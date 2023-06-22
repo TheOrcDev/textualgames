@@ -4,7 +4,7 @@ export interface ButtonBadgeProps {
   color?: string;
 }
 
-export const ButtonBadge: React.FC<ToasterMessageProps> = ({
+export const ButtonBadge: React.FC<ButtonBadgeProps> = ({
   content,
   color,
   onClick,
