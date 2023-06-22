@@ -1,7 +1,7 @@
 export interface ButtonBadgeProps {
   content: string;
   onClick: () => void;
-  color?: HexColor;
+  color?: string;
 }
 
 export const ButtonBadge: React.FC<ToasterMessageProps> = ({
