@@ -59,18 +59,18 @@ export default function Home() {
 
   return (
     <main className={`h-screen ${pressStart2P.className}`}>
-      <h1 className="absolute bottom-5 left-5 text-xs">Textual Games</h1>
+      <h1 className="fixed bottom-5 left-5 text-xs">Textual Games</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-20 mx-4 sm:mx-10 md:mx-32">
         {!story.story &&
           !loading &&
           genres.map((genre: string, index: number) => (
-            <span key={index}>
+            <div className="flex items-center" key={index}>
               <ButtonBadge
                 content={genre}
                 onClick={() => getData(genre)}
                 color="bg-slate-400"
               />
-            </span>
+            </div>
           ))}
       </div>
       {loading && (
