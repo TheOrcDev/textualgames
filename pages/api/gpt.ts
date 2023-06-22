@@ -86,7 +86,7 @@ export default async function handler(
   res.status(200).json({
     message: "success",
     data: {
-      data: data.choices[0] ? data.choices[0].text : undefined,
+      data: data.choices[0],
       story: gameStory ? gameStory : undefined,
       level: level + 1,
     },
