@@ -60,7 +60,7 @@ export default function Home() {
   return (
     <main className={`h-screen ${pressStart2P.className}`}>
       <h1 className="absolute bottom-5 left-5 text-xs">Textual Games</h1>
-      <div className="grid grid-cols-3 gap-5 mt-20 mx-32">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-20 mx-4 sm:mx-10 md:mx-32">
         {!story.story &&
           !loading &&
           genres.map((genre: string, index: number) => (
@@ -76,13 +76,13 @@ export default function Home() {
       {loading && (
         <div
           className="
-        animate-spin rounded-full h-12 w-12 border-b-2 border-gray-500
-        absolute top-1/2 left-1/2
-        "
+          animate-spin rounded-full h-12 w-12 border-b-2 border-gray-500
+          absolute top-1/2 left-1/2
+          "
         ></div>
       )}
       {story.story && !loading && (
-        <div className="flex-row justify-center text-center max-w-6xl m-20">
+        <div className="flex-row justify-center text-center max-w-6xl m-5 sm:m-20">
           <p className="text-xl mt-10 mb-5">{story.story}</p>
           {story.choices &&
             story.choices.map((choice: string, index: number) => (
