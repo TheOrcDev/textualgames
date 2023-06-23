@@ -17,7 +17,9 @@ export default function Home() {
     story: "",
     choices: [],
   });
+  const [storyLevel, setStoryLevel] = useState<string>("");
   const [character, setCharacter] = useState<string>("");
+  const [characterName, setCharacterName] = useState<string>("");
   const [level, setLevel] = useState<number>(1);
   const [loading, setLoading] = useState(false);
   const genres = [
@@ -29,8 +31,10 @@ export default function Home() {
     "Romance",
     "Sci-Fi",
   ];
+  const [genre, setGenre] = useState<string>();
 
   const getData = async (genre: string) => {
+    setGenre(genre);
     setLoading(true);
     const chatGptData = await fetch("/api/gpt", {
       method: "POST",
@@ -38,8 +42,10 @@ export default function Home() {
     });
     const result = await chatGptData.json();
     const firstLevel = await JSON.parse(result.data.data.message.content);
-    const character = result.data.story;
-    setCharacter(character);
+    const storyLevel = result.data.story;
+    setStoryLevel(storyLevel);
+    setCharacter(result.data.character);
+    setCharacterName(firstLevel.characterName);
     setStory(firstLevel);
     setLoading(false);
   };
@@ -48,7 +54,15 @@ export default function Home() {
     setLoading(true);
     const chatGptData = await fetch("/api/gpt", {
       method: "POST",
-      body: JSON.stringify({ choice, story, character, level }),
+      body: JSON.stringify({
+        choice,
+        story,
+        character,
+        level,
+        genre,
+        storyLevel,
+        characterName,
+      }),
     });
     const result = await chatGptData.json();
     const nextLevel = await JSON.parse(result.data.data.message.content);
