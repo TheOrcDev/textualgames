@@ -82,7 +82,7 @@ export default async function handler(
     console.log("Too long prompt");
     throw new Error("Too long prompt");
   }
-
+  console.log(data.choices[0]);
   res.status(200).json({
     message: "success",
     data: {

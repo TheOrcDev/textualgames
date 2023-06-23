@@ -54,6 +54,7 @@ export default function Home() {
     const nextLevel = await JSON.parse(result.data.data.message.content);
     setLevel(result.data.level);
     setStory(nextLevel);
+    window.scrollTo(0, 0);
     setLoading(false);
   };
 
@@ -82,8 +83,8 @@ export default function Home() {
         ></div>
       )}
       {story.story && !loading && (
-        <div className="flex-row justify-center text-center max-w-6xl m-5 sm:m-20">
-          <p className="text-xl mt-10 mb-5">{story.story}</p>
+        <div className="flex-row justify-center text-center px-5 sm:px-40">
+          <p className="text-sm md:text-xl mt-10 mb-5">{story.story}</p>
           {story.choices &&
             story.choices.map((choice: string, index: number) => (
               <div className="flex justify-center" key={index}>
