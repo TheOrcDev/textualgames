@@ -1,9 +1,8 @@
 import ButtonBadge from "@/components/ButtonBadge/ButtonBadge";
-import { Inter } from "next/font/google";
 import { useState } from "react";
 import { Press_Start_2P } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { getStory } from "@/libs/libs";
+import { CharacterStory } from "@/libs/story-creator";
 
 type Story = {
   story: string;
@@ -21,6 +20,7 @@ export default function Home() {
   const [character, setCharacter] = useState<string>("");
   const [characterName, setCharacterName] = useState<string>("");
   const [level, setLevel] = useState<number>(1);
+  const [characterStory, setCharacterStory] = useState<CharacterStory>();
   const [loading, setLoading] = useState(false);
   const genres = [
     "Fantasy",
@@ -34,20 +34,28 @@ export default function Home() {
   const [genre, setGenre] = useState<string>();
 
   const getData = async (genre: string) => {
+    const characterStory = getStory();
+    setCharacterStory(characterStory);
     setGenre(genre);
     setLoading(true);
     const chatGptData = await fetch("/api/gpt", {
       method: "POST",
-      body: JSON.stringify({ genre }),
+      body: JSON.stringify({ genre, characterStory }),
     });
     const result = await chatGptData.json();
-    const firstLevel = await JSON.parse(result.data.data.message.content);
-    const storyLevel = result.data.story;
-    setStoryLevel(storyLevel);
-    setCharacter(result.data.character);
-    setCharacterName(firstLevel.characterName);
-    setStory(firstLevel);
-    setLoading(false);
+    try {
+      const firstLevel = await JSON.parse(result.data.data);
+      const storyLevel = result.data.story;
+      setStoryLevel(storyLevel);
+      setCharacter(result.data.character);
+      setCharacterName(firstLevel.characterName);
+      setStory(firstLevel);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      console.log("restarting");
+      getData(genre);
+    }
   };
 
   const getNextLevel = async (choice: string, story: string) => {
@@ -62,18 +70,25 @@ export default function Home() {
         genre,
         storyLevel,
         characterName,
+        characterStory,
       }),
     });
     const result = await chatGptData.json();
-    const nextLevel = await JSON.parse(result.data.data.message.content);
-    setLevel(result.data.level);
-    setStory(nextLevel);
-    window.scrollTo(0, 0);
-    setLoading(false);
+    try {
+      const nextLevel = await JSON.parse(result.data.data);
+      setLevel(result.data.level);
+      setStory(nextLevel);
+      window.scrollTo(0, 0);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      console.log("restarting");
+      getNextLevel(choice, story);
+    }
   };
 
   return (
-    <main className={`h-screen ${pressStart2P.className}`}>
+    <main className={`${pressStart2P.className} bg-fixed h-screen`}>
       <h1 className="fixed bottom-5 left-5 text-xs">Textual Games</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-20 mx-4 sm:mx-10 md:mx-32">
         {!story.story &&

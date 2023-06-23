@@ -21,9 +21,9 @@ export default async function handler(
     body = JSON.parse(req.body);
   }
 
-  const { character, level, genre, storyLevel } = body || {};
+  const { character, level, genre, storyLevel, characterStory } = body || {};
 
-  const creator = new StoryCreator();
+  const creator = new StoryCreator(characterStory);
   const storyPrompt = await creator.getGptStoryPrompt(body);
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -47,7 +47,7 @@ export default async function handler(
   res.status(200).json({
     message: "success",
     data: {
-      data: data.choices[0],
+      data: data.choices[0].message.content,
       story: storyLevel,
       genre: genre,
       level: level + 1,
