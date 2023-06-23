@@ -57,6 +57,8 @@ const getRandomSentence = () => {
   return sentences[Math.floor(Math.random() * sentences.length)];
 };
 
+export interface LoadingSentencesProps {}
+
 export const LoadingSentences: React.FC<LoadingSentencesProps> = ({}) => {
   const [sentence, setSentence] = useState<string>("");
 
