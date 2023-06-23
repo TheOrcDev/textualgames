@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Press_Start_2P } from "next/font/google";
 import { getStory } from "@/libs/libs";
 import { CharacterStory } from "@/libs/story-creator";
+import { LoadingSentences } from "@/components/LoadingSentences/LoadingSentences";
 
 type Story = {
   story: string;
@@ -103,14 +104,7 @@ export default function Home() {
             </div>
           ))}
       </div>
-      {loading && (
-        <div
-          className="
-          animate-spin rounded-full h-12 w-12 border-b-2 border-gray-500
-          absolute top-1/2 left-1/2
-          "
-        ></div>
-      )}
+      {loading && <LoadingSentences />}
       {story.story && !loading && (
         <div className="flex-row justify-center text-center px-5 sm:px-40">
           <p className="text-sm md:text-xl mt-10 mb-5">{story.story}</p>
