@@ -5,19 +5,18 @@ export default function Document() {
   return (
     <Html lang="en">
       <Script
-        strategy="lazyOnload"
+        strategy="afterInteractive"
+        async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
-
-      <Script strategy="lazyOnload">
+      <Script strategy="afterInteractive" id="google-analytics">
         {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-        page_path: window.location.pathname,
-        });
-    `}
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}';
+        `}
       </Script>
 
       <Head />
