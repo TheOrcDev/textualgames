@@ -4,6 +4,7 @@ import { Press_Start_2P } from "next/font/google";
 import { getStory } from "@/libs/libs";
 import { CharacterStory } from "@/libs/story-creator";
 import { LoadingSentences } from "@/components/LoadingSentences/LoadingSentences";
+import { Footer } from "@/components/Layout/Footer";
 
 type Story = {
   story: string;
@@ -89,9 +90,10 @@ export default function Home() {
   };
 
   return (
-    <main className={`${pressStart2P.className} bg-fixed h-screen`}>
-      <h1 className="fixed bottom-5 left-5 text-xs">Textual Games</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-20 mx-4 sm:mx-10 md:mx-32">
+    <main
+      className={`${pressStart2P.className} bg-fixed h-screen bg-[url('/img/bg.webp')] bg-repeat-y`}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 pt-20 mx-4 sm:mx-10 md:mx-32">
         {!story.story &&
           !loading &&
           genres.map((genre: string, index: number) => (
@@ -114,12 +116,12 @@ export default function Home() {
                 <ButtonBadge
                   content={choice}
                   onClick={() => getNextLevel(choice, story.story)}
-                  color="#8294C4"
                 />
               </div>
             ))}
         </div>
       )}
+      <Footer />
     </main>
   );
 }

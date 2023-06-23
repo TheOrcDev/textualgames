@@ -74,7 +74,7 @@ export const LoadingSentences: React.FC<LoadingSentencesProps> = ({}) => {
     <div className="absolute top-1/2 w-full">
       <p
         key={sentence}
-        className="flex items-center justify-center text-sm animate-fade-in-out"
+        className="flex items-center justify-center text-center text-sm animate-fade-in-out"
       >
         {sentence}
       </p>
