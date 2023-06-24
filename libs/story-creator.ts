@@ -35,23 +35,34 @@ class StoryCreator {
       numberOfChoices = "three";
     }
     let firstPartOfPrompt = `This was my previous level: ${data.story}. My choice was: ${data.choice}. Continue the story, but don't repeat too much of previous level. Add little bit of dialog too. My name is ${data.characterName} and I'm ${this.characterStory.characterType}, and the plot in the beginning of the game was ${data.characterName} ${this.characterStory.plot}, game should still be aimed in that direction.`;
-    const oneBadOutcome =
-      "One choice outcome should be bad, and will harm the character.";
+    const oneBadOutcome = "One of these choices should have a bad outcome.";
+    const twoBadOutcomes = "Two of these choices should have a bad outcome.";
 
-    const twoBadOutcomes =
-      "Two choice outcomes should be bad, and will harm the character.";
-
+    // Something big
     if (data.level === 3) {
       const somethingBig = `In this level something big should happen, like a big fight or a big decision (depending on the current story circumstances). ${oneBadOutcome}`;
       firstPartOfPrompt = `${firstPartOfPrompt} ${somethingBig}`;
     }
 
+    // Plot twist and nemesis
     if (data.level === 5) {
-      firstPartOfPrompt = `${firstPartOfPrompt} ${oneBadOutcome} and make some kind of nemesis for my character.`;
+      const plotTwist = `In this level player should find out something new about the story or about himself, like a plot twist.`;
+      firstPartOfPrompt = `${firstPartOfPrompt} ${plotTwist} and make some kind of nemesis for my character which will come in next levels.`;
     }
 
-    if (data.level >= 7) {
-      firstPartOfPrompt = `${firstPartOfPrompt} ${twoBadOutcomes}`;
+    // Prepare ending
+    if (data.level === 7) {
+      firstPartOfPrompt = `${firstPartOfPrompt} Start to wrap up the story, prepare ending with nemesis. ${twoBadOutcomes}`;
+    }
+
+    // Plot twist
+    if (data.level === 8) {
+      firstPartOfPrompt = `${firstPartOfPrompt} Make some big plot twist of the story. ${oneBadOutcome}`;
+    }
+
+    // Ending
+    if (data.level === 9) {
+      firstPartOfPrompt = `${firstPartOfPrompt} This is the last level, make final showdown with the nemesis or a big decision (depending on the current story circumstances). ${twoBadOutcomes}`;
     }
 
     const gameCharacterStory = `${this.characterStory.characterType} ${this.characterStory.plot}`;
@@ -65,11 +76,10 @@ class StoryCreator {
 
     // If level is 10, we are ending the story
     if (data.level === 10) {
-      basePrompt = `End my story with ${data.character}. My current level is ${data.story}. My choice was ${data.choice}. Genre is ${data.genre}. in json format like this { story: string; }`;
+      basePrompt = `End my story based on my previous choice with ${data.character}. My current level is ${data.story}. My choice was ${data.choice}. Genre is ${data.genre}. in json format like this { story: string; }`;
     }
 
     console.log("gameCharacterStory", gameCharacterStory);
-    // console.log("basePrompt", basePrompt);
 
     return { basePrompt, character: gameCharacterStory };
   }

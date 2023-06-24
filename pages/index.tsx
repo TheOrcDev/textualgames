@@ -108,7 +108,7 @@ export default function Home() {
       </div>
       {loading && <LoadingSentences />}
       {story.story && !loading && (
-        <div className="flex-row justify-center text-center px-5 sm:px-40">
+        <div className="flex-row justify-center text-center px-5 sm:px-40 pb-20">
           <p className="text-sm md:text-xl mt-10 mb-5">{story.story}</p>
           {story.choices &&
             story.choices.map((choice: string, index: number) => (
