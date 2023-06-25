@@ -109,6 +109,7 @@ export function getStory(): CharacterStory {
     "protecting a magical artifact from falling into the wrong hands",
     "investigating a series of supernatural phenomena",
     "finding a cure for a deadly pandemic",
+    "revanging the death of a loved one",
   ];
 
   const randomCharacter =

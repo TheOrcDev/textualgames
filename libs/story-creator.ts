@@ -49,25 +49,20 @@ class StoryCreator {
 
     // Make a friend or ally
     if (data.level === 4) {
-      const makeFriend = `In this level player should make a friend or ally.`;
+      const makeFriend = `In this level player should make a friend or ally. Give me a name for my friend or ally, and describe him.`;
       firstPartOfPrompt = `${firstPartOfPrompt} ${makeFriend}`;
     }
 
     // Plot twist and nemesis
     if (data.level === 5) {
-      const plotTwist = `In this level player should find out something new about the story or about himself, like a plot twist.`;
+      const plotTwist = `In this level player should find out something new about the story or about himself from an ally or from some book etc.`;
       firstPartOfPrompt = `${firstPartOfPrompt} ${plotTwist} and make some kind of nemesis for my character which will come in next levels.`;
     }
 
     // Ally can betray or die
-    if (data.level === 6) {
+    if (data.level === 7) {
       const allyBetray = `In this level player should find out that his ally is a traitor or that he died.`;
       firstPartOfPrompt = `${firstPartOfPrompt} ${allyBetray}`;
-    }
-
-    // Prepare ending
-    if (data.level === 7) {
-      firstPartOfPrompt = `${firstPartOfPrompt} Prepare ending of the story. ${twoBadOutcomes}`;
     }
 
     // Plot twist
