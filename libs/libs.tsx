@@ -51,6 +51,12 @@ export function getStory(): CharacterStory {
     "a jester",
     "a professional athlete",
     "a bounty hunter",
+    "a wizard",
+    "an ant",
+    "a giant",
+    "a giant robot",
+    "a frog",
+    "a talking dog",
   ];
 
   const plots = [

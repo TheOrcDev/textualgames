@@ -21,10 +21,10 @@ export default async function handler(
     body = JSON.parse(req.body);
   }
 
-  const { character, level, genre, storyLevel, characterStory } = body || {};
+  const { story } = body;
 
-  const creator = new StoryCreator(characterStory);
-  const storyPrompt = await creator.getGptStoryPrompt(body);
+  const creator = new StoryCreator();
+  const storyPrompt = await creator.getGptStoryPrompt(story);
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -48,10 +48,8 @@ export default async function handler(
     message: "success",
     data: {
       data: data.choices[0].message.content,
-      story: storyLevel,
-      genre: genre,
-      level: level + 1,
-      character: character ? character : storyPrompt.character,
+      story: story.storyLevel,
+      level: story.level + 1,
     },
   });
 }
