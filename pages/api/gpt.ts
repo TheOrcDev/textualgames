@@ -33,7 +33,7 @@ export default async function handler(
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: storyPrompt.basePrompt }],
       temperature: 0.8,
-      max_tokens: 1024,
+      max_tokens: 2048,
     }),
   });
 

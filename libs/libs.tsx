@@ -112,13 +112,114 @@ export function getStory(): CharacterStory {
     "revanging the death of a loved one",
   ];
 
+  const items = [
+    "a sword",
+    "a shield",
+    "a bow",
+    "arrows",
+    "a gun",
+    "a knife",
+    "a rope",
+    "a staff",
+    "a magical amulet",
+    "a grappling hook",
+    "a lantern",
+    "lockpicks",
+    "a spellbook",
+    "a compass",
+    "a map",
+    "a bag of holding",
+    "a set of throwing knives",
+    "a flute",
+    "a potion of invisibility",
+    "a set of lockpicking tools",
+    "a telescope",
+    "a set of climbing gear",
+    "a net",
+    "a vial of poison",
+    "a shovel",
+    "a crowbar",
+    "a vial of acid",
+    "a grappling rope",
+    "a set of darts",
+    "a spyglass",
+    "a bag of marbles",
+    "a lockbox",
+    "a smoke bomb",
+    "a set of disguise tools",
+    "a telescope",
+    "a set of tracking tools",
+    "a vial of sleep poison",
+    "a magical amulet of protection",
+  ];
+
+  const lessUsefulItems = [
+    "A set of keys",
+    "A lockpick",
+    "A grappling rope",
+    "A crowbar",
+    "A lantern",
+    "A compass",
+    "A map",
+    "A spyglass",
+    "A bottle of potion",
+    "A bag of coins",
+    "A rope ladder",
+    "A set of tools",
+    "A first aid kit",
+    "A tinderbox",
+    "A bag of herbs",
+    "A vial of poison",
+    "A water canteen",
+    "A fishing rod",
+    "A set of playing cards",
+    "A musical instrument",
+    "A bag of marbles",
+    "A bag of flour",
+    "A whistle",
+    "A mirror",
+    "A magnifying glass",
+    "A pair of binoculars",
+    "A grappling hook",
+    "A shovel",
+    "A hammer",
+    "A set of nails",
+    "A cooking pot",
+    "A tent",
+    "A backpack",
+    "A compass",
+    "A pocket watch",
+    "A journal",
+    "A roll of bandages",
+    "A bag of chalk",
+    "A lantern",
+    "A mirror",
+    "A flask",
+    "A walking stick",
+    "A quill pen",
+    "A set of dice",
+    "A sewing kit",
+    "A musical instrument",
+    "A magnifying glass",
+    "A lockbox",
+    "A bottle of ink",
+    "A pair of binoculars",
+    "A whistle",
+  ];
+
+  // TODO: Friends
+  // TODO: Enemies
+
   const randomCharacter =
     characters[Math.floor(Math.random() * characters.length)];
-
   const randomStory = plots[Math.floor(Math.random() * plots.length)];
+  const randomItem = items[Math.floor(Math.random() * items.length)];
+  const randomLessUsefulItem =
+    lessUsefulItems[Math.floor(Math.random() * lessUsefulItems.length)];
 
   return {
     plot: randomStory,
     characterType: randomCharacter,
+    items: [randomItem, randomLessUsefulItem],
   };
 }

@@ -14,14 +14,17 @@ export default function Home() {
     story: {
       story: "",
       choices: [],
+      inventory: [],
+      whatHappenedSoFar: "",
     },
     choice: "",
     character: "",
     characterName: "",
-    level: 1,
+    level: 2,
     characterStory: {
       plot: "",
       characterType: "",
+      items: [],
     },
     genre: "",
   });
@@ -77,6 +80,7 @@ export default function Home() {
       body: JSON.stringify({ story }),
     });
     const result = await chatGptData.json();
+
     try {
       const nextLevel = await JSON.parse(result.data.data);
 
