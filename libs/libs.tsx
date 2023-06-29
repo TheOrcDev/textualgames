@@ -207,15 +207,17 @@ export function getStory(): CharacterStory {
     "A whistle",
   ];
 
+  const getRandomString = (array: string[]) => {
+    return array[Math.floor(Math.random() * array.length)];
+  };
+
   // TODO: Friends
   // TODO: Enemies
 
-  const randomCharacter =
-    characters[Math.floor(Math.random() * characters.length)];
-  const randomStory = plots[Math.floor(Math.random() * plots.length)];
-  const randomItem = items[Math.floor(Math.random() * items.length)];
-  const randomLessUsefulItem =
-    lessUsefulItems[Math.floor(Math.random() * lessUsefulItems.length)];
+  const randomCharacter = getRandomString(characters);
+  const randomStory = getRandomString(plots);
+  const randomItem = getRandomString(items);
+  const randomLessUsefulItem = getRandomString(lessUsefulItems);
 
   return {
     plot: randomStory,

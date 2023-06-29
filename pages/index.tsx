@@ -100,9 +100,9 @@ export default function Home() {
 
   return (
     <main
-      className={`${pressStart2P.className} bg-fixed h-screen bg-[url('/img/bg.webp')] bg-repeat-y`}
+      className={`${pressStart2P.className} bg-fixed h-screen bg-[url('/img/bg.webp')] bg-repeat-y pt-20`}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 pt-20 mx-4 sm:mx-10 md:mx-32">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mx-4 sm:mx-10 md:mx-32">
         {!story.story.story &&
           !loading &&
           genres.map((genre: string, index: number) => (
@@ -117,7 +117,11 @@ export default function Home() {
       </div>
       {loading && <LoadingSentences />}
       {story.story && !loading && (
-        <div className="flex-row justify-center text-center px-5 sm:px-40 pb-20">
+        <div
+          className="
+        flex-row justify-center text-center px-5 sm:px-40 
+        pb-20 scroll-smooth overflow-auto h-full no-scrollbar"
+        >
           <p className="text-sm md:text-xl mt-10 mb-5">{story.story.story}</p>
           {story.story.choices ? (
             story.story.choices.map((choice: string, index: number) => (

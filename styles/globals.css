@@ -41,3 +41,15 @@ body {
     animation: fadeIn 0.5s ease-in-out forwards, fadeOut 0.5s ease-in-out 4.5s forwards;
   }
 }
+
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+  }

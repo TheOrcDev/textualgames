@@ -36,7 +36,6 @@ class StoryCreator {
 
   async getGptStoryPrompt(data: Story): Promise<StoryPrompt> {
     let numberOfChoices = "two";
-    console.log(data);
 
     if (data.level === 3 || data.level >= 4) {
       numberOfChoices = "three";
@@ -117,7 +116,6 @@ class StoryCreator {
       basePrompt = `End my story based on my previous choice with ${data.character}. ${levelPlotTwist} This is what happened so far: "${data.story.whatHappenedSoFar} ${data.story.story}. My choice was ${data.choice} Genre is ${data.genre}. in json format like this { story: string; }`;
     }
 
-    console.log(basePrompt);
     return { basePrompt, character: gameCharacterStory };
   }
 }
