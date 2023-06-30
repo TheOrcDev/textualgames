@@ -105,14 +105,14 @@ export default function Home() {
         </div>
       } */}
 
-      {/* Character plot */}
+      {/* Character plot select */}
       {/* {story.character && !story.story && !loading &&
         <div className="flex justify-center">
           TODO: make character plot
         </div>
       } */}
 
-      {/* Items selection */}
+      {/* Items select */}
       {/* {story.plot && !story.story && !loading &&
         <div className="flex justify-center">
           TODO: make character plot
