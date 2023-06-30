@@ -8,7 +8,7 @@ export type Story = {
   characterStory: CharacterStory;
 };
 
-type Level = {
+export type Level = {
   story: string;
   choices: string[];
   inventory: string[];

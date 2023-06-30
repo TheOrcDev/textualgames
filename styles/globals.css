@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  background-color: #242D4A;
+  background-color: #242d4a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,18 +38,18 @@ body {
 
 @layer utilities {
   .animate-fade-in-out {
-    animation: fadeIn 0.5s ease-in-out forwards, fadeOut 0.5s ease-in-out 4.5s forwards;
+    animation: fadeIn 0.5s ease-in-out forwards,
+      fadeOut 0.5s ease-in-out 4.5s forwards;
   }
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-      display: none;
-  }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .no-scrollbar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-  }
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

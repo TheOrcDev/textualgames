@@ -5,7 +5,8 @@ import { getStory } from "@/libs/libs";
 import { Story } from "@/libs/story-creator";
 import { LoadingSentences } from "@/components/LoadingSentences/LoadingSentences";
 import { Footer } from "@/components/Layout/Footer";
-import { useRouter } from "next/router";
+import GenreSelect from "@/components/GenreSelect/GenreSelect";
+import StoryLevel from "@/components/StoryLevel/StoryLevel";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
@@ -30,15 +31,6 @@ export default function Home() {
   });
 
   const [loading, setLoading] = useState(false);
-  const genres = [
-    "Fantasy",
-    "Adventure",
-    "Comedy",
-    "Horror",
-    "Mystery",
-    "Romance",
-    "Sci-Fi",
-  ];
 
   const getData = async (genre: string) => {
     const characterStory = getStory();
@@ -52,7 +44,9 @@ export default function Home() {
       method: "POST",
       body: JSON.stringify({ story }),
     });
+
     const result = await chatGptData.json();
+
     try {
       const firstLevel = await JSON.parse(result.data.data);
 
@@ -96,52 +90,45 @@ export default function Home() {
       getNextLevel(choice, storyLevel);
     }
   };
-  const router = useRouter();
 
   return (
     <main
       className={`${pressStart2P.className} bg-fixed h-screen bg-[url('/img/bg.webp')] bg-repeat-y pt-20`}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mx-4 sm:mx-10 md:mx-32">
-        {!story.story.story &&
-          !loading &&
-          genres.map((genre: string, index: number) => (
-            <div className="flex items-center" key={index}>
-              <ButtonBadge
-                content={genre}
-                onClick={() => getData(genre)}
-                color="bg-slate-400"
-              />
-            </div>
-          ))}
-      </div>
-      {loading && <LoadingSentences />}
-      {story.story && !loading && (
-        <div
-          className="
-        flex-row justify-center text-center px-5 sm:px-40 
-        pb-20 scroll-smooth overflow-auto h-full no-scrollbar"
-        >
-          <p className="text-sm md:text-xl mt-10 mb-5">{story.story.story}</p>
-          {story.story.choices ? (
-            story.story.choices.map((choice: string, index: number) => (
-              <div className="flex justify-center" key={index}>
-                <ButtonBadge
-                  content={choice}
-                  onClick={() => getNextLevel(choice, story.story.story)}
-                />
-              </div>
-            ))
-          ) : (
-            <div className="flex justify-center">
-              <ButtonBadge
-                content="Play New Story"
-                onClick={() => router.reload()}
-              />
-            </div>
-          )}
+      {/* Genre select */}
+      {!story.story.story && !loading && <GenreSelect getData={getData} />}
+
+      {/* Character select */}
+      {/* {story.genre && !story.story && !loading &&
+        <div className="flex justify-center">
+          TODO: make character selection
         </div>
+      } */}
+
+      {/* Character plot */}
+      {/* {story.character && !story.story && !loading &&
+        <div className="flex justify-center">
+          TODO: make character plot
+        </div>
+      } */}
+
+      {/* Items selection */}
+      {/* {story.plot && !story.story && !loading &&
+        <div className="flex justify-center">
+          TODO: make character plot
+          TODO: Do getData() here
+        </div>
+      } */}
+
+      {/* Story level */}
+      {story.story && !loading && (
+        <StoryLevel level={story.story} getNextLevel={getNextLevel} />
       )}
+
+      {/* Loading */}
+      {loading && <LoadingSentences />}
+
+      {/* Footer */}
       <Footer />
     </main>
   );
