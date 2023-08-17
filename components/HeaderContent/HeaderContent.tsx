@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Button from "../Button/Button";
 
 interface HeaderContentProps {}
@@ -7,7 +8,12 @@ const HeaderContent: React.FC<HeaderContentProps> = ({}) => {
     <>
       <div className="flex justify-center">
         <div className="flex justify-center w-1/2 md:w-full">
-          <img src="/img/logo/textualgameslogolight.png" alt="" />
+          <Image
+            src="/img/logo/textualgameslogolight.png"
+            alt="Textual Games"
+            width={300}
+            height={300}
+          />
         </div>
       </div>
       <div className="flex-col justify-center text-center px-8 md:px-36 text-sm mt-10 w-full">

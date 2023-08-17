@@ -12,7 +12,11 @@ const Level: React.FC<LevelProps> = ({ content, options, onClick }) => {
       <p className="text-2xl">{content}</p>
       <div className="mt-20 flex justify-center">
         {options.map((option) => (
-          <Button content={option} onClick={() => onClick(option)} />
+          <Button
+            key={option}
+            content={option}
+            onClick={() => onClick(option)}
+          />
         ))}
       </div>
     </div>

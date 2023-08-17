@@ -1,12 +1,16 @@
+import Image from "next/image";
+
 interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = ({}) => {
   return (
     <div className="fixed flex gap-2 items-center bottom-5 left-5 text-xs">
-      <img
+      <Image
         src="/img/logo/textualgameslogolight.png"
         alt="logo"
-        className="w-5 shadow-md"
+        className="shadow-md"
+        width={20}
+        height={20}
       />
       <h2>Textual Games</h2>
     </div>
