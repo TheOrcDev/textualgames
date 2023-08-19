@@ -30,7 +30,7 @@ class StoryCreator {
 
   constructor() {
     this.jsonFormat =
-      "{ story: string; characterName: string; inventory: string[]; choices: string[]; }. Avoid new lines in the story, and anything that can break the json format.";
+      "{ story: string; choices: string[]; }. Avoid new lines in the story, and anything that can break the json format.";
   }
 
   async getGptStoryPrompt(data: Story): Promise<StoryPrompt> {
@@ -112,7 +112,9 @@ class StoryCreator {
     const gameCharacterStory = `${data.characterStory.characterType} ${data.characterStory.plot}`;
 
     if (!data.choice || !data.story.story) {
-      thePrompt = `Begin the ${data.genre} genre text-based game story with two choices. The game should be from first person.
+      thePrompt = `You are a dungeon master running a text base game with a player.
+      
+      Begin the ${data.genre} genre text-based game story with two choices. The game should be from first person.
 
       The story revolves around my character, ${gameCharacterStory}. My character name is ${data.characterName}. Start by providing a detailed description of my character.
       

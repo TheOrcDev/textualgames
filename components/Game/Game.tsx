@@ -64,8 +64,6 @@ export const Game: React.FC = () => {
       setLoading(false);
     } catch (e) {
       console.log(e);
-      getData();
-      console.log("Restarting");
     }
   };
 
