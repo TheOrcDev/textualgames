@@ -30,7 +30,7 @@ class StoryCreator {
 
   constructor() {
     this.jsonFormat =
-      "{ story: string;  whatHappenedSoFar: string; characterName: string; inventory: string[]; choices: string[]; }. Avoid new lines in the story, and anything that can break the json format.";
+      "{ story: string; characterName: string; inventory: string[]; choices: string[]; }. Avoid new lines in the story, and anything that can break the json format.";
   }
 
   async getGptStoryPrompt(data: Story): Promise<StoryPrompt> {
@@ -112,17 +112,18 @@ class StoryCreator {
     const gameCharacterStory = `${data.characterStory.characterType} ${data.characterStory.plot}`;
 
     if (!data.choice || !data.story.story) {
-      thePrompt = `Level 1: Begin the ${data.genre} genre text-based game story with two choices. The game should be from first person.
-      The story revolves around your character, ${gameCharacterStory}. Your character name is ${data.characterName}. Start by providing a detailed description of your character.
+      thePrompt = `Begin the ${data.genre} genre text-based game story with two choices. The game should be from first person.
+
+      The story revolves around my character, ${gameCharacterStory}. My character name is ${data.characterName}. Start by providing a detailed description of my character.
       
       Inventory:
       ${inventory}
       
-      Describe the items currently in your inventory.
+      Describe the items currently in my inventory.
       
-      Set the scene by describing your surroundings, creating an immersive atmosphere for the story.
+      Set the scene by describing my surroundings, creating an immersive atmosphere for the story.
 
-      Make a little backstory for your character, and put it in the "whatHappenedSoFar" variable. This should be a short summary of the events leading up to the start of the game.
+      Make a little backstory for my character, and put it in the "whatHappenedSoFar" variable. This should be a short summary of the events leading up to the start of the game.
       
       Ensure that the story aligns with the ${data.genre} genre, offering ${numberOfChoices} choices to the player.
       
@@ -137,6 +138,18 @@ class StoryCreator {
     }
 
     return { basePrompt, character: gameCharacterStory };
+  }
+
+  async getNextLevel(data: Story): Promise<StoryPrompt> {
+    let thePrompt = `Continue the story based on my choice.
+
+    My choice was: "${data.choice}"
+
+    Ensure the story remains in the ${data.genre} genre with 2 choices available.
+
+    Return the data in the following JSON format: ${this.jsonFormat}`;
+
+    return { basePrompt: thePrompt, character: data.characterName };
   }
 }
 

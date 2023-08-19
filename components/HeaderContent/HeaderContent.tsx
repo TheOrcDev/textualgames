@@ -7,12 +7,13 @@ const HeaderContent: React.FC<HeaderContentProps> = ({}) => {
   return (
     <>
       <div className="flex justify-center">
-        <div className="flex justify-center w-1/2 md:w-full">
+        <div className="flex justify-center">
           <Image
             src="/img/logo/textualgameslogolight.png"
             alt="Textual Games"
-            width={300}
-            height={300}
+            className="shadow-md w-auto"
+            width={400}
+            height={400}
           />
         </div>
       </div>

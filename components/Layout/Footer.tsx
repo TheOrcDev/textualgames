@@ -8,7 +8,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
       <Image
         src="/img/logo/textualgameslogolight.png"
         alt="logo"
-        className="shadow-md"
+        className="shadow-md w-auto"
         width={20}
         height={20}
       />

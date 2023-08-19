@@ -46,44 +46,26 @@ export const Game: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const getData = async () => {
+  const getData = async (choice?: string) => {
     setLoading(true);
 
     try {
+      if (choice) {
+        story.choice = choice;
+        console.log(choice);
+      }
       const gptData = await chatGptData(story);
-      const firstLevel = await JSON.parse(gptData.data.data);
+      const level = await JSON.parse(gptData.data.data);
 
-      story.story = firstLevel;
-      story.characterName = firstLevel.characterName;
+      story.story = level;
+      story.characterName = level.characterName;
       setStory(story);
 
       setLoading(false);
     } catch (e) {
       console.log(e);
-      console.log("restarting");
       getData();
-    }
-  };
-
-  const getNextLevel = async (choice: string, storyLevel: string) => {
-    setLoading(true);
-
-    story.choice = choice;
-    setStory(story);
-
-    try {
-      const gptData = await chatGptData(story);
-      const nextLevel = await JSON.parse(gptData.data.data);
-
-      story.story = nextLevel;
-      story.level = gptData.data.level;
-
-      window.scrollTo(0, 0);
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-      console.log("restarting");
-      getNextLevel(choice, storyLevel);
+      console.log("Restarting");
     }
   };
 
@@ -172,7 +154,7 @@ export const Game: React.FC = () => {
 
         {/* Story level */}
         {story.story.story && !loading && (
-          <StoryLevel level={story.story} getNextLevel={getNextLevel} />
+          <StoryLevel level={story.story} getNextLevel={getData} />
         )}
 
         {/* Loading */}

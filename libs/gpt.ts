@@ -1,39 +1,42 @@
 "use server";
 
+import { OpenAI } from "langchain/llms/openai";
+import { BufferMemory } from "langchain/memory";
+import { ConversationChain } from "langchain/chains";
+
+const model = new OpenAI({
+  modelName: process.env.GPT_MODEL,
+  openAIApiKey: process.env.GPT_API_KEY,
+  temperature: parseFloat(process.env.GPT_TEMPERATURE ?? "0.8"),
+  maxTokens: parseInt(process.env.GPT_MAX_TOKENS ?? "1048"),
+});
+
+const memory = new BufferMemory();
+
+const chain = new ConversationChain({
+  llm: model,
+  memory,
+  verbose: true,
+});
+
 import StoryCreator, { Story } from "./story-creator";
 
 export const chatGptData = async (story: Story) => {
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${process.env.GPT_API_KEY}`,
-    "Access-Control-Allow-Origin": "*",
-  };
-
   const creator = new StoryCreator();
-  const storyPrompt = await creator.getGptStoryPrompt(story);
 
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers,
-    body: JSON.stringify({
-      model: process.env.GPT_MODEL,
-      messages: [{ role: "user", content: storyPrompt.basePrompt }],
-      temperature: parseInt(process.env.GPT_TEMPERATURE ?? "0.8"),
-      max_tokens: parseInt(process.env.GPT_MAX_TOKENS ?? "1048"),
-    }),
-  });
+  // TODO: This is a hack to get the story prompt for the first level
+  const input =
+    story.choice === ""
+      ? (await creator.getGptStoryPrompt(story)).basePrompt
+      : (await creator.getNextLevel(story)).basePrompt;
 
-  const data = await response.json();
-
-  if (data.choices[0].finish_reason === "length") {
-    console.log("Too long prompt");
-    throw new Error("Too long prompt");
-  }
+  const response = await chain.call({ input });
+  const data = await response.response;
 
   return {
     message: "success",
     data: {
-      data: data.choices[0].message.content,
+      data,
       story: story.level,
       level: story.level + 1,
     },
