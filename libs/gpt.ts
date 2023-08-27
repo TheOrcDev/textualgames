@@ -24,9 +24,8 @@ import StoryCreator, { Story } from "./story-creator";
 export const chatGptData = async (story: Story) => {
   const creator = new StoryCreator();
 
-  // TODO: This is a hack to get the story prompt for the first level
   const input =
-    story.choice === ""
+    story.level === 1
       ? (await creator.getGptStoryPrompt(story)).basePrompt
       : (await creator.getNextLevel(story)).basePrompt;
 
@@ -37,7 +36,6 @@ export const chatGptData = async (story: Story) => {
     message: "success",
     data: {
       data,
-      story: story.level,
       level: story.level + 1,
     },
   };

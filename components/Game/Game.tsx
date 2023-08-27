@@ -27,7 +27,7 @@ export const Game: React.FC = () => {
     },
     choice: "",
     characterName: "",
-    level: 2,
+    level: 1,
     characterStory: {
       plot: "",
       characterType: "",
@@ -52,13 +52,14 @@ export const Game: React.FC = () => {
     try {
       if (choice) {
         story.choice = choice;
-        console.log(choice);
       }
       const gptData = await chatGptData(story);
-      const level = await JSON.parse(gptData.data.data);
+      const storyData = await JSON.parse(gptData.data.data);
+      const level = gptData.data.level;
 
-      story.story = level;
-      story.characterName = level.characterName;
+      story.story = storyData;
+      story.level = level;
+      story.characterName = storyData.characterName;
       setStory(story);
 
       setLoading(false);

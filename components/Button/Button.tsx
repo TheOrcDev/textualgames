@@ -2,9 +2,15 @@ export interface ButtonProps {
   content: string;
   onClick?: () => void;
   color?: string;
+  onKeyDown?: () => KeyboardEvent;
 }
 
-export const Button: React.FC<ButtonProps> = ({ content, color, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({
+  content,
+  color,
+  onClick,
+  onKeyDown,
+}) => {
   // remove "a" or "an" from the beginning of the string
   if (content.startsWith("a ")) {
     content = content.slice(2);
@@ -22,6 +28,7 @@ export const Button: React.FC<ButtonProps> = ({ content, color, onClick }) => {
       ${content.length > 20 && "h-32"}
       `}
       onClick={onClick}
+      onKeyDown={onKeyDown}
     >
       {content}
     </button>

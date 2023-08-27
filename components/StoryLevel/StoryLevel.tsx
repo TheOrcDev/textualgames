@@ -14,6 +14,13 @@ export const StoryLevel: React.FC<StoryLevelProps> = ({
   level,
 }) => {
   const [choice, setChoice] = useState<string>("");
+  const [choicesOption, setChoicesOption] = useState<boolean>(false);
+
+  const enter = (event: any) => {
+    if (event.key === "Enter") {
+      getNextLevel(choice, level.story);
+    }
+  };
 
   return (
     <div
@@ -21,7 +28,8 @@ export const StoryLevel: React.FC<StoryLevelProps> = ({
     flex-row justify-center text-center px-5 sm:px-40"
     >
       <p className="text-sm md:text-xl mt-10 mb-5">{level.story}</p>
-      {level.choices ? (
+      {level.choices &&
+        choicesOption &&
         level.choices.map((choice: string, index: number) => (
           <div className="flex justify-center m-5" key={index}>
             <Button
@@ -29,22 +37,34 @@ export const StoryLevel: React.FC<StoryLevelProps> = ({
               onClick={() => getNextLevel(choice, level.story)}
             />
           </div>
-        ))
-      ) : (
-        <div className="flex justify-center m-5">
-          <Button content="Play New Story" />
-        </div>
+        ))}
+      {choicesOption && (
+        <Button
+          content="Manual"
+          onClick={() => setChoicesOption(!choicesOption)}
+        />
       )}
-      {/* <input
-        type="text"
-        value={choice}
-        onChange={(value) => setChoice(value.target.value)}
-        className="border-2 border-black text-black w-full h-10"
-      />
-      <Button
-        content={"Go"}
-        onClick={() => getNextLevel(choice, level.story)}
-      /> */}
+      {!choicesOption && (
+        <>
+          <textarea
+            value={choice}
+            onChange={(value) => setChoice(value.target.value)}
+            className="border-2 border-black text-black w-full p-5"
+            rows={5}
+            onKeyDown={(e) => enter(e)}
+          ></textarea>
+          <div className="w-full flex justify-center gap-5">
+            <Button
+              content="Go"
+              onClick={() => getNextLevel(choice, level.story)}
+            />
+            <Button
+              content="Choices"
+              onClick={() => setChoicesOption(!choicesOption)}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };
