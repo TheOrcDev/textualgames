@@ -5,6 +5,8 @@ import { BufferMemory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
 import { PromptTemplate } from "langchain/prompts";
 
+console.log(PromptTemplate);
+
 const model = new OpenAI({
   modelName: process.env.GPT_MODEL,
   openAIApiKey: process.env.GPT_API_KEY,
