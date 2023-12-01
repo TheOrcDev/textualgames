@@ -3,6 +3,7 @@
 import { OpenAI } from "langchain/llms/openai";
 import { BufferMemory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
+import { PromptTemplate } from "langchain/prompts";
 
 const model = new OpenAI({
   modelName: process.env.GPT_MODEL,
