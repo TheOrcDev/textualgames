@@ -30,7 +30,7 @@ class StoryCreator {
 
   constructor() {
     this.jsonFormat =
-      "{ story: string; choices: string[]; }. Avoid new lines in the story, and anything that can break the json format.";
+      "{ story: string; choices: string[]; }. There should be two potential choices for this level in choices array. Avoid new lines in the story, and anything that can break the json format.";
   }
 
   async getGptStoryPrompt(data: Story): Promise<StoryPrompt> {
@@ -61,7 +61,7 @@ class StoryCreator {
       
       Ensure that the story aligns with the ${data.genre} genre.
       
-      Please return the data in the following JSON format, offering two choices to the player, which will be only for showing what could players potentially write as their action:`;
+      Please return the data in the following JSON format:`;
 
     let basePrompt = `${thePrompt} ${this.jsonFormat}`;
 
@@ -69,13 +69,16 @@ class StoryCreator {
   }
 
   async getNextLevel(data: Story): Promise<StoryPrompt> {
+    const gameCharacterStory = `${data.characterStory.characterType} ${data.characterStory.plot}`;
     const thePrompt = `Continue the story based on my choice.
 
     My choice was: "${data.choice}"
 
     Ensure the story remains in the ${data.genre}.
 
-    Return the data in the following JSON format: ${this.jsonFormat}`;
+    The story revolves around my character, ${gameCharacterStory}. My character name is ${data.characterName}.
+
+    Please return the data in the following JSON format: ${this.jsonFormat}`;
 
     return { basePrompt: thePrompt, character: data.characterName };
   }
