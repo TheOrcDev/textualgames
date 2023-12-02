@@ -34,12 +34,6 @@ class StoryCreator {
   }
 
   async getGptStoryPrompt(data: Story): Promise<StoryPrompt> {
-    let numberOfChoices = "two";
-
-    if (data.level === 3 || data.level >= 4) {
-      numberOfChoices = "three";
-    }
-
     if (data.story.inventory.length > 0) {
       data.characterStory.items = data.story.inventory;
     }
@@ -65,9 +59,9 @@ class StoryCreator {
 
       Make a little backstory for my character. This should be a short summary of the events leading up to the start of the game.
       
-      Ensure that the story aligns with the ${data.genre} genre, offering ${numberOfChoices} choices to the player, which will be only for showing what could players potentially write as their action.
+      Ensure that the story aligns with the ${data.genre} genre.
       
-      Please return the data in the following JSON format:`;
+      Please return the data in the following JSON format, offering two choices to the player, which will be only for showing what could players potentially write as their action:`;
 
     let basePrompt = `${thePrompt} ${this.jsonFormat}`;
 
