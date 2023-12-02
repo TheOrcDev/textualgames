@@ -73,7 +73,7 @@ class StoryCreator {
 
     My choice was: "${data.choice}"
 
-    Ensure the story remains in the ${data.genre} genre with 2 choices available.
+    Ensure the story remains in the ${data.genre}.
 
     Return the data in the following JSON format: ${this.jsonFormat}`;
 
