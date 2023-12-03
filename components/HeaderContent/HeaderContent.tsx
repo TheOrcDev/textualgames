@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Button from "../Button/Button";
 
-interface HeaderContentProps {}
+type Props = {
+  getRandomGame: () => void;
+};
 
-const HeaderContent: React.FC<HeaderContentProps> = ({}) => {
+const HeaderContent: React.FC<Props> = ({ getRandomGame }: Props) => {
   return (
     <>
       <div className="flex justify-center">
@@ -26,10 +28,11 @@ const HeaderContent: React.FC<HeaderContentProps> = ({}) => {
           to Textual Games!
         </p>
         <div className="flex justify-center my-10">
-          <div className="w-4/5 md:w-1/2">
+          <div className="flex gap-3">
             <a href="#play">
-              <Button content="Step into the story" />
+              <Button content="Choose your story" />
             </a>
+            <Button content="Quick game" onClick={getRandomGame} />
           </div>
         </div>
 

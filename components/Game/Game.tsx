@@ -16,25 +16,10 @@ import {
   HeaderContent,
   Genres,
 } from "@/components";
+import { createDefaultStoryState, createRandomStory } from ".";
 
 export const Game: React.FC = () => {
-  const [story, setStory] = useState<Story>({
-    story: {
-      story: "",
-      choices: [],
-      inventory: [],
-      whatHappenedSoFar: "",
-    },
-    choice: "",
-    characterName: "",
-    level: 1,
-    characterStory: {
-      plot: "",
-      characterType: "",
-      items: [],
-    },
-    genre: "",
-  });
+  const [story, setStory] = useState<Story>(createDefaultStoryState);
 
   const [genreSelection, setGenreSelection] = useState(true);
   const [characterSelection, setCharacterSelection] = useState(false);
@@ -45,6 +30,27 @@ export const Game: React.FC = () => {
   const [name, setName] = useState("");
 
   const [loading, setLoading] = useState(false);
+
+  const getRandomGame = async () => {
+    setLoading(true);
+    setGenreSelection(false);
+    const randomStory = createRandomStory();
+
+    try {
+      const gptData = await chatGptData(randomStory);
+      const storyData = await JSON.parse(gptData.data.data);
+      const level = gptData.data.level;
+
+      randomStory.story = storyData;
+      randomStory.level = level;
+      randomStory.characterName = storyData.characterName;
+      setStory(randomStory);
+
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const getData = async (choice?: string) => {
     setLoading(true);
@@ -74,7 +80,7 @@ export const Game: React.FC = () => {
         {/* Genre select */}
         {genreSelection && (
           <>
-            <HeaderContent />
+            <HeaderContent getRandomGame={getRandomGame} />
             <div id="play" className="mt-20"></div>
             <Genres
               select={(choice) => {
