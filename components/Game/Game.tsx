@@ -16,10 +16,10 @@ import {
   HeaderContent,
   Genres,
 } from "@/components";
-import { createDefaultStoryState, createRandomStory } from ".";
+import { createStory } from ".";
 
 export const Game: React.FC = () => {
-  const [story, setStory] = useState<Story>(createDefaultStoryState);
+  const [story, setStory] = useState<Story>(createStory);
 
   const [genreSelection, setGenreSelection] = useState(true);
   const [characterSelection, setCharacterSelection] = useState(false);
@@ -34,7 +34,7 @@ export const Game: React.FC = () => {
   const getRandomGame = async () => {
     setLoading(true);
     setGenreSelection(false);
-    const randomStory = createRandomStory();
+    const randomStory = createStory(true);
 
     try {
       const gptData = await chatGptData(randomStory);

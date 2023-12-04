@@ -1,32 +1,7 @@
 import { characters, genres, items, names, plots } from "@/libs/data";
 import { Story } from "@/libs/story-creator";
 
-export const createDefaultStoryState = (): Story => ({
-  story: {
-    story: "",
-    choices: [],
-    inventory: [],
-    whatHappenedSoFar: "",
-  },
-  choice: "",
-  characterName: "",
-  level: 1,
-  characterStory: {
-    plot: "",
-    characterType: "",
-    items: [],
-  },
-  genre: "",
-});
-
-export const createRandomStory = (): Story => {
-  const randomCharacterName = names[Math.floor(Math.random() * names.length)];
-  const randomPlot = plots[Math.floor(Math.random() * plots.length)];
-  const randomCharacterType =
-    characters[Math.floor(Math.random() * characters.length)];
-  const randomItem = items[Math.floor(Math.random() * items.length)];
-  const randomGenre = genres[Math.floor(Math.random() * genres.length)];
-
+export const createStory = (random?: boolean): Story => {
   return {
     story: {
       story: "",
@@ -35,13 +10,17 @@ export const createRandomStory = (): Story => {
       whatHappenedSoFar: "",
     },
     choice: "",
-    characterName: randomCharacterName,
+    characterName: random
+      ? names[Math.floor(Math.random() * names.length)]
+      : "",
     level: 1,
     characterStory: {
-      plot: randomPlot,
-      characterType: randomCharacterType,
-      items: [randomItem],
+      plot: random ? plots[Math.floor(Math.random() * plots.length)] : "",
+      characterType: random
+        ? characters[Math.floor(Math.random() * characters.length)]
+        : "",
+      items: random ? [items[Math.floor(Math.random() * items.length)]] : [],
     },
-    genre: randomGenre.name,
+    genre: random ? genres[Math.floor(Math.random() * genres.length)].name : "",
   };
 };

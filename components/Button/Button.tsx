@@ -17,6 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   } else if (content.startsWith("an ")) {
     content = content.slice(3);
   }
+
   return (
     <button
       className={`
