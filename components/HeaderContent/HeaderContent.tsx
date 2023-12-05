@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "../Button/Button";
+import { Button } from "@/components";
 
 type Props = {
   getRandomGame: () => void;
@@ -28,7 +28,7 @@ const HeaderContent: React.FC<Props> = ({ getRandomGame }: Props) => {
           to Textual Games!
         </p>
         <div className="flex justify-center my-10">
-          <div className="flex gap-3">
+          <div className="flex gap-5 whitespace-nowrap">
             <a href="#play">
               <Button content="Choose your story" />
             </a>
@@ -46,27 +46,6 @@ const HeaderContent: React.FC<Props> = ({ getRandomGame }: Props) => {
           narratives will transport you to a realm where your imagination knows
           no bounds.
         </p>
-        {/* <p className="mt-5">
-            As you delve into each tale, you will find yourself confronted with
-            pivotal moments, where your choices will mold the fate of the
-            characters and the world they inhabit. Will you be the hero who
-            saves the day, or will your actions lead to unforeseen consequences?
-            The power is in your hands, and only you can unravel the intricate
-            tapestry of these captivating narratives. Not only will you be
-            captivated by the stories we offer, but you will also have the
-            opportunity to unleash your own creativity. Dive into our
-            interactive story creator, a powerful tool that enables you to forge
-            your own adventures from scratch. Craft intricate plots, shape
-            unforgettable characters, and develop branching paths that allow
-            players to carve their own destinies. With the story creator, you
-            become the architect of your own storytelling universe, ready to
-            share your creations with the world. Whether you're a seasoned
-            storyteller or a curious explorer, [Your Game Website's Name]
-            welcomes you to embark on an unforgettable journey of choice and
-            consequence. Are you ready to make your mark on the worlds we have
-            to offer? Prepare to be enthralled as you enter the gateway to
-            countless adventures. The path lies before you. Choose wisely.
-            </p> */}
       </div>
     </>
   );

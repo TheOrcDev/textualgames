@@ -1,8 +1,8 @@
 export interface ButtonProps {
-  content: string;
-  onClick?: () => void;
-  color?: string;
   onKeyDown?: () => KeyboardEvent;
+  onClick?: () => void;
+  content: string;
+  color?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -21,7 +21,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={`
-      transition ease-in-out delay-150 hover:-translate-y-1 p-3 hover:shadow-lg rounded-xl
+      transition ease-in-out hover:-translate-y-1 p-3 hover:shadow-lg rounded-xl
       flex text-center w-full shadow-md items-center justify-center min-h-28 ${
         color ? color : "bg-yellow-400"
       } text-xs md:text-base shadow-yellow-700

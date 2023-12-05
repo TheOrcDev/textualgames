@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/ui/Button/Button";
 import { Level } from "@/libs/story-creator";
 import { useState } from "react";
 
