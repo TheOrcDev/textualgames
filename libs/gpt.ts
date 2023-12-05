@@ -25,21 +25,22 @@ const chain = new ConversationChain({
 import StoryCreator, { Story } from "./story-creator";
 
 export const chatGptData = async (story: Story) => {
-  const creator = new StoryCreator();
+  try {
+    const creator = new StoryCreator();
 
-  const input =
-    story.level === 1
-      ? (await creator.getGptStoryPrompt(story)).basePrompt
-      : (await creator.getNextLevel(story)).basePrompt;
+    const input =
+      story.level === 1
+        ? (await creator.getGptStoryPrompt(story)).basePrompt
+        : (await creator.getNextLevel(story)).basePrompt;
 
-  const response = await chain.call({ input });
-  const data = await response.response;
+    const response = await chain.call({ input });
+    const data = await response.response;
 
-  return {
-    message: "success",
-    data: {
+    return {
       data,
       level: story.level + 1,
-    },
-  };
+    };
+  } catch (e) {
+    throw e;
+  }
 };

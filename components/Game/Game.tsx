@@ -26,11 +26,11 @@ export const Game: React.FC = () => {
   const [nameSelection, setNameSelection] = useState(false);
   const [plotSelection, setPlotSelection] = useState(false);
   const [itemSelection, setItemSelection] = useState(false);
-
   const [name, setName] = useState("");
 
   const [loading, setLoading] = useState(false);
 
+  // Random
   const getRandomGame = async () => {
     setLoading(true);
     setGenreSelection(false);
@@ -38,8 +38,8 @@ export const Game: React.FC = () => {
 
     try {
       const gptData = await chatGptData(randomStory);
-      const storyData = await JSON.parse(gptData.data.data);
-      const level = gptData.data.level;
+      const storyData = await JSON.parse(gptData.data);
+      const level = gptData.level;
 
       randomStory.story = storyData;
       randomStory.level = level;
@@ -52,6 +52,7 @@ export const Game: React.FC = () => {
     }
   };
 
+  // Start the game
   const getData = async (choice?: string) => {
     setLoading(true);
 
