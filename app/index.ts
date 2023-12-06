@@ -1,5 +1,5 @@
 import { characters, genres, items, names, plots } from "@/libs/data";
-import { Story } from "@/libs/story-creator";
+import { Story } from "@/libs/types";
 
 export type PartyMember = {
   name: string;
