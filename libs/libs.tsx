@@ -1,5 +1,5 @@
-import { CharacterStory } from "./story-creator";
 import { characters, plots, items, lessUsefulItems } from "./data";
+import { CharacterStory } from "./types";
 
 export function getStory(): CharacterStory {
   const getRandomString = (array: string[]) => {
