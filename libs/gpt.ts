@@ -22,7 +22,8 @@ const chain = new ConversationChain({
   verbose: true,
 });
 
-import StoryCreator, { Story } from "./story-creator";
+import StoryCreator from "./story-creator";
+import { Story } from "./types";
 
 export const chatGptData = async (story: Story) => {
   try {
