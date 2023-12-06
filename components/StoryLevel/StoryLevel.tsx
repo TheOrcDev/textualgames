@@ -1,12 +1,12 @@
 "use client";
 
 import Button from "@/components/ui/Button/Button";
-import { Level } from "@/libs/story-creator";
+import { GameLevel } from "@/libs/types";
 import { useState } from "react";
 
 export interface StoryLevelProps {
   getNextLevel: (choice: string, storyLevel: string) => void;
-  level: Level;
+  level: GameLevel;
 }
 
 export const StoryLevel: React.FC<StoryLevelProps> = ({
@@ -18,7 +18,7 @@ export const StoryLevel: React.FC<StoryLevelProps> = ({
 
   const enter = (event: any) => {
     if (event.key === "Enter") {
-      getNextLevel(choice, level.story);
+      getNextLevel(choice, level.storyline);
     }
   };
 
@@ -27,14 +27,14 @@ export const StoryLevel: React.FC<StoryLevelProps> = ({
       className="
     flex-row justify-center text-center px-5 sm:px-40"
     >
-      <p className="text-sm md:text-xl mt-10 mb-5">{level.story}</p>
-      {level.choices &&
+      <p className="text-sm md:text-xl mt-10 mb-5">{level.storyline}</p>
+      {level.availableChoices &&
         choicesOption &&
-        level.choices.map((choice: string, index: number) => (
+        level.availableChoices.map((choice: string, index: number) => (
           <div className="flex justify-center m-5" key={index}>
             <Button
               content={choice}
-              onClick={() => getNextLevel(choice, level.story)}
+              onClick={() => getNextLevel(choice, level.storyline)}
             />
           </div>
         ))}
@@ -56,7 +56,7 @@ export const StoryLevel: React.FC<StoryLevelProps> = ({
           <div className="w-full flex justify-center gap-5">
             <Button
               content="Go"
-              onClick={() => getNextLevel(choice, level.story)}
+              onClick={() => getNextLevel(choice, level.storyline)}
             />
             <Button
               content="Choices"

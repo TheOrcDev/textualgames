@@ -10,11 +10,11 @@ export type PartyMember = {
 
 export const createStory = (random?: boolean): Story => {
   return {
-    story: {
-      story: "",
-      choices: [],
-      inventory: [],
-      whatHappenedSoFar: "",
+    levelInfo: {
+      storyline: "",
+      availableChoices: [],
+      inventoryItems: [],
+      progressSummary: "",
     },
     choice: "",
     characterName: random

@@ -1,4 +1,5 @@
 import GoogleAnalytics from "@/components/Layout/GoogleAnalytics";
+
 import "./globals.css";
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";

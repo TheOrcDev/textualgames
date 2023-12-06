@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import { type Story } from "@/libs/story-creator";
 import { characters, plots, items } from "@/libs/data";
 import { chatGptData } from "@/libs/gpt";
+import { Story } from "@/libs/types";
 
 import {
   LoadingSentences,
@@ -42,7 +42,7 @@ export default function Home() {
       const storyData = await JSON.parse(gptData.data);
       const level = gptData.level;
 
-      randomStory.story = storyData;
+      randomStory.levelInfo = storyData;
       randomStory.level = level;
       randomStory.characterName = storyData.characterName;
       setStory(randomStory);
@@ -62,10 +62,11 @@ export default function Home() {
         story.choice = choice;
       }
       const gptData = await chatGptData(story);
-      const storyData = await JSON.parse(gptData.data.data);
-      const level = gptData.data.level;
+      const storyData = await JSON.parse(gptData.data);
 
-      story.story = storyData;
+      const level = gptData.data;
+
+      story.levelInfo = storyData;
       story.level = level;
       story.characterName = storyData.characterName;
       setStory(story);
@@ -160,8 +161,8 @@ export default function Home() {
         )}
 
         {/* Story level */}
-        {story.story.story && !loading && (
-          <StoryLevel level={story.story} getNextLevel={getData} />
+        {story.levelInfo.storyline && !loading && (
+          <StoryLevel level={story.levelInfo} getNextLevel={getData} />
         )}
 
         {/* Loading */}

@@ -1,28 +1,8 @@
-export type Story = {
-  story: Level;
-  choice: string;
-  level: number;
-  genre: string;
-  characterName: string;
-  characterStory: CharacterStory;
-};
-
-export type Level = {
-  story: string;
-  choices: string[];
-  inventory: string[];
-  whatHappenedSoFar: string;
-};
+import { Story } from "./types";
 
 type StoryPrompt = {
   basePrompt: string;
   character: string;
-};
-
-export type CharacterStory = {
-  plot: string;
-  characterType: string;
-  items: string[];
 };
 
 class StoryCreator {
@@ -30,12 +10,12 @@ class StoryCreator {
 
   constructor() {
     this.jsonFormat =
-      "{ story: string; choices: string[]; }. There should be two potential choices for this level in choices array. Avoid new lines in the story, and anything that can break the json format.";
+      "{ storyline: string; availableChoices: string[]; }. There should be two potential choices for this level in choices array. Avoid new lines in the story, and anything that can break the json format.";
   }
 
   async getGptStoryPrompt(data: Story): Promise<StoryPrompt> {
-    if (data.story.inventory.length > 0) {
-      data.characterStory.items = data.story.inventory;
+    if (data.levelInfo.inventoryItems.length > 0) {
+      data.characterStory.items = data.levelInfo.inventoryItems;
     }
     const items = data.characterStory.items.join(", ");
     const inventory = `Feel free to incorporate items from your inventory if they are necessary for the story. Currently, your character have: ${items}. 
