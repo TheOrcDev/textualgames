@@ -1,4 +1,5 @@
 export const characters = [
+  "an orc",
   "a knight",
   "a wizard",
   "a detective",

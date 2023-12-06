@@ -49,14 +49,11 @@ class StoryCreator {
   }
 
   async getNextLevel(data: Story): Promise<StoryPrompt> {
-    const gameCharacterStory = `${data.characterStory.characterType} ${data.characterStory.plot}`;
     const thePrompt = `Continue the story based on my choice.
 
     My choice was: "${data.choice}"
 
     Ensure the story remains in the ${data.genre}.
-
-    The story revolves around my character, ${gameCharacterStory}. My character name is ${data.characterName}.
 
     Please return the data in the following JSON format: ${this.jsonFormat}`;
 
