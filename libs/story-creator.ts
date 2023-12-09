@@ -13,6 +13,9 @@ class StoryCreator {
       "{ storyline: string; availableChoices: string[]; }. There should be two potential choices for this level in choices array. Avoid new lines in the story, and anything that can break the json format.";
   }
 
+  // TODO: Add companions
+  // TODO: Add enemies
+
   async getGptStoryPrompt(data: Story): Promise<StoryPrompt> {
     if (data.levelInfo.inventoryItems.length > 0) {
       data.characterStory.items = data.levelInfo.inventoryItems;
