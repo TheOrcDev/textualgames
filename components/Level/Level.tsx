@@ -1,12 +1,12 @@
 import Button from "../ui/Button/Button";
 
-interface LevelProps {
+type Props = {
   content: string;
   options: string[];
   onClick: (option: string) => void;
-}
+};
 
-const Level: React.FC<LevelProps> = ({ content, options, onClick }) => {
+const Level: React.FC<Props> = ({ content, options, onClick }) => {
   return (
     <div className="flex flex-col items-center">
       <p className="text-2xl">{content}</p>

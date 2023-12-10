@@ -1,11 +1,11 @@
-export interface ButtonProps {
+type Props = {
   onKeyDown?: () => KeyboardEvent;
   onClick?: () => void;
   content: string;
   color?: string;
-}
+};
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<Props> = ({
   content,
   color,
   onClick,

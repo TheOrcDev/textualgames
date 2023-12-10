@@ -4,15 +4,12 @@ import Button from "@/components/ui/Button/Button";
 import { GameLevel } from "@/libs/types";
 import { useState } from "react";
 
-export interface StoryLevelProps {
+type Props = {
   getNextLevel: (choice: string, storyLevel: string) => void;
   level: GameLevel;
-}
+};
 
-export const StoryLevel: React.FC<StoryLevelProps> = ({
-  getNextLevel,
-  level,
-}) => {
+export const StoryLevel: React.FC<Props> = ({ getNextLevel, level }) => {
   const [choice, setChoice] = useState<string>("");
   const [choicesOption, setChoicesOption] = useState<boolean>(false);
 

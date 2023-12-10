@@ -3,12 +3,12 @@
 import { Button } from "@/components";
 import { useState } from "react";
 
-interface SelectItemsProps {
+type Props = {
   items: string[];
   select: (genre: string) => void;
-}
+};
 
-const SelectItems: React.FC<SelectItemsProps> = ({ items, select }) => {
+const SelectItems: React.FC<Props> = ({ items, select }) => {
   const [currentItems, setCurrentItems] = useState(items.slice(0, 15));
 
   return (

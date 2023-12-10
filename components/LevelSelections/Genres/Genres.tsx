@@ -11,11 +11,11 @@ type Genre = {
   image: string;
 };
 
-export interface GenresProps {
+type Props = {
   select: (genre: string) => void;
-}
+};
 
-export const Genres: React.FC<GenresProps> = ({ select }) => {
+export const Genres: React.FC<Props> = ({ select }) => {
   const [currentItems, setCurrentItems] = useState(genres.slice(0, 15));
 
   return (

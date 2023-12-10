@@ -1,10 +1,10 @@
-interface InputProps {
+type Props = {
   value?: string;
   onChange?: (value: string) => void;
   placeholder?: string;
-}
+};
 
-const Input: React.FC<InputProps> = ({ placeholder, value, onChange }) => {
+const Input: React.FC<Props> = ({ placeholder, value, onChange }) => {
   return (
     <input
       className={`

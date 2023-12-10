@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-interface FooterProps {}
+type Props = {};
 
-const Footer: React.FC<FooterProps> = ({}) => {
+const Footer: React.FC<Props> = ({}) => {
   return (
     <div className="fixed flex gap-2 items-center bottom-5 left-5 text-xs">
       <Image
