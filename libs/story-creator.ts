@@ -5,7 +5,7 @@ type StoryPrompt = {
   character: string;
 };
 
-class StoryCreator {
+export default class StoryCreator {
   private jsonFormat: string;
 
   constructor() {
@@ -17,51 +17,56 @@ class StoryCreator {
   // TODO: Add enemies
 
   async getGptStoryPrompt(data: Story): Promise<StoryPrompt> {
-    if (data.levelInfo.inventoryItems.length > 0) {
-      data.characterStory.items = data.levelInfo.inventoryItems;
-    }
+    this.updateCharacterInventory(data);
+
     const items = data.characterStory.items.join(", ");
-    const inventory = `Feel free to incorporate items from your inventory if they are necessary for the story. Currently, your character have: ${items}. 
-    
-    Also if you want to add or remove some items to my inventory, you can do that too by finding or losing them in the story, or by trading with someone, or similar. Throughout the story, you can find, lose, trade, or acquire new items for your inventory to enhance your character's abilities. Be creative in integrating these items into the narrative.`;
+    const inventory = `
+      Feel free to incorporate items from your inventory if they are necessary for the story.
+      Currently, your character has: ${items}.
+      If you want to add or remove items from the inventory, you can do that by finding, losing, trading, or acquiring them in the story.
+      Be creative in integrating these items into the narrative.
+    `;
 
     const gameCharacterStory = `${data.characterStory.characterType} ${data.characterStory.plot}`;
 
-    const thePrompt = `You are a dungeon master running a text base game with a player.
-      
+    const thePrompt = `
+      You are a dungeon master running a text-based game with a player.
       Begin the ${data.genre} genre text-based game story with two choices. The game should be from first person.
-
-      The story revolves around my character, ${gameCharacterStory}. My character name is ${data.characterName}. Start by providing a detailed description of my character.
+      The story revolves around my character, ${gameCharacterStory}.
+      My character's name is ${data.characterName}. Start by providing a detailed description of my character.
       
       Inventory:
       ${inventory}
       
       Describe the items currently in my inventory.
-      
       Set the scene by describing my surroundings, creating an immersive atmosphere for the story.
-
-      Make a little backstory for my character. This should be a short summary of the events leading up to the start of the game.
-      
+      Make a little backstory for my character, a short summary of the events leading up to the start of the game.
       Ensure that the story aligns with the ${data.genre} genre.
       
-      Please return the data in the following JSON format:`;
+      Please return the data in the following JSON format:
+    `;
 
-    let basePrompt = `${thePrompt} ${this.jsonFormat}`;
+    const basePrompt = `${thePrompt} ${this.jsonFormat}`;
 
     return { basePrompt, character: gameCharacterStory };
   }
 
   async getNextLevel(data: Story): Promise<StoryPrompt> {
-    const thePrompt = `Continue the story based on my choice.
-
-    My choice was: "${data.choice}"
-
-    Ensure the story remains in the ${data.genre}.
-
-    Please return the data in the following JSON format: ${this.jsonFormat}`;
+    const thePrompt = `
+      Continue the story based on my choice.
+      My choice was: "${data.choice}"
+      Ensure the story remains in the ${data.genre}.
+      
+      Please return the data in the following JSON format:
+      ${this.jsonFormat}
+    `;
 
     return { basePrompt: thePrompt, character: data.characterName };
   }
-}
 
-export default StoryCreator;
+  private updateCharacterInventory(data: Story) {
+    if (data.levelInfo.inventoryItems.length > 0) {
+      data.characterStory.items = data.levelInfo.inventoryItems;
+    }
+  }
+}
