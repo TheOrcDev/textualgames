@@ -1,13 +1,6 @@
 import { characters, genres, items, names, plots } from "@/libs/data";
 import { Story } from "@/libs/types";
 
-export type PartyMember = {
-  name: string;
-  race: string;
-  class: string;
-  gold: number;
-};
-
 export const createStory = (random?: boolean): Story => {
   return {
     levelInfo: {
