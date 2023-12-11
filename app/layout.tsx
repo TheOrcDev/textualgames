@@ -8,7 +8,7 @@ const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Textual Games",
-  description: "A collection of text-based games",
+  description: "Create your own story! AI Generated Textual Games.",
 };
 
 export default function RootLayout({
