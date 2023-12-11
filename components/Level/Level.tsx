@@ -6,7 +6,7 @@ type Props = {
   onClick: (option: string) => void;
 };
 
-const Level: React.FC<Props> = ({ content, options, onClick }) => {
+export default function Level({ content, options, onClick }: Props) {
   return (
     <div className="flex flex-col items-center">
       <p className="text-2xl">{content}</p>
@@ -21,6 +21,4 @@ const Level: React.FC<Props> = ({ content, options, onClick }) => {
       </div>
     </div>
   );
-};
-
-export default Level;
+}

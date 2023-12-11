@@ -4,7 +4,7 @@ type Props = {
   placeholder?: string;
 };
 
-const Input: React.FC<Props> = ({ placeholder, value, onChange }) => {
+export default function Input({ placeholder, value, onChange }: Props) {
   return (
     <input
       className={`
@@ -20,6 +20,4 @@ const Input: React.FC<Props> = ({ placeholder, value, onChange }) => {
       onChange={(e) => onChange && onChange(e.target.value)}
     />
   );
-};
-
-export default Input;
+}

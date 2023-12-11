@@ -5,12 +5,7 @@ type Props = {
   color?: string;
 };
 
-export const Button: React.FC<Props> = ({
-  content,
-  color,
-  onClick,
-  onKeyDown,
-}) => {
+export default function Button({ content, color, onClick, onKeyDown }: Props) {
   // remove "a" or "an" from the beginning of the string
   if (content.startsWith("a ")) {
     content = content.slice(2);
@@ -34,6 +29,4 @@ export const Button: React.FC<Props> = ({
       {content}
     </button>
   );
-};
-
-export default Button;
+}

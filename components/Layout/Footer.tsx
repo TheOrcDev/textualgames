@@ -1,8 +1,6 @@
 import Image from "next/image";
 
-type Props = {};
-
-const Footer: React.FC<Props> = ({}) => {
+export default function Footer() {
   return (
     <div className="fixed flex gap-2 items-center bottom-5 left-5 text-xs">
       <Image
@@ -15,6 +13,4 @@ const Footer: React.FC<Props> = ({}) => {
       <h2>Textual Games</h2>
     </div>
   );
-};
-
-export default Footer;
+}

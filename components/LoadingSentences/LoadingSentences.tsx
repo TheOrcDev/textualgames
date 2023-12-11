@@ -59,9 +59,7 @@ const getRandomSentence = () => {
   return sentences[Math.floor(Math.random() * sentences.length)];
 };
 
-type Props = {};
-
-const LoadingSentences: React.FC<Props> = ({}) => {
+export default function LoadingSentences() {
   const [sentence, setSentence] = useState<string>("");
 
   useEffect(() => {
@@ -82,6 +80,4 @@ const LoadingSentences: React.FC<Props> = ({}) => {
       </p>
     </div>
   );
-};
-
-export default LoadingSentences;
+}

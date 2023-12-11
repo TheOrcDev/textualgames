@@ -15,7 +15,7 @@ type Props = {
   select: (genre: string) => void;
 };
 
-export const Genres: React.FC<Props> = ({ select }) => {
+export default function Genres({ select }: Props) {
   const [currentItems, setCurrentItems] = useState(genres.slice(0, 15));
 
   return (
@@ -50,6 +50,4 @@ export const Genres: React.FC<Props> = ({ select }) => {
       )}
     </div>
   );
-};
-
-export default Genres;
+}

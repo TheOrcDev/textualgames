@@ -8,7 +8,7 @@ type Props = {
   select: (genre: string) => void;
 };
 
-const SelectItems: React.FC<Props> = ({ items, select }) => {
+export default function SelectItems({ items, select }: Props) {
   const [currentItems, setCurrentItems] = useState(items.slice(0, 15));
 
   return (
@@ -29,6 +29,4 @@ const SelectItems: React.FC<Props> = ({ items, select }) => {
       )}
     </div>
   );
-};
-
-export default SelectItems;
+}

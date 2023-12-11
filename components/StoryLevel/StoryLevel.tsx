@@ -9,7 +9,7 @@ type Props = {
   level: GameLevel;
 };
 
-export const StoryLevel: React.FC<Props> = ({ getNextLevel, level }) => {
+export default function StoryLevel({ getNextLevel, level }: Props) {
   const [choice, setChoice] = useState<string>("");
   const [choicesOption, setChoicesOption] = useState<boolean>(false);
 
@@ -64,6 +64,4 @@ export const StoryLevel: React.FC<Props> = ({ getNextLevel, level }) => {
       )}
     </div>
   );
-};
-
-export default StoryLevel;
+}

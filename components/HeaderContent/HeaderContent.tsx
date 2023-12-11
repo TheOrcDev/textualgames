@@ -5,7 +5,7 @@ type Props = {
   getRandomGame: () => void;
 };
 
-const HeaderContent: React.FC<Props> = ({ getRandomGame }: Props) => {
+export default function HeaderContent({ getRandomGame }: Props) {
   return (
     <>
       <div className="flex justify-center">
@@ -49,6 +49,4 @@ const HeaderContent: React.FC<Props> = ({ getRandomGame }: Props) => {
       </div>
     </>
   );
-};
-
-export default HeaderContent;
+}
