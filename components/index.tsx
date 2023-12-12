@@ -1,8 +1,8 @@
+export { default as SelectItems } from "./LevelSelections/SelectItems/SelectItems";
 export { default as LoadingSentences } from "./LoadingSentences/LoadingSentences";
 export { default as HeaderContent } from "./HeaderContent/HeaderContent";
-export { default as SelectItems } from "./LevelSelections/SelectItems/SelectItems";
-export { default as StoryLevel } from "./StoryLevel/StoryLevel";
 export { default as Genres } from "./LevelSelections/Genres/Genres";
+export { default as StoryLevel } from "./StoryLevel/StoryLevel";
 export { default as Button } from "./ui/Button/Button";
 export { default as Footer } from "./Layout/Footer";
 export { default as Level } from "./Level/Level";

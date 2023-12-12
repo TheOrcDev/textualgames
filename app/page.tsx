@@ -31,21 +31,18 @@ export default function Home() {
 
   const [loading, setLoading] = useState(false);
 
-  // Random
-  const getRandomGame = async () => {
+  const fetchData = async (input: Story, isRandom = false) => {
     setLoading(true);
-    setGenreSelection(false);
-    const randomStory = createStory(true);
 
     try {
-      const gptData = await chatGptData(randomStory);
+      const gptData = await chatGptData(input);
       const storyData = await JSON.parse(gptData.data);
       const level = gptData.level;
 
-      randomStory.levelInfo = storyData;
-      randomStory.level = level;
-      randomStory.characterName = storyData.characterName;
-      setStory(randomStory);
+      input.levelInfo = storyData;
+      input.level = level;
+      input.characterName = storyData.characterName;
+      setStory(input);
 
       setLoading(false);
     } catch (e) {
@@ -53,28 +50,17 @@ export default function Home() {
     }
   };
 
-  // Start the game
+  const getRandomGame = async () => {
+    setGenreSelection(false);
+    const randomStory = createStory(true);
+    await fetchData(randomStory, true);
+  };
+
   const getData = async (choice?: string) => {
-    setLoading(true);
-
-    try {
-      if (choice) {
-        story.choice = choice;
-      }
-      const gptData = await chatGptData(story);
-      const storyData = await JSON.parse(gptData.data);
-
-      const level = gptData.data;
-
-      story.levelInfo = storyData;
-      story.level = level;
-      story.characterName = storyData.characterName;
-      setStory(story);
-
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
+    if (choice) {
+      story.choice = choice;
     }
+    await fetchData(story);
   };
 
   return (

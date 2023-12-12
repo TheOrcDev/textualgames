@@ -54,7 +54,9 @@ export default class StoryCreator {
   async getNextLevel(story: Story): Promise<StoryPrompt> {
     const thePrompt = `
       Continue the story based on my choice.
+
       My choice was: "${story.choice}"
+      
       Ensure the story remains in the ${story.genre}.
       
       ${this.jsonFormat}
