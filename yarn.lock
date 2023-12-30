@@ -63,9 +63,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "@eslint/eslintrc@npm:2.1.2"
+"@eslint/eslintrc@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "@eslint/eslintrc@npm:2.1.4"
   dependencies:
     ajv: "npm:^6.12.4"
     debug: "npm:^4.3.2"
@@ -76,25 +76,25 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     minimatch: "npm:^3.1.2"
     strip-json-comments: "npm:^3.1.1"
-  checksum: 00efdc3797e6f05518060522b7788e5f5aff02f13facbd0c83b176c3dee86554023283a5f68542df379c5137685d2d29745c87f62bf2406a1d38d95471f44ce6
+  checksum: 32f67052b81768ae876c84569ffd562491ec5a5091b0c1e1ca1e0f3c24fb42f804952fdd0a137873bc64303ba368a71ba079a6f691cee25beee9722d94cc8573
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:^8.47.0":
-  version: 8.48.0
-  resolution: "@eslint/js@npm:8.48.0"
-  checksum: c8ac8952f37cccd41b4adc4399a7a3a6a0b4c52d67bc55b412be5b3ffb476343b3463a4df2c1d7b633dbb6e0d5fb277eeaf3ba0de0dcdf6d0ed97fcdd416ba94
+"@eslint/js@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@eslint/js@npm:8.56.0"
+  checksum: 60b3a1cf240e2479cec9742424224465dc50e46d781da1b7f5ef240501b2d1202c225bd456207faac4b34a64f4765833345bc4ddffd00395e1db40fa8c426f5a
   languageName: node
   linkType: hard
 
-"@humanwhocodes/config-array@npm:^0.11.10":
-  version: 0.11.11
-  resolution: "@humanwhocodes/config-array@npm:0.11.11"
+"@humanwhocodes/config-array@npm:^0.11.13":
+  version: 0.11.13
+  resolution: "@humanwhocodes/config-array@npm:0.11.13"
   dependencies:
-    "@humanwhocodes/object-schema": "npm:^1.2.1"
+    "@humanwhocodes/object-schema": "npm:^2.0.1"
     debug: "npm:^4.1.1"
     minimatch: "npm:^3.0.5"
-  checksum: 4195f68e485f7d1a7c95cf0f126cc41f7223eeda2f1b46b893123c99b35bb76145c37d25e2ba452d54815ed69bb656c0ce9e343ffa984470c08afa6e82a4713f
+  checksum: d76ca802d853366094d0e98ff0d0994117fc8eff96649cd357b15e469e428228f597cd2e929d54ab089051684949955f16ee905bb19f7b2f0446fb377157be7a
   languageName: node
   linkType: hard
 
@@ -105,10 +105,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/object-schema@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@humanwhocodes/object-schema@npm:1.2.1"
-  checksum: c3c35fdb70c04a569278351c75553e293ae339684ed75895edc79facc7276e351115786946658d78133130c0cca80e57e2203bc07f8fa7fe7980300e8deef7db
+"@humanwhocodes/object-schema@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@humanwhocodes/object-schema@npm:2.0.1"
+  checksum: 9dba24e59fdb4041829d92b693aacb778add3b6f612aaa9c0774f3b650c11a378cc64f042a59da85c11dae33df456580a3c36837b953541aed6ff94294f97fac
   languageName: node
   linkType: hard
 
@@ -168,12 +168,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@langchain/community@npm:~0.0.3":
-  version: 0.0.3
-  resolution: "@langchain/community@npm:0.0.3"
+"@langchain/community@npm:~0.0.12":
+  version: 0.0.12
+  resolution: "@langchain/community@npm:0.0.12"
   dependencies:
-    "@langchain/core": "npm:~0.1.0"
-    "@langchain/openai": "npm:~0.0.5"
+    "@langchain/core": "npm:~0.1.5"
+    "@langchain/openai": "npm:~0.0.9"
     flat: "npm:^5.0.2"
     langsmith: "npm:~0.0.48"
     uuid: "npm:^9.0.0"
@@ -189,6 +189,7 @@ __metadata:
     "@aws-sdk/credential-provider-node": ^3.388.0
     "@clickhouse/client": ^0.2.5
     "@cloudflare/ai": ^1.0.12
+    "@datastax/astra-db-ts": 0.1.2
     "@elastic/elasticsearch": ^8.4.0
     "@getmetal/metal-sdk": "*"
     "@getzep/zep-js": ^0.9.0
@@ -227,6 +228,7 @@ __metadata:
     closevector-web: 0.1.0-alpha.16
     cohere-ai: ">=6.0.0"
     convex: ^1.3.1
+    discord.js: ^14.14.1
     faiss-node: ^0.5.1
     firebase-admin: ^11.9.0
     google-auth-library: ^8.9.0
@@ -275,6 +277,8 @@ __metadata:
     "@clickhouse/client":
       optional: true
     "@cloudflare/ai":
+      optional: true
+    "@datastax/astra-db-ts":
       optional: true
     "@elastic/elasticsearch":
       optional: true
@@ -352,6 +356,8 @@ __metadata:
       optional: true
     convex:
       optional: true
+    discord.js:
+      optional: true
     faiss-node:
       optional: true
     firebase-admin:
@@ -408,13 +414,13 @@ __metadata:
       optional: true
     ws:
       optional: true
-  checksum: 019f2009373cf2e3a78dbe9c98611726bb3eb43ea9178387db7c02a5e9ebac0b9f0b0e52b65e9162db49eab62e581f8ad0cbd17ba6e201c362510328feadebe1
+  checksum: 8c4a9f5b19015f0138332eae840a0483b0d7309b1e50abbd92692eff232550e69e96d3fe5710a44e1dacc4d940bfd147a76876239cbb3643404535602c1045f9
   languageName: node
   linkType: hard
 
-"@langchain/core@npm:~0.1.0":
-  version: 0.1.0
-  resolution: "@langchain/core@npm:0.1.0"
+"@langchain/core@npm:~0.1.5":
+  version: 0.1.6
+  resolution: "@langchain/core@npm:0.1.6"
   dependencies:
     ansi-styles: "npm:^5.0.0"
     camelcase: "npm:6"
@@ -426,20 +432,20 @@ __metadata:
     p-retry: "npm:4"
     uuid: "npm:^9.0.0"
     zod: "npm:^3.22.3"
-  checksum: 6555f4c3d76b6229d97c183b99acf0041812c0e0a1b13e3dd0072c4bfab1e6468887276fbbe1f863660cf006cced0c90be83e509f724d14e8dd6bdc941305ae6
+  checksum: a8b16a3fef303f86fc7817ca07d469078fead9d5431e4ea097459b8c33d54708df121a5ce320981450f30402cd302ee1ff32a2381a383944458140ec7dde7323
   languageName: node
   linkType: hard
 
-"@langchain/openai@npm:~0.0.5":
-  version: 0.0.5
-  resolution: "@langchain/openai@npm:0.0.5"
+"@langchain/openai@npm:~0.0.9":
+  version: 0.0.9
+  resolution: "@langchain/openai@npm:0.0.9"
   dependencies:
-    "@langchain/core": "npm:~0.1.0"
+    "@langchain/core": "npm:~0.1.5"
     js-tiktoken: "npm:^1.0.7"
     openai: "npm:^4.19.0"
     zod: "npm:^3.22.3"
     zod-to-json-schema: "npm:3.20.3"
-  checksum: 692241b8ee014eafd93ff475e876523f568a95a633beb810a148a13aab648f28568b7a3369f1090e7eefcd2907f6cfed68417c8aa796cd4bfc457a6915db5cfe
+  checksum: 7519e29353dc1237c137f199efd1d1adec943edb168cf4c3886d0ec74e3e10beb988df72a0cb5381a7926ef407d817194a51e35f5cc39ff8868496f85fb67a92
   languageName: node
   linkType: hard
 
@@ -625,12 +631,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.10.4":
-  version: 20.10.4
-  resolution: "@types/node@npm:20.10.4"
+"@types/node@npm:^20.10.6":
+  version: 20.10.6
+  resolution: "@types/node@npm:20.10.6"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 2c8b70cba731eb2ae3ae046daa74903bfcbb0e7b9196da767e5895054f6d252296ae7a04fb1dbbcb53bb004c4c658c05eaea2731bc9e2dd9e08f7e88d672f563
+  checksum: 6692ccfa8552ef60c4069fda3c8de726c23e8d403cdf788e3c7efa769987e80fbda5f02723dd857f9de7df24a5fa40b3ed4580ec3c5cbac04eba44cf7b2ab1dc
   languageName: node
   linkType: hard
 
@@ -641,12 +647,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.2.17":
-  version: 18.2.17
-  resolution: "@types/react-dom@npm:18.2.17"
+"@types/react-dom@npm:^18.2.18":
+  version: 18.2.18
+  resolution: "@types/react-dom@npm:18.2.18"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 33b53078ed7e9e0cfc4dc691e938f7db1cc06353bc345947b41b581c3efe2b980c9e4eb6460dbf5ddc521dd91959194c970221a2bd4bfad9d23ebce338e12938
+  checksum: 74dba11a1b8156f3a763f3fca1fb4ec1dcd349153279b8bf79210024a69f994bf2cf0728198c047f8130c5318420ea56281b0a4ef84c8ae943cd9a0cac705220
   languageName: node
   linkType: hard
 
@@ -661,14 +667,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.43":
-  version: 18.2.43
-  resolution: "@types/react@npm:18.2.43"
+"@types/react@npm:^18.2.46":
+  version: 18.2.46
+  resolution: "@types/react@npm:18.2.46"
   dependencies:
     "@types/prop-types": "npm:*"
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10477a50fbd3c0cc5b8a2ade679f442717f68fb27c8460b2aa1d3256cd18c48f742bbe5b9ee37a8c4c5f832ffa37b3a23c09fd96dd880a8e3182d8929c05e803
+  checksum: 814cc67107e5e69501d65bfc371cc2c716665d2a3608d395a2f81e24c3a2875db28e2cad717dfb17017eabcffd1d68ee2c9e09ecaba3f7108d5b7fbb9888ebab
   languageName: node
   linkType: hard
 
@@ -753,6 +759,13 @@ __metadata:
     "@typescript-eslint/types": "npm:6.6.0"
     eslint-visitor-keys: "npm:^3.4.1"
   checksum: 916331900aa39f91eb509954169b1230ba979577343ab6d4e380862c29408053c3325c852501241ff17c4e46ffb80ca28217f9781f627db2d20b3c4d9691ab69
+  languageName: node
+  linkType: hard
+
+"@ungap/structured-clone@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@ungap/structured-clone@npm:1.2.0"
+  checksum: 8209c937cb39119f44eb63cf90c0b73e7c754209a6411c707be08e50e29ee81356dca1a848a405c8bdeebfe2f5e4f831ad310ae1689eeef65e7445c090c6657d
   languageName: node
   linkType: hard
 
@@ -1859,17 +1872,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.47.0":
-  version: 8.47.0
-  resolution: "eslint@npm:8.47.0"
+"eslint@npm:^8.56.0":
+  version: 8.56.0
+  resolution: "eslint@npm:8.56.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     "@eslint-community/regexpp": "npm:^4.6.1"
-    "@eslint/eslintrc": "npm:^2.1.2"
-    "@eslint/js": "npm:^8.47.0"
-    "@humanwhocodes/config-array": "npm:^0.11.10"
+    "@eslint/eslintrc": "npm:^2.1.4"
+    "@eslint/js": "npm:8.56.0"
+    "@humanwhocodes/config-array": "npm:^0.11.13"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
     "@nodelib/fs.walk": "npm:^1.2.8"
+    "@ungap/structured-clone": "npm:^1.2.0"
     ajv: "npm:^6.12.4"
     chalk: "npm:^4.0.0"
     cross-spawn: "npm:^7.0.2"
@@ -1902,7 +1916,7 @@ __metadata:
     text-table: "npm:^0.2.0"
   bin:
     eslint: bin/eslint.js
-  checksum: b6c69f2ca34990027cfe7d46c956672583549b2a13d118791ee60ad1fa3e5057ab7781b27c9b0ea76dc67f7e980b33e106ad07d54c83464ab9ba03d2ec832f36
+  checksum: 2be598f7da1339d045ad933ffd3d4742bee610515cd2b0d9a2b8b729395a01d4e913552fff555b559fccaefd89d7b37632825789d1b06470608737ae69ab43fb
   languageName: node
   linkType: hard
 
@@ -2986,14 +3000,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"langchain@npm:^0.0.205":
-  version: 0.0.205
-  resolution: "langchain@npm:0.0.205"
+"langchain@npm:^0.0.213":
+  version: 0.0.213
+  resolution: "langchain@npm:0.0.213"
   dependencies:
     "@anthropic-ai/sdk": "npm:^0.9.1"
-    "@langchain/community": "npm:~0.0.3"
-    "@langchain/core": "npm:~0.1.0"
-    "@langchain/openai": "npm:~0.0.5"
+    "@langchain/community": "npm:~0.0.12"
+    "@langchain/core": "npm:~0.1.5"
+    "@langchain/openai": "npm:~0.0.9"
     binary-extensions: "npm:^2.2.0"
     expr-eval: "npm:^2.0.2"
     js-tiktoken: "npm:^1.0.7"
@@ -3025,7 +3039,7 @@ __metadata:
     "@vercel/kv": ^0.2.3
     "@xata.io/client": ^0.28.0
     apify-client: ^2.7.1
-    assemblyai: ^2.0.2
+    assemblyai: ^4.0.0
     axios: "*"
     cheerio: ^1.0.0-rc.12
     chromadb: "*"
@@ -3039,7 +3053,7 @@ __metadata:
     ignore: ^5.2.0
     ioredis: ^5.3.2
     jsdom: "*"
-    mammoth: "*"
+    mammoth: ^1.6.0
     mongodb: ^5.2.0
     node-llama-cpp: "*"
     notion-to-md: ^3.1.0
@@ -3162,7 +3176,7 @@ __metadata:
       optional: true
     youtubei.js:
       optional: true
-  checksum: caeb188f849bfbcb63e4d0a1203684bbd1a8e80488cc466f5ba2991e4239a4179fb4de9aa57a456e19650221978dd79eef06b34b2fdec1e9bd29470c519a02ff
+  checksum: 10a6bf03c88d753b31cdd5849e20c220aa0205e9b63dba42d93a55d1b4a9e151072fca70400aff91d7505c6ebbdcdb873ff3fab8a606eed8a915cf43cd570555
   languageName: node
   linkType: hard
 
@@ -4632,9 +4646,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.3.6":
-  version: 3.3.6
-  resolution: "tailwindcss@npm:3.3.6"
+"tailwindcss@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "tailwindcss@npm:3.4.0"
   dependencies:
     "@alloc/quick-lru": "npm:^5.2.0"
     arg: "npm:^5.0.2"
@@ -4661,7 +4675,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 69caade773249cb963c33e81f85b7fc423dcb74b416727483f434f4e12874187f633970c9de864fa96736289abaf71189314a53589ada0be6c09ccb0e8b78391
+  checksum: 0a1cef7468e6d17c2857d0b3c4017af2cb37ed8ba27dfb14780c517b8a74f6786970227c400ac1325fc8bcfc09099d8e990fa7c60924bf945f3d0a912d63f546
   languageName: node
   linkType: hard
 
@@ -4697,18 +4711,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "textualgames@workspace:."
   dependencies:
-    "@types/node": "npm:^20.10.4"
-    "@types/react": "npm:^18.2.43"
-    "@types/react-dom": "npm:^18.2.17"
+    "@types/node": "npm:^20.10.6"
+    "@types/react": "npm:^18.2.46"
+    "@types/react-dom": "npm:^18.2.18"
     autoprefixer: "npm:^10.4.16"
-    eslint: "npm:8.47.0"
+    eslint: "npm:^8.56.0"
     eslint-config-next: "npm:^14.0.4"
-    langchain: "npm:^0.0.205"
+    langchain: "npm:^0.0.213"
     next: "npm:^14.0.4"
     postcss: "npm:^8.4.32"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
-    tailwindcss: "npm:^3.3.6"
+    tailwindcss: "npm:^3.4.0"
     typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft
