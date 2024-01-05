@@ -123,6 +123,7 @@ export const items = [
   "a knife",
   "a rope",
   "a staff",
+  "a mace",
   "a magical amulet",
   "a grappling hook",
   "a lantern",
@@ -150,6 +151,7 @@ export const items = [
   "a smoke bomb",
   "disguise tools",
   "a telescope",
+  "a flail",
   "tracking tools",
   "sleep potion",
   "a bag of herbs",
@@ -157,6 +159,7 @@ export const items = [
   "a water bottle",
   "a fishing rod",
   "a guitar",
+  "a shovel",
 ];
 
 export const lessUsefulItems = [
@@ -187,7 +190,6 @@ export const lessUsefulItems = [
   "A magnifying glass",
   "A pair of binoculars",
   "A grappling hook",
-  "A shovel",
   "A hammer",
   "A set of nails",
   "A cooking pot",
@@ -198,6 +200,7 @@ export const lessUsefulItems = [
   "A journal",
   "A roll of bandages",
   "A bag of chalk",
+  "empty book",
   "A lantern",
   "A mirror",
   "A flask",

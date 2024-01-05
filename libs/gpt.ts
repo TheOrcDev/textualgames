@@ -41,7 +41,7 @@ export const chatGptData = async (story: Story) => {
       data,
       level: story.level + 1,
     };
-  } catch (e) {
-    throw e;
+  } catch (error) {
+    throw error;
   }
 };
