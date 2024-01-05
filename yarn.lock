@@ -2501,6 +2501,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"husky@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "husky@npm:8.0.3"
+  bin:
+    husky: lib/bin.js
+  checksum: 6722591771c657b91a1abb082e07f6547eca79144d678e586828ae806499d90dce2a6aee08b66183fd8b085f19d20e0990a2ad396961746b4c8bd5bdb619d668
+  languageName: node
+  linkType: hard
+
 "iconv-lite@npm:^0.6.2":
   version: 0.6.3
   resolution: "iconv-lite@npm:0.6.3"
@@ -4717,6 +4726,7 @@ __metadata:
     autoprefixer: "npm:^10.4.16"
     eslint: "npm:^8.56.0"
     eslint-config-next: "npm:^14.0.4"
+    husky: "npm:^8.0.3"
     langchain: "npm:^0.0.213"
     next: "npm:^14.0.4"
     postcss: "npm:^8.4.32"
