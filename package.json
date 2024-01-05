@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "husky install",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "commit": "./node_modules/cz-customizable/standalone.js"
   },
   "dependencies": {
     "@types/node": "^20.10.6",
@@ -25,7 +26,13 @@
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.3"
   },
+  "config": {
+    "cz-customizable": {
+      "config": "cz-config.js"
+    }
+  },
   "devDependencies": {
+    "cz-customizable": "^7.0.0",
     "husky": "^8.0.3"
   }
 }
