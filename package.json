@@ -12,13 +12,13 @@
     "commit": "./node_modules/cz-customizable/standalone.js"
   },
   "dependencies": {
-    "@types/node": "^20.10.7",
+    "@types/node": "^20.10.8",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
-    "langchain": "^0.1.0",
+    "langchain": "^0.1.2",
     "next": "^14.0.4",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
