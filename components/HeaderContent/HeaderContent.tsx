@@ -11,7 +11,7 @@ export default function HeaderContent({ getRandomGame }: Props) {
       <div className="flex justify-center">
         <div className="flex justify-center">
           <Image
-            src="/img/logo/textualgameslogolight.png"
+            src="/img/logo/textualgames.webp"
             alt="Textual Games"
             className="shadow-md w-auto"
             width={400}
