@@ -22,6 +22,44 @@ const chain = new ConversationChain({
   verbose: true,
 });
 
+const getDalle3Image = async (prompt: string, story: Story) => {
+  const imagePrompt = `
+  Give me a scenery image for the visual novel game.
+
+  The main storyline is ${story.characterStory.plot}.
+
+  My character is a ${story.characterStory.characterType}, and his name is ${story.characterName}
+
+  My choice was: "${story.choice}"
+
+  The story genre is: "${story.genre}", and keep the image in that mood.
+
+  My current level description is this: ${prompt}
+`;
+
+  const imageResponse = await fetch(
+    "https://api.openai.com/v1/images/generations",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.GPT_API_KEY}`,
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        n: 1,
+        prompt: imagePrompt,
+        size: "1792x1024",
+        model: "dall-e-3",
+      }),
+    }
+  );
+
+  const image = await imageResponse.json();
+
+  return image.data[0].url;
+};
+
 import StoryCreator from "./story-creator";
 import { Story } from "./types";
 
@@ -34,12 +72,15 @@ export const chatGptData = async (story: Story) => {
         ? (await creator.getGptStoryPrompt(story)).basePrompt
         : (await creator.getNextLevel(story)).basePrompt;
 
+    const image = await getDalle3Image(input, story);
+
     const response = await chain.call({ input });
     const data = await response.response;
 
     return {
       data,
       level: story.level + 1,
+      image,
     };
   } catch (error) {
     throw error;

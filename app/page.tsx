@@ -18,6 +18,7 @@ import {
 } from "@/components";
 
 import { createStory } from ".";
+import Image from "next/image";
 
 export default function Home() {
   const [story, setStory] = useState<Story>(createStory);
@@ -38,10 +39,12 @@ export default function Home() {
       const gptData = await chatGptData(input);
       const storyData = await JSON.parse(gptData.data);
       const level = gptData.level;
+      const image = gptData.image;
 
       input.levelInfo = storyData;
       input.level = level;
       input.characterName = storyData.characterName;
+      input.image = image;
       setStory(input);
 
       setLoading(false);
@@ -149,6 +152,17 @@ export default function Home() {
         {/* Story level */}
         {story.levelInfo.storyline && !loading && (
           <StoryLevel level={story.levelInfo} getNextLevel={getData} />
+        )}
+
+        {story.image && (
+          <div className="flex justify-center items-center mt-5">
+            <Image
+              src={story.image}
+              width={1024}
+              height={1024}
+              alt="AI Image"
+            />
+          </div>
         )}
 
         {/* Loading */}

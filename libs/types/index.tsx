@@ -5,6 +5,7 @@ export type Story = {
   genre: string;
   characterName: string;
   characterStory: CharacterStory;
+  image: string;
 };
 
 export type GameLevel = {
