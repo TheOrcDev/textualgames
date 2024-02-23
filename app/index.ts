@@ -1,5 +1,11 @@
-import { characters, genres, items, names, plots } from "@/libs/data";
-import { Story } from "@/libs/types";
+import {
+  characters,
+  genres,
+  items,
+  names,
+  plots,
+} from "@/components/shared/data";
+import { Story } from "@/components/shared/types";
 
 export const createStory = (random?: boolean): Story => {
   return {
@@ -10,6 +16,7 @@ export const createStory = (random?: boolean): Story => {
       progressSummary: "",
     },
     choice: "",
+    image: "",
     characterName: random
       ? names[Math.floor(Math.random() * names.length)]
       : "",

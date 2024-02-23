@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components";
-import { genres } from "@/libs/data";
+import { genres } from "@/components/shared/data";
 import Image from "next/image";
 import { useState } from "react";
 

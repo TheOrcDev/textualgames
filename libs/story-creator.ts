@@ -1,4 +1,4 @@
-import { Story } from "./types";
+import { Story } from "../components/shared/types";
 
 type StoryPrompt = {
   basePrompt: string;

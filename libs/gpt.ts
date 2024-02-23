@@ -61,7 +61,7 @@ const getDalle3Image = async (prompt: string, story: Story) => {
 };
 
 import StoryCreator from "./story-creator";
-import { Story } from "./types";
+import { Story } from "../components/shared/types";
 
 export const chatGptData = async (story: Story) => {
   try {

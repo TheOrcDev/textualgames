@@ -1,9 +1,14 @@
-export { default as SelectItems } from "./LevelSelections/SelectItems/SelectItems";
-export { default as LoadingSentences } from "./LoadingSentences/LoadingSentences";
-export { default as HeaderContent } from "./HeaderContent/HeaderContent";
-export { default as Genres } from "./LevelSelections/Genres/Genres";
-export { default as StoryLevel } from "./StoryLevel/StoryLevel";
-export { default as Button } from "./ui/Button/Button";
-export { default as Footer } from "./Layout/Footer";
-export { default as Level } from "./Level/Level";
-export { default as Input } from "./ui/Input/Input";
+// Features
+export { default as SelectItems } from "./features/LevelSelections/SelectItems/SelectItems";
+export { default as LoadingSentences } from "./features/LoadingSentences/LoadingSentences";
+export { default as Genres } from "./features/LevelSelections/Genres/Genres";
+export { default as StoryLevel } from "./features/StoryLevel/StoryLevel";
+
+// Shared UI
+export { default as HeaderContent } from "./shared/ui/THeaderContent/THeaderContent";
+export { default as Footer } from "./shared/ui/TFooter/Footer";
+export { default as Button } from "./shared/ui/TButton/TButton";
+export { default as Input } from "./shared/ui/TInput/TInput";
+
+// Entities
+export { default as GoogleAnalytics } from "./entities/GoogleAnalytics/GoogleAnalytics";

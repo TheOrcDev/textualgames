@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import { characters, plots, items } from "@/libs/data";
+import { characters, plots, items } from "@/components/shared/data";
 import { chatGptData } from "@/libs/gpt";
-import { Story } from "@/libs/types";
+import { Story } from "@/components/shared/types";
 
 import {
   LoadingSentences,

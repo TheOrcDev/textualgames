@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/components/ui/Button/Button";
-import { GameLevel } from "@/libs/types";
+import Button from "@/components/shared/ui/TButton/TButton";
+import { GameLevel } from "@/components/shared/types";
 import { useState } from "react";
 
 type Props = {
