@@ -7,7 +7,7 @@ type Props = {
 
 export default function HeaderContent({ getRandomGame }: Props) {
   return (
-    <>
+    <header>
       <div className="flex justify-center">
         <div className="flex justify-center">
           <Image
@@ -47,6 +47,6 @@ export default function HeaderContent({ getRandomGame }: Props) {
           no bounds.
         </p>
       </div>
-    </>
+    </header>
   );
 }
