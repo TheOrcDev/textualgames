@@ -6,7 +6,8 @@ export { default as StoryLevel } from "./features/StoryLevel/StoryLevel";
 
 // Shared UI
 export { default as HeaderContent } from "./shared/ui/THeaderContent/THeaderContent";
-export { default as Footer } from "./shared/ui/TFooter/Footer";
+export { default as Footer } from "./shared/ui/TFooter/TFooter";
+export { default as Header } from "./shared/ui/THeader/THeader";
 export { default as Button } from "./shared/ui/TButton/TButton";
 export { default as Input } from "./shared/ui/TInput/TInput";
 
