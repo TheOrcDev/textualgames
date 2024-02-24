@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 
-import { GoogleAnalytics } from "@/components";
+import { Footer, GoogleAnalytics } from "@/components";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
@@ -19,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleAnalytics />
-      <body className={pressStart2P.className}>{children}</body>
+      <body className={pressStart2P.className}>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

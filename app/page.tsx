@@ -8,7 +8,6 @@ import { Story } from "@/components/shared/types";
 
 import {
   LoadingSentences,
-  Footer,
   SelectItems,
   StoryLevel,
   Input,
@@ -167,9 +166,6 @@ export default function Home() {
 
         {/* Loading */}
         {loading && <LoadingSentences />}
-
-        {/* Footer */}
-        <Footer />
       </main>
     </>
   );
