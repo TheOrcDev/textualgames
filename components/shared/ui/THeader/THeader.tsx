@@ -1,8 +1,6 @@
-"use client";
-
 import Image from "next/image";
 
-export default function OHeader() {
+export default function THeader() {
   return (
     <header className="p-5 flex items-center justify-between">
       <Image
