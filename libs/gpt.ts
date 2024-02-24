@@ -1,13 +1,10 @@
 "use server";
 
-import { OpenAI } from "@langchain/openai";
+import { ChatOpenAI } from "@langchain/openai";
 import { BufferMemory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
-import { PromptTemplate } from "langchain/prompts";
 
-console.log(PromptTemplate);
-
-const model = new OpenAI({
+const model = new ChatOpenAI({
   modelName: process.env.GPT_MODEL,
   openAIApiKey: process.env.GPT_API_KEY,
   temperature: parseFloat(process.env.GPT_TEMPERATURE ?? "0.8"),
