@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <>
-      <main className={`bg-[url('/img/bg.jpg')] bg-no-repeat pt-20 pb-20`}>
+      <main className={`bg-[url('/img/bg.jpg')] bg-no-repeat pt-10 pb-20`}>
         {/* Genre select */}
         {genreSelection && (
           <>
