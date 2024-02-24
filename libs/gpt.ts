@@ -1,6 +1,6 @@
 "use server";
 
-import { OpenAI } from "langchain/llms/openai";
+import { OpenAI } from "@langchain/openai";
 import { BufferMemory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
 import { PromptTemplate } from "langchain/prompts";

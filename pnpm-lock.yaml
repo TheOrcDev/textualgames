@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@langchain/openai':
+        specifier: ^0.0.14
+        version: 0.0.14
       '@types/node':
         specifier: ^20.11.19
         version: 20.11.19
