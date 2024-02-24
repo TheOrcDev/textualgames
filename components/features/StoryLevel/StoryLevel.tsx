@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
 import Button from "@/components/shared/ui/TButton/TButton";
 import { GameLevel } from "@/components/shared/types";
-import { useState } from "react";
 
 type Props = {
   getNextLevel: (choice: string, storyLevel: string) => void;

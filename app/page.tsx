@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 
-import { characters, plots, items } from "@/components/shared/data";
-import { chatGptData } from "@/libs/gpt";
 import { Story } from "@/components/shared/types";
-
+import { characters, plots, items } from "@/components/shared/data";
 import {
   LoadingSentences,
   SelectItems,
@@ -15,6 +13,8 @@ import {
   HeaderContent,
   Genres,
 } from "@/components";
+
+import { chatGptData } from "@/libs/gpt";
 
 import { createStory } from ".";
 import Image from "next/image";

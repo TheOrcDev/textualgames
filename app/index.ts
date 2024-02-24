@@ -1,3 +1,4 @@
+import { Story } from "@/components/shared/types";
 import {
   characters,
   genres,
@@ -5,7 +6,6 @@ import {
   names,
   plots,
 } from "@/components/shared/data";
-import { Story } from "@/components/shared/types";
 
 export const createStory = (random?: boolean): Story => {
   return {
