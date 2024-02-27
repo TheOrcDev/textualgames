@@ -19,7 +19,12 @@ export default function Genres({ select }: Props) {
   const [currentItems, setCurrentItems] = useState(genres.slice(0, 15));
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-4 sm:mx-10 md:mx-32 h-min px-10 xl:px-24 2xl:px-40">
+    <div
+      className="
+      grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 
+      mx-4 sm:mx-10 md:mx-32 h-min px-10 xl:px-24 2xl:px-40
+      "
+    >
       {currentItems.map((item: Genre, index: number) => (
         <div className="flex flex-col items-center" key={index}>
           <Image
@@ -39,6 +44,7 @@ export default function Genres({ select }: Props) {
           <p className="text-xs mt-3">{item.description}</p>
         </div>
       ))}
+
       {genres.length > 15 && currentItems.length !== genres.length && (
         <Button
           content="More..."
