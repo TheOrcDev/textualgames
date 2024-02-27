@@ -148,11 +148,6 @@ export default function Home() {
           />
         )}
 
-        {/* Story level */}
-        {story.levelInfo.storyline && !loading && (
-          <StoryLevel level={story.levelInfo} getNextLevel={getData} />
-        )}
-
         {story.image && (
           <div className="flex justify-center items-center mt-5">
             <Image
@@ -162,6 +157,11 @@ export default function Home() {
               alt="AI Image"
             />
           </div>
+        )}
+
+        {/* Story level */}
+        {story.levelInfo.storyline && !loading && (
+          <StoryLevel level={story.levelInfo} getNextLevel={getData} />
         )}
 
         {/* Loading */}
