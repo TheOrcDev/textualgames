@@ -25,13 +25,15 @@ const getDalle3Image = async (prompt: string, story: Story) => {
 
   The main storyline is ${story.characterStory.plot}.
 
-  My character is a ${story.characterStory.characterType}, and his name is ${story.characterName}
-
-  My choice was: "${story.choice}"
+  My character is a ${story.characterStory.characterType}
 
   The story genre is: "${story.genre}", and keep the image in that mood.
 
   My current level description is this: ${prompt}
+
+  My choice was: "${story.choice}"
+
+  Image should be in photorealistic art.
 `;
 
   const imageResponse = await fetch(
