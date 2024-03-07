@@ -55,8 +55,7 @@ export default function Home() {
   const getRandomGame = async () => {
     setGenreSelection(false);
     const randomStory = createStory(true);
-    const orc = "orc";
-    await fetchData(orc, true);
+    await fetchData(randomStory, true);
   };
 
   const getData = async (choice?: string) => {
