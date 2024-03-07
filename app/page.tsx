@@ -55,13 +55,15 @@ export default function Home() {
   const getRandomGame = async () => {
     setGenreSelection(false);
     const randomStory = createStory(true);
-    await fetchData(randomStory, true);
+    const orc = "orc";
+    await fetchData(orc, true);
   };
 
   const getData = async (choice?: string) => {
     if (choice) {
       story.choice = choice;
     }
+
     await fetchData(story);
   };
 
@@ -84,6 +86,8 @@ export default function Home() {
           </>
         )}
 
+        <div className="flex flex-col bg-zinc-400"></div>
+
         {/* Character select */}
         {characterSelection && (
           <SelectItems
@@ -96,7 +100,6 @@ export default function Home() {
             }}
           />
         )}
-
         {/* Character name input */}
         {nameSelection && (
           <div className="flex flex-col justify-center items-center text-center mt-5">
