@@ -20,12 +20,16 @@ const chain = new ConversationChain({
 });
 
 const getDalle3Image = async (prompt: string, story: Story) => {
+  const items = story.characterStory.items.toString();
+
+  console.log(items);
+
   const imagePrompt = `
   Give me a scenery image for the visual novel game.
 
   The main storyline is ${story.characterStory.plot}.
 
-  My character is a ${story.characterStory.characterType}
+  My character is a ${story.characterStory.characterType}, and is carrying these items: ${items}
 
   The story genre is: "${story.genre}", and keep the image in that mood.
 

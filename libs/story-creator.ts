@@ -33,7 +33,7 @@ export default class StoryCreator {
 
     const thePrompt = `
       You are a dungeon master running a text-based game with a player.
-      Begin the ${story.genre} genre text-based game story with two choices. The game should be from first person.
+      Begin the ${story.genre} genre text-based game story. The game should be from first person.
       The story revolves around my character, ${gameCharacterStory}.
       My character's name is ${story.characterName}. Start by providing a detailed description of my character.
       
