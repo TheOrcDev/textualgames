@@ -21,8 +21,8 @@ export default function Genres({ select }: Props) {
   return (
     <div
       className="
-      grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 
-      mx-4 sm:mx-10 md:mx-32 h-min px-10 xl:px-24 2xl:px-40
+      mx-4 grid h-min grid-cols-1 gap-10 
+      px-10 sm:mx-10 md:mx-32 md:grid-cols-2 lg:grid-cols-3 xl:px-24 2xl:px-40
       "
     >
       {currentItems.map((item: Genre, index: number) => (
@@ -34,14 +34,14 @@ export default function Genres({ select }: Props) {
             width={80}
             height={80}
           />
-          <div className="text-left w-full my-3">{item.name.toUpperCase()}</div>
+          <div className="my-3 w-full text-left">{item.name.toUpperCase()}</div>
           <div className="w-full text-left">
             <div className="w-1/2">
               <Button content="PLAY" onClick={() => select(item.name)} />
             </div>
           </div>
 
-          <p className="text-xs mt-3">{item.description}</p>
+          <p className="mt-3 text-xs">{item.description}</p>
         </div>
       ))}
 

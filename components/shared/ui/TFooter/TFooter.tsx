@@ -2,11 +2,11 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="fixed flex gap-2 items-center bottom-5 left-5 text-xs">
+    <footer className="fixed bottom-5 left-5 flex items-center gap-2 text-xs">
       <Image
         src="/img/logo/textualgameslogolight.png"
         alt="logo"
-        className="shadow-md w-auto"
+        className="w-auto shadow-md"
         width={20}
         height={20}
       />

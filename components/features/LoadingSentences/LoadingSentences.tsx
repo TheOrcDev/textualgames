@@ -75,8 +75,8 @@ export default function LoadingSentences() {
       <p
         key={sentence}
         className="
-        flex items-center justify-center 
-        text-sm animate-fade-in-out text-center
+        animate-fade-in-out flex items-center 
+        justify-center text-center text-sm
         "
       >
         {sentence}

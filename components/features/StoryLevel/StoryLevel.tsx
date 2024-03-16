@@ -21,13 +21,13 @@ export default function StoryLevel({ getNextLevel, level }: Props) {
   };
 
   return (
-    <div className="flex-row justify-center text-center px-5 sm:px-40">
-      <p className="text-sm md:text-xl mt-10 mb-5">{level.storyline}</p>
+    <div className="flex-row justify-center px-5 text-center sm:px-40">
+      <p className="mb-5 mt-10 text-sm md:text-xl">{level.storyline}</p>
 
       {level.availableChoices &&
         choicesOption &&
         level.availableChoices.map((choice: string, index: number) => (
-          <div className="flex justify-center m-5" key={index}>
+          <div className="m-5 flex justify-center" key={index}>
             <Button
               content={choice}
               onClick={() => getNextLevel(choice, level.storyline)}
@@ -45,11 +45,11 @@ export default function StoryLevel({ getNextLevel, level }: Props) {
           <textarea
             value={choice}
             onChange={(value) => setChoice(value.target.value)}
-            className="border-2 border-black text-black w-full p-5"
+            className="w-full border-2 border-black p-5 text-black"
             rows={5}
             onKeyDown={onKeyDown}
           ></textarea>
-          <div className="w-full flex justify-center gap-5">
+          <div className="flex w-full justify-center gap-5">
             <Button
               content="Go"
               onClick={() => getNextLevel(choice, level.storyline)}

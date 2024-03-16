@@ -7,7 +7,7 @@ type Props = {
 
 export default function HeaderContent({ getRandomGame }: Props) {
   return (
-    <div className="flex-col justify-center text-center px-8 md:px-36 text-sm w-full">
+    <div className="w-full flex-col justify-center px-8 text-center text-sm md:px-36">
       <h1 className="text-2xl">Textual Games</h1>
       <p className="mt-10">
         Welcome to the captivating world of interactive storytelling! Prepare to
@@ -15,7 +15,7 @@ export default function HeaderContent({ getRandomGame }: Props) {
         your choices shape the course of each unique narrative. Welcome to
         Textual Games!
       </p>
-      <div className="flex justify-center my-10">
+      <div className="my-10 flex justify-center">
         <div className="flex gap-5 whitespace-nowrap">
           <a href="#play">
             <Button content="Choose your story" />

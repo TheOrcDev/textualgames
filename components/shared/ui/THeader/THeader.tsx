@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function THeader() {
   return (
-    <header className="p-5 flex items-center justify-between">
+    <header className="flex items-center justify-between p-5">
       <Link href={"/"}>
         <Image
           width={50}

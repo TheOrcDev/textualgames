@@ -68,7 +68,7 @@ export default function Home() {
 
   return (
     <>
-      <main className={`bg-[url('/img/bg.jpg')] bg-no-repeat pt-10 pb-20`}>
+      <main className={`bg-[url('/img/bg.jpg')] bg-no-repeat pb-20 pt-10`}>
         {/* Genre select */}
         {genreSelection && (
           <>
@@ -101,7 +101,7 @@ export default function Home() {
         )}
         {/* Character name input */}
         {nameSelection && (
-          <div className="flex flex-col justify-center items-center text-center mt-5">
+          <div className="mt-5 flex flex-col items-center justify-center text-center">
             <Input
               placeholder="enter your name"
               value={name}
@@ -151,7 +151,7 @@ export default function Home() {
         )}
 
         {story.image && (
-          <div className="flex justify-center items-center mt-5">
+          <div className="mt-5 flex items-center justify-center">
             <Image
               src={story.image}
               width={1024}
