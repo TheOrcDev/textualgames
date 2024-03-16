@@ -7,7 +7,7 @@ import { Footer, GoogleAnalytics, Header } from "@/components";
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Textual Games",
+  title: "Textual Games - Create your own story!",
   description: "Create your own story! AI Generated Textual Games.",
 };
 

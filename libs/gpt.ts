@@ -22,8 +22,6 @@ const chain = new ConversationChain({
 const getDalle3Image = async (prompt: string, story: Story) => {
   const items = story.characterStory.items.toString();
 
-  console.log(items);
-
   const imagePrompt = `
   Give me a scenery image for the visual novel game.
 
