@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import Button from "@/components/shared/ui/TButton/TButton";
+import Button from "@/components/shared/ui/Button/Button";
 import { GameLevel } from "@/components/shared/types";
 
 type Props = {
