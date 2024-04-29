@@ -1,8 +1,19 @@
 "use server";
 
+import { compare } from "@langchain/core/utils/json_patch";
+import { Serializable } from "@langchain/core/load/serializable";
+import { getEncoding } from "@langchain/core/utils/tiktoken";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+
 import { ChatOpenAI } from "@langchain/openai";
 import { BufferMemory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
+
+const DoNotRemoveCompare = compare;
+const DoNotRemovegetEncoding = getEncoding;
+const DoNotRemoveSerializable = Serializable;
+const DoNotRemoveRecursiveCharacterTextSplitter =
+  RecursiveCharacterTextSplitter;
 
 const model = new ChatOpenAI({
   modelName: process.env.GPT_MODEL,
