@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Button } from "@/components";
+import { Button } from "@/components/ui";
 
 type Props = {
   getRandomGame: () => void;
@@ -18,9 +17,9 @@ export default function HeaderContent({ getRandomGame }: Props) {
       <div className="my-10 flex justify-center">
         <div className="flex gap-5 whitespace-nowrap">
           <a href="#play">
-            <Button content="Choose your story" />
+            <Button>Choose your story</Button>
           </a>
-          <Button content="Quick game" onClick={getRandomGame} />
+          <Button onClick={getRandomGame}>Quick game</Button>
         </div>
       </div>
 

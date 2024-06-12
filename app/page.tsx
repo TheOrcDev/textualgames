@@ -4,20 +4,20 @@ import { useState } from "react";
 
 import { Story } from "@/components/shared/types";
 import { characters, plots, items } from "@/components/shared/data";
+import { Input, HeaderContent } from "@/components/ui";
+
 import {
   LoadingSentences,
   SelectItems,
-  StoryLevel,
-  Input,
-  Button,
-  HeaderContent,
   Genres,
-} from "@/components";
+  StoryLevel,
+} from "@/components/features";
 
 import { chatGptData } from "@/libs/gpt";
 
 import { createStory } from ".";
 import Image from "next/image";
+import { Button } from "@/components/ui";
 
 export default function Home() {
   const [story, setStory] = useState<Story>(createStory);
@@ -68,7 +68,7 @@ export default function Home() {
 
   return (
     <>
-      <main className={`bg-[url('/img/bg.jpg')] bg-no-repeat pb-20 pt-10`}>
+      <main>
         {/* Genre select */}
         {genreSelection && (
           <>
@@ -85,8 +85,6 @@ export default function Home() {
           </>
         )}
 
-        <div className="flex flex-col bg-zinc-400"></div>
-
         {/* Character select */}
         {characterSelection && (
           <SelectItems
@@ -101,26 +99,26 @@ export default function Home() {
         )}
         {/* Character name input */}
         {nameSelection && (
-          <div className="mt-5 flex flex-col items-center justify-center text-center">
+          <div className="mt-5 flex flex-col items-center justify-center gap-5 text-center">
             <Input
               placeholder="enter your name"
               value={name}
+              className="w-96"
               onChange={(e) => {
-                setName(e);
+                setName(e.target.value);
               }}
             />
-            <div className="w-60">
-              <Button
-                content="submit"
-                onClick={() => {
-                  if (name === "") return alert("Please enter a name");
-                  story.characterName = name;
-                  setStory(story);
-                  setNameSelection(false);
-                  setPlotSelection(true);
-                }}
-              />
-            </div>
+            <Button
+              onClick={() => {
+                if (name === "") return alert("Please enter a name");
+                story.characterName = name;
+                setStory(story);
+                setNameSelection(false);
+                setPlotSelection(true);
+              }}
+            >
+              submit
+            </Button>
           </div>
         )}
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components";
+import { Button } from "@/components/ui";
 import { useState } from "react";
 
 type Props = {
@@ -20,17 +20,20 @@ export default function SelectItems({ items, select }: Props) {
     >
       {currentItems.map((item: string, index: number) => (
         <div className="flex h-min items-center" key={index}>
-          <Button content={item} onClick={() => select(item)} />
+          <Button className="h-40 w-60 text-wrap" onClick={() => select(item)}>
+            {item}
+          </Button>
         </div>
       ))}
       {items.length > 15 && currentItems.length !== items.length && (
         <Button
-          content="More..."
           onClick={() => {
             setCurrentItems(items.slice(0, currentItems.length + 15));
           }}
           color="bg-yellow-100"
-        />
+        >
+          More...
+        </Button>
       )}
     </div>
   );

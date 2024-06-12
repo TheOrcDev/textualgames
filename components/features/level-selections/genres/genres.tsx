@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components";
+import { Button } from "@/components/ui";
 import { genres } from "@/components/shared/data";
 import Image from "next/image";
 import { useState } from "react";
@@ -37,7 +37,7 @@ export default function Genres({ select }: Props) {
           <div className="my-3 w-full text-left">{item.name.toUpperCase()}</div>
           <div className="w-full text-left">
             <div className="w-1/2">
-              <Button content="PLAY" onClick={() => select(item.name)} />
+              <Button onClick={() => select(item.name)}>PLAY</Button>
             </div>
           </div>
 
@@ -47,12 +47,13 @@ export default function Genres({ select }: Props) {
 
       {genres.length > 15 && currentItems.length !== genres.length && (
         <Button
-          content="More..."
           onClick={() => {
             setCurrentItems(genres.slice(0, currentItems.length + 15));
           }}
           color="bg-slate-400"
-        />
+        >
+          More...
+        </Button>
       )}
     </div>
   );
