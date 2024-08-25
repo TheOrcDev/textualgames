@@ -72,8 +72,8 @@ export default function PlayPage() {
         {/* Genre select */}
         {genreSelection && (
           <>
-            <HeaderContent getRandomGame={getRandomGame} />
-            <div id="play" className="mt-20"></div>
+            {/* <HeaderContent getRandomGame={getRandomGame} /> */}
+            {/* <div id="play" className="mt-20"></div> */}
             <Genres
               select={(choice) => {
                 story.genre = choice;
