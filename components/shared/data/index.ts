@@ -223,48 +223,48 @@ export const genres = [
       "Step into a realm where magic reigns supreme, as you embark on an extraordinary adventure through fantastical landscapes. Encounter mythical creatures, unravel ancient prophecies, and test your mettle against formidable foes in a battle of light against darkness. Your choices will shape the destiny of this enchanting world, where heroes are forged and legends are born.",
     image: "/img/categories/fantasy.png",
   },
-  {
-    name: "Adventure",
-    description:
-      "Embark on an adrenaline-fueled adventure of a lifetime, where uncharted territories await your exploration and every moment is a thrilling leap into the unknown. Discover the courage within as you navigate treacherous landscapes, conquer formidable challenges, and create a legacy that will be whispered in tales of daring exploits for generations to come.",
-    image: "/img/categories/adventure.png",
-  },
-  {
-    name: "Comedy",
-    description:
-      "Enter a world where laughter is the ultimate currency as you embark on a rib-tickling adventure filled with comedic chaos, witty hijinks, and unforgettable punchlines. Brace yourself for a comedic rollercoaster ride that will leave you in stitches and remind you that laughter truly is the best medicine.",
-    image: "/img/categories/comedy.png",
-  },
-  {
-    name: "Horror",
-    description:
-      "Enter a nightmarish realm where shadows lurk in every corner, and chilling whispers send shivers down your spine. Brace yourself for a bone-chilling descent into darkness as you confront your deepest fears and unearth the terrifying secrets that lie hidden in the shadows, knowing that survival is not guaranteed in this realm of relentless horror.",
-    image: "/img/categories/horror.png",
-  },
-  {
-    name: "Mystery",
-    description:
-      "Immerse yourself in a gripping world of secrets and deception, where every step forward uncovers new enigmas, and the truth lies hidden in the shadows, waiting to be unveiled. Follow a trail of clues, solve perplexing puzzles, and unravel the layers of a captivating mystery that will keep you guessing until the final, mind-bending revelation.",
-    image: "/img/categories/mystery.png",
-  },
-  {
-    name: "Romance",
-    description:
-      "Indulge in a whirlwind of passion and desire as you enter a realm where hearts entwine and love's intoxicating spell weaves its magic. Follow the journey of two souls destined to collide, navigating obstacles, experiencing heartache and bliss, ultimately discovering that true love is a force that transcends time and defies all odds.",
-    image: "/img/categories/romance.png",
-  },
+  // {
+  //   name: "Adventure",
+  //   description:
+  //     "Embark on an adrenaline-fueled adventure of a lifetime, where uncharted territories await your exploration and every moment is a thrilling leap into the unknown. Discover the courage within as you navigate treacherous landscapes, conquer formidable challenges, and create a legacy that will be whispered in tales of daring exploits for generations to come.",
+  //   image: "/img/categories/adventure.png",
+  // },
+  // {
+  //   name: "Comedy",
+  //   description:
+  //     "Enter a world where laughter is the ultimate currency as you embark on a rib-tickling adventure filled with comedic chaos, witty hijinks, and unforgettable punchlines. Brace yourself for a comedic rollercoaster ride that will leave you in stitches and remind you that laughter truly is the best medicine.",
+  //   image: "/img/categories/comedy.png",
+  // },
+  // {
+  //   name: "Horror",
+  //   description:
+  //     "Enter a nightmarish realm where shadows lurk in every corner, and chilling whispers send shivers down your spine. Brace yourself for a bone-chilling descent into darkness as you confront your deepest fears and unearth the terrifying secrets that lie hidden in the shadows, knowing that survival is not guaranteed in this realm of relentless horror.",
+  //   image: "/img/categories/horror.png",
+  // },
+  // {
+  //   name: "Mystery",
+  //   description:
+  //     "Immerse yourself in a gripping world of secrets and deception, where every step forward uncovers new enigmas, and the truth lies hidden in the shadows, waiting to be unveiled. Follow a trail of clues, solve perplexing puzzles, and unravel the layers of a captivating mystery that will keep you guessing until the final, mind-bending revelation.",
+  //   image: "/img/categories/mystery.png",
+  // },
+  // {
+  //   name: "Romance",
+  //   description:
+  //     "Indulge in a whirlwind of passion and desire as you enter a realm where hearts entwine and love's intoxicating spell weaves its magic. Follow the journey of two souls destined to collide, navigating obstacles, experiencing heartache and bliss, ultimately discovering that true love is a force that transcends time and defies all odds.",
+  //   image: "/img/categories/romance.png",
+  // },
   {
     name: "Sci-Fi",
     description:
       "Embark on an awe-inspiring voyage through the cosmos, where futuristic technologies and mind-bending possibilities await at every turn. Immerse yourself in a world of advanced civilizations, extraordinary discoveries, and epic intergalactic battles as you explore the vastness of the universe and contemplate the profound mysteries of existence.",
     image: "/img/categories/sci-fi.png",
   },
-  {
-    name: "Historical",
-    description:
-      "Travel back in time to an era steeped in rich traditions, grandeur, and momentous events that shaped the course of history. Immerse yourself in the captivating narratives of legendary figures, witness the rise and fall of empires, and experience the triumphs and tribulations of bygone eras, all within the tapestry of a meticulously researched and evocative historical setting.",
-    image: "/img/categories/historical.png",
-  },
+  // {
+  //   name: "Historical",
+  //   description:
+  //     "Travel back in time to an era steeped in rich traditions, grandeur, and momentous events that shaped the course of history. Immerse yourself in the captivating narratives of legendary figures, witness the rise and fall of empires, and experience the triumphs and tribulations of bygone eras, all within the tapestry of a meticulously researched and evocative historical setting.",
+  //   image: "/img/categories/historical.png",
+  // },
   {
     name: "Dystopian",
     description:

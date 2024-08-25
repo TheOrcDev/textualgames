@@ -7,7 +7,7 @@ import { Header } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Textual Games - Create your own story!",
+  title: "Textual Games - Unique AI Generated Games",
   description: "Create your own story! AI Generated Textual Games.",
 };
 

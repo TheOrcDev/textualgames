@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import { Story } from "@/components/shared/types";
 import { characters, plots, items } from "@/components/shared/data";
-import { Input, HeaderContent } from "@/components/ui";
 
+import { Input } from "@/components/ui";
 import {
   LoadingSentences,
   SelectItems,
