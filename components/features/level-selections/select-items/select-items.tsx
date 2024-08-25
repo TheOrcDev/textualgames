@@ -14,13 +14,16 @@ export default function SelectItems({ items, select }: Props) {
   return (
     <div
       className="
-      mx-4 grid grid-cols-1 gap-5 
+      mx-4 grid grid-cols-1 gap-5
       sm:mx-10 sm:grid-cols-2 md:mx-32 md:grid-cols-3
       "
     >
       {currentItems.map((item: string, index: number) => (
         <div className="flex h-min items-center" key={index}>
-          <Button className="h-40 w-60 text-wrap" onClick={() => select(item)}>
+          <Button
+            className="h-40 w-full text-wrap"
+            onClick={() => select(item)}
+          >
             {item}
           </Button>
         </div>
@@ -30,7 +33,6 @@ export default function SelectItems({ items, select }: Props) {
           onClick={() => {
             setCurrentItems(items.slice(0, currentItems.length + 15));
           }}
-          color="bg-yellow-100"
         >
           More...
         </Button>

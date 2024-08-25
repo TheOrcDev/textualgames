@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 
-import { Footer, Header, ThemeProvider } from "@/components/ui";
+import { Footer, ThemeProvider } from "@/components/ui";
 import { GoogleAnalytics } from "@/components/entities";
 
 import { cn } from "@/lib/utils";
@@ -22,19 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleAnalytics />
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased pb-20",
-          pressStart2P.className
-        )}
-      >
+      <body className={cn(pressStart2P.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
           {children}
           <Footer />
         </ThemeProvider>
