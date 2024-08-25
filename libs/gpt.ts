@@ -1,19 +1,22 @@
 "use server";
 
-import { compare } from "@langchain/core/utils/json_patch";
 import { Serializable } from "@langchain/core/load/serializable";
+import { AsyncCaller } from "@langchain/core/utils/async_caller";
+import { compare } from "@langchain/core/utils/json_patch";
 import { getEncoding } from "@langchain/core/utils/tiktoken";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
 import { ChatOpenAI } from "@langchain/openai";
-import { BufferMemory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
+import { BufferMemory } from "langchain/memory";
 
 const DoNotRemoveCompare = compare;
 const DoNotRemovegetEncoding = getEncoding;
 const DoNotRemoveSerializable = Serializable;
 const DoNotRemoveRecursiveCharacterTextSplitter =
   RecursiveCharacterTextSplitter;
+const DoNotRemoveAsyncCaller =
+  AsyncCaller;
 
 const model = new ChatOpenAI({
   modelName: process.env.GPT_MODEL,
@@ -72,8 +75,8 @@ const getDalle3Image = async (prompt: string, story: Story) => {
   return image.data[0].url;
 };
 
-import StoryCreator from "./story-creator";
 import { Story } from "../components/shared/types";
+import StoryCreator from "./story-creator";
 
 export const chatGptData = async (story: Story) => {
   try {
