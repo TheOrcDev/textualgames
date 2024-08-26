@@ -3,11 +3,11 @@
 import { useState } from "react";
 
 import { Button, Textarea } from "@/components/ui";
-import { GameLevel } from "@/components/shared/types";
+import { Level } from "@/components/shared/types";
 
 type Props = {
   getNextLevel: (choice: string, storyLevel: string) => void;
-  level: GameLevel;
+  level: Level;
 };
 
 export default function StoryLevel({ getNextLevel, level }: Props) {
@@ -26,9 +26,9 @@ export default function StoryLevel({ getNextLevel, level }: Props) {
 
       <div className="flex flex-col gap-3">
         <div className="flex w-full items-center justify-center gap-5">
-          {level.availableChoices &&
+          {level.choices &&
             choicesOption &&
-            level.availableChoices.map((choice: string, index: number) => (
+            level.choices.map((choice: string, index: number) => (
               <Button
                 className="h-40 w-60 text-wrap"
                 key={index}

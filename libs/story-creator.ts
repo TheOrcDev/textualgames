@@ -10,7 +10,7 @@ export default class StoryCreator {
 
   constructor() {
     this.jsonFormat = `Please return the story in the following JSON format 
-      { storyline: string; availableChoices: string[]; }. 
+      { storyline: string; choices: string[]; }. 
       There should be two potential choices for this level in choices array. 
       Avoid new lines in the story, and anything that can break the json format.`;
   }
@@ -66,8 +66,8 @@ export default class StoryCreator {
   }
 
   private updateCharacterInventory(story: Story) {
-    if (story.level.inventoryItems.length > 0) {
-      story.character.items = story.level.inventoryItems;
+    if (story.level.items.length > 0) {
+      story.character.items = story.level.items;
     }
   }
 }

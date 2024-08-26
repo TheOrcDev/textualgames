@@ -5,9 +5,9 @@ export const createStory = (): Story => {
     level: {
       level: 1,
       storyline: "",
-      availableChoices: [],
-      inventoryItems: [],
-      progressSummary: "",
+      choices: [],
+      items: [],
+      progress: "",
     },
     choice: "",
     image: "",

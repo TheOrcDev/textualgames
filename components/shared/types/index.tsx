@@ -1,17 +1,16 @@
 export type Story = {
-  level: GameLevel;
+  level: Level;
   character: Character;
   choice: string;
   genre: string;
   image: string;
 };
 
-export type GameLevel = {
+export type Level = {
   level: number;
   storyline: string;
-  availableChoices: string[];
-  inventoryItems: string[];
-  progressSummary: string;
+  choices: string[];
+  items: string[];
 };
 
 export type Character = {
