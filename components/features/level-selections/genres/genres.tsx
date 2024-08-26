@@ -31,7 +31,7 @@ export default function Genres({ select }: Props) {
       {genres.map((item: Genre) => (
         <Card
           key={item.name}
-          className="cursor-pointer hover:bg-primary/50"
+          className="cursor-pointer transition duration-300 ease-in hover:bg-primary/50"
           onClick={() => select(item.name)}
         >
           <CardHeader>
