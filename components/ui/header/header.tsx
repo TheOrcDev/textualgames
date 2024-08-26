@@ -7,10 +7,11 @@ export default function THeader() {
     <header className="flex items-center justify-between p-5 px-10">
       <Link href={"/"}>
         <Image
-          width={50}
-          height={50}
-          src="/img/logo/textualgames.webp"
+          width={70}
+          height={70}
+          src="/img/logo/textual-games-logo.png"
           alt="Textual Games Logo"
+          className="bg-white"
         />
       </Link>
       <ModeToggle />
