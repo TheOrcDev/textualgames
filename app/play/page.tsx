@@ -2,8 +2,12 @@
 
 import { useState } from "react";
 
+import Image from "next/image";
+
 import { Story } from "@/components/shared/types";
 import { characters, plots, items } from "@/components/shared/data";
+import { chatGptData } from "@/libs/gpt";
+import { createStory } from "..";
 
 import { Input } from "@/components/ui";
 import {
@@ -12,11 +16,6 @@ import {
   Genres,
   StoryLevel,
 } from "@/components/features";
-
-import { chatGptData } from "@/libs/gpt";
-
-import { createStory } from "..";
-import Image from "next/image";
 import { Button } from "@/components/ui";
 
 export default function PlayPage() {
@@ -31,31 +30,25 @@ export default function PlayPage() {
 
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async (input: Story, isRandom = false) => {
+  const fetchData = async (input: Story) => {
     setLoading(true);
 
     try {
       const gptData = await chatGptData(input);
       const storyData = await JSON.parse(gptData.data);
-      const level = gptData.level;
-      const image = gptData.image;
+      const { level, image } = gptData;
 
       input.levelInfo = storyData;
       input.level = level;
       input.characterName = storyData.characterName;
       input.image = image;
+
       setStory(input);
 
       setLoading(false);
     } catch (e) {
       console.log(e);
     }
-  };
-
-  const getRandomGame = async () => {
-    setGenreSelection(false);
-    const randomStory = createStory(true);
-    await fetchData(randomStory, true);
   };
 
   const getData = async (choice?: string) => {
@@ -72,8 +65,6 @@ export default function PlayPage() {
         {/* Genre select */}
         {genreSelection && (
           <>
-            {/* <HeaderContent getRandomGame={getRandomGame} /> */}
-            {/* <div id="play" className="mt-20"></div> */}
             <Genres
               select={(choice) => {
                 story.genre = choice;
