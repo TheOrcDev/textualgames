@@ -32,6 +32,7 @@
     "lucide-react": "^0.435.0",
     "mini-svg-data-uri": "^1.4.4",
     "next": "^14.2.6",
+    "next-auth": "^4.24.7",
     "next-themes": "^0.3.0",
     "postcss": "^8.4.41",
     "react": "^18.3.1",
