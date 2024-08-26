@@ -7,7 +7,6 @@ export const createStory = (): Story => {
       storyline: "",
       choices: [],
       items: [],
-      progress: "",
     },
     choice: "",
     image: "",
