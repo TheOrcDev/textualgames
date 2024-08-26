@@ -1,22 +1,22 @@
 export type Story = {
-  levelInfo: GameLevel;
+  level: GameLevel;
+  character: Character;
   choice: string;
-  level: number;
   genre: string;
-  characterName: string;
-  characterStory: CharacterStory;
   image: string;
 };
 
 export type GameLevel = {
+  level: number;
   storyline: string;
   availableChoices: string[];
   inventoryItems: string[];
   progressSummary: string;
 };
 
-export type CharacterStory = {
+export type Character = {
+  name: string;
   plot: string;
-  characterType: string;
+  type: string;
   items: string[];
 };

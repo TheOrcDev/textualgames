@@ -34,14 +34,14 @@ const chain = new ConversationChain({
 });
 
 const getDalle3Image = async (prompt: string, story: Story) => {
-  const items = story.characterStory.items.toString();
+  const items = story.character.items.toString();
 
   const imagePrompt = `
   Give me a scenery image for the visual novel game.
 
-  The main storyline is ${story.characterStory.plot}.
+  The main storyline is ${story.character.plot}.
 
-  My character is a ${story.characterStory.characterType}, and is carrying these items: ${items}
+  My character is a ${story.character.type}, and is carrying these items: ${items}
 
   The story genre is: "${story.genre}", and keep the image in that mood.
 
@@ -83,7 +83,7 @@ export const chatGptData = async (story: Story) => {
     const creator = new StoryCreator();
 
     const input =
-      story.level === 1
+      story.level.level === 1
         ? (await creator.getGptStoryPrompt(story)).basePrompt
         : (await creator.getNextLevel(story)).basePrompt;
 
@@ -94,7 +94,7 @@ export const chatGptData = async (story: Story) => {
 
     return {
       data,
-      level: story.level + 1,
+      level: story.level.level + 1,
       image,
     };
   } catch (error) {

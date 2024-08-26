@@ -36,11 +36,9 @@ export default function PlayPage() {
     try {
       const gptData = await chatGptData(input);
       const storyData = await JSON.parse(gptData.data);
-      const { level, image } = gptData;
+      const { image } = gptData;
 
-      input.levelInfo = storyData;
-      input.level = level;
-      input.characterName = storyData.characterName;
+      input.level = storyData;
       input.image = image;
 
       setStory(input);
@@ -80,8 +78,8 @@ export default function PlayPage() {
         {characterSelection && (
           <SelectItems
             items={characters}
-            select={(choice) => {
-              story.characterStory.characterType = choice;
+            select={(characterType) => {
+              story.character.type = characterType;
               setStory(story);
               setCharacterSelection(false);
               setNameSelection(true);
@@ -102,7 +100,7 @@ export default function PlayPage() {
             <Button
               onClick={() => {
                 if (name === "") return alert("Please enter a name");
-                story.characterName = name;
+                story.character.name = name;
                 setStory(story);
                 setNameSelection(false);
                 setPlotSelection(true);
@@ -117,8 +115,8 @@ export default function PlayPage() {
         {plotSelection && (
           <SelectItems
             items={plots}
-            select={(choice) => {
-              story.characterStory.plot = choice;
+            select={(plot) => {
+              story.character.plot = plot;
               setStory(story);
               setPlotSelection(false);
               setItemSelection(true);
@@ -130,8 +128,8 @@ export default function PlayPage() {
         {itemSelection && (
           <SelectItems
             items={items}
-            select={(choice) => {
-              story.characterStory.items.push(choice);
+            select={(item) => {
+              story.character.items.push(item);
               setStory(story);
               setItemSelection(false);
               getData();
@@ -151,8 +149,8 @@ export default function PlayPage() {
         )}
 
         {/* Story level */}
-        {story.levelInfo.storyline && !loading && (
-          <StoryLevel level={story.levelInfo} getNextLevel={getData} />
+        {story.level.storyline && !loading && (
+          <StoryLevel level={story.level} getNextLevel={getData} />
         )}
 
         {/* Loading */}

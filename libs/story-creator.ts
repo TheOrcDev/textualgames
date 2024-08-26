@@ -21,7 +21,7 @@ export default class StoryCreator {
   async getGptStoryPrompt(story: Story): Promise<StoryPrompt> {
     this.updateCharacterInventory(story);
 
-    const items = story.characterStory.items.join(", ");
+    const items = story.character.items.join(", ");
     const inventory = `
       Feel free to incorporate items from your inventory if they are necessary for the story.
       Currently, your character has: ${items}.
@@ -29,13 +29,13 @@ export default class StoryCreator {
       Be creative in integrating these items into the narrative.
     `;
 
-    const gameCharacterStory = `${story.characterStory.characterType} ${story.characterStory.plot}`;
+    const gameCharacterStory = `${story.character.type} ${story.character.plot}`;
 
     const thePrompt = `
       You are a dungeon master running a text-based game with a player.
       Begin the ${story.genre} genre text-based game story. The game should be from first person.
       The story revolves around my character, ${gameCharacterStory}.
-      My character's name is ${story.characterName}. Start by providing a detailed description of my character.
+      My character's name is ${story.character.name}. Start by providing a detailed description of my character.
       
       Inventory:
       ${inventory}
@@ -62,12 +62,12 @@ export default class StoryCreator {
       ${this.jsonFormat}
     `;
 
-    return { basePrompt: thePrompt, character: story.characterName };
+    return { basePrompt: thePrompt, character: story.character.name };
   }
 
   private updateCharacterInventory(story: Story) {
-    if (story.levelInfo.inventoryItems.length > 0) {
-      story.characterStory.items = story.levelInfo.inventoryItems;
+    if (story.level.inventoryItems.length > 0) {
+      story.character.items = story.level.inventoryItems;
     }
   }
 }
