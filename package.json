@@ -14,6 +14,7 @@
   "dependencies": {
     "@langchain/core": "^0.2.28",
     "@langchain/openai": "^0.2.7",
+    "@neondatabase/serverless": "^0.9.4",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/node": "^22.5.0",
@@ -22,6 +23,8 @@
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.33.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.6",
     "framer-motion": "^11.3.30",
@@ -45,6 +48,7 @@
   },
   "devDependencies": {
     "cz-customizable": "^7.2.1",
+    "drizzle-kit": "^0.24.2",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "husky": "^9.1.5"
   }
