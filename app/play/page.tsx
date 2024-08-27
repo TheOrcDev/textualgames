@@ -17,6 +17,7 @@ import {
   StoryLevel,
 } from "@/components/features";
 import { Button } from "@/components/ui";
+import NotEnoughTokens from "@/components/features/not-enough-tokens/not-enough-tokens";
 
 export default function PlayPage() {
   const [story, setStory] = useState<Story>(createStory);
@@ -26,6 +27,7 @@ export default function PlayPage() {
   const [nameSelection, setNameSelection] = useState(false);
   const [plotSelection, setPlotSelection] = useState(false);
   const [itemSelection, setItemSelection] = useState(false);
+  const [hasNoTokens, setHasNoTokens] = useState(false);
   const [name, setName] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -35,6 +37,13 @@ export default function PlayPage() {
 
     try {
       const gptData = await chatGptData(input);
+
+      if (gptData === "Not enough tokens") {
+        setLoading(false);
+        setHasNoTokens(true);
+        return;
+      }
+
       const storyData = await JSON.parse(gptData.data);
       const { image } = gptData;
 
@@ -135,6 +144,12 @@ export default function PlayPage() {
               getData();
             }}
           />
+        )}
+
+        {hasNoTokens && (
+          <div className="flex flex-col items-center justify-center gap-5 p-24">
+            <NotEnoughTokens />
+          </div>
         )}
 
         {story.image && (

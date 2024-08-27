@@ -1,5 +1,6 @@
 export { Button } from "./button/button";
 
+export { Badge } from "./badge/badge";
 export * from "./card/card";
 export * from "./dropdown-menu/dropdown-menu";
 export { default as Footer } from "./footer/footer";
