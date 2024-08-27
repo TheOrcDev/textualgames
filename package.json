@@ -12,6 +12,8 @@
     "commit": "./node_modules/cz-customizable/standalone.js"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.3.4",
+    "@clerk/themes": "^2.1.22",
     "@langchain/core": "^0.2.28",
     "@langchain/openai": "^0.2.7",
     "@neondatabase/serverless": "^0.9.4",

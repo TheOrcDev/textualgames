@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "../mode-toggle/mode-toggle";
+import { UserInfo } from "@/components/features";
 
 export default function THeader() {
   return (
@@ -14,7 +15,10 @@ export default function THeader() {
           className="bg-white"
         />
       </Link>
-      <ModeToggle />
+      <div className="flex gap-3">
+        <ModeToggle />
+        <UserInfo />
+      </div>
     </header>
   );
 }
