@@ -104,7 +104,7 @@ export const aiRouter = router({
         }
 
         const level =
-          input.story.level.level === 1
+          input.story.level.levelNumber === 1
             ? (await creator.getGptStoryPrompt(input.story)).basePrompt
             : (await creator.getNextLevel(input.story)).basePrompt;
 
@@ -113,7 +113,7 @@ export const aiRouter = router({
         await db.insert(tokenSpends).values({
           amount: 1,
           email: user?.emailAddresses[0].emailAddress!,
-          action: "one level",
+          action: "level",
         });
 
         const response = await chain.call({ input: level });
@@ -121,7 +121,7 @@ export const aiRouter = router({
 
         return {
           data,
-          level: input.story.level.level + 1,
+          level: input.story.level.levelNumber + 1,
           image,
         };
       } catch (e) {

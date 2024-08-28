@@ -7,7 +7,7 @@ export type Story = {
 };
 
 export type Level = {
-  level: number;
+  levelNumber: number;
   storyline: string;
   choices: string[];
   items: string[];
