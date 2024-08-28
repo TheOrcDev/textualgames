@@ -1,5 +1,3 @@
-"use server";
-
 import { currentUser } from "@clerk/nextjs/server";
 import { Serializable } from "@langchain/core/load/serializable";
 import { AsyncCaller } from "@langchain/core/utils/async_caller";
@@ -9,13 +7,15 @@ import { ChatOpenAI } from "@langchain/openai";
 import { ConversationChain } from "langchain/chains";
 import { BufferMemory } from "langchain/memory";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { z } from "zod";
 
 import db from "@/db/drizzle";
 import { tokenSpends } from "@/db/schema";
 import { getTotalTokens } from "@/lib/queries";
+import StoryCreator from "@/lib/story-creator";
 
-import { Story } from "../components/shared/types";
-import StoryCreator from "./story-creator";
+import { Story } from "../../components/shared/types";
+import { publicProcedure, router } from "../trpc";
 
 const DoNotRemoveCompare = compare;
 const DoNotRemovegetEncoding = getEncoding;
@@ -81,42 +81,51 @@ const getDalle3Image = async (prompt: string, story: Story) => {
   return image.data[0].url;
 };
 
-export const chatGptData = async (story: Story) => {
-  const user = await currentUser();
+export const aiRouter = router({
+  getLevel: publicProcedure
+    .input(
+      z.object({
+        story: z.custom<Story>(),
+      }),
+    )
+    .mutation(async (opts) => {
+      const { input } = opts;
+      const user = await currentUser();
 
-  try {
-    const creator = new StoryCreator();
+      try {
+        const creator = new StoryCreator();
 
-    const totalUserTokens = await getTotalTokens(
-      user?.emailAddresses[0].emailAddress!,
-    );
+        const totalUserTokens = await getTotalTokens(
+          user?.emailAddresses[0].emailAddress!,
+        );
 
-    if (totalUserTokens <= 0) {
-      return "Not enough tokens";
-    }
+        if (totalUserTokens <= 0) {
+          return "Not enough tokens";
+        }
 
-    const input =
-      story.level.level === 1
-        ? (await creator.getGptStoryPrompt(story)).basePrompt
-        : (await creator.getNextLevel(story)).basePrompt;
+        const level =
+          input.story.level.level === 1
+            ? (await creator.getGptStoryPrompt(input.story)).basePrompt
+            : (await creator.getNextLevel(input.story)).basePrompt;
 
-    const image = await getDalle3Image(input, story);
+        const image = await getDalle3Image(level, input.story);
 
-    await db.insert(tokenSpends).values({
-      amount: 1,
-      email: user?.emailAddresses[0].emailAddress!,
-      action: "one level",
-    });
+        await db.insert(tokenSpends).values({
+          amount: 1,
+          email: user?.emailAddresses[0].emailAddress!,
+          action: "one level",
+        });
 
-    const response = await chain.call({ input });
-    const data = await response.response;
+        const response = await chain.call({ input: level });
+        const data = await response.response;
 
-    return {
-      data,
-      level: story.level.level + 1,
-      image,
-    };
-  } catch (error) {
-    throw error;
-  }
-};
+        return {
+          data,
+          level: input.story.level.level + 1,
+          image,
+        };
+      } catch (e) {
+        throw e;
+      }
+    }),
+});

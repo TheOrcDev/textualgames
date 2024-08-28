@@ -1,25 +1,24 @@
 "use client";
 
 import { useState } from "react";
-
 import Image from "next/image";
 
-import { Story } from "@/components/shared/types";
-import { characters, plots, items } from "@/components/shared/data";
-import { chatGptData } from "@/libs/gpt";
-import { createStory } from "..";
-
-import { Input } from "@/components/ui";
 import {
+  Genres,
   LoadingSentences,
   SelectItems,
-  Genres,
   StoryLevel,
 } from "@/components/features";
-import { Button } from "@/components/ui";
 import NotEnoughTokens from "@/components/features/not-enough-tokens/not-enough-tokens";
+import { characters, items, plots } from "@/components/shared/data";
+import { Story } from "@/components/shared/types";
+import { Button, Input } from "@/components/ui";
+import { trpc } from "@/server/client";
+
+import { createStory } from "..";
 
 export default function PlayPage() {
+  const level = trpc.ai.getLevel.useMutation();
   const [story, setStory] = useState<Story>(createStory);
 
   const [genreSelection, setGenreSelection] = useState(true);
@@ -32,11 +31,13 @@ export default function PlayPage() {
 
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async (input: Story) => {
+  const fetchData = async (story: Story) => {
     setLoading(true);
 
     try {
-      const gptData = await chatGptData(input);
+      const gptData = await level.mutateAsync({
+        story,
+      });
 
       if (gptData === "Not enough tokens") {
         setLoading(false);
@@ -47,10 +48,10 @@ export default function PlayPage() {
       const storyData = await JSON.parse(gptData.data);
       const { image } = gptData;
 
-      input.level = storyData;
-      input.image = image;
+      story.level = storyData;
+      story.image = image;
 
-      setStory(input);
+      setStory(story);
 
       setLoading(false);
     } catch (e) {

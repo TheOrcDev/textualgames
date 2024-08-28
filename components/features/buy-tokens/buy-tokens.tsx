@@ -17,19 +17,22 @@ import {
   CardTitle,
 } from "@/components/ui";
 import getStripe from "@/lib/stripe";
-import { getClientSecret } from "@/lib/tokens";
+import { trpc } from "@/server/client";
 
 import PaymentForm from "./payment-form";
 
 export default function BuyTokens() {
   const stripePromise = getStripe();
+  const createClientSecret = trpc.tokens.getClientSecret.useMutation();
   const { resolvedTheme } = useTheme();
 
   const [paymentIntentSecret, setPaymentIntentSecret] = useState("");
   const [showPayment, setShowPayment] = useState<boolean>(false);
 
   const buyTokens = async (bundle: Tokens) => {
-    const clientSecret = await getClientSecret(bundle);
+    const clientSecret = await createClientSecret.mutateAsync({
+      tokens: bundle,
+    });
 
     if (!clientSecret) {
       console.log("No client secret");

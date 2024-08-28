@@ -6,6 +6,7 @@ import { Press_Start_2P } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { GoogleAnalytics } from "@/components/entities";
+import { TRPCProvider } from "@/components/providers";
 import { Footer, ThemeProvider } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
@@ -26,15 +27,17 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <GoogleAnalytics />
         <body className={cn(pressStart2P.className)}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <Footer />
-          </ThemeProvider>
+          <TRPCProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+              <Footer />
+            </ThemeProvider>
+          </TRPCProvider>
         </body>
       </html>
     </ClerkProvider>

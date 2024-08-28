@@ -5,13 +5,16 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui";
-import { getPaymentIntent } from "@/lib/tokens";
+import { trpc } from "@/server/client";
 
 export default function PaymentSuccess() {
   const searchParams = useSearchParams();
   const [paymentIntentData, setPaymentIntentData] = useState<number | null>(
     null,
   );
+
+  const getPaymentIntent = trpc.tokens.getPaymentIntent.useMutation();
+  const utils = trpc.useUtils();
 
   const paymentIntent = searchParams.get("payment_intent");
   const paymentIntentSecret = searchParams.get("payment_intent_client_secret");
@@ -21,8 +24,12 @@ export default function PaymentSuccess() {
       if (!paymentIntent || !paymentIntentSecret) {
         return;
       }
-      const data = await getPaymentIntent(paymentIntent, paymentIntentSecret);
+      const data = await getPaymentIntent.mutateAsync({
+        paymentIntent,
+        paymentIntentSecret,
+      });
 
+      utils.tokens.getTokens.refetch();
       setPaymentIntentData(data!);
     };
 
