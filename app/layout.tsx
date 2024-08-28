@@ -5,7 +5,7 @@ import { Press_Start_2P } from "next/font/google";
 
 import { ClerkProvider } from "@clerk/nextjs";
 
-import { GoogleAnalytics } from "@/components/entities";
+import { GoogleAnalytics } from "@/components/features";
 import { TRPCProvider } from "@/components/providers";
 import { Footer, ThemeProvider } from "@/components/ui";
 import { cn } from "@/lib/utils";
