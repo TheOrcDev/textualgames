@@ -19,6 +19,7 @@ import { createStory } from "..";
 
 export default function PlayPage() {
   const level = trpc.ai.getLevel.useMutation();
+  const utils = trpc.useUtils();
   const [story, setStory] = useState<Story>(createStory);
 
   const [genreSelection, setGenreSelection] = useState(true);
@@ -52,6 +53,8 @@ export default function PlayPage() {
       story.image = image;
 
       setStory(story);
+
+      utils.tokens.getTokens.refetch();
 
       setLoading(false);
     } catch (e) {
