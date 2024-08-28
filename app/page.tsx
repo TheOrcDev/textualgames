@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui";
 import Link from "next/link";
+
+import { Button } from "@/components/ui";
 
 export default function PlayPage() {
   return (

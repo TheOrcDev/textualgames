@@ -2,11 +2,11 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
+
 import { ClerkProvider } from "@clerk/nextjs";
 
-import { Footer, ThemeProvider } from "@/components/ui";
 import { GoogleAnalytics } from "@/components/entities";
-
+import { Footer, ThemeProvider } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });

@@ -10,4 +10,3 @@ export { Input } from "./input/input";
 export { ModeToggle } from "./mode-toggle/mode-toggle";
 export { Textarea } from "./textarea/textarea";
 export { ThemeProvider } from "./theme-provider/theme-provider";
-

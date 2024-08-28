@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui";
 import { getPaymentIntent } from "@/lib/tokens";
@@ -10,7 +10,7 @@ import { getPaymentIntent } from "@/lib/tokens";
 export default function PaymentSuccess() {
   const searchParams = useSearchParams();
   const [paymentIntentData, setPaymentIntentData] = useState<number | null>(
-    null
+    null,
   );
 
   const paymentIntent = searchParams.get("payment_intent");

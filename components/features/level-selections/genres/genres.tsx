@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { genres } from "@/components/shared/data";
-
 import {
   Button,
   Card,

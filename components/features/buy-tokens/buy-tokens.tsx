@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Elements } from "@stripe/react-stripe-js";
-import getStripe from "@/lib/stripe";
-import PaymentForm from "./payment-form";
 
 import { CheckCircledIcon } from "@radix-ui/react-icons";
+import { Elements } from "@stripe/react-stripe-js";
+import { useTheme } from "next-themes";
 
 import { Tokens } from "@/components/shared/types";
-
 import {
   Button,
   Card,
@@ -18,9 +16,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui";
-
-import { useTheme } from "next-themes";
+import getStripe from "@/lib/stripe";
 import { getClientSecret } from "@/lib/tokens";
+
+import PaymentForm from "./payment-form";
 
 export default function BuyTokens() {
   const stripePromise = getStripe();

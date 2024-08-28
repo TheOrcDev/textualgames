@@ -1,13 +1,14 @@
 "use client";
 
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { useTheme } from "next-themes";
 
 import { Badge, Button } from "@/components/ui";
-import Link from "next/link";
 import { getTokens } from "@/lib/tokens";
-import { useEffect, useState } from "react";
 
 export default function UserInfo() {
   const [tokens, setTokens] = useState<number>(0);

@@ -5,4 +5,3 @@ export { default as LoadingSentences } from "./loading-sentences/loading-sentenc
 export { default as PaymentSuccess } from "./payment-success/payment-success";
 export { default as StoryLevel } from "./story-level/story-level";
 export { default as UserInfo } from "./user/user-info";
-

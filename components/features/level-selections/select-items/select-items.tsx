@@ -1,7 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui";
 import { useState } from "react";
+
+import { Button } from "@/components/ui";
 
 type Props = {
   items: string[];

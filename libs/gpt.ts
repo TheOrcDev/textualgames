@@ -1,22 +1,28 @@
 "use server";
 
+import { currentUser } from "@clerk/nextjs/server";
 import { Serializable } from "@langchain/core/load/serializable";
 import { AsyncCaller } from "@langchain/core/utils/async_caller";
 import { compare } from "@langchain/core/utils/json_patch";
 import { getEncoding } from "@langchain/core/utils/tiktoken";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-
 import { ChatOpenAI } from "@langchain/openai";
 import { ConversationChain } from "langchain/chains";
 import { BufferMemory } from "langchain/memory";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+
+import db from "@/db/drizzle";
+import { tokenSpends } from "@/db/schema";
+import { getTotalTokens } from "@/lib/queries";
+
+import { Story } from "../components/shared/types";
+import StoryCreator from "./story-creator";
 
 const DoNotRemoveCompare = compare;
 const DoNotRemovegetEncoding = getEncoding;
 const DoNotRemoveSerializable = Serializable;
 const DoNotRemoveRecursiveCharacterTextSplitter =
   RecursiveCharacterTextSplitter;
-const DoNotRemoveAsyncCaller =
-  AsyncCaller;
+const DoNotRemoveAsyncCaller = AsyncCaller;
 
 const model = new ChatOpenAI({
   modelName: process.env.GPT_MODEL,
@@ -67,7 +73,7 @@ const getDalle3Image = async (prompt: string, story: Story) => {
         size: "1792x1024",
         model: "dall-e-3",
       }),
-    }
+    },
   );
 
   const image = await imageResponse.json();
@@ -75,20 +81,15 @@ const getDalle3Image = async (prompt: string, story: Story) => {
   return image.data[0].url;
 };
 
-import db from "@/db/drizzle";
-import { tokenSpends } from "@/db/schema";
-import { getTotalTokens } from "@/lib/queries";
-import { currentUser } from "@clerk/nextjs/server";
-import { Story } from "../components/shared/types";
-import StoryCreator from "./story-creator";
-
 export const chatGptData = async (story: Story) => {
   const user = await currentUser();
 
   try {
     const creator = new StoryCreator();
 
-    const totalUserTokens = await getTotalTokens(user?.emailAddresses[0].emailAddress!);
+    const totalUserTokens = await getTotalTokens(
+      user?.emailAddresses[0].emailAddress!,
+    );
 
     if (totalUserTokens <= 0) {
       return "Not enough tokens";
@@ -104,7 +105,7 @@ export const chatGptData = async (story: Story) => {
     await db.insert(tokenSpends).values({
       amount: 1,
       email: user?.emailAddresses[0].emailAddress!,
-      action: "one level"
+      action: "one level",
     });
 
     const response = await chain.call({ input });

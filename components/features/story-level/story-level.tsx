@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { Button, Textarea } from "@/components/ui";
 import { Level } from "@/components/shared/types";
+import { Button, Textarea } from "@/components/ui";
 
 type Props = {
   getNextLevel: (choice: string, storyLevel: string) => void;

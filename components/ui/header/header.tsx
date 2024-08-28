@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ModeToggle } from "../mode-toggle/mode-toggle";
+
 import { UserInfo } from "@/components/features";
+
+import { ModeToggle } from "../mode-toggle/mode-toggle";
 
 export default function THeader() {
   return (

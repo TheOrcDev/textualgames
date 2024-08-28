@@ -1,6 +1,20 @@
 {
+  "root": true,
   "extends": [
-    "next/core-web-vitals",
-    "plugin:tailwindcss/recommended"
+    "plugin:tailwindcss/recommended",
+    "next/core-web-vitals"
+  ],
+  "rules": {
+    "no-unused-vars": 1
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js"
+      ],
+      "parser": "@typescript-eslint/parser"
+    }
   ]
 }
