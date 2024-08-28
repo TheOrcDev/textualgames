@@ -3,7 +3,7 @@ import { Story } from "@/components/shared/types";
 export const createStory = (): Story => {
   return {
     level: {
-      level: 1,
+      levelNumber: 1,
       storyline: "",
       choices: [],
       items: [],
