@@ -1,20 +1,18 @@
-import { Story } from "@/components/shared/types";
+import { Game } from "@/components/shared/types";
 
-export const createStory = (): Story => {
+export const createStory = (): Game => {
   return {
-    level: {
-      levelNumber: 1,
-      storyline: "",
-      choices: [],
-      items: [],
-    },
+    id: "",
+    levels: [],
     choice: "",
-    image: "",
     character: {
+      id: "",
+      gameId: "",
       name: "",
       plot: "",
       type: "",
-      items: [],
+      items: "",
+      createdAt: "",
     },
     genre: "",
   };
