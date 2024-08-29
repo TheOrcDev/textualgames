@@ -31,7 +31,7 @@ export default function MealPlanPage({
   };
 
   return (
-    <main className="flex flex-col items-center justify-center gap-5 p-24">
+    <main>
       {!game.isPending && game.data && <StoryLevel game={gameData} />}
     </main>
   );

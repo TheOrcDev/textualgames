@@ -43,6 +43,7 @@ export default function StoryLevel({ game }: Props) {
         return;
       }
 
+      setChoice("");
       utils.games.get.refetch();
       utils.tokens.getTokens.refetch();
     } catch (e) {
