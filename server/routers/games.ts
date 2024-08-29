@@ -31,13 +31,13 @@ export const gamesRouter = router({
         throw error;
       }
     }),
-  getlevels: publicProcedure.query(async () => {
+  getAllGames: publicProcedure.query(async () => {
     try {
       const user = await currentUser();
 
       return await db.query.games.findMany({
         with: {
-          levels: true,
+          character: true,
         },
         where: eq(games.email, user?.emailAddresses[0].emailAddress!),
       });

@@ -8,5 +8,6 @@ export { default as HeaderContent } from "./header-content/header-content";
 export { default as Header } from "./header/header";
 export { Input } from "./input/input";
 export { ModeToggle } from "./mode-toggle/mode-toggle";
+export { Skeleton } from "./skeleton/skeleton";
 export { Textarea } from "./textarea/textarea";
 export { ThemeProvider } from "./theme-provider/theme-provider";
