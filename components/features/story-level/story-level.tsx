@@ -23,6 +23,7 @@ export default function StoryLevel({ game }: Props) {
   const [hasNoTokens, setHasNoTokens] = useState(false);
 
   const choices = JSON.parse(game.levels[0].choices);
+  const level = game.levels[0];
 
   const onKeyDown = (event: any) => {
     if (event.key === "Enter") {
@@ -61,22 +62,15 @@ export default function StoryLevel({ game }: Props) {
         </div>
       )}
 
-      {!nextLevel.isPending && game.levels[0].image && (
+      {!nextLevel.isPending && level.image && (
         <div className="mt-5 flex items-center justify-center">
-          <Image
-            src={game.levels[0].image}
-            width={1024}
-            height={1024}
-            alt="AI Image"
-          />
+          <Image src={level.image} width={1024} height={1024} alt="AI Image" />
         </div>
       )}
 
       {!nextLevel.isPending && (
-        <div className="flex-row justify-center px-5 text-center sm:px-40">
-          <p className="mb-5 mt-10 text-sm md:text-xl">
-            {game.levels[0].storyline}
-          </p>
+        <div className="flex-row justify-center px-5 text-center md:px-20 lg:px-40">
+          <p className="mb-5 mt-10 text-sm md:text-xl">{level.storyline}</p>
 
           <div className="flex flex-col gap-3">
             <div className="flex w-full items-center justify-center gap-5">
