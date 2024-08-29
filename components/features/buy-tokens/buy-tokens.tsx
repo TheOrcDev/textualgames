@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { Elements } from "@stripe/react-stripe-js";
@@ -59,8 +60,13 @@ export default function BuyTokens() {
               <CardContent className="md:min-h-96">
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-1 text-xl">
-                    <CheckCircledIcon className="size-5 text-primary" /> 10
-                    tokens
+                    10
+                    <Image
+                      src={"/img/tg-coin.png"}
+                      width={32}
+                      height={32}
+                      alt="Textual Games Token"
+                    />
                   </div>
                   <p>
                     Looking to try out Textual Games or just need a quick boost?
@@ -92,8 +98,13 @@ export default function BuyTokens() {
               <CardContent className="md:min-h-96">
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-1 text-xl">
-                    <CheckCircledIcon className="size-5 text-primary" /> 50
-                    tokens
+                    50
+                    <Image
+                      src={"/img/tg-coin.png"}
+                      width={32}
+                      height={32}
+                      alt="Textual Games Token"
+                    />
                   </div>
                   <p>
                     Get more bang for your buck with our Efficient package! For
@@ -124,8 +135,13 @@ export default function BuyTokens() {
               <CardContent className="md:min-h-96">
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-1 text-xl">
-                    <CheckCircledIcon className="size-5 text-primary" /> 100
-                    tokens
+                    100
+                    <Image
+                      src={"/img/tg-coin.png"}
+                      width={32}
+                      height={32}
+                      alt="Textual Games Token"
+                    />
                   </div>
                   <p>
                     Ready to go all in? The Best Deal offers incredible value

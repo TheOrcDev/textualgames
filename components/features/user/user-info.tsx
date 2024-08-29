@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
@@ -27,8 +28,16 @@ export default function UserInfo() {
 
       <SignedIn>
         <Link href={"/buy-tokens"}>
-          <Badge className={`${tokens?.data === 0 && "bg-destructive"}`}>
-            {tokens?.data} tokens
+          <Badge
+            className={`flex gap-1 ${tokens?.data === 0 && "bg-destructive"}`}
+          >
+            {tokens?.data}
+            <Image
+              src={"/img/tg-coin.png"}
+              width={32}
+              height={32}
+              alt="Textual Games Token"
+            />
           </Badge>
         </Link>
 
