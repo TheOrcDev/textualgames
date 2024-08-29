@@ -107,7 +107,7 @@ export const aiRouter = router({
         let levelNumber;
 
         // First level
-        if (!input.game.levels) {
+        if (input.game.levels.length) {
           level = (await creator.getGptStoryPrompt(input.game)).basePrompt;
           levelNumber = 1;
 
