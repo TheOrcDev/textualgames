@@ -1,23 +1,29 @@
-export type Story = {
-  level: Level;
+export type Game = {
+  id: string;
+  levels: Level[];
   character: Character;
   choice: string;
   genre: string;
-  image: string;
 };
 
 export type Level = {
-  levelNumber: number;
+  id: string;
+  gameId: string;
+  level: string;
   storyline: string;
-  choices: string[];
-  items: string[];
+  choices: string; // JSON object
+  image: string;
+  createdAt: string;
 };
 
 export type Character = {
+  id: string;
   name: string;
   plot: string;
   type: string;
-  items: string[];
+  items: string; // JSON object
+  gameId: string;
+  createdAt: string;
 };
 
 export const Tokens = {

@@ -10,11 +10,11 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { z } from "zod";
 
 import db from "@/db/drizzle";
-import { tokenSpends } from "@/db/schema";
+import { characters, games, levels, tokenSpends } from "@/db/schema";
 import { getTotalTokens } from "@/lib/queries";
 import StoryCreator from "@/lib/story-creator";
 
-import { Story } from "../../components/shared/types";
+import { Game } from "../../components/shared/types";
 import { publicProcedure, router } from "../trpc";
 
 const DoNotRemoveCompare = compare;
@@ -39,21 +39,19 @@ const chain = new ConversationChain({
   verbose: true,
 });
 
-const getDalle3Image = async (prompt: string, story: Story) => {
-  const items = story.character.items.toString();
-
+const getDalle3Image = async (prompt: string, game: Game) => {
   const imagePrompt = `
   Give me a scenery image for the visual novel game.
 
-  The main storyline is ${story.character.plot}.
+  The main storyline is ${game.character.plot}.
 
-  My character is a ${story.character.type}, and is carrying these items: ${items}
+  My character is a ${game.character.type}, and is carrying these items: ${game.character.items}
 
-  The story genre is: "${story.genre}", and keep the image in that mood.
+  The story genre is: "${game.genre}", and keep the image in that mood.
 
   My current level description is this: ${prompt}
 
-  My choice was: "${story.choice}"
+  My choice was: "${game.choice}"
 
   Image should be in photorealistic art.
 `;
@@ -85,7 +83,7 @@ export const aiRouter = router({
   getLevel: publicProcedure
     .input(
       z.object({
-        story: z.custom<Story>(),
+        game: z.custom<Game>(),
       }),
     )
     .mutation(async (opts) => {
@@ -103,12 +101,41 @@ export const aiRouter = router({
           return "Not enough tokens";
         }
 
-        const level =
-          input.story.level.levelNumber === 1
-            ? (await creator.getGptStoryPrompt(input.story)).basePrompt
-            : (await creator.getNextLevel(input.story)).basePrompt;
+        let level;
+        let image;
+        let gameId;
+        let levelNumber;
 
-        const image = await getDalle3Image(level, input.story);
+        // First level
+        if (!input.game.levels) {
+          level = (await creator.getGptStoryPrompt(input.game)).basePrompt;
+          levelNumber = 1;
+
+          const [newGame] = await db
+            .insert(games)
+            .values({
+              email: user?.emailAddresses[0].emailAddress!,
+              genre: input.game.genre,
+              choice: "",
+            })
+            .returning({ id: games.id });
+
+          await db.insert(characters).values({
+            name: input.game.character.name,
+            plot: input.game.character.plot,
+            type: input.game.character.type,
+            items: input.game.character.items,
+            gameId: newGame.id,
+          });
+
+          gameId = newGame.id;
+          image = await getDalle3Image(level, input.game);
+        } else {
+          level = (await creator.getNextLevel(input.game)).basePrompt;
+          gameId = input.game.id;
+          image = "";
+          levelNumber = +input.game.levels[0].level + 1;
+        }
 
         await db.insert(tokenSpends).values({
           amount: 1,
@@ -119,11 +146,17 @@ export const aiRouter = router({
         const response = await chain.call({ input: level });
         const data = await response.response;
 
-        return {
-          data,
-          level: input.story.level.levelNumber + 1,
+        const json = await JSON.parse(data);
+
+        await db.insert(levels).values({
+          storyline: json.storyline,
+          choices: JSON.stringify(json.choices),
           image,
-        };
+          level: String(levelNumber),
+          gameId,
+        });
+
+        return gameId;
       } catch (e) {
         throw e;
       }

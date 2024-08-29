@@ -1,26 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-import {
-  Genres,
-  LoadingSentences,
-  SelectItems,
-  StoryLevel,
-} from "@/components/features";
+import { Genres, LoadingSentences, SelectItems } from "@/components/features";
 import NotEnoughTokens from "@/components/features/not-enough-tokens/not-enough-tokens";
 import { characters, items, plots } from "@/components/shared/data";
-import { Story } from "@/components/shared/types";
+import { Game } from "@/components/shared/types";
 import { Button, Input } from "@/components/ui";
 import { trpc } from "@/server/client";
 
 import { createStory } from "..";
 
 export default function PlayPage() {
+  const router = useRouter();
   const level = trpc.ai.getLevel.useMutation();
   const utils = trpc.useUtils();
-  const [story, setStory] = useState<Story>(createStory);
+  const [story, setStory] = useState<Game>(createStory);
 
   const [genreSelection, setGenreSelection] = useState(true);
   const [characterSelection, setCharacterSelection] = useState(false);
@@ -32,42 +28,27 @@ export default function PlayPage() {
 
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async (story: Story) => {
+  const fetchData = async (game: Game) => {
     setLoading(true);
 
     try {
-      const gptData = await level.mutateAsync({
-        story,
+      const data = await level.mutateAsync({
+        game,
       });
 
-      if (gptData === "Not enough tokens") {
+      if (data === "Not enough tokens") {
         setLoading(false);
         setHasNoTokens(true);
         return;
       }
 
-      const storyData = await JSON.parse(gptData.data);
-      const { image } = gptData;
-
-      story.level = storyData;
-      story.image = image;
-
-      setStory(story);
-
       utils.tokens.getTokens.refetch();
+      router.push(`/game/${data}`);
 
       setLoading(false);
     } catch (e) {
       console.log(e);
     }
-  };
-
-  const getData = async (choice?: string) => {
-    if (choice) {
-      story.choice = choice;
-    }
-
-    await fetchData(story);
   };
 
   return (
@@ -142,10 +123,10 @@ export default function PlayPage() {
           <SelectItems
             items={items}
             select={(item) => {
-              story.character.items.push(item);
+              story.character.items = JSON.stringify([item]);
               setStory(story);
               setItemSelection(false);
-              getData();
+              fetchData(story);
             }}
           />
         )}
@@ -154,22 +135,6 @@ export default function PlayPage() {
           <div className="flex flex-col items-center justify-center gap-5 p-24">
             <NotEnoughTokens />
           </div>
-        )}
-
-        {story.image && (
-          <div className="mt-5 flex items-center justify-center">
-            <Image
-              src={story.image}
-              width={1024}
-              height={1024}
-              alt="AI Image"
-            />
-          </div>
-        )}
-
-        {/* Story level */}
-        {story.level.storyline && !loading && (
-          <StoryLevel level={story.level} getNextLevel={getData} />
         )}
 
         {/* Loading */}
