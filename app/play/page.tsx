@@ -3,8 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Genres, LoadingSentences, SelectItems } from "@/components/features";
-import NotEnoughTokens from "@/components/features/not-enough-tokens/not-enough-tokens";
+import {
+  Genres,
+  LoadingSentences,
+  NotEnoughTokens,
+  SelectItems,
+} from "@/components/features";
 import { characters, items, plots } from "@/components/shared/data";
 import { Game } from "@/components/shared/types";
 import { Button, Input } from "@/components/ui";
@@ -80,6 +84,7 @@ export default function PlayPage() {
             }}
           />
         )}
+
         {/* Character name input */}
         {nameSelection && (
           <div className="mt-5 flex flex-col items-center justify-center gap-5 text-center">
@@ -93,6 +98,7 @@ export default function PlayPage() {
             />
             <Button
               onClick={() => {
+                // TODO: Validation for name
                 if (name === "") return alert("Please enter a name");
                 story.character.name = name;
                 setStory(story);
@@ -100,7 +106,7 @@ export default function PlayPage() {
                 setPlotSelection(true);
               }}
             >
-              submit
+              Submit
             </Button>
           </div>
         )}

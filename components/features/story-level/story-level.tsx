@@ -3,23 +3,21 @@
 import { useState } from "react";
 import Image from "next/image";
 
+import { LoadingSentences, NotEnoughTokens } from "@/components/features";
 import { Game } from "@/components/shared/types";
 import { Button, Textarea } from "@/components/ui";
 import { trpc } from "@/server/client";
-
-import LoadingSentences from "../loading-sentences/loading-sentences";
-import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
 
 type Props = {
   game: Game;
 };
 
 export default function StoryLevel({ game }: Props) {
-  const nextLevel = trpc.ai.getLevel.useMutation();
+  const currentLevel = trpc.ai.getLevel.useMutation();
   const utils = trpc.useUtils();
 
   const [choice, setChoice] = useState<string>("");
-  const [choicesOption, setChoicesOption] = useState<boolean>(false);
+  const [isManualChoice, setIsManualChoice] = useState<boolean>(false);
   const [hasNoTokens, setHasNoTokens] = useState(false);
 
   const choices = JSON.parse(game.levels[0].choices);
@@ -35,7 +33,7 @@ export default function StoryLevel({ game }: Props) {
     game.choice = choice;
 
     try {
-      const data = await nextLevel.mutateAsync({
+      const data = await currentLevel.mutateAsync({
         game,
       });
 
@@ -54,7 +52,7 @@ export default function StoryLevel({ game }: Props) {
 
   return (
     <>
-      {nextLevel.isPending && <LoadingSentences />}
+      {currentLevel.isPending && <LoadingSentences />}
 
       {hasNoTokens && (
         <div className="flex flex-col items-center justify-center gap-5 p-24">
@@ -62,20 +60,20 @@ export default function StoryLevel({ game }: Props) {
         </div>
       )}
 
-      {!nextLevel.isPending && level.image && (
+      {!currentLevel.isPending && level.image && (
         <div className="mt-5 flex items-center justify-center">
           <Image src={level.image} width={1024} height={1024} alt="AI Image" />
         </div>
       )}
 
-      {!nextLevel.isPending && (
+      {!currentLevel.isPending && (
         <div className="flex-row justify-center px-5 text-center md:px-20 lg:px-40">
           <p className="mb-5 mt-10 text-sm md:text-xl">{level.storyline}</p>
 
           <div className="flex flex-col gap-3">
             <div className="flex w-full items-center justify-center gap-5">
               {choices &&
-                choicesOption &&
+                isManualChoice &&
                 choices.map((choice: string, index: number) => (
                   <Button
                     className="size-72 text-wrap"
@@ -87,9 +85,9 @@ export default function StoryLevel({ game }: Props) {
                 ))}
             </div>
 
-            {choicesOption ? (
+            {isManualChoice ? (
               <div>
-                <Button onClick={() => setChoicesOption(!choicesOption)}>
+                <Button onClick={() => setIsManualChoice(!isManualChoice)}>
                   Manual
                 </Button>
               </div>
@@ -110,7 +108,7 @@ export default function StoryLevel({ game }: Props) {
                   </Button>
                   <Button
                     className="h-20 w-60"
-                    onClick={() => setChoicesOption(!choicesOption)}
+                    onClick={() => setIsManualChoice(!isManualChoice)}
                   >
                     Choices
                   </Button>
