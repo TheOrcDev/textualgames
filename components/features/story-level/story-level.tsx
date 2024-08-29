@@ -84,7 +84,7 @@ export default function StoryLevel({ game }: Props) {
                 choicesOption &&
                 choices.map((choice: string, index: number) => (
                   <Button
-                    className="h-40 w-60 text-wrap"
+                    className="size-72 text-wrap"
                     key={index}
                     onClick={() => goToNextLevel(choice)}
                   >

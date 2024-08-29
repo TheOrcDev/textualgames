@@ -17,7 +17,7 @@ export const gamesRouter = router({
         const game = await db.query.games.findFirst({
           with: {
             levels: {
-              orderBy: (levels, { desc }) => [desc(levels.level)],
+              orderBy: (levels, { desc }) => [desc(levels.createdAt)],
               limit: 1,
             },
             character: true,
