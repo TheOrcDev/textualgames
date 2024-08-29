@@ -101,18 +101,13 @@ export const aiRouter = router({
           return "Not enough tokens";
         }
 
-        let level;
-        let image;
-        let gameId;
-        let levelNumber;
+        let level = "";
+        let image = "";
+        let gameId = "";
+        let levelNumber = 0;
 
-        if (Array.isArray(input.game?.levels) && input.game.levels.length > 0) {
-          level = (await creator.getNextLevel(input.game)).basePrompt;
-          gameId = input.game.id;
-          image = "";
-          levelNumber = +input.game.levels[0].level + 1;
-        } else {
-          // First level
+        // First level
+        if (input.game.levels.length === 0) {
           level = (await creator.getGptStoryPrompt(input.game)).basePrompt;
           levelNumber = 1;
 
@@ -135,6 +130,11 @@ export const aiRouter = router({
 
           gameId = newGame.id;
           image = await getDalle3Image(level, input.game);
+        } else {
+          level = (await creator.getNextLevel(input.game)).basePrompt;
+          gameId = input.game.id;
+          image = "";
+          levelNumber = +input.game.levels[0].level + 1;
         }
 
         await db.insert(tokenSpends).values({
