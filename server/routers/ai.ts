@@ -8,6 +8,7 @@ import {
 import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 import { ChatOpenAI } from "@langchain/openai";
 import { Pool } from "@neondatabase/serverless";
+import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 import db from "@/db/drizzle";
@@ -154,11 +155,20 @@ export const aiRouter = router({
           { configurable: { sessionId: gameId } },
         );
 
-        const json = await JSON.parse(response);
+        const aiJSON = await JSON.parse(response);
+
+        if (aiJSON.items) {
+          await db
+            .update(characters)
+            .set({
+              items: JSON.stringify(aiJSON.items),
+            })
+            .where(eq(characters.gameId, gameId));
+        }
 
         await db.insert(levels).values({
-          storyline: json.storyline,
-          choices: JSON.stringify(json.choices),
+          storyline: aiJSON.storyline,
+          choices: JSON.stringify(aiJSON.choices),
           image,
           level: String(levelNumber),
           gameId,

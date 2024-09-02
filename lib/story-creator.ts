@@ -9,21 +9,21 @@ export default class StoryCreator {
   private jsonFormat: string;
 
   constructor() {
-    this.jsonFormat = `Please return the story in the following JSON format 
-      { storyline: string; choices: string[]; }. 
-      There should be two potential choices for this level in choices array. 
-      Avoid new lines in the story, and anything that can break the json format.`;
+    this.jsonFormat = `
+    Please return the story in the following JSON format 
+    { "storyline": string, "choices": string[], "items": string[] }. 
+    There should be two potential choices for this level in choices array. 
+    Avoid new lines in the story, and anything that can break the json format.
+    `;
   }
 
   // TODO: Add companions
   // TODO: Add enemies
 
   async getGptStoryPrompt(game: Game): Promise<StoryPrompt> {
-    this.updateCharacterInventory(game);
-
     const inventory = `
-      Feel free to incorporate items from your inventory if they are necessary for the game.
-      Currently, your character has: ${game.character.items}.
+      Feel free to incorporate items from inventory if they can logically be used for the game.
+      Currently, character has: ${game.character.items}.
       If you want to add or remove items from the inventory, you can do that by finding, losing, trading, or acquiring them in the game.
       Be creative in integrating these items into the narrative.
     `;
@@ -32,14 +32,14 @@ export default class StoryCreator {
 
     const thePrompt = `
       You are a dungeon master running a text-based game with a player.
-      Begin the ${game.genre} genre text-based game game. The game should be from first person.
+      Begin the ${game.genre} genre text-based game.
       The story revolves around my character, ${gameCharacterStory}.
       My character's name is ${game.character.name}. Start by providing a detailed description of my character.
+      The game should be from first person, as my character sees the world.
       
       Inventory:
       ${inventory}
       
-      Describe the items currently in my inventory.
       Set the scene by describing my surroundings, creating an immersive atmosphere for the game.
       Make a little backstory for my character, a short summary of the events leading up to the start of the game.
       Ensure that the story aligns with the ${game.genre} genre.
@@ -56,6 +56,9 @@ export default class StoryCreator {
 
       My choice was: "${game.choice}"
       
+      Feel free to incorporate items from inventory if they can logically be used for the game.
+      Currently, character has: ${game.character.items}.
+
       Ensure the story remains in the ${game.genre}.
       
       ${this.jsonFormat}
@@ -76,13 +79,5 @@ export default class StoryCreator {
   
     Image should be in photorealistic art, and it shouldn't have any text.
   `;
-  }
-
-  private updateCharacterInventory(game: Game) {
-    const items = JSON.parse(game.character.items);
-
-    if (items.length > 0) {
-      game.character.items = game.character.items;
-    }
   }
 }
