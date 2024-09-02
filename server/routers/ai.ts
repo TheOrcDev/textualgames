@@ -41,9 +41,7 @@ const chain = new ConversationChain({
 
 const creator = new StoryCreator();
 
-const getImage = async (prompt: string, game: Game) => {
-  const imagePrompt = await creator.getImagePrompt(prompt, game);
-
+const getAIImage = async (prompt: string) => {
   const imageResponse = await fetch(
     "https://api.openai.com/v1/images/generations",
     {
@@ -55,7 +53,7 @@ const getImage = async (prompt: string, game: Game) => {
       },
       body: JSON.stringify({
         n: 1,
-        prompt: imagePrompt,
+        prompt: prompt,
         size: "1792x1024",
         model: "dall-e-3",
       }),
@@ -65,6 +63,11 @@ const getImage = async (prompt: string, game: Game) => {
   const image = await imageResponse.json();
 
   return image.data[0].url;
+};
+
+const getImage = async (game: Game) => {
+  const imagePrompt = await creator.getImagePrompt(game);
+  return getAIImage(imagePrompt);
 };
 
 export const aiRouter = router({
@@ -115,7 +118,7 @@ export const aiRouter = router({
           });
 
           gameId = newGame.id;
-          image = await getImage(level, input.game);
+          image = await getImage(input.game);
         } else {
           level = (await creator.getNextLevel(input.game)).basePrompt;
           gameId = input.game.id;

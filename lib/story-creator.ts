@@ -64,7 +64,7 @@ export default class StoryCreator {
     return { basePrompt: thePrompt, character: game.character.name };
   }
 
-  async getImagePrompt(prompt: string, game: Game) {
+  async getImagePrompt(game: Game) {
     return `
     Give me a scenery image for the visual novel game.
   
@@ -74,11 +74,7 @@ export default class StoryCreator {
   
     The story genre is: "${game.genre}", and keep the image in that mood.
   
-    My current level description is this: ${prompt}
-  
-    My choice was: "${game.choice}"
-  
-    Image should be in photorealistic art.
+    Image should be in photorealistic art, and it shouldn't have any text.
   `;
   }
 
