@@ -70,6 +70,10 @@ export default function PlayPage() {
     );
   }
 
+  if (loading) {
+    return <LoadingSentences />;
+  }
+
   return (
     <main className="p-12 lg:p-24">
       {/* Character select */}
@@ -140,13 +144,10 @@ export default function PlayPage() {
       )}
 
       {hasNoTokens && (
-        <div className="flex flex-col items-center justify-center gap-5 p-24">
+        <div className="flex flex-col items-center justify-center gap-5">
           <NotEnoughTokens />
         </div>
       )}
-
-      {/* Loading */}
-      {loading && <LoadingSentences />}
     </main>
   );
 }
