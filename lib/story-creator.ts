@@ -64,6 +64,24 @@ export default class StoryCreator {
     return { basePrompt: thePrompt, character: game.character.name };
   }
 
+  async getImagePrompt(prompt: string, game: Game) {
+    return `
+    Give me a scenery image for the visual novel game.
+  
+    The main storyline is ${game.character.plot}.
+  
+    My character is a ${game.character.type}, and is carrying these items: ${game.character.items}
+  
+    The story genre is: "${game.genre}", and keep the image in that mood.
+  
+    My current level description is this: ${prompt}
+  
+    My choice was: "${game.choice}"
+  
+    Image should be in photorealistic art.
+  `;
+  }
+
   private updateCharacterInventory(game: Game) {
     const items = JSON.parse(game.character.items);
 

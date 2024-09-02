@@ -39,22 +39,10 @@ const chain = new ConversationChain({
   verbose: true,
 });
 
-const getDalle3Image = async (prompt: string, game: Game) => {
-  const imagePrompt = `
-  Give me a scenery image for the visual novel game.
+const creator = new StoryCreator();
 
-  The main storyline is ${game.character.plot}.
-
-  My character is a ${game.character.type}, and is carrying these items: ${game.character.items}
-
-  The story genre is: "${game.genre}", and keep the image in that mood.
-
-  My current level description is this: ${prompt}
-
-  My choice was: "${game.choice}"
-
-  Image should be in photorealistic art.
-`;
+const getImage = async (prompt: string, game: Game) => {
+  const imagePrompt = await creator.getImagePrompt(prompt, game);
 
   const imageResponse = await fetch(
     "https://api.openai.com/v1/images/generations",
@@ -91,8 +79,6 @@ export const aiRouter = router({
       const user = await currentUser();
 
       try {
-        const creator = new StoryCreator();
-
         const totalUserTokens = await getTotalTokens(
           user?.emailAddresses[0].emailAddress!,
         );
@@ -129,7 +115,7 @@ export const aiRouter = router({
           });
 
           gameId = newGame.id;
-          image = await getDalle3Image(level, input.game);
+          image = await getImage(level, input.game);
         } else {
           level = (await creator.getNextLevel(input.game)).basePrompt;
           gameId = input.game.id;
