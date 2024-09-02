@@ -24,7 +24,7 @@ export default function GamePage({ params }: { params: { gameId: string } }) {
   };
 
   return (
-    <main className="p-10">
+    <main>
       {game.isPending && (
         <div className="flex items-center justify-center">
           <div className="grid gap-3 md:grid-cols-2">
