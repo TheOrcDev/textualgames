@@ -55,22 +55,23 @@ export default function PlayPage() {
     }
   };
 
+  if (genreSelection) {
+    return (
+      <>
+        <Genres
+          select={(choice) => {
+            story.genre = choice;
+            setStory(story);
+            setGenreSelection(false);
+            setCharacterSelection(true);
+          }}
+        />
+      </>
+    );
+  }
+
   return (
     <main className="p-12 lg:p-24">
-      {/* Genre select */}
-      {genreSelection && (
-        <>
-          <Genres
-            select={(choice) => {
-              story.genre = choice;
-              setStory(story);
-              setGenreSelection(false);
-              setCharacterSelection(true);
-            }}
-          />
-        </>
-      )}
-
       {/* Character select */}
       {characterSelection && (
         <>
