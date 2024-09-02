@@ -14,14 +14,11 @@ export default function NotEnoughTokens() {
     <Card className="min-w-96">
       <CardHeader>
         <CardTitle>Not enough tokens :(</CardTitle>
-        <CardDescription>
-          You need at least one token to make your meal plan.
-        </CardDescription>
+        <CardDescription>You need at least one token to play.</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-5">
         <p>
-          Ready to unlock more? Get tokens now and start crafting your awesome
-          meal plans!
+          Ready to unlock more? Get tokens now and continue playing your story.
         </p>
         <Link href={"/buy-tokens"}>
           <Button>Buy Now!</Button>
