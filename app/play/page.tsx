@@ -56,24 +56,24 @@ export default function PlayPage() {
   };
 
   return (
-    <>
-      <main>
-        {/* Genre select */}
-        {genreSelection && (
-          <>
-            <Genres
-              select={(choice) => {
-                story.genre = choice;
-                setStory(story);
-                setGenreSelection(false);
-                setCharacterSelection(true);
-              }}
-            />
-          </>
-        )}
+    <main className="p-12 lg:p-24">
+      {/* Genre select */}
+      {genreSelection && (
+        <>
+          <Genres
+            select={(choice) => {
+              story.genre = choice;
+              setStory(story);
+              setGenreSelection(false);
+              setCharacterSelection(true);
+            }}
+          />
+        </>
+      )}
 
-        {/* Character select */}
-        {characterSelection && (
+      {/* Character select */}
+      {characterSelection && (
+        <>
           <SelectItems
             items={characters}
             select={(characterType) => {
@@ -83,69 +83,69 @@ export default function PlayPage() {
               setNameSelection(true);
             }}
           />
-        )}
+        </>
+      )}
 
-        {/* Character name input */}
-        {nameSelection && (
-          <div className="mt-5 flex flex-col items-center justify-center gap-5 text-center">
-            <Input
-              placeholder="enter your name"
-              value={name}
-              className="w-96"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-            <Button
-              onClick={() => {
-                // TODO: Validation for name
-                if (name === "") return alert("Please enter a name");
-                story.character.name = name;
-                setStory(story);
-                setNameSelection(false);
-                setPlotSelection(true);
-              }}
-            >
-              Submit
-            </Button>
-          </div>
-        )}
-
-        {/* Character plot select */}
-        {plotSelection && (
-          <SelectItems
-            items={plots}
-            select={(plot) => {
-              story.character.plot = plot;
-              setStory(story);
-              setPlotSelection(false);
-              setItemSelection(true);
+      {/* Character name input */}
+      {nameSelection && (
+        <div className="mt-5 flex flex-col items-center justify-center gap-5 text-center">
+          <Input
+            placeholder="enter your name"
+            value={name}
+            className="w-96"
+            onChange={(e) => {
+              setName(e.target.value);
             }}
           />
-        )}
-
-        {/* Items select */}
-        {itemSelection && (
-          <SelectItems
-            items={items}
-            select={(item) => {
-              story.character.items = JSON.stringify([item]);
+          <Button
+            onClick={() => {
+              // TODO: Validation for name
+              if (name === "") return alert("Please enter a name");
+              story.character.name = name;
               setStory(story);
-              setItemSelection(false);
-              fetchData(story);
+              setNameSelection(false);
+              setPlotSelection(true);
             }}
-          />
-        )}
+          >
+            Submit
+          </Button>
+        </div>
+      )}
 
-        {hasNoTokens && (
-          <div className="flex flex-col items-center justify-center gap-5 p-24">
-            <NotEnoughTokens />
-          </div>
-        )}
+      {/* Character plot select */}
+      {plotSelection && (
+        <SelectItems
+          items={plots}
+          select={(plot) => {
+            story.character.plot = plot;
+            setStory(story);
+            setPlotSelection(false);
+            setItemSelection(true);
+          }}
+        />
+      )}
 
-        {/* Loading */}
-        {loading && <LoadingSentences />}
-      </main>
-    </>
+      {/* Items select */}
+      {itemSelection && (
+        <SelectItems
+          items={items}
+          select={(item) => {
+            story.character.items = JSON.stringify([item]);
+            setStory(story);
+            setItemSelection(false);
+            fetchData(story);
+          }}
+        />
+      )}
+
+      {hasNoTokens && (
+        <div className="flex flex-col items-center justify-center gap-5 p-24">
+          <NotEnoughTokens />
+        </div>
+      )}
+
+      {/* Loading */}
+      {loading && <LoadingSentences />}
+    </main>
   );
 }

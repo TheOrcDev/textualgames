@@ -13,12 +13,7 @@ export default function SelectItems({ items, select }: Props) {
   const [currentItems, setCurrentItems] = useState(items.slice(0, 15));
 
   return (
-    <div
-      className="
-      mx-4 grid grid-cols-1 gap-5
-      sm:mx-10 sm:grid-cols-2 md:mx-32 md:grid-cols-3
-      "
-    >
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {currentItems.map((item: string, index: number) => (
         <div className="flex h-min items-center" key={index}>
           <Button
