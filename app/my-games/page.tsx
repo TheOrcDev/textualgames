@@ -52,7 +52,7 @@ export default function MyGames() {
           ))}
       </div>
       {!games.isPending && !games.data?.length && (
-        <h2 className="text-2xl">No meal plans yet!</h2>
+        <h2 className="text-2xl">No started games yet!</h2>
       )}
     </main>
   );

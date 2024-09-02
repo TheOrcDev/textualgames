@@ -5,11 +5,7 @@ import { Game } from "@/components/shared/types";
 import { Skeleton } from "@/components/ui";
 import { trpc } from "@/server/client";
 
-export default function MealPlanPage({
-  params,
-}: {
-  params: { gameId: string };
-}) {
+export default function GamePage({ params }: { params: { gameId: string } }) {
   const game = trpc.games.get.useQuery({
     gameId: params.gameId,
   });

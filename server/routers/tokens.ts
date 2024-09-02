@@ -107,7 +107,7 @@ export const tokensRouter = router({
         // const { error } = await resend.emails.send({
         //   from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
         //   to: [user?.emailAddresses[0].emailAddress!],
-        //   subject: "Your Meal Planning Starts Here",
+        //   subject: "Your Story Starts Here",
         //   react: BoughtTokens({ tokens: amountOfTokens }),
         // });
 

@@ -38,36 +38,3 @@ export const spendTokens = async (
     action,
   });
 };
-
-// export const addDailyPlanAndMeals = async (data: DailyMealPlan, email: string, weeklyPlanId?: string) => {
-//     const [dailyPlan] = await db.insert(dailyPlans).values({
-//         email,
-//         title: data.mealPlanTitle,
-//         totalCalories: data.totalCalories,
-//         weeklyPlanId,
-//     }).returning({ id: dailyPlans.id });
-
-//     data.meals.map(async (meal: Meal) => {
-//         await db.insert(meals).values({
-//             title: meal.title,
-//             calories: meal.calories,
-//             ingredients: JSON.stringify(meal.ingredients),
-//             dailyPlanId: dailyPlan.id,
-//         })
-//     })
-
-//     return dailyPlan.id;
-// }
-
-// export const addWeeklyPlan = async (data: WeeklyMealPlan, email: string) => {
-//     const [weeklyPlan] = await db.insert(weeklyPlans).values({
-//         email,
-//         title: data.weeklyMealPlanTitle,
-//         totalCalories: data.totalCalories,
-//     }).returning({ id: weeklyPlans.id });
-
-//     data.days.map((dailyPlan) => {
-//         addDailyPlanAndMeals(dailyPlan, email, weeklyPlan.id);
-//     })
-
-// }
