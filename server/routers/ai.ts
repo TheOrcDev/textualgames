@@ -1,12 +1,13 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { Serializable } from "@langchain/core/load/serializable";
-import { AsyncCaller } from "@langchain/core/utils/async_caller";
-import { compare } from "@langchain/core/utils/json_patch";
-import { getEncoding } from "@langchain/core/utils/tiktoken";
+import { PostgresChatMessageHistory } from "@langchain/community/stores/message/postgres";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+import {
+  ChatPromptTemplate,
+  MessagesPlaceholder,
+} from "@langchain/core/prompts";
+import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 import { ChatOpenAI } from "@langchain/openai";
-import { ConversationChain } from "langchain/chains";
-import { BufferMemory } from "langchain/memory";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { Pool } from "@neondatabase/serverless";
 import { z } from "zod";
 
 import db from "@/db/drizzle";
@@ -17,13 +18,6 @@ import StoryCreator from "@/lib/story-creator";
 import { Game } from "../../components/shared/types";
 import { publicProcedure, router } from "../trpc";
 
-const DoNotRemoveCompare = compare;
-const DoNotRemovegetEncoding = getEncoding;
-const DoNotRemoveSerializable = Serializable;
-const DoNotRemoveRecursiveCharacterTextSplitter =
-  RecursiveCharacterTextSplitter;
-const DoNotRemoveAsyncCaller = AsyncCaller;
-
 const model = new ChatOpenAI({
   modelName: process.env.GPT_MODEL,
   openAIApiKey: process.env.GPT_API_KEY,
@@ -31,12 +25,33 @@ const model = new ChatOpenAI({
   maxTokens: parseInt(process.env.GPT_MAX_TOKENS ?? "1048"),
 });
 
-const memory = new BufferMemory();
+const prompt = ChatPromptTemplate.fromMessages([
+  [
+    "system",
+    "You are a helpful assistant. Answer all questions to the best of your ability.",
+  ],
+  new MessagesPlaceholder("chat_history"),
+  ["human", "{input}"],
+]);
 
-const chain = new ConversationChain({
-  llm: model,
-  memory,
-  verbose: true,
+const chain = prompt.pipe(model).pipe(new StringOutputParser());
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL_POOL,
+  ssl: true,
+});
+
+const chainWithHistory = new RunnableWithMessageHistory({
+  runnable: chain,
+  inputMessagesKey: "input",
+  historyMessagesKey: "chat_history",
+  getMessageHistory: async (sessionId) => {
+    const chatHistory = new PostgresChatMessageHistory({
+      sessionId,
+      pool,
+    });
+    return chatHistory;
+  },
 });
 
 const creator = new StoryCreator();
@@ -132,10 +147,14 @@ export const aiRouter = router({
           action: "level",
         });
 
-        const response = await chain.call({ input: level });
-        const data = await response.response;
+        const response = await chainWithHistory.invoke(
+          {
+            input: level,
+          },
+          { configurable: { sessionId: gameId } },
+        );
 
-        const json = await JSON.parse(data);
+        const json = await JSON.parse(response);
 
         await db.insert(levels).values({
           storyline: json.storyline,
