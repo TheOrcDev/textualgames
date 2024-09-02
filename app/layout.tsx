@@ -13,8 +13,12 @@ import { cn } from "@/lib/utils";
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
   title: "Textual Games - Create your own story!",
   description: "Create your own story! AI Generated Textual Games.",
+  openGraph: {
+    images: "/img/og-image.png",
+  },
 };
 
 export default async function RootLayout({
