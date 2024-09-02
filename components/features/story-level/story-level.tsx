@@ -67,7 +67,7 @@ export default function StoryLevel({ game }: Props) {
       )}
 
       {!currentLevel.isPending && !hasNoTokens && (
-        <div className="flex-row justify-center px-5 text-center md:px-20 lg:px-40">
+        <div className="flex-row justify-center text-center md:px-20 lg:px-40">
           <p className="mb-5 mt-10 text-sm md:text-xl">{level.storyline}</p>
 
           <div className="flex flex-col gap-3">

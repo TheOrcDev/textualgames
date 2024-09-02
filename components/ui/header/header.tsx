@@ -8,7 +8,7 @@ import { ModeToggle } from "../mode-toggle/mode-toggle";
 export default function THeader() {
   return (
     <header className="flex items-center justify-between p-5 px-10">
-      <Link href={"/"}>
+      <Link href={"/"} className="hidden sm:block">
         <Image
           width={70}
           height={70}
