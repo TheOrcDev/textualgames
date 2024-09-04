@@ -5,7 +5,7 @@ export default async function BuyTokensPage() {
   return (
     <>
       <Header />
-      <div className="flex flex-col items-center justify-center gap-10 p-24">
+      <div className="flex flex-col items-center justify-center gap-10 p-12">
         <BuyTokens />
       </div>
     </>
