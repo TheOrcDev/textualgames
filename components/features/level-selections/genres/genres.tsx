@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { genres } from "@/components/shared/data";
+import { Genre } from "@/components/shared/types";
 import {
   Button,
   Card,
@@ -9,14 +10,14 @@ import {
   CardTitle,
 } from "@/components/ui";
 
-type Genre = {
-  name: string;
+type GenreItem = {
+  name: Genre;
   description: string;
   image: string;
 };
 
 type Props = {
-  select: (genre: string) => void;
+  select: (genre: Genre) => void;
 };
 
 export default function Genres({ select }: Props) {
@@ -27,7 +28,7 @@ export default function Genres({ select }: Props) {
       px-10 sm:mx-10 md:mx-16 md:grid-cols-2 xl:grid-cols-3 2xl:px-40
       "
     >
-      {genres.map((item: Genre) => (
+      {genres.map((item: GenreItem) => (
         <Card
           key={item.name}
           className="cursor-pointer transition duration-300 ease-in hover:bg-primary/50"

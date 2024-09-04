@@ -3,7 +3,7 @@ export type Game = {
   levels: Level[];
   character: Character;
   choice: string;
-  genre: string;
+  genre: Genre;
 };
 
 export type Level = {
@@ -32,3 +32,10 @@ export const Tokens = {
   HUNDRED: "100",
 } as const;
 export type Tokens = (typeof Tokens)[keyof typeof Tokens];
+
+export const Genre = {
+  FANTASY: "Fantasy",
+  SCIFI: "Sci-Fi",
+  DYSTOPIAN: "Dystopian",
+} as const;
+export type Genre = (typeof Genre)[keyof typeof Genre];

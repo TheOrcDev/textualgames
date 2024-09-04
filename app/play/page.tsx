@@ -9,8 +9,14 @@ import {
   NotEnoughTokens,
   SelectItems,
 } from "@/components/features";
-import { characters, items, plots } from "@/components/shared/data";
-import { Game } from "@/components/shared/types";
+import {
+  characters,
+  fantasyCharacters,
+  items,
+  plots,
+  sciFiCharacters,
+} from "@/components/shared/data";
+import { Game, Genre } from "@/components/shared/types";
 import { Button, Input } from "@/components/ui";
 import { trpc } from "@/server/client";
 
@@ -22,6 +28,8 @@ export default function PlayPage() {
   const utils = trpc.useUtils();
   const [story, setStory] = useState<Game>(createStory);
 
+  const [availableCharacters, setAvailableCharacters] =
+    useState<string[]>(characters);
   const [genreSelection, setGenreSelection] = useState(true);
   const [characterSelection, setCharacterSelection] = useState(false);
   const [nameSelection, setNameSelection] = useState(false);
@@ -61,6 +69,12 @@ export default function PlayPage() {
         <Genres
           select={(choice) => {
             story.genre = choice;
+            if (choice === Genre.FANTASY) {
+              setAvailableCharacters(fantasyCharacters);
+            }
+            if (choice === Genre.SCIFI) {
+              setAvailableCharacters(sciFiCharacters);
+            }
             setStory(story);
             setGenreSelection(false);
             setCharacterSelection(true);
@@ -80,7 +94,7 @@ export default function PlayPage() {
       {characterSelection && (
         <>
           <SelectItems
-            items={characters}
+            items={availableCharacters}
             select={(characterType) => {
               story.character.type = characterType;
               setStory(story);
