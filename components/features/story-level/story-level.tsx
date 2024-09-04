@@ -50,6 +50,10 @@ export default function StoryLevel({ game }: Props) {
     }
   };
 
+  const storylineParts = level.storyline
+    .split(".")
+    .filter((part) => part.trim());
+
   return (
     <>
       {currentLevel.isPending && <LoadingSentences />}
@@ -67,8 +71,14 @@ export default function StoryLevel({ game }: Props) {
       )}
 
       {!currentLevel.isPending && !hasNoTokens && (
-        <div className="flex-row justify-center p-10 text-center md:px-20 lg:px-40">
-          <p className="mb-5 mt-10 text-sm md:text-xl">{level.storyline}</p>
+        <div className="flex-row justify-center p-10 md:px-20 lg:px-40">
+          <div className="text-sm md:text-xl">
+            {storylineParts.map((part, index) => (
+              <p key={index} className="mb-2">
+                {part.trim() + "."}
+              </p>
+            ))}
+          </div>
 
           <div className="flex flex-col gap-3">
             <div className="flex w-full items-center justify-center gap-5">
