@@ -38,6 +38,7 @@ const readComponents = (relativePath) => {
   return reactFiles;
 };
 
+const pages = readComponents("");
 const widgets = readComponents("widgets");
 const features = readComponents("features");
 const entities = readFolders("entities")
@@ -50,7 +51,7 @@ const sharedUI = readComponents("ui");
 const sharedLibs = readFolders("shared/lib").map((f) => `${f}-lib`);
 
 const workflows = readFolders(".github/workflows", "").map(
-  (f) => `${f.replace(".yaml", "")}-workflow`
+  (f) => `${f.replace(".yaml", "")}-workflow`,
 );
 
 module.exports = {
@@ -93,6 +94,7 @@ module.exports = {
 
     "---",
     "pages",
+    ...pages,
 
     "---",
 
