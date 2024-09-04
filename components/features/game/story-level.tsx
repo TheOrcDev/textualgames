@@ -23,7 +23,7 @@ export default function StoryLevel({ game }: Props) {
   const choices = JSON.parse(game.levels[0].choices);
   const level = game.levels[0];
 
-  const onKeyDown = (event: any) => {
+  const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       goToNextLevel(choice);
     }
