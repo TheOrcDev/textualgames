@@ -71,7 +71,7 @@ export default function StoryLevel({ game }: Props) {
       )}
 
       {!currentLevel.isPending && !hasNoTokens && (
-        <div className="flex-row justify-center p-10 md:px-20 lg:px-40">
+        <div className="flex flex-col justify-center gap-10 p-10 md:px-20 lg:px-40">
           <div className="text-sm md:text-xl">
             {storylineParts.map((part, index) => (
               <p key={index} className="mb-2">
@@ -80,7 +80,7 @@ export default function StoryLevel({ game }: Props) {
             ))}
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-5">
             <div className="flex w-full items-center justify-center gap-5">
               {choices &&
                 isManualChoice &&
@@ -96,7 +96,7 @@ export default function StoryLevel({ game }: Props) {
             </div>
 
             {isManualChoice ? (
-              <div>
+              <div className="flex justify-center">
                 <Button onClick={() => setIsManualChoice(!isManualChoice)}>
                   Manual
                 </Button>
