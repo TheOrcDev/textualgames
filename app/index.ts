@@ -1,4 +1,4 @@
-import { Game } from "@/components/shared/types";
+import { Game, Genre } from "@/components/shared/types";
 
 export const createStory = (): Game => {
   return {
@@ -15,6 +15,6 @@ export const createStory = (): Game => {
       items: "",
       createdAt: "",
     },
-    genre: "",
+    genre: Genre.FANTASY,
   };
 };
