@@ -9,6 +9,7 @@ import { useTheme } from "next-themes";
 
 import { Tokens } from "@/components/shared/types";
 import {
+  Badge,
   Button,
   Card,
   CardContent,
@@ -92,7 +93,10 @@ export default function BuyTokens() {
               onClick={() => buyTokens(Tokens.FIFTY)}
             >
               <CardHeader>
-                <CardTitle>Efficent</CardTitle>
+                <CardTitle className="flex justify-between gap-2">
+                  <span>Efficent</span>
+                  <Badge className="text-center">Most Popular</Badge>
+                </CardTitle>
                 <CardDescription>3.5$</CardDescription>
               </CardHeader>
               <CardContent className="md:min-h-96">
