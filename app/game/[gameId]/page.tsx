@@ -1,7 +1,7 @@
 "use client";
 
 import { StoryLevel } from "@/components/features";
-import { Game } from "@/components/shared/types";
+import { Game, Genre } from "@/components/shared/types";
 import { Skeleton } from "@/components/ui";
 import { trpc } from "@/server/client";
 
@@ -21,6 +21,7 @@ export default function GamePage({ params }: { params: { gameId: string } }) {
       items: "",
       gameId: "",
     },
+    genre: Genre.SCIFI,
   };
 
   return (
