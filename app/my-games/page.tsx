@@ -16,7 +16,7 @@ export default function MyGames() {
   const games = trpc.games.getAllGames.useQuery();
 
   return (
-    <main className="flex flex-col items-center justify-center gap-5 px-24">
+    <>
       <h2 className="text-2xl">My Games</h2>
 
       {games.isPending && (
@@ -54,6 +54,6 @@ export default function MyGames() {
       {!games.isPending && !games.data?.length && (
         <h2 className="text-2xl">No started games yet!</h2>
       )}
-    </main>
+    </>
   );
 }

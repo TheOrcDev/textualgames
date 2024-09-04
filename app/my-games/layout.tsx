@@ -15,7 +15,9 @@ export default function RootLayout({
   return (
     <div>
       <Header />
-      {children}
+      <main className="flex flex-col items-center justify-center gap-5 p-5 py-10 md:px-24">
+        {children}
+      </main>
     </div>
   );
 }
