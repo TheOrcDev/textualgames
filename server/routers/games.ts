@@ -2,6 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
+import { isValidUUID } from "@/db";
 import db from "@/db/drizzle";
 import { games } from "@/db/schema";
 
@@ -12,6 +13,12 @@ export const gamesRouter = router({
     .input(z.object({ gameId: z.string() }))
     .query(async (opts) => {
       const { input } = opts;
+
+      const isValidGameId = isValidUUID(input.gameId);
+
+      if (!isValidGameId) {
+        return false;
+      }
 
       try {
         const game = await db.query.games.findFirst({
