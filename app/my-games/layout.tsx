@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import { Header } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Textual Games - My games",
-  description: "Create your own story! AI Generated Textual Games.",
+  title: "My Games: Explore Your Creations on Textual Games",
+  description:
+    "View, edit, and continue your AI-generated stories. Explore all your past creations and keep the adventure going with Textual Games.",
 };
 
 export default function RootLayout({

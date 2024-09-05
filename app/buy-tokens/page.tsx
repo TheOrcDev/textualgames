@@ -4,9 +4,9 @@ import { BuyTokens } from "@/components/features";
 import { Header } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Textual Games - Buy Tokens",
+  title: "Buy Tokens: Fuel Your Adventure on Textual Games",
   description:
-    "Buy tokens and create your own story! AI Generated Textual Games.",
+    "Purchase tokens to create, play, and enhance your AI-generated stories. Get the tokens you need to keep your adventures going on Textual Games.",
 };
 
 export default async function BuyTokensPage() {
