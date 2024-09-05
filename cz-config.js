@@ -38,7 +38,7 @@ const readComponents = (relativePath) => {
   return reactFiles;
 };
 
-const pages = readComponents("");
+const pages = readFolders("", "app/");
 const widgets = readComponents("widgets");
 const features = readComponents("features");
 const entities = readFolders("entities")
