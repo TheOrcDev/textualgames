@@ -85,6 +85,7 @@ export const tokensRouter = router({
           return;
         }
 
+        // Check if this payment has already been processed
         const [existingRecord] = await db
           .select()
           .from(purchases)
@@ -97,6 +98,7 @@ export const tokensRouter = router({
 
         const amountOfTokens = getTokenByPrice(paymentIntent.amount / 100);
 
+        // Save the payment
         await db.insert(purchases).values({
           email: user?.emailAddresses[0].emailAddress!,
           paymentIntent: input.paymentIntent,

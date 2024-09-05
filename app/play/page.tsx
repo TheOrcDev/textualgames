@@ -89,7 +89,7 @@ export default function PlayPage() {
   }
 
   return (
-    <main className="p-12 lg:p-24">
+    <>
       {/* Character select */}
       {characterSelection && (
         <>
@@ -162,6 +162,6 @@ export default function PlayPage() {
           <NotEnoughTokens />
         </div>
       )}
-    </main>
+    </>
   );
 }
