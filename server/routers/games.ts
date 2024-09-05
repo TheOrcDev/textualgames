@@ -32,8 +32,6 @@ export const gamesRouter = router({
           where: eq(games.id, input.gameId),
         });
 
-        console.log(game);
-
         return game;
       } catch (error) {
         console.log(error);
