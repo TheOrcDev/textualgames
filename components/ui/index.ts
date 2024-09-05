@@ -1,6 +1,5 @@
-export { Button } from "./button/button";
-
 export { Badge } from "./badge/badge";
+export { Button } from "./button/button";
 export * from "./card/card";
 export * from "./dropdown-menu/dropdown-menu";
 export { default as Footer } from "./footer/footer";
@@ -10,4 +9,3 @@ export { Input } from "./input/input";
 export { ModeToggle } from "./mode-toggle/mode-toggle";
 export { Skeleton } from "./skeleton/skeleton";
 export { Textarea } from "./textarea/textarea";
-export { ThemeProvider } from "./theme-provider/theme-provider";

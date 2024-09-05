@@ -6,8 +6,8 @@ import { Press_Start_2P } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { GoogleAnalytics } from "@/components/features";
-import { TRPCProvider } from "@/components/providers";
-import { Footer, ThemeProvider } from "@/components/ui";
+import { ThemeProvider, TRPCProvider } from "@/components/providers";
+import { Footer } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
