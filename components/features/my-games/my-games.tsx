@@ -18,11 +18,15 @@ export default function MyGames() {
   const games = trpc.games.getAllGames.useQuery();
   const deleteGame = trpc.games.deleteGame.useMutation();
 
-  const handleDelete = (gameId: string) => {
-    deleteGame.mutate({
-      gameId,
-    });
-    // TODO: toast
+  const handleDelete = async (gameId: string) => {
+    try {
+      await deleteGame.mutateAsync({
+        gameId,
+      });
+      // Display success toast
+    } catch (error) {
+      // Display error toast
+    }
   };
 
   return (
@@ -63,7 +67,7 @@ export default function MyGames() {
 
             <CardFooter className="flex items-center justify-center gap-3">
               <Link href={`/game/${game.id}`}>
-                <Button onClick={() => handleDelete(game.id)}>Continue</Button>
+                <Button>Continue</Button>
               </Link>
               <Button
                 variant={"destructive"}

@@ -80,7 +80,7 @@ export const gamesRouter = router({
 
         return character;
       } catch (error) {
-        console.log(error);
+        console.error("Failed to delete game:", error);
         throw error;
       }
     }),
