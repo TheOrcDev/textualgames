@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { Elements } from "@stripe/react-stripe-js";
 import { useTheme } from "next-themes";
 

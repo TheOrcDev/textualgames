@@ -67,7 +67,7 @@ export const gamesRouter = router({
       try {
         await db.delete(levels).where(eq(levels.gameId, input.gameId));
 
-        const character = await db
+        const [character] = await db
           .delete(characters)
           .where(eq(characters.gameId, input.gameId))
           .returning({
@@ -78,7 +78,7 @@ export const gamesRouter = router({
           id: games.id,
         });
 
-        return character;
+        return character.name;
       } catch (error) {
         console.error("Failed to delete game:", error);
         throw error;

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { useToast } from "@/components/hooks/use-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,15 +29,23 @@ export default function MyGames() {
   const deleteGame = trpc.games.deleteGame.useMutation();
   const utils = trpc.useUtils();
 
+  const { toast } = useToast();
+
   const handleDelete = async (gameId: string) => {
     try {
-      await deleteGame.mutateAsync({
+      const character = await deleteGame.mutateAsync({
         gameId,
       });
       utils.games.getAllGames.refetch();
-      // Display success toast
+      toast({
+        title: `Goodbye ${character}`,
+        description: "Successfully deleted.",
+      });
     } catch (error) {
-      // Display error toast
+      toast({
+        title: "Couldn't delete",
+        description: "Something went wrong. Please try again.",
+      });
     }
   };
 
