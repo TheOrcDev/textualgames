@@ -22,12 +22,7 @@ type Props = {
 
 export default function Genres({ select }: Props) {
   return (
-    <div
-      className="
-      mx-4 grid h-min grid-cols-1 gap-10 
-      px-10 sm:mx-10 md:mx-16 md:grid-cols-2 xl:grid-cols-3 2xl:px-40
-      "
-    >
+    <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">
       {genres.map((item: GenreItem) => (
         <Card
           key={item.name}
