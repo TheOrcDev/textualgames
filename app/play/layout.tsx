@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <div>
       <Header />
-      <main className="p-8 lg:px-24 xl:px-52">{children}</main>
+      <main>{children}</main>
     </div>
   );
 }
