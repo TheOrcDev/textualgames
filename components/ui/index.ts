@@ -10,3 +10,5 @@ export { Input } from "./input/input";
 export { ModeToggle } from "./mode-toggle/mode-toggle";
 export { Skeleton } from "./skeleton/skeleton";
 export { Textarea } from "./textarea/textarea";
+export * from "./toast/toast";
+export { Toaster } from "./toaster/toaster";

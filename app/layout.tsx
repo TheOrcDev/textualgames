@@ -7,7 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import { GoogleAnalytics } from "@/components/features";
 import { ThemeProvider, TRPCProvider } from "@/components/providers";
-import { Footer } from "@/components/ui";
+import { Footer, Toaster } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
@@ -41,6 +41,7 @@ export default async function RootLayout({
             >
               {children}
               <Footer />
+              <Toaster />
             </ThemeProvider>
           </TRPCProvider>
         </body>
