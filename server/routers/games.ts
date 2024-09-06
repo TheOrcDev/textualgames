@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { isValidUUID } from "@/db";
 import db from "@/db/drizzle";
-import { games } from "@/db/schema";
+import { characters, games, levels } from "@/db/schema";
 
 import { publicProcedure, router } from "../trpc";
 
@@ -53,4 +53,35 @@ export const gamesRouter = router({
       throw error;
     }
   }),
+  deleteGame: publicProcedure
+    .input(z.object({ gameId: z.string() }))
+    .mutation(async (opts) => {
+      const { input } = opts;
+
+      const isValidGameId = isValidUUID(input.gameId);
+
+      if (!isValidGameId) {
+        return false;
+      }
+
+      try {
+        await db.delete(levels).where(eq(levels.gameId, input.gameId));
+
+        const character = await db
+          .delete(characters)
+          .where(eq(characters.gameId, input.gameId))
+          .returning({
+            name: characters.name,
+          });
+
+        await db.delete(games).where(eq(games.id, input.gameId)).returning({
+          id: games.id,
+        });
+
+        return character;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    }),
 });
