@@ -116,7 +116,12 @@ export default function MyGames() {
         ))}
       </div>
       {!games.isPending && !games.data?.length && (
-        <h2 className="text-2xl">No started games yet!</h2>
+        <div className="flex flex-col items-center justify-center gap-3">
+          <h2 className="text-2xl">No started games yet!</h2>
+          <Link href={"/play"}>
+            <Button>Create Your Character</Button>
+          </Link>
+        </div>
       )}
     </>
   );
