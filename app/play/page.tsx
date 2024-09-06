@@ -65,7 +65,7 @@ export default function PlayPage() {
 
   if (genreSelection) {
     return (
-      <>
+      <div className="p-8 lg:px-24 xl:px-52">
         <Genres
           select={(choice) => {
             story.genre = choice;
@@ -80,7 +80,7 @@ export default function PlayPage() {
             setCharacterSelection(true);
           }}
         />
-      </>
+      </div>
     );
   }
 
@@ -89,7 +89,7 @@ export default function PlayPage() {
   }
 
   return (
-    <>
+    <main className="p-8 lg:px-24 xl:px-52">
       {/* Character select */}
       {characterSelection && (
         <>
@@ -162,6 +162,6 @@ export default function PlayPage() {
           <NotEnoughTokens />
         </div>
       )}
-    </>
+    </main>
   );
 }

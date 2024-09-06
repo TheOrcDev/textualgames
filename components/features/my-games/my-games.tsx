@@ -3,6 +3,15 @@
 import Link from "next/link";
 
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   Button,
   Card,
   CardContent,
@@ -17,12 +26,14 @@ import { trpc } from "@/server/client";
 export default function MyGames() {
   const games = trpc.games.getAllGames.useQuery();
   const deleteGame = trpc.games.deleteGame.useMutation();
+  const utils = trpc.useUtils();
 
   const handleDelete = async (gameId: string) => {
     try {
       await deleteGame.mutateAsync({
         gameId,
       });
+      utils.games.getAllGames.refetch();
       // Display success toast
     } catch (error) {
       // Display error toast
@@ -69,12 +80,28 @@ export default function MyGames() {
               <Link href={`/game/${game.id}`}>
                 <Button>Continue</Button>
               </Link>
-              <Button
-                variant={"destructive"}
-                onClick={() => handleDelete(game.id)}
-              >
-                Delete
-              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant={"destructive"}>Delete</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      your game and remove {game?.character?.name} character.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => handleDelete(game.id)}>
+                      Continue
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </CardFooter>
           </Card>
         ))}
