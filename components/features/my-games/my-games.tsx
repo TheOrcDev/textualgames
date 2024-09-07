@@ -67,7 +67,7 @@ export default function MyGames() {
         {games.data?.map((game) => (
           <Card
             key={game.id}
-            className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-primary/10 hover:bg-gradient-to-br"
+            className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br"
           >
             <Link href={`/game/${game.id}`}>
               <div>
