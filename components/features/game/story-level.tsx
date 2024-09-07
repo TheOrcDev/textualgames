@@ -55,7 +55,7 @@ export default function StoryLevel({ game }: Props) {
     .filter((part) => part.trim());
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 p-10">
       {currentLevel.isPending && <LoadingSentences />}
 
       {hasNoTokens && (
@@ -72,7 +72,7 @@ export default function StoryLevel({ game }: Props) {
 
       {!currentLevel.isPending && !hasNoTokens && (
         <div className="flex flex-col justify-center gap-10 md:px-20 lg:px-40">
-          <div className="bg-primary/15 p-10 text-sm md:text-xl">
+          <div className="border-2 border-dotted border-primary bg-primary/15 p-10 text-sm md:text-xl">
             {storylineParts.map((part, index) => (
               <p key={index} className="mb-2">
                 {part.trim() + "."}
