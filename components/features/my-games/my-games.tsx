@@ -33,12 +33,14 @@ export default function MyGames() {
 
   const handleDelete = async (gameId: string) => {
     try {
-      const character = await deleteGame.mutateAsync({
+      const characterName = await deleteGame.mutateAsync({
         gameId,
       });
+
       utils.games.getAllGames.refetch();
+
       toast({
-        title: `Goodbye ${character}`,
+        title: `Goodbye ${characterName}`,
         description: "Successfully deleted.",
       });
     } catch (error) {

@@ -36,7 +36,7 @@ export default function Game({ gameId }: Props) {
     };
 
     return (
-      <div>
+      <>
         {game.isPending && (
           <div className="flex items-center justify-center">
             <div className="grid gap-3 md:grid-cols-2">
@@ -48,8 +48,8 @@ export default function Game({ gameId }: Props) {
           </div>
         )}
 
-        {!game.isPending && game.data && <StoryLevel game={gameData} />}
-      </div>
+        {game.data && <StoryLevel game={gameData} />}
+      </>
     );
   }
 }
