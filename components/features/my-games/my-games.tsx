@@ -65,27 +65,32 @@ export default function MyGames() {
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {games.data?.map((game) => (
-          <Card key={game.id} className="flex flex-col justify-between">
-            <div>
-              <CardHeader>
-                <CardTitle>
-                  {game.character?.name} {game.character?.type}
-                </CardTitle>
-                <CardDescription>{game.genre}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col gap-3">
-                  <p>{game.character?.plot}</p>
+          <Card
+            key={game.id}
+            className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-primary/10 hover:bg-gradient-to-br"
+          >
+            <Link href={`/game/${game.id}`}>
+              <div>
+                <CardHeader>
+                  <CardTitle>
+                    {game.character?.name} {game.character?.type}
+                  </CardTitle>
+                  <CardDescription>{game.genre}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col gap-3">
+                    <p>{game.character?.plot}</p>
 
-                  <p>Items:</p>
+                    <p>Items:</p>
 
-                  {game.character &&
-                    JSON.parse(game.character.items).map((item: string) => (
-                      <p key={item}>- {item}</p>
-                    ))}
-                </div>
-              </CardContent>
-            </div>
+                    {game.character &&
+                      JSON.parse(game.character.items).map((item: string) => (
+                        <p key={item}>- {item}</p>
+                      ))}
+                  </div>
+                </CardContent>
+              </div>
+            </Link>
 
             <CardFooter className="flex items-center justify-center gap-3">
               <Link href={`/game/${game.id}`}>
