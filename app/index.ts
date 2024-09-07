@@ -13,7 +13,7 @@ export const createStory = (): Game => {
       plot: "",
       type: "",
       items: "",
-      createdAt: "",
+      createdAt: new Date(),
     },
     genre: Genre.FANTASY,
   };
