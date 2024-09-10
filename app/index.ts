@@ -11,6 +11,7 @@ export const createStory = (): Game => {
       gameId: "",
       name: "",
       plot: "",
+      gender: "male",
       type: "",
       items: "",
       createdAt: "",
