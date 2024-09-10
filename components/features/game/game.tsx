@@ -1,7 +1,11 @@
 "use client";
 
 import { StoryLevel } from "@/components/features";
-import { Genre, type Game as GameType } from "@/components/shared/types";
+import {
+  Character,
+  Genre,
+  type Game as GameType,
+} from "@/components/shared/types";
 import { Skeleton } from "@/components/ui";
 import { trpc } from "@/server/client";
 
@@ -36,11 +40,12 @@ export default function Game({ gameId }: Props) {
   if (game.data) {
     const gameData: GameType = {
       ...game.data,
-      character: game?.data?.character ?? {
+      character: (game?.data?.character as Character) ?? {
         type: "",
         id: "",
         name: "",
         createdAt: "",
+        gender: "male",
         plot: "",
         items: "",
         gameId: "",

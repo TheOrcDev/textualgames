@@ -10,7 +10,7 @@ export default function PlayPage() {
         Textual Games
       </p>
       <Badge>beta</Badge>
-      <Link href={"/play"}>
+      <Link href={"/create-character"}>
         <Button>Play Your Story</Button>
       </Link>
     </div>

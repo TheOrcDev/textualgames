@@ -106,6 +106,8 @@ export const aiRouter = router({
           return "Not enough tokens";
         }
 
+        // TODO: check if character plot, type, and items are from the data lists
+
         let level = "";
         let image = "";
         let gameId = "";
@@ -130,6 +132,7 @@ export const aiRouter = router({
             plot: input.game.character.plot,
             type: input.game.character.type,
             items: input.game.character.items,
+            gender: input.game.character.gender,
             gameId: newGame.id,
           });
 

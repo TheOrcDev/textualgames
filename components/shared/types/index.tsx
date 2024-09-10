@@ -21,6 +21,7 @@ export type Character = {
   name: string;
   plot: string;
   type: string;
+  gender: "male" | "female";
   items: string; // JSON object
   gameId: string;
   createdAt: string;

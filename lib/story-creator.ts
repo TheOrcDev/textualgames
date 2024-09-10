@@ -34,7 +34,7 @@ export default class StoryCreator {
       You are a dungeon master running a text-based game with a player.
       Begin the ${game.genre} genre text-based game.
       The story revolves around my character, ${gameCharacterStory}.
-      My character's name is ${game.character.name}. Start by providing a detailed description of my character.
+      My character's name is ${game.character.name}, and I'm a ${game.character.gender}. Start by providing a detailed description of my character.
       The game should be from first person, as my character sees the world.
       
       Inventory:

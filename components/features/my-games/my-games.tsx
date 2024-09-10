@@ -125,7 +125,7 @@ export default function MyGames() {
       {!games.isPending && !games.data?.length && (
         <div className="flex flex-col items-center justify-center gap-3">
           <h2 className="text-2xl">No started games yet!</h2>
-          <Link href={"/play"}>
+          <Link href={"/create-character"}>
             <Button>Create Your Character</Button>
           </Link>
         </div>
