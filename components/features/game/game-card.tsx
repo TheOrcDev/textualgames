@@ -66,7 +66,7 @@ export default function GameCard({ game }: Props) {
         <div>
           <CardHeader>
             <CardTitle>
-              {game.character.name} {game.character.type}
+              {game.character?.name} {game.character?.type}
             </CardTitle>
             <CardDescription>{game.genre}</CardDescription>
           </CardHeader>
@@ -75,9 +75,10 @@ export default function GameCard({ game }: Props) {
               <p>{game.character?.plot}</p>
 
               <p>Items:</p>
-              {JSON.parse(game.character.items).map((item: string) => (
-                <p key={item}>- {item}</p>
-              ))}
+              {game.character &&
+                JSON.parse(game.character.items).map((item: string) => (
+                  <p key={item}>- {item}</p>
+                ))}
             </div>
           </CardContent>
         </div>
