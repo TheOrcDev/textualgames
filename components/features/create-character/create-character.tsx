@@ -26,8 +26,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
   Form,
   FormControl,
@@ -190,7 +188,7 @@ export default function CreateCharacter() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="grid gap-5 px-5 text-xs md:grid-cols-2 md:text-base"
         >
-          <div className="col-span-full flex md:justify-between md:flex-row flex-col gap-5 items-center">
+          <div className="col-span-full flex flex-col items-center gap-5 md:flex-row md:justify-between">
             <FormField
               control={form.control}
               name="genre"
@@ -351,15 +349,15 @@ export default function CreateCharacter() {
                       </DropdownMenuTrigger>
                     </FormControl>
                     <DropdownMenuContent>
-                      <ScrollArea className="h-[25rem] min-w-[20rem] md:w-[40rem] xl:w-[55rem] rounded-md border p-4">
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                      <ScrollArea className="h-[25rem] min-w-80 rounded-md border p-4 md:w-[40rem] xl:w-[55rem]">
+                        <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
                           {availableData.stories.map((story) => (
                             <DropdownMenuItem key={story}>
                               <Button
                                 onClick={() => {
                                   field.onChange(story);
                                 }}
-                                className="h-52 w-52 xl:w-full text-wrap text-xs md:text-base"
+                                className="size-52 text-wrap text-xs md:text-base xl:w-full"
                               >
                                 {story}
                               </Button>
