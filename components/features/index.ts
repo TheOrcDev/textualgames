@@ -1,4 +1,5 @@
 export { default as BuyTokens } from "./buy-tokens/buy-tokens";
+export { default as CreateCharacter } from "./create-character/create-character";
 export { default as StoryLevel } from "./game/story-level";
 export { default as GoogleAnalytics } from "./google-analytics/google-analytics";
 export { default as Genres } from "./level-selections/genres/genres";

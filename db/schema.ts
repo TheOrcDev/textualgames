@@ -1,5 +1,12 @@
 import { relations } from "drizzle-orm";
-import { integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  integer,
+  pgEnum,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core";
 
 export const purchases = pgTable("purchases", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -26,12 +33,15 @@ export const games = pgTable("games", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const genderEnum = pgEnum("gender", ["male", "female"]);
+
 export const characters = pgTable("characters", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: text("name").notNull(),
   plot: text("plot").notNull(),
   type: text("type").notNull(),
   items: text("items").notNull(),
+  gender: genderEnum("gender").default("male"),
   gameId: uuid("game_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
