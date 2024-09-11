@@ -4,54 +4,19 @@ import Link from "next/link";
 
 import { Plus } from "lucide-react";
 
-import { useToast } from "@/components/hooks/use-toast";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
   Button,
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
   Skeleton,
 } from "@/components/ui";
 import { trpc } from "@/server/client";
 
+import GameCard from "../game/game-card";
+
 export default function MyGames() {
   const games = trpc.games.getAllGames.useQuery();
-  const deleteGame = trpc.games.deleteGame.useMutation();
-  const utils = trpc.useUtils();
-
-  const { toast } = useToast();
-
-  const handleDelete = async (gameId: string) => {
-    try {
-      const characterName = await deleteGame.mutateAsync({
-        gameId,
-      });
-
-      utils.games.getAllGames.refetch();
-
-      toast({
-        title: `Goodbye ${characterName}`,
-        description: "Successfully deleted.",
-      });
-    } catch (error) {
-      toast({
-        title: "Couldn't delete",
-        description: "Something went wrong. Please try again.",
-      });
-    }
-  };
 
   return (
     <>
@@ -67,66 +32,10 @@ export default function MyGames() {
 
       {!games.isPending && (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {games.data?.map((game) => (
-            <Card
-              key={game.id}
-              className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br"
-            >
-              <Link href={`/game/${game.id}`}>
-                <div>
-                  <CardHeader>
-                    <CardTitle>
-                      {game.character?.name} {game.character?.type}
-                    </CardTitle>
-                    <CardDescription>{game.genre}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-col gap-3">
-                      <p>{game.character?.plot}</p>
+          {games.data?.map((game) => <GameCard game={game} key={game.id} />)}
 
-                      <p>Items:</p>
-
-                      {game.character &&
-                        JSON.parse(game.character.items).map((item: string) => (
-                          <p key={item}>- {item}</p>
-                        ))}
-                    </div>
-                  </CardContent>
-                </div>
-              </Link>
-
-              <CardFooter className="flex items-center justify-center gap-3">
-                <Link href={`/game/${game.id}`}>
-                  <Button>Continue</Button>
-                </Link>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant={"destructive"}>Delete</Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Are you absolutely sure?
-                      </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your game and remove {game?.character?.name}{" "}
-                        character.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => handleDelete(game.id)}>
-                        Continue
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </CardFooter>
-            </Card>
-          ))}
           <Link href={"/create-character"} className="flex">
-            <Card className="flex cursor-pointer flex-col justify-center items-center from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br">
+            <Card className="flex cursor-pointer flex-col items-center justify-center from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br">
               <CardHeader>Play New Story</CardHeader>
               <CardContent>
                 <Plus className="size-32" />
