@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { Plus } from "lucide-react";
+
 import { useToast } from "@/components/hooks/use-toast";
 import {
   AlertDialog,
@@ -63,65 +65,77 @@ export default function MyGames() {
         </div>
       )}
 
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {games.data?.map((game) => (
-          <Card
-            key={game.id}
-            className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br"
-          >
-            <Link href={`/game/${game.id}`}>
-              <div>
-                <CardHeader>
-                  <CardTitle>
-                    {game.character?.name} {game.character?.type}
-                  </CardTitle>
-                  <CardDescription>{game.genre}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col gap-3">
-                    <p>{game.character?.plot}</p>
-
-                    <p>Items:</p>
-
-                    {game.character &&
-                      JSON.parse(game.character.items).map((item: string) => (
-                        <p key={item}>- {item}</p>
-                      ))}
-                  </div>
-                </CardContent>
-              </div>
-            </Link>
-
-            <CardFooter className="flex items-center justify-center gap-3">
+      {!games.isPending && (
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {games.data?.map((game) => (
+            <Card
+              key={game.id}
+              className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br"
+            >
               <Link href={`/game/${game.id}`}>
-                <Button>Continue</Button>
+                <div>
+                  <CardHeader>
+                    <CardTitle>
+                      {game.character?.name} {game.character?.type}
+                    </CardTitle>
+                    <CardDescription>{game.genre}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col gap-3">
+                      <p>{game.character?.plot}</p>
+
+                      <p>Items:</p>
+
+                      {game.character &&
+                        JSON.parse(game.character.items).map((item: string) => (
+                          <p key={item}>- {item}</p>
+                        ))}
+                    </div>
+                  </CardContent>
+                </div>
               </Link>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant={"destructive"}>Delete</Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      Are you absolutely sure?
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      your game and remove {game?.character?.name} character.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => handleDelete(game.id)}>
-                      Continue
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+
+              <CardFooter className="flex items-center justify-center gap-3">
+                <Link href={`/game/${game.id}`}>
+                  <Button>Continue</Button>
+                </Link>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant={"destructive"}>Delete</Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Are you absolutely sure?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete your game and remove {game?.character?.name}{" "}
+                        character.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={() => handleDelete(game.id)}>
+                        Continue
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </CardFooter>
+            </Card>
+          ))}
+          <Link href={"/create-character"} className="flex">
+            <Card className="flex cursor-pointer flex-col justify-center items-center from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br">
+              <CardHeader>Play New Story</CardHeader>
+              <CardContent>
+                <Plus className="size-32" />
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
+      )}
+
       {!games.isPending && !games.data?.length && (
         <div className="flex flex-col items-center justify-center gap-3">
           <h2 className="text-2xl">No started games yet!</h2>
