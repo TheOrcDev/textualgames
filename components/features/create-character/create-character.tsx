@@ -59,11 +59,12 @@ export default function CreateCharacter() {
 
   const router = useRouter();
 
-  const [availableCharacters, setAvailableCharacters] =
-    useState<string[]>(fantasyCharacters);
-  const [availableStories, setAvailableStories] =
-    useState<string[]>(fantasyPlots);
-  const [availableItems, setAvailableItems] = useState<string[]>(fantasyItems);
+  const [availableData, setAvailableData] = useState({
+    characters: fantasyCharacters,
+    stories: fantasyPlots,
+    items: fantasyItems,
+  });
+
   const [hasNoTokens, setHasNoTokens] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof createCharacterFormSchema>>({
@@ -113,21 +114,27 @@ export default function CreateCharacter() {
 
   const onGenreChange = (genre: Genre) => {
     if (genre === Genre.FANTASY) {
-      setAvailableCharacters(fantasyCharacters);
-      setAvailableStories(fantasyPlots);
-      setAvailableItems(fantasyItems);
+      setAvailableData({
+        characters: fantasyCharacters,
+        stories: fantasyPlots,
+        items: fantasyItems,
+      });
     }
 
     if (genre === Genre.SCIFI) {
-      setAvailableCharacters(sciFiCharacters);
-      setAvailableStories(sciFiPlots);
-      setAvailableItems(sciFiItems);
+      setAvailableData({
+        characters: sciFiCharacters,
+        stories: sciFiPlots,
+        items: sciFiItems,
+      });
     }
 
     if (genre === Genre.DYSTOPIAN) {
-      setAvailableCharacters(dystopianCharacters);
-      setAvailableStories(dystopianPlots);
-      setAvailableItems(dystopianItems);
+      setAvailableData({
+        characters: dystopianCharacters,
+        stories: dystopianPlots,
+        items: dystopianItems,
+      });
     }
   };
 
@@ -137,13 +144,17 @@ export default function CreateCharacter() {
         Math.floor(Math.random() * Object.values(Genre).length)
       ];
     const randomCharacter =
-      availableCharacters[
-        Math.floor(Math.random() * availableCharacters.length)
+      availableData.characters[
+        Math.floor(Math.random() * availableData.characters.length)
       ];
     const randomStory =
-      availableStories[Math.floor(Math.random() * availableStories.length)];
+      availableData.stories[
+        Math.floor(Math.random() * availableData.stories.length)
+      ];
     const randomItem =
-      availableItems[Math.floor(Math.random() * availableItems.length)];
+      availableData.items[
+        Math.floor(Math.random() * availableData.items.length)
+      ];
     const randomGender = Math.random() > 0.5 ? "male" : "female";
     const randomName =
       randomGender === "male"
@@ -277,7 +288,7 @@ export default function CreateCharacter() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {availableCharacters.map((type) => (
+                      {availableData.characters.map((type) => (
                         <SelectItem key={type} value={type}>
                           {type}
                         </SelectItem>
@@ -311,7 +322,7 @@ export default function CreateCharacter() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {availableItems.map((item) => (
+                      {availableData.items.map((item) => (
                         <SelectItem key={item} value={item}>
                           {item}
                         </SelectItem>
@@ -342,7 +353,7 @@ export default function CreateCharacter() {
                     <DropdownMenuContent>
                       <ScrollArea className="h-[25rem] min-w-[20rem] md:w-[40rem] xl:w-[55rem] rounded-md border p-4">
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                          {availableStories.map((story) => (
+                          {availableData.stories.map((story) => (
                             <DropdownMenuItem key={story}>
                               <Button
                                 onClick={() => {

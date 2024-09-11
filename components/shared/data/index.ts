@@ -401,7 +401,7 @@ export const fantasyItems = [
 ];
 
 export const sciFiItems = [
-  "plasmrifle",
+  "plasma rifle",
   "holographic communicator",
   "energy shield",
   "jetpack",
