@@ -41,7 +41,7 @@ export const characters = pgTable("characters", {
   plot: text("plot").notNull(),
   type: text("type").notNull(),
   items: text("items").notNull(),
-  gender: genderEnum("gender").default("male"),
+  gender: genderEnum("gender").default("male").notNull(),
   gameId: uuid("game_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
