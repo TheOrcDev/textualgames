@@ -46,6 +46,7 @@ import {
   SelectValue,
 } from "@/components/ui";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
+import { getRandomElement } from "@/lib/utils";
 import { trpc } from "@/server/client";
 
 import LoadingSentences from "../loading-sentences/loading-sentences";
@@ -111,60 +112,52 @@ export default function CreateCharacter() {
   }
 
   const onGenreChange = (genre: Genre) => {
-    if (genre === Genre.FANTASY) {
-      setAvailableData({
+    const genreData = {
+      [Genre.FANTASY]: {
         characters: fantasyCharacters,
         stories: fantasyPlots,
         items: fantasyItems,
-      });
-    }
-
-    if (genre === Genre.SCIFI) {
-      setAvailableData({
+      },
+      [Genre.SCIFI]: {
         characters: sciFiCharacters,
         stories: sciFiPlots,
         items: sciFiItems,
-      });
-    }
-
-    if (genre === Genre.DYSTOPIAN) {
-      setAvailableData({
+      },
+      [Genre.DYSTOPIAN]: {
         characters: dystopianCharacters,
         stories: dystopianPlots,
         items: dystopianItems,
-      });
-    }
+      },
+    };
+
+    setAvailableData(genreData[genre]);
   };
 
   const quickGame = () => {
-    const randomGenre =
-      Object.values(Genre)[
-        Math.floor(Math.random() * Object.values(Genre).length)
-      ];
-    const randomCharacter =
-      availableData.characters[
-        Math.floor(Math.random() * availableData.characters.length)
-      ];
-    const randomStory =
-      availableData.stories[
-        Math.floor(Math.random() * availableData.stories.length)
-      ];
-    const randomItem =
-      availableData.items[
-        Math.floor(Math.random() * availableData.items.length)
-      ];
+    const randomGenre = getRandomElement(Object.values(Genre));
+    const randomCharacter = getRandomElement(availableData.characters);
+    const randomStory = getRandomElement(availableData.stories);
+    const randomItem = getRandomElement(availableData.items);
     const randomGender = Math.random() > 0.5 ? "male" : "female";
-    const randomName =
-      randomGender === "male"
-        ? maleNames[Math.floor(Math.random() * maleNames.length)]
-        : femaleNames[Math.floor(Math.random() * femaleNames.length)];
+    const randomName = getRandomElement(
+      randomGender === "male" ? maleNames : femaleNames,
+    );
 
-    form.setValue("genre", randomGenre);
-    form.setValue("type", randomCharacter);
-    form.setValue("plot", randomStory);
-    form.setValue("items", randomItem);
-    form.setValue("gender", randomGender);
-    form.setValue("name", randomName);
+    const formValues = {
+      genre: randomGenre,
+      type: randomCharacter,
+      plot: randomStory,
+      items: randomItem,
+      gender: randomGender,
+      name: randomName,
+    };
+
+    Object.entries(formValues).forEach(([key, value]) =>
+      form.setValue(
+        key as "type" | "name" | "genre" | "gender" | "plot" | "items",
+        value as any,
+      ),
+    );
   };
 
   if (hasNoTokens) {
