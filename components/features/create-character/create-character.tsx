@@ -46,6 +46,7 @@ import {
   SelectValue,
 } from "@/components/ui";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
+import { getRandomElement } from "@/lib/utils";
 import { trpc } from "@/server/client";
 
 import LoadingSentences from "../loading-sentences/loading-sentences";
@@ -133,9 +134,6 @@ export default function CreateCharacter() {
   };
 
   const quickGame = () => {
-    const getRandomElement = (array: string[]) =>
-      array[Math.floor(Math.random() * array.length)];
-
     const randomGenre = getRandomElement(Object.values(Genre));
     const randomCharacter = getRandomElement(availableData.characters);
     const randomStory = getRandomElement(availableData.stories);
