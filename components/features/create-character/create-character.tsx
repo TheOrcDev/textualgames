@@ -155,7 +155,10 @@ export default function CreateCharacter() {
     };
 
     Object.entries(formValues).forEach(([key, value]) =>
-      form.setValue(key, value),
+      form.setValue(
+        key as "type" | "name" | "genre" | "gender" | "plot" | "items",
+        value as any,
+      ),
     );
   };
 
