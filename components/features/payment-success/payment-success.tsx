@@ -13,7 +13,7 @@ export default function PaymentSuccess() {
     null,
   );
 
-  const getPaymentIntent = trpc.tokens.getPaymentIntent.useMutation();
+  const getPaymentIntent = trpc.stripe.getPaymentIntent.useMutation();
   const utils = trpc.useUtils();
 
   const paymentIntent = searchParams.get("payment_intent");
