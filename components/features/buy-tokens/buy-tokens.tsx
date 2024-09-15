@@ -24,7 +24,7 @@ import PaymentForm from "./payment-form";
 
 export default function BuyTokens() {
   const stripePromise = getStripe();
-  const createClientSecret = trpc.tokens.getClientSecret.useMutation();
+  const createClientSecret = trpc.stripe.getClientSecret.useMutation();
   const { resolvedTheme } = useTheme();
 
   const [paymentIntentSecret, setPaymentIntentSecret] = useState("");
