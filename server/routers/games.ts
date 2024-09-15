@@ -38,7 +38,7 @@ export const gamesRouter = router({
         throw error;
       }
     }),
-  getAllGames: publicProcedure.query(async () => {
+  getAll: publicProcedure.query(async () => {
     try {
       const user = await currentUser();
 
@@ -53,7 +53,7 @@ export const gamesRouter = router({
       throw error;
     }
   }),
-  deleteGame: publicProcedure
+  delete: publicProcedure
     .input(z.object({ gameId: z.string() }))
     .mutation(async (opts) => {
       const { input } = opts;

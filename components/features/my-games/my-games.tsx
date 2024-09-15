@@ -16,7 +16,7 @@ import { trpc } from "@/server/client";
 import GameCard from "../game/game-card";
 
 export default function MyGames() {
-  const games = trpc.games.getAllGames.useQuery();
+  const games = trpc.games.getAll.useQuery();
 
   return (
     <>

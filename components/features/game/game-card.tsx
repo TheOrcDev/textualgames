@@ -32,7 +32,7 @@ interface Props {
   };
 }
 export default function GameCard({ game }: Props) {
-  const deleteGame = trpc.games.deleteGame.useMutation();
+  const deleteGame = trpc.games.delete.useMutation();
   const utils = trpc.useUtils();
 
   const { toast } = useToast();
@@ -43,7 +43,7 @@ export default function GameCard({ game }: Props) {
         gameId,
       });
 
-      utils.games.getAllGames.refetch();
+      utils.games.getAll.refetch();
 
       toast({
         title: `Goodbye ${characterName}`,
