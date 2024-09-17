@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { useToast } from "@/components/hooks/use-toast";
-import { Character, Genre } from "@/components/shared/types";
+import { Character } from "@/components/shared/types";
 import {
   AlertDialog,
   AlertDialogAction,
