@@ -3,6 +3,7 @@ export { default as CreateCharacter } from "./create-character/create-character"
 export { default as GameCard } from "./game/game-card";
 export { default as StoryLevel } from "./game/story-level";
 export { default as GoogleAnalytics } from "./google-analytics/google-analytics";
+export { default as Screenshots } from "./landing-page/screenshots";
 export { default as Genres } from "./level-selections/genres/genres";
 export { default as SelectItems } from "./level-selections/select-items/select-items";
 export { default as LoadingSentences } from "./loading-sentences/loading-sentences";

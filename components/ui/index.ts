@@ -2,6 +2,7 @@ export * from "./alert-dialog/alert-dialog";
 export { Badge } from "./badge/badge";
 export { Button } from "./button/button";
 export * from "./card/card";
+export * from "./carousel/carousel";
 export * from "./dropdown-menu/dropdown-menu";
 export { default as Footer } from "./footer/footer";
 export * from "./form/form";
