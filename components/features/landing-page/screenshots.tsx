@@ -32,17 +32,17 @@ export default function Screenshots() {
       <h2 className="font-bold md:text-2xl">Characters you can play</h2>
       <Carousel className="w-2/3">
         <CarouselContent>
-          {screenshots.map((item, index) => (
-            <CarouselItem key={index}>
+          {screenshots.map((screenshot) => (
+            <CarouselItem key={screenshot.src}>
               <div className="flex flex-col items-center justify-center gap-3">
                 <Image
                   width={450}
                   height={450}
-                  src={item.src}
-                  alt={item.alt}
+                  src={screenshot.src}
+                  alt={screenshot.alt}
                   className="w-full"
                 />
-                <p>{item.caption}</p>
+                <p>{screenshot.caption}</p>
               </div>
             </CarouselItem>
           ))}
