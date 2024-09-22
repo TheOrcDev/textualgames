@@ -81,7 +81,6 @@ export default function CreateCharacter() {
 
   async function onSubmit(values: z.infer<typeof createCharacterFormSchema>) {
     try {
-      // TODO: remove this by creating new api endpoint for new character
       const game = {
         id: "",
         levels: [],
