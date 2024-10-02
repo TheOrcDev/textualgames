@@ -17,4 +17,5 @@ export * from "./select/select";
 export { Skeleton } from "./skeleton/skeleton";
 export { Textarea } from "./textarea/textarea";
 export * from "./toast/toast";
+export * from "./toaster/toaster";
 export { Toaster } from "./toaster/toaster";
