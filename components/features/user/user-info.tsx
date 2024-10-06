@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Loader2 } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Badge, Button } from "@/components/ui";
@@ -31,7 +32,11 @@ export default function UserInfo() {
           <Badge
             className={`flex gap-1 ${tokens?.data === 0 && "bg-destructive"}`}
           >
-            {tokens?.data}
+            {tokens.isLoading ? (
+              <Loader2 className="animate-spin" />
+            ) : (
+              tokens?.data
+            )}
             <Image
               src={"/img/tg-coin.png"}
               width={32}
