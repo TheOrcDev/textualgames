@@ -13,7 +13,7 @@ import { purchases } from "@/db/schema";
 
 import { publicProcedure, router } from "../trpc";
 
-const STRIPE_API_VERSION = "2024-06-20";
+const STRIPE_API_VERSION = "2024-09-30.acacia";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   typescript: true,
