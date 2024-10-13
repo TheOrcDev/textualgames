@@ -371,7 +371,9 @@ export default function CreateCharacter() {
             <Button type="button" onClick={() => form.reset()}>
               Clear
             </Button>
-            <Button type="submit">Play Your Story</Button>
+            <Button type="submit" disabled={level.isPending}>
+              Play Your Story
+            </Button>
           </div>
         </form>
       </Form>

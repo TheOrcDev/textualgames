@@ -3,12 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import {
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Loader2 } from "lucide-react";
 import { useTheme } from "next-themes";
 
-import { Badge, Button } from "@/components/ui";
+import { Badge, Button, Skeleton } from "@/components/ui";
 import { trpc } from "@/server/client";
 
 export default function UserInfo() {
@@ -46,6 +52,9 @@ export default function UserInfo() {
           </Badge>
         </Link>
 
+        <ClerkLoading>
+          <Skeleton className="size-8 rounded-full" />
+        </ClerkLoading>
         <UserButton
           appearance={{
             baseTheme: resolvedTheme === "dark" ? dark : undefined,
