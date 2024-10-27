@@ -20,11 +20,11 @@ export default function Game({ gameId }: Props) {
     gameId,
   });
 
-  if (!game.isPending && !game.data) {
+  if (!game.isLoading && !game.data) {
     return <NoGame />;
   }
 
-  if (game.isPending) {
+  if (game.isLoading) {
     return (
       <div className="flex items-center justify-center">
         <div className="grid gap-3 md:grid-cols-2">

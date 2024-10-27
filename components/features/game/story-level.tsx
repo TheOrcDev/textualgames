@@ -56,7 +56,7 @@ export default function StoryLevel({ game }: Props) {
 
   return (
     <div className="flex flex-col gap-5 p-10">
-      {currentLevel.isPending && <LoadingSentences />}
+      {currentLevel.isLoading && <LoadingSentences />}
 
       {hasNoTokens && (
         <div className="flex flex-col items-center justify-center gap-5 p-24">
@@ -64,13 +64,13 @@ export default function StoryLevel({ game }: Props) {
         </div>
       )}
 
-      {!currentLevel.isPending && level.image && (
+      {!currentLevel.isLoading && level.image && (
         <div className="flex items-center justify-center">
           <Image src={level.image} width={1024} height={1024} alt="AI Image" />
         </div>
       )}
 
-      {!currentLevel.isPending && !hasNoTokens && (
+      {!currentLevel.isLoading && !hasNoTokens && (
         <div className="flex flex-col justify-center gap-10 md:px-20 lg:px-40">
           <div className="border-2 border-dotted border-primary bg-primary/15 p-10 text-sm md:text-xl">
             {storylineParts.map((part, index) => (

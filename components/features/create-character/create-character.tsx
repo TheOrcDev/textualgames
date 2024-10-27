@@ -167,7 +167,7 @@ export default function CreateCharacter() {
     );
   }
 
-  if (level.isPending) {
+  if (level.isLoading) {
     return <LoadingSentences />;
   }
 
@@ -371,7 +371,7 @@ export default function CreateCharacter() {
             <Button type="button" onClick={() => form.reset()}>
               Clear
             </Button>
-            <Button type="submit" disabled={level.isPending}>
+            <Button type="submit" disabled={level.isLoading}>
               Play Your Story
             </Button>
           </div>

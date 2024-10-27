@@ -22,7 +22,7 @@ export default function MyGames() {
     <>
       <h2 className="text-2xl">My Games</h2>
 
-      {games.isPending && (
+      {games.isLoading && (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           <Skeleton className="size-72" />
           <Skeleton className="size-72" />
@@ -30,7 +30,7 @@ export default function MyGames() {
         </div>
       )}
 
-      {!games.isPending && (
+      {!games.isLoading && (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {games.data?.map((game) => <GameCard game={game} key={game.id} />)}
 
@@ -45,7 +45,7 @@ export default function MyGames() {
         </div>
       )}
 
-      {!games.isPending && !games.data?.length && (
+      {!games.isLoading && !games.data?.length && (
         <div className="flex flex-col items-center justify-center gap-3">
           <h2 className="text-2xl">No started games yet!</h2>
           <Link href={"/create-character"}>
