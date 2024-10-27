@@ -1,5 +1,7 @@
+import { Suspense } from "react";
+
 import { PaymentSuccess } from "@/components/features";
-import { Header } from "@/components/ui";
+import { Header, Skeleton } from "@/components/ui";
 
 export default async function BuyTokensPage() {
   return (
@@ -7,7 +9,9 @@ export default async function BuyTokensPage() {
       <Header />
       <div className="flex flex-col items-center justify-center gap-10 p-24">
         <h2>Congratulations!</h2>
-        <PaymentSuccess />
+        <Suspense fallback={<Skeleton className="size-72" />}>
+          <PaymentSuccess />
+        </Suspense>
       </div>
     </>
   );
