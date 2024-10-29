@@ -47,7 +47,7 @@
     "eslint": "^9.13.0",
     "eslint-config-next": "^15.0.1",
     "framer-motion": "^11.11.10",
-    "langchain": "^0.3.4",
+    "langchain": "^0.3.5",
     "lucide-react": "^0.453.0",
     "mini-svg-data-uri": "^1.4.4",
     "next": "^15.0.1",
