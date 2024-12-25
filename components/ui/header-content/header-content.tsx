@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   getRandomGame: () => void;

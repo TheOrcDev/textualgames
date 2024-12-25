@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { LoadingSentences, NotEnoughTokens } from "@/components/features";
-import { Button, Textarea } from "@/components/ui";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { Game, Level } from "@/db/schema";
 import { getLevel } from "@/server/ai";
 

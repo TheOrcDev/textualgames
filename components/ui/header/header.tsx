@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { UserInfo } from "@/components/features";
 
-import { ModeToggle } from "../mode-toggle/mode-toggle";
+import { ModeToggle } from "../mode-toggle";
 
 export default function THeader() {
   return (

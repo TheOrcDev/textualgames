@@ -4,7 +4,7 @@ import { ClerkLoading, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { useTheme } from "next-themes";
 
-import { Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ClerkButton() {
   const { resolvedTheme } = useTheme();

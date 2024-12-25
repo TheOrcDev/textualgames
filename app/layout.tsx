@@ -7,7 +7,8 @@ import { Press_Start_2P } from "next/font/google";
 
 import { GoogleAnalytics } from "@/components/features";
 import { ThemeProvider } from "@/components/providers";
-import { Footer, Toaster } from "@/components/ui";
+import Footer from "@/components/ui/footer/footer";
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });

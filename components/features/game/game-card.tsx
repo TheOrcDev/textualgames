@@ -13,14 +13,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-  Button,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui";
+} from "@/components/ui/card";
 import { Game } from "@/db/schema";
 import { deleteGame } from "@/server/games";
 

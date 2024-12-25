@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Button } from "@/components/ui";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   items: string[];

@@ -20,12 +20,14 @@ import {
   sciFiPlots,
 } from "@/components/shared/data";
 import { Genre } from "@/components/shared/types";
+import { Button } from "@/components/ui/button";
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Form,
   FormControl,
   FormDescription,
@@ -33,17 +35,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  Label,
-  RadioGroup,
-  RadioGroupItem,
-  ScrollArea,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui";
+} from "@/components/ui/select";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import { getRandomElement } from "@/lib/utils";
 import { getLevel } from "@/server/ai";
@@ -137,7 +140,7 @@ export default function CreateCharacter() {
     const randomItem = getRandomElement(availableData.items);
     const randomGender = Math.random() > 0.5 ? "male" : "female";
     const randomName = getRandomElement(
-      randomGender === "male" ? maleNames : femaleNames,
+      randomGender === "male" ? maleNames : femaleNames
     );
 
     const formValues = {
@@ -152,8 +155,8 @@ export default function CreateCharacter() {
     Object.entries(formValues).forEach(([key, value]) =>
       form.setValue(
         key as "type" | "name" | "genre" | "gender" | "plot" | "items",
-        value as any,
-      ),
+        value as any
+      )
     );
   };
 

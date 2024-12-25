@@ -2,14 +2,8 @@ import Image from "next/image";
 
 import { genres } from "@/components/shared/data";
 import { Genre } from "@/components/shared/types";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui";
-
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 type GenreItem = {
   name: Genre;
   description: string;

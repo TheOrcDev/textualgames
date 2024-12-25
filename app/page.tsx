@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { Badge, Button } from "@/components/ui";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function PlayPage() {
   return (

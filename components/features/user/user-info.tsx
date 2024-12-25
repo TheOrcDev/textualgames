@@ -2,7 +2,8 @@ import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Badge, Button } from "@/components/ui";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { getTokens } from "@/server/tokens";
 
 import ClerkButton from "../clerk-button/clerk-button";

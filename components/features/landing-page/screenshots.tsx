@@ -6,7 +6,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui";
+} from "@/components/ui/carousel";
 
 const screenshots = [
   {

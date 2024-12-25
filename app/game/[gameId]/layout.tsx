@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Header } from "@/components/ui";
+import Header from "@/components/ui/header/header";
 
 export const metadata: Metadata = {
   title: "Play Your Game: Interactive Story on Textual Games",
