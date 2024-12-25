@@ -13,7 +13,6 @@ export default function PlayPage() {
       <p className="animate-pulse text-primary">
         Register now to get 5 free tokens
       </p>
-      <Badge>beta</Badge>
       <Link href={"/create-character"}>
         <Button>Play Your Story</Button>
       </Link>
