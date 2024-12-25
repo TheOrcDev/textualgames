@@ -47,15 +47,12 @@ import {
 } from "@/components/ui";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import { getRandomElement } from "@/lib/utils";
-import { trpc } from "@/server/client";
+import { getLevel } from "@/server/ai";
 
 import LoadingSentences from "../loading-sentences/loading-sentences";
 import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
 
 export default function CreateCharacter() {
-  const level = trpc.ai.getLevel.useMutation();
-  const utils = trpc.useUtils();
-
   const router = useRouter();
 
   const [availableData, setAvailableData] = useState({
@@ -65,6 +62,7 @@ export default function CreateCharacter() {
   });
 
   const [hasNoTokens, setHasNoTokens] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof createCharacterFormSchema>>({
     resolver: zodResolver(createCharacterFormSchema),
@@ -80,33 +78,34 @@ export default function CreateCharacter() {
   });
 
   async function onSubmit(values: z.infer<typeof createCharacterFormSchema>) {
+    setIsLoading(true);
     try {
       const game = {
         id: "",
+        email: "",
         levels: [],
         choice: "",
         character: {
           ...values,
           id: "",
           gameId: "",
-          createdAt: "",
+          createdAt: new Date(),
         },
         genre: values.genre,
       };
 
-      const data = await level.mutateAsync({
-        game,
-      });
+      const data = await getLevel(game);
 
       if (data === "Not enough tokens") {
         setHasNoTokens(true);
         return;
       }
 
-      utils.tokens.getTokens.refetch();
-      router.push(`/game/${data}`);
+      router.push(`/game/${data.gameId}`);
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -167,216 +166,216 @@ export default function CreateCharacter() {
     );
   }
 
-  if (level.isLoading) {
-    return <LoadingSentences />;
-  }
-
   return (
     <>
-      <h1>Create Your Character</h1>
+      {isLoading && <LoadingSentences />}
 
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="grid gap-5 px-5 text-xs md:grid-cols-2 md:text-base"
-        >
-          <div className="col-span-full flex flex-col items-center gap-5 md:flex-row md:justify-between">
-            <FormField
-              control={form.control}
-              name="genre"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Choose Your Genre</FormLabel>
-                  <FormControl>
-                    <div className="flex items-center gap-2">
-                      {Object.values(Genre).map((genre) => (
-                        <div
-                          key={genre}
-                          className={`${field.value === genre ? "border-b-2" : ""} pb-2`}
-                        >
-                          <Button
-                            size={"sm"}
-                            disabled={genre === field.value}
-                            onClick={() => {
-                              field.onChange(genre);
-                              onGenreChange(genre);
-                            }}
-                            type="button"
-                          >
-                            {genre}
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button size={"sm"} type="button" onClick={quickGame}>
-              Random Character
-            </Button>
-          </div>
-          <div className="flex max-w-[29rem] flex-col gap-5 border p-5">
-            <h2>Character Details</h2>
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+      {!isLoading && (
+        <>
+          <h1>Create Your Character</h1>
 
-            <FormField
-              control={form.control}
-              name="gender"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Gender</FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      value={field.value}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="male" id="male" />
-                        <Label htmlFor="male">Male</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="female" id="female" />
-                        <Label htmlFor="female">Female</Label>
-                      </div>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    value={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={`${form.getValues("genre")} Character Type`}
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {availableData.characters.map((type) => (
-                        <SelectItem key={type} value={type}>
-                          {type}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormDescription className="text-xs">
-                    Each genre has different characters.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="flex max-w-[29rem] flex-col gap-5 border p-5">
-            <h2>Story & Inventory</h2>
-            <FormField
-              control={form.control}
-              name="items"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Item</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    value={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your item" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {availableData.items.map((item) => (
-                        <SelectItem key={item} value={item}>
-                          {item}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormDescription className="text-xs">
-                    Each genre has different items.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="plot"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-3">
-                  <FormLabel>Story</FormLabel>
-                  <DropdownMenu>
-                    <FormControl>
-                      <DropdownMenuTrigger asChild>
-                        <Button className="h-52 w-full text-wrap text-xs md:text-base">
-                          {field.value ? field.value : "Select Your Story"}
-                        </Button>
-                      </DropdownMenuTrigger>
-                    </FormControl>
-                    <DropdownMenuContent>
-                      <ScrollArea className="h-[25rem] min-w-80 rounded-md border p-4 md:w-[40rem] xl:w-[55rem]">
-                        <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-                          {availableData.stories.map((story) => (
-                            <DropdownMenuItem key={story}>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="grid gap-5 px-5 text-xs md:grid-cols-2 md:text-base"
+            >
+              <div className="col-span-full flex flex-col items-center gap-5 md:flex-row md:justify-between">
+                <FormField
+                  control={form.control}
+                  name="genre"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Choose Your Genre</FormLabel>
+                      <FormControl>
+                        <div className="flex items-center gap-2">
+                          {Object.values(Genre).map((genre) => (
+                            <div
+                              key={genre}
+                              className={`${field.value === genre ? "border-b-2" : ""} pb-2`}
+                            >
                               <Button
+                                size={"sm"}
+                                disabled={genre === field.value}
                                 onClick={() => {
-                                  field.onChange(story);
+                                  field.onChange(genre);
+                                  onGenreChange(genre);
                                 }}
-                                className="size-52 text-wrap text-xs md:text-base xl:w-full"
+                                type="button"
                               >
-                                {story}
+                                {genre}
                               </Button>
-                            </DropdownMenuItem>
+                            </div>
                           ))}
                         </div>
-                      </ScrollArea>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <FormDescription className="text-xs">
-                    Each genre has different stories.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="col-span-full flex flex-col justify-end gap-3 md:flex-row">
-            <Button type="button" onClick={() => form.reset()}>
-              Clear
-            </Button>
-            <Button type="submit" disabled={level.isLoading}>
-              Play Your Story
-            </Button>
-          </div>
-        </form>
-      </Form>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button size={"sm"} type="button" onClick={quickGame}>
+                  Random Character
+                </Button>
+              </div>
+              <div className="flex max-w-[29rem] flex-col gap-5 border p-5">
+                <h2>Character Details</h2>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="gender"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Gender</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          value={field.value}
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="male" id="male" />
+                            <Label htmlFor="male">Male</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="female" id="female" />
+                            <Label htmlFor="female">Female</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Type</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        value={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue
+                              placeholder={`${form.getValues("genre")} Character Type`}
+                            />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {availableData.characters.map((type) => (
+                            <SelectItem key={type} value={type}>
+                              {type}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormDescription className="text-xs">
+                        Each genre has different characters.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex max-w-[29rem] flex-col gap-5 border p-5">
+                <h2>Story & Inventory</h2>
+                <FormField
+                  control={form.control}
+                  name="items"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Item</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        value={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select your item" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {availableData.items.map((item) => (
+                            <SelectItem key={item} value={item}>
+                              {item}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormDescription className="text-xs">
+                        Each genre has different items.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="plot"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col gap-3">
+                      <FormLabel>Story</FormLabel>
+                      <DropdownMenu>
+                        <FormControl>
+                          <DropdownMenuTrigger asChild>
+                            <Button className="h-52 w-full text-wrap text-xs md:text-base">
+                              {field.value ? field.value : "Select Your Story"}
+                            </Button>
+                          </DropdownMenuTrigger>
+                        </FormControl>
+                        <DropdownMenuContent>
+                          <ScrollArea className="h-[25rem] min-w-80 rounded-md border p-4 md:w-[40rem] xl:w-[55rem]">
+                            <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+                              {availableData.stories.map((story) => (
+                                <DropdownMenuItem key={story}>
+                                  <Button
+                                    onClick={() => {
+                                      field.onChange(story);
+                                    }}
+                                    className="size-52 text-wrap text-xs md:text-base xl:w-full"
+                                  >
+                                    {story}
+                                  </Button>
+                                </DropdownMenuItem>
+                              ))}
+                            </div>
+                          </ScrollArea>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                      <FormDescription className="text-xs">
+                        Each genre has different stories.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="col-span-full flex flex-col justify-end gap-3 md:flex-row">
+                <Button type="button" onClick={() => form.reset()}>
+                  Clear
+                </Button>
+                <Button type="submit">Play Your Story</Button>
+              </div>
+            </form>
+          </Form>
+        </>
+      )}
     </>
   );
 }

@@ -33,6 +33,13 @@ export const games = pgTable("games", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export type Game = typeof games.$inferInsert & {
+  levels: (typeof levels.$inferSelect)[];
+  character: typeof characters.$inferSelect;
+};
+
+export type Level = typeof levels.$inferSelect;
+
 export const genderEnum = pgEnum("gender", ["male", "female"]);
 
 export const characters = pgTable("characters", {

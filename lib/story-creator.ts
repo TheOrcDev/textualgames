@@ -1,4 +1,4 @@
-import { Game } from "../components/shared/types";
+import { Game } from "@/db/schema";
 
 type StoryPrompt = {
   basePrompt: string;

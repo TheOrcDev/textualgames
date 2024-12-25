@@ -3,7 +3,6 @@
 import Link from "next/link";
 
 import { useToast } from "@/components/hooks/use-toast";
-import { Character } from "@/components/shared/types";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,28 +21,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui";
-import { trpc } from "@/server/client";
+import { Game } from "@/db/schema";
+import { deleteGame } from "@/server/games";
 
 interface Props {
-  game: {
-    id: string;
-    character: Character | null;
-    genre: string;
-  };
+  game: Game;
 }
-export default function GameCard({ game }: Props) {
-  const deleteGame = trpc.games.delete.useMutation();
-  const utils = trpc.useUtils();
 
+export default function GameCard({ game }: Props) {
   const { toast } = useToast();
 
   const handleDelete = async (gameId: string) => {
     try {
-      const characterName = await deleteGame.mutateAsync({
-        gameId,
-      });
-
-      utils.games.getAll.refetch();
+      const characterName = await deleteGame(gameId);
 
       toast({
         title: `Goodbye ${characterName}`,
@@ -102,7 +92,7 @@ export default function GameCard({ game }: Props) {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={() => handleDelete(game.id)}>
+              <AlertDialogAction onClick={() => handleDelete(game.id ?? "")}>
                 Continue
               </AlertDialogAction>
             </AlertDialogFooter>

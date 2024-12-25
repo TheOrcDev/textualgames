@@ -1,12 +1,20 @@
-import Game from "@/components/features/game/game";
+import { StoryLevel } from "@/components/features";
+import { getGame } from "@/server/games";
 
-type Params = Promise<{ gameId: string }>;
+interface Props {
+  params: Promise<{
+    gameId: string;
+  }>;
+}
 
-export default async function GamePage({ params }: { params: Params }) {
+export default async function GamePage({ params }: Props) {
   const { gameId } = await params;
-  return (
-    <main>
-      <Game gameId={gameId} />
-    </main>
-  );
+
+  const game = await getGame(gameId);
+
+  if (!game?.character) {
+    return <div>No character found</div>;
+  }
+
+  return <>{game && <StoryLevel game={game} />}</>;
 }

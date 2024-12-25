@@ -4,24 +4,22 @@ import { useState } from "react";
 import Image from "next/image";
 
 import { LoadingSentences, NotEnoughTokens } from "@/components/features";
-import { Game } from "@/components/shared/types";
 import { Button, Textarea } from "@/components/ui";
-import { trpc } from "@/server/client";
+import { Game, Level } from "@/db/schema";
+import { getLevel } from "@/server/ai";
 
 type Props = {
   game: Game;
 };
 
 export default function StoryLevel({ game }: Props) {
-  const currentLevel = trpc.ai.getLevel.useMutation();
-  const utils = trpc.useUtils();
-
   const [choice, setChoice] = useState<string>("");
   const [isManualChoice, setIsManualChoice] = useState<boolean>(false);
   const [hasNoTokens, setHasNoTokens] = useState(false);
+  const [level, setLevel] = useState<Level>(game.levels[0]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const choices = JSON.parse(game.levels[0].choices);
-  const level = game.levels[0];
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
@@ -33,9 +31,8 @@ export default function StoryLevel({ game }: Props) {
     game.choice = choice;
 
     try {
-      const data = await currentLevel.mutateAsync({
-        game,
-      });
+      setIsLoading(true);
+      const data = await getLevel(game);
 
       if (data === "Not enough tokens") {
         setHasNoTokens(true);
@@ -43,10 +40,11 @@ export default function StoryLevel({ game }: Props) {
       }
 
       setChoice("");
-      utils.games.get.refetch();
-      utils.tokens.getTokens.refetch();
+      setLevel(data.level);
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -56,7 +54,7 @@ export default function StoryLevel({ game }: Props) {
 
   return (
     <div className="flex flex-col gap-5 p-10">
-      {currentLevel.isLoading && <LoadingSentences />}
+      {isLoading && <LoadingSentences />}
 
       {hasNoTokens && (
         <div className="flex flex-col items-center justify-center gap-5 p-24">
@@ -64,13 +62,18 @@ export default function StoryLevel({ game }: Props) {
         </div>
       )}
 
-      {!currentLevel.isLoading && level.image && (
+      {game.levels[0].image && !isLoading && (
         <div className="flex items-center justify-center">
-          <Image src={level.image} width={1024} height={1024} alt="AI Image" />
+          <Image
+            src={game.levels[0].image}
+            width={1024}
+            height={1024}
+            alt="AI Image"
+          />
         </div>
       )}
 
-      {!currentLevel.isLoading && !hasNoTokens && (
+      {!hasNoTokens && !isLoading && (
         <div className="flex flex-col justify-center gap-10 md:px-20 lg:px-40">
           <div className="border-2 border-dotted border-primary bg-primary/15 p-10 text-sm md:text-xl">
             {storylineParts.map((part, index) => (

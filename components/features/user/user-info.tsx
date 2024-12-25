@@ -1,25 +1,15 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  ClerkLoading,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
-import { Loader2 } from "lucide-react";
-import { useTheme } from "next-themes";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 
-import { Badge, Button, Skeleton } from "@/components/ui";
-import { trpc } from "@/server/client";
+import { Badge, Button } from "@/components/ui";
+import { getTokens } from "@/server/tokens";
 
-export default function UserInfo() {
-  const tokens = trpc.tokens.getTokens.useQuery();
-  const { resolvedTheme } = useTheme();
+import ClerkButton from "../clerk-button/clerk-button";
+
+export default async function UserInfo() {
+  const tokens = await getTokens();
 
   return (
     <div className="flex items-center gap-2">
@@ -35,14 +25,8 @@ export default function UserInfo() {
 
       <SignedIn>
         <Link href={"/buy-tokens"}>
-          <Badge
-            className={`flex gap-1 ${tokens?.data === 0 && "bg-destructive"}`}
-          >
-            {tokens.isLoading ? (
-              <Loader2 className="animate-spin" />
-            ) : (
-              tokens?.data
-            )}
+          <Badge className={`flex gap-1 ${tokens === 0 && "bg-destructive"}`}>
+            {tokens}
             <Image
               src={"/img/tg-coin.png"}
               width={32}
@@ -52,14 +36,7 @@ export default function UserInfo() {
           </Badge>
         </Link>
 
-        <ClerkLoading>
-          <Skeleton className="size-8 rounded-full" />
-        </ClerkLoading>
-        <UserButton
-          appearance={{
-            baseTheme: resolvedTheme === "dark" ? dark : undefined,
-          }}
-        />
+        <ClerkButton />
       </SignedIn>
     </div>
   );
