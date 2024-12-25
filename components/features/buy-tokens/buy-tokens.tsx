@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-
 import { Elements } from "@stripe/react-stripe-js";
+import Image from "next/image";
 import { useTheme } from "next-themes";
+import React, { useState } from "react";
 
 import { Tokens } from "@/components/shared/types";
 import {

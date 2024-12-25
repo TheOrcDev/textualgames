@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui";
 import { getPaymentIntent } from "@/server/tokens";
@@ -27,8 +27,6 @@ export default function PaymentSuccess() {
     };
 
     getData();
-    // Disabling ESLint warning - Hooks cannot go in here
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

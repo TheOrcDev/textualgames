@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { Plus } from "lucide-react";
+import Link from "next/link";
 
 import GameCard from "@/components/features/game/game-card";
 import { Button, Card, CardContent, CardHeader } from "@/components/ui";

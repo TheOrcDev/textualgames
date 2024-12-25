@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 import Stripe from "stripe";
 
 const STRIPE_API_VERSION = "2024-12-18.acacia";

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 
 import { LoadingSentences, NotEnoughTokens } from "@/components/features";
 import { Button, Textarea } from "@/components/ui";

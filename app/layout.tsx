@@ -1,9 +1,8 @@
 import "./globals.css";
 
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
-
-import { ClerkProvider } from "@clerk/nextjs";
 
 import { GoogleAnalytics } from "@/components/features";
 import { ThemeProvider } from "@/components/providers";

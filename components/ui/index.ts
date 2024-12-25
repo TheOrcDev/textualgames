@@ -6,8 +6,8 @@ export * from "./carousel/carousel";
 export * from "./dropdown-menu/dropdown-menu";
 export { default as Footer } from "./footer/footer";
 export * from "./form/form";
-export { default as HeaderContent } from "./header-content/header-content";
 export { default as Header } from "./header/header";
+export { default as HeaderContent } from "./header-content/header-content";
 export { Input } from "./input/input";
 export { Label } from "./label/label";
 export { ModeToggle } from "./mode-toggle/mode-toggle";
@@ -19,3 +19,4 @@ export { Textarea } from "./textarea/textarea";
 export * from "./toast/toast";
 export * from "./toaster/toaster";
 export { Toaster } from "./toaster/toaster";
+
