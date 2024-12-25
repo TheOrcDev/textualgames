@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 
@@ -40,6 +41,7 @@ export default async function RootLayout({
             {children}
             <Footer />
             <Toaster />
+            <Analytics />
           </ThemeProvider>
         </body>
       </html>

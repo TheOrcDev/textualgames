@@ -35,6 +35,7 @@
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@vercel/analytics": "^1.4.1",
     "ai": "^4.0.22",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
