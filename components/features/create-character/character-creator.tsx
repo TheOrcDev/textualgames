@@ -2,8 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Dice1Icon as Dice,
-  Gamepad2,
+  Dice5Icon as Dice,
   Radiation,
   Rocket,
   ScrollText,
@@ -48,6 +47,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -186,17 +186,32 @@ export default function CharacterCreator() {
     return <LoadingSentences />;
   }
 
+  const allFieldsFilled =
+    form.getValues("name") &&
+    form.getValues("gender") &&
+    form.getValues("type") &&
+    form.getValues("items") &&
+    form.getValues("plot");
+
+  const percentage = () => {
+    if (step === 1) return 0;
+    if (allFieldsFilled && step === 2) return 66;
+    if (step === 2) return 33;
+    return 0;
+  };
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mx-auto w-full max-w-4xl space-y-8"
+        className="mx-auto w-full max-w-4xl"
       >
-        <header className="space-y-2 text-center">
+        <header className="flex flex-col items-center gap-5 text-center">
           <h1 className="text-4xl font-bold tracking-wider">
             Create Your Character
           </h1>
-          <p className="text-gray-400">Step {step} of 2</p>
+          <Progress className="max-w-sm" value={percentage()} />
+          <p className="text-gray-400">Step {step} of 3</p>
         </header>
 
         <div className="grid gap-6">
@@ -204,7 +219,7 @@ export default function CharacterCreator() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="font-mono text-xl">Choose Your Genre</h2>
-              <TooltipProvider>
+              {/* <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -214,6 +229,7 @@ export default function CharacterCreator() {
                       onClick={handleRandomCharacter}
                       disabled={isLoading}
                     >
+                      Random
                       <Dice className="size-5" />
                       <span className="sr-only">Random Character</span>
                     </Button>
@@ -222,7 +238,7 @@ export default function CharacterCreator() {
                     <p>Generate a random character</p>
                   </TooltipContent>
                 </Tooltip>
-              </TooltipProvider>
+              </TooltipProvider> */}
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -467,9 +483,17 @@ export default function CharacterCreator() {
             >
               Clear
             </Button>
-            <Button className="font-mono" disabled={isLoading} type="submit">
-              Play Your Story
-            </Button>
+            <div className="relative flex justify-center">
+              <Button className="font-mono" disabled={isLoading} type="submit">
+                Play Your Story
+              </Button>
+
+              {allFieldsFilled && (
+                <div className="absolute top-0 w-max -translate-y-full animate-pulse">
+                  ready to play
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </form>
