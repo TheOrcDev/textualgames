@@ -272,7 +272,7 @@ export default function CharacterCreator() {
           {/* Character Details & Story */}
           {form.getValues("genre") && !isLoading && (
             <div className="grid gap-6 md:grid-cols-2">
-              <Card className="border-background bg-gray-700 dark:bg-gray-900">
+              <Card className="border-background bg-gray-300 dark:bg-gray-900">
                 <CardHeader>
                   <CardTitle className="text-sm">Character Details</CardTitle>
                 </CardHeader>
@@ -363,7 +363,7 @@ export default function CharacterCreator() {
                 </CardContent>
               </Card>
 
-              <Card className="border-background bg-gray-700 dark:bg-gray-900">
+              <Card className="border-background bg-gray-300 dark:bg-gray-900">
                 <CardHeader>
                   <CardTitle className="text-sm">Story & Inventory</CardTitle>
                 </CardHeader>
@@ -408,7 +408,7 @@ export default function CharacterCreator() {
                       <DialogTrigger asChild>
                         <Button
                           variant="outline"
-                          className="h-32 w-full border-gray-700 bg-background font-mono hover:bg-gray-700"
+                          className="h-32 w-full border-gray-700 bg-background font-mono hover:bg-gray-300"
                         >
                           {form.getValues("plot") ? (
                             <div className="space-y-2 text-left">
@@ -424,7 +424,7 @@ export default function CharacterCreator() {
                           )}
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-2xl bg-gray-700 dark:bg-gray-900">
+                      <DialogContent className="max-w-2xl bg-gray-300 dark:bg-gray-900">
                         <DialogHeader>
                           <DialogTitle className="font-mono text-xl">
                             Choose Your Story
@@ -462,7 +462,7 @@ export default function CharacterCreator() {
                         </ScrollArea>
                       </DialogContent>
                     </Dialog>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-xs text-muted-foreground">
                       Each genre has different stories.
                     </p>
                   </div>
