@@ -182,7 +182,7 @@ export default function CharacterCreator() {
     return <NotEnoughTokens />;
   }
 
-  if (isLoading) {
+  if (isLoading && step === 2) {
     return <LoadingSentences />;
   }
 
@@ -193,10 +193,10 @@ export default function CharacterCreator() {
         className="mx-auto w-full max-w-4xl space-y-8"
       >
         <header className="space-y-2 text-center">
-          <h1 className="font-mono text-4xl font-bold tracking-wider">
+          <h1 className="text-4xl font-bold tracking-wider">
             Create Your Character
           </h1>
-          <p className="text-gray-400">Step {step} of 3</p>
+          <p className="text-gray-400">Step {step} of 2</p>
         </header>
 
         <div className="grid gap-6">
