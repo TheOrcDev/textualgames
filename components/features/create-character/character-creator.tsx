@@ -396,7 +396,7 @@ export default function CharacterCreator() {
                         >
                           {form.getValues("plot") ? (
                             <div className="space-y-2 text-left">
-                              <h4 className="font-bold">
+                              <h4 className="text-wrap font-bold">
                                 {form.getValues("plot")}
                               </h4>
                             </div>
