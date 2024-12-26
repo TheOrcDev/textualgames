@@ -137,8 +137,6 @@ export default function CharacterCreator() {
   }
 
   const handleGenreSelect = (genre: Genre) => {
-    setIsLoading(true);
-
     const genreData = {
       [Genre.FANTASY]: {
         characters: fantasyCharacters,
@@ -163,10 +161,7 @@ export default function CharacterCreator() {
     form.setValue("genre", genre);
 
     // Simulate loading of genre-specific content
-    setTimeout(() => {
-      setIsLoading(false);
-      setStep(2);
-    }, 500);
+    setStep(2);
   };
 
   const handleRandomCharacter = () => {
@@ -248,6 +243,7 @@ export default function CharacterCreator() {
                     <TooltipTrigger asChild>
                       <Button
                         variant="outline"
+                        type="button"
                         className={cn(
                           "h-auto py-4 px-6 font-mono text-lg justify-start gap-4 transition-all",
                           form.getValues("genre") === genre.id &&
