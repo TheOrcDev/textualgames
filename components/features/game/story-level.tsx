@@ -63,14 +63,9 @@ export default function StoryLevel({ game }: Props) {
         </div>
       )}
 
-      {game.levels[0].image && !isLoading && (
+      {level.image && !isLoading && (
         <div className="flex items-center justify-center">
-          <Image
-            src={game.levels[0].image}
-            width={1024}
-            height={1024}
-            alt="AI Image"
-          />
+          <Image src={level.image} width={1024} height={1024} alt="AI Image" />
         </div>
       )}
 

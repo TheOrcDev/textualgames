@@ -11,9 +11,11 @@ import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 import { ChatOpenAI } from "@langchain/openai";
 import { Pool } from "@neondatabase/serverless";
 import { eq } from "drizzle-orm";
+import { z } from "zod";
 
 import db from "@/db/drizzle";
 import { characters, Game, games, levels, tokenSpends } from "@/db/schema";
+import { createCharacterFormSchema } from "@/lib/form-schemas";
 import { getTotalTokens } from "@/lib/queries";
 import StoryCreator from "@/lib/story-creator";
 
@@ -73,7 +75,7 @@ const getAIImage = async (prompt: string) => {
         size: "1792x1024",
         model: "dall-e-3",
       }),
-    },
+    }
   );
 
   const image = await imageResponse.json();
@@ -88,12 +90,112 @@ const getImage = async (game: Game) => {
 
 const creator = new StoryCreator();
 
+export async function createCharacter(
+  formData: z.infer<typeof createCharacterFormSchema>
+) {
+  const user = await currentUser();
+
+  try {
+    const totalUserTokens = await getTotalTokens(
+      user?.emailAddresses[0].emailAddress!
+    );
+
+    if (totalUserTokens <= 0) {
+      return "Not enough tokens";
+    }
+
+    const [newGame] = await db
+      .insert(games)
+      .values({
+        email: user?.emailAddresses[0].emailAddress!,
+        genre: formData.genre,
+        choice: "",
+      })
+      .returning({ id: games.id });
+
+    await db.insert(characters).values({
+      name: formData.name,
+      plot: formData.plot,
+      type: formData.type,
+      items: formData.items,
+      gender: formData.gender,
+      gameId: newGame.id,
+    });
+
+    const game = await db.query.games.findFirst({
+      where: eq(games.id, newGame.id),
+      with: {
+        character: true,
+        levels: true,
+      },
+    });
+
+    if (!game) {
+      throw new Error("Game not found");
+    }
+
+    const validCharacter = game.character ?? {
+      id: "",
+      name: "",
+      gender: "male",
+      plot: "",
+      type: "",
+      items: "",
+      gameId: "",
+      createdAt: new Date(),
+    };
+
+    const image = await getImage({ ...game, character: validCharacter });
+
+    await db.insert(tokenSpends).values({
+      amount: 1,
+      email: user?.emailAddresses[0].emailAddress!,
+      action: "level",
+    });
+
+    const level = (
+      await creator.getGptStoryPrompt({ ...game, character: validCharacter })
+    ).basePrompt;
+    const levelNumber = 1;
+
+    const response = await chainWithHistory.invoke(
+      {
+        input: level,
+      },
+      { configurable: { sessionId: game.id } }
+    );
+
+    const aiJSON = await JSON.parse(response);
+
+    if (aiJSON.items) {
+      await db
+        .update(characters)
+        .set({
+          items: JSON.stringify(aiJSON.items),
+        })
+        .where(eq(characters.gameId, game.id));
+    }
+
+    await db.insert(levels).values({
+      storyline: aiJSON.storyline,
+      choices: JSON.stringify(aiJSON.choices),
+      image,
+      level: String(levelNumber),
+      gameId: game.id,
+    });
+
+    return { gameId: game.id, level: aiJSON };
+  } catch (e) {
+    throw e;
+  }
+}
+
 export async function getLevel(game: Game) {
   const user = await currentUser();
 
   try {
     const totalUserTokens = await getTotalTokens(
-      user?.emailAddresses[0].emailAddress!,
+      user?.emailAddresses[0].emailAddress!
     );
 
     if (totalUserTokens <= 0) {
@@ -149,7 +251,7 @@ export async function getLevel(game: Game) {
       {
         input: level,
       },
-      { configurable: { sessionId: gameId } },
+      { configurable: { sessionId: gameId } }
     );
 
     const aiJSON = await JSON.parse(response);

@@ -1,5 +1,5 @@
-import { CreateCharacter } from "@/components/features";
+import CharacterCreator from "@/components/features/create-character/character-creator";
 
 export default function CreateCharacterPage() {
-  return <CreateCharacter />;
+  return <CharacterCreator />;
 }
