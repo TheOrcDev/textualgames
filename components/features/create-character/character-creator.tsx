@@ -96,6 +96,8 @@ export default function CharacterCreator() {
 
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isGenreChangeLoading, setIsGenreChangeLoading] =
+    useState<boolean>(false);
   const [hasNoTokens, setHasNoTokens] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [availableData, setAvailableData] = useState({
@@ -137,6 +139,8 @@ export default function CharacterCreator() {
   }
 
   const handleGenreSelect = (genre: Genre) => {
+    setIsGenreChangeLoading(true);
+
     const genreData = {
       [Genre.FANTASY]: {
         characters: fantasyCharacters,
@@ -161,7 +165,10 @@ export default function CharacterCreator() {
     form.setValue("genre", genre);
 
     // Simulate loading of genre-specific content
-    setStep(2);
+    setTimeout(() => {
+      setIsGenreChangeLoading(false);
+      setStep(2);
+    }, 500);
   };
 
   const handleRandomCharacter = () => {
@@ -177,7 +184,7 @@ export default function CharacterCreator() {
     return <NotEnoughTokens />;
   }
 
-  if (isLoading && step === 2) {
+  if (isLoading) {
     return <LoadingSentences />;
   }
 
@@ -266,7 +273,7 @@ export default function CharacterCreator() {
           </div>
 
           {/* Character Details & Story */}
-          {form.getValues("genre") && !isLoading && (
+          {form.getValues("genre") && !isGenreChangeLoading && (
             <div className="grid gap-6 md:grid-cols-2">
               <Card className="border-background bg-gray-300 dark:bg-gray-900">
                 <CardHeader>
@@ -468,29 +475,35 @@ export default function CharacterCreator() {
           )}
 
           {/* Action Buttons */}
-          <div className="flex justify-between pt-4">
-            <Button
-              variant="outline"
-              onClick={() => {
-                form.reset();
-                setStep(1);
-              }}
-              className="font-mono"
-            >
-              Clear
-            </Button>
-            <div className="relative flex justify-center">
-              <Button className="font-mono" disabled={isLoading} type="submit">
-                Play Your Story
+          {!isLoading && !isGenreChangeLoading && (
+            <div className="flex justify-between pt-4">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  form.reset();
+                  setStep(1);
+                }}
+                className="font-mono"
+              >
+                Clear
               </Button>
+              <div className="relative flex justify-center">
+                <Button
+                  className="font-mono"
+                  disabled={isLoading}
+                  type="submit"
+                >
+                  Play Your Story
+                </Button>
 
-              {allFieldsFilled && (
-                <div className="absolute top-0 w-max -translate-y-full animate-pulse">
-                  ready to play
-                </div>
-              )}
+                {allFieldsFilled && (
+                  <div className="absolute top-0 w-max -translate-y-full animate-pulse">
+                    ready to play
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </form>
     </Form>

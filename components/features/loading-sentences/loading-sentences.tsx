@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const sentences = [
@@ -71,7 +72,7 @@ export default function LoadingSentences() {
   }, []);
 
   return (
-    <div className="absolute top-1/2 w-full">
+    <div className="absolute top-1/2 flex w-full items-center justify-center gap-2">
       <p
         key={sentence}
         className="
@@ -81,6 +82,7 @@ export default function LoadingSentences() {
       >
         {sentence}
       </p>
+      <Loader2 className="size-10 animate-spin" />
     </div>
   );
 }
