@@ -1,4 +1,5 @@
 import { StoryLevel } from "@/components/features";
+import GameLevel from "@/components/features/game/level";
 import { getGame } from "@/server/games";
 
 interface Props {
@@ -16,5 +17,5 @@ export default async function GamePage({ params }: Props) {
     return <div>No character found</div>;
   }
 
-  return <>{game && <StoryLevel game={game} />}</>;
+  return <>{game && <GameLevel game={game} />}</>;
 }
