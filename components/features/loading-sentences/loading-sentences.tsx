@@ -72,7 +72,7 @@ export default function LoadingSentences() {
   }, []);
 
   return (
-    <div className="absolute top-1/2 flex w-full items-center justify-center gap-2">
+    <div className="absolute top-1/2 flex w-full flex-col items-center justify-center gap-2">
       <p
         key={sentence}
         className="
