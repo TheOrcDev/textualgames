@@ -210,7 +210,7 @@ export default function CharacterCreator() {
       >
         <header className="flex flex-col items-center gap-5 text-center">
           <h1 className="text-4xl font-bold tracking-wider">
-            Create Your Character
+            Create Your Story
           </h1>
           <Progress className="max-w-sm" value={percentage()} />
           <p className="text-gray-400">Step {step} of 3</p>
@@ -220,7 +220,9 @@ export default function CharacterCreator() {
           {/* Genre Selection */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="font-mono text-xl">Choose Your Genre</h2>
+              <h2 className="text-xs text-muted-foreground">
+                Choose Your Genre
+              </h2>
               {/* <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -274,208 +276,225 @@ export default function CharacterCreator() {
 
           {/* Character Details & Story */}
           {form.getValues("genre") && !isGenreChangeLoading && (
-            <div className="grid gap-6 md:grid-cols-2">
-              <Card className="border-background bg-gray-300 dark:bg-gray-900">
-                <CardHeader>
-                  <CardTitle className="text-sm">Character Details</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Enter character name"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+            <>
+              <h2 className="text-xs text-muted-foreground">
+                Create Your Character
+              </h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <Card className="border-background bg-gray-300 dark:bg-gray-900">
+                  <CardHeader>
+                    <CardTitle className="text-sm">Character Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Enter character name"
+                                {...field}
+                                className="placeholder:text-xs"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
-                  <div className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="gender"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Gender</FormLabel>
-                          <FormControl>
-                            <RadioGroup
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="gender"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Gender</FormLabel>
+                            <FormControl>
+                              <RadioGroup
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                                value={field.value}
+                              >
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem value="male" id="male" />
+                                  <Label htmlFor="male">Male</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem value="female" id="female" />
+                                  <Label htmlFor="female">Female</Label>
+                                </div>
+                              </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="type"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Type</FormLabel>
+                            <Select
                               onValueChange={field.onChange}
                               defaultValue={field.value}
                               value={field.value}
                             >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="male" id="male" />
-                                <Label htmlFor="male">Male</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="female" id="female" />
-                                <Label htmlFor="female">Female</Label>
-                              </div>
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                              <FormControl>
+                                <SelectTrigger className="text-xs">
+                                  <SelectValue
+                                    placeholder={`${form.getValues("genre")} Character Type`}
+                                  />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {availableData.characters.map((type) => (
+                                  <SelectItem
+                                    key={type}
+                                    value={type}
+                                    className="text-xs"
+                                  >
+                                    {type}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormDescription className="text-xs">
+                              Each genre has different characters.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
 
-                  <div className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="type"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Type</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                            value={field.value}
+                <Card className="border-background bg-gray-300 dark:bg-gray-900">
+                  <CardHeader>
+                    <CardTitle className="text-sm">Story & Inventory</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="items"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Item</FormLabel>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              value={field.value}
+                            >
+                              <FormControl>
+                                <SelectTrigger className="text-xs">
+                                  <SelectValue placeholder="Select your item" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {availableData.items.map((item) => (
+                                  <SelectItem
+                                    key={item}
+                                    value={item}
+                                    className="text-xs"
+                                  >
+                                    {item}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormDescription className="text-xs">
+                              Each genre has different items.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Story</Label>
+                      <Dialog
+                        open={isDialogOpen}
+                        onOpenChange={setIsDialogOpen}
+                      >
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className="h-32 w-full border-gray-700 bg-background font-mono hover:bg-gray-300 dark:hover:bg-gray-900"
                           >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue
-                                  placeholder={`${form.getValues("genre")} Character Type`}
-                                />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {availableData.characters.map((type) => (
-                                <SelectItem key={type} value={type}>
-                                  {type}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormDescription className="text-xs">
-                            Each genre has different characters.
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-background bg-gray-300 dark:bg-gray-900">
-                <CardHeader>
-                  <CardTitle className="text-sm">Story & Inventory</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="items"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Item</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                            value={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select your item" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {availableData.items.map((item) => (
-                                <SelectItem key={item} value={item}>
-                                  {item}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormDescription className="text-xs">
-                            Each genre has different items.
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>Story</Label>
-                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                      <DialogTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className="h-32 w-full border-gray-700 bg-background font-mono hover:bg-gray-300"
-                        >
-                          {form.getValues("plot") ? (
-                            <div className="space-y-2 text-left">
-                              <h4 className="text-wrap font-bold">
-                                {form.getValues("plot")}
-                              </h4>
-                            </div>
-                          ) : (
-                            <div className="flex flex-col items-center gap-2 text-gray-400">
-                              <ScrollText className="size-6" />
-                              <span>Select Your Story</span>
-                            </div>
-                          )}
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-2xl bg-gray-300 dark:bg-gray-900">
-                        <DialogHeader>
-                          <DialogTitle className="font-mono text-xl">
-                            Choose Your Story
-                          </DialogTitle>
-                          <DialogDescription>
-                            Select a story path that will define your
-                            character's journey
-                          </DialogDescription>
-                        </DialogHeader>
-                        <ScrollArea className="h-[400px] w-full rounded-md border p-4">
-                          <div className="flex flex-col gap-2">
-                            {availableData.stories.map(
-                              (story: string, index: number) => (
-                                <Card
-                                  key={index}
-                                  className={cn(
-                                    "cursor-pointer transition-colors hover:bg-background",
-                                    form.getValues("plot") === story &&
-                                      "border-primary"
-                                  )}
-                                  onClick={() => {
-                                    form.setValue("plot", story);
-                                    setIsDialogOpen(false);
-                                  }}
-                                >
-                                  <CardHeader>
-                                    <CardTitle className="font-mono text-sm">
-                                      {index + 1}. {story}
-                                    </CardTitle>
-                                  </CardHeader>
-                                </Card>
-                              )
+                            {form.getValues("plot") ? (
+                              <div className="space-y-2 text-left">
+                                <h4 className="text-wrap font-bold">
+                                  {form.getValues("plot")}
+                                </h4>
+                              </div>
+                            ) : (
+                              <div className="flex flex-col items-center gap-2 text-gray-400">
+                                <ScrollText className="size-6" />
+                                <span>Select Your Story</span>
+                              </div>
                             )}
-                          </div>
-                        </ScrollArea>
-                      </DialogContent>
-                    </Dialog>
-                    <p className="text-xs text-muted-foreground">
-                      Each genre has different stories.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-2xl bg-gray-300 dark:bg-gray-900">
+                          <DialogHeader>
+                            <DialogTitle className="font-mono text-xl">
+                              Choose Your Story
+                            </DialogTitle>
+                            <DialogDescription>
+                              Select a story path that will define your
+                              character's journey
+                            </DialogDescription>
+                          </DialogHeader>
+                          <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+                            <div className="flex flex-col gap-2">
+                              {availableData.stories.map(
+                                (story: string, index: number) => (
+                                  <Card
+                                    key={index}
+                                    className={cn(
+                                      "cursor-pointer transition-colors bg-background hover:bg-gray-100 dark:hover:bg-gray-900",
+                                      form.getValues("plot") === story &&
+                                        "border-primary"
+                                    )}
+                                    onClick={() => {
+                                      form.setValue("plot", story);
+                                      setIsDialogOpen(false);
+                                    }}
+                                  >
+                                    <CardHeader>
+                                      <CardTitle className="font-mono text-sm">
+                                        {index + 1}. {story}
+                                      </CardTitle>
+                                    </CardHeader>
+                                  </Card>
+                                )
+                              )}
+                            </div>
+                          </ScrollArea>
+                        </DialogContent>
+                      </Dialog>
+                      <p className="text-xs text-muted-foreground">
+                        Each genre has different stories.
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </>
           )}
 
           {/* Action Buttons */}
-          {!isLoading && !isGenreChangeLoading && (
+          {!isLoading && !isGenreChangeLoading && step > 1 && (
             <div className="flex justify-between pt-4">
               <Button
                 variant="outline"
