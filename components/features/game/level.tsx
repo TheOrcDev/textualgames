@@ -99,7 +99,7 @@ export default function GameLevel({ game }: Props) {
     <div className="p-6 font-mono">
       <div className="mx-auto max-w-4xl space-y-6">
         {/* Story Display */}
-        <div className="rounded-lg border border-red-900/50 bg-[#2a1517] p-6 text-white shadow-lg">
+        <div className="rounded-lg border border-red-900/50 bg-background p-6 shadow-lg">
           <div className="space-y-4 whitespace-pre-wrap">
             {isLoading ? (
               <p>Your story is loading...</p>
@@ -138,7 +138,7 @@ export default function GameLevel({ game }: Props) {
                 Choices
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-gray-900 text-white">
+            <DialogContent>
               <DialogHeader>
                 <DialogTitle>Available Choices</DialogTitle>
                 <DialogDescription className="text-gray-400">
