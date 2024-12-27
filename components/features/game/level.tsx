@@ -98,7 +98,6 @@ export default function GameLevel({ game }: Props) {
 
   return (
     <div className="p-6 font-mono">
-      {game.levels.length}
       <div className="mx-auto max-w-4xl space-y-6">
         {game.levels[0].image && (
           <Image
