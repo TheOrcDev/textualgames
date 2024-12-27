@@ -11,11 +11,8 @@ import db from "@/db/drizzle";
 import { purchases, tokenSpends } from "@/db/schema";
 import { getTotalTokens } from "@/lib/queries";
 
-const STRIPE_API_VERSION = "2024-12-18.acacia";
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   typescript: true,
-  apiVersion: STRIPE_API_VERSION,
 });
 
 const priceMap = {
@@ -40,7 +37,7 @@ export async function getTokens() {
 
   try {
     const totalUserTokens = await getTotalTokens(
-      user?.emailAddresses[0].emailAddress!,
+      user?.emailAddresses[0].emailAddress!
     );
 
     return totalUserTokens;
@@ -66,7 +63,7 @@ export async function getClientSecret(tokens: Tokens) {
 
 export async function getPaymentIntent(
   paymentIntentString: string,
-  paymentIntentSecret: string,
+  paymentIntentSecret: string
 ) {
   try {
     const user = await currentUser();
@@ -100,7 +97,7 @@ export async function getPaymentIntent(
     const { error } = await resend.emails.send({
       from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
       to: [user?.emailAddresses[0].emailAddress!],
-      subject: "Your Meal Planning Starts Here",
+      subject: "Your Story begins here",
       react: await BoughtTokens({ tokens: amountOfTokens }),
     });
 
@@ -117,7 +114,7 @@ export async function getPaymentIntent(
 export async function spendTokens(
   amount: number,
   email: string,
-  action: string,
+  action: string
 ) {
   try {
     await db.insert(tokenSpends).values({

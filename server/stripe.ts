@@ -1,11 +1,8 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const STRIPE_API_VERSION = "2024-12-18.acacia";
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   typescript: true,
-  apiVersion: STRIPE_API_VERSION,
 });
 
 export async function createPaymentIntent(amount: number) {
@@ -20,7 +17,7 @@ export async function createPaymentIntent(amount: number) {
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
-      },
+      }
     );
   } catch (error: any) {
     return new NextResponse(JSON.stringify({ error: error.message }), {
