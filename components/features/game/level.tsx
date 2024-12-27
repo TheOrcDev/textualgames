@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -97,7 +98,18 @@ export default function GameLevel({ game }: Props) {
 
   return (
     <div className="p-6 font-mono">
+      {game.levels.length}
       <div className="mx-auto max-w-4xl space-y-6">
+        {game.levels[0].image && (
+          <Image
+            src={game.levels[0].image}
+            alt={game.character.name}
+            width={1000}
+            height={1000}
+            className="rounded-lg"
+          />
+        )}
+
         {/* Story Display */}
         <div className="rounded-lg border border-red-900/50 bg-background p-6 shadow-lg">
           <div className="space-y-4 whitespace-pre-wrap">
