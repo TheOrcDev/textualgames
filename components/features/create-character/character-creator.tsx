@@ -289,6 +289,46 @@ export default function CharacterCreator() {
                     <div className="space-y-2">
                       <FormField
                         control={form.control}
+                        name="type"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Type</FormLabel>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              value={field.value}
+                            >
+                              <FormControl>
+                                <SelectTrigger className="text-xs">
+                                  <SelectValue
+                                    placeholder={`${form.getValues("genre")} Character Type`}
+                                  />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {availableData.characters.map((type) => (
+                                  <SelectItem
+                                    key={type}
+                                    value={type}
+                                    className="text-xs"
+                                  >
+                                    {type}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormDescription className="text-xs">
+                              Each genre has different characters.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
                         name="name"
                         render={({ field }) => (
                           <FormItem>
@@ -329,46 +369,6 @@ export default function CharacterCreator() {
                                 </div>
                               </RadioGroup>
                             </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <FormField
-                        control={form.control}
-                        name="type"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Type</FormLabel>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              value={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger className="text-xs">
-                                  <SelectValue
-                                    placeholder={`${form.getValues("genre")} Character Type`}
-                                  />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {availableData.characters.map((type) => (
-                                  <SelectItem
-                                    key={type}
-                                    value={type}
-                                    className="text-xs"
-                                  >
-                                    {type}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormDescription className="text-xs">
-                              Each genre has different characters.
-                            </FormDescription>
                             <FormMessage />
                           </FormItem>
                         )}
