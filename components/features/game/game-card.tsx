@@ -1,5 +1,6 @@
 "use client";
 
+import { Trash } from "lucide-react";
 import Link from "next/link";
 
 import { useToast } from "@/components/hooks/use-toast";
@@ -14,6 +15,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,6 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { Game } from "@/db/schema";
 import { deleteGame } from "@/server/games";
 
@@ -57,32 +60,39 @@ export default function GameCard({ game }: Props) {
       <Link href={`/game/${game.id}`}>
         <div>
           <CardHeader>
-            <CardTitle>
-              {game.character?.name} {game.character?.type}
+            <CardTitle className="flex items-center justify-between">
+              <div>{game.character?.name}</div>
+              <Badge>{game.genre}</Badge>
             </CardTitle>
-            <CardDescription>{game.genre}</CardDescription>
+            <CardDescription>{game.character?.type}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-3">
-              <p>{game.character?.plot}</p>
+              <p className="text-sm">{game.character?.plot}</p>
+
+              <Separator />
 
               <p>Items:</p>
               {game.character &&
                 JSON.parse(game.character.items).map((item: string) => (
-                  <p key={item}>- {item}</p>
+                  <p key={item} className="text-xs">
+                    - {item}
+                  </p>
                 ))}
             </div>
           </CardContent>
         </div>
       </Link>
 
-      <CardFooter className="flex items-center justify-center gap-3">
+      <CardFooter className="flex items-center justify-between gap-3">
         <Link href={`/game/${game.id}`}>
           <Button>Continue</Button>
         </Link>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant={"destructive"}>Delete</Button>
+            <Button variant={"destructive"}>
+              <Trash className="size-4" />
+            </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
