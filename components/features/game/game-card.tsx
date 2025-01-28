@@ -57,41 +57,37 @@ export default function GameCard({ game }: Props) {
   };
 
   return (
-    <Card
-      key={game.id}
-      className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br"
-    >
+    <Card className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br">
       <Link href={`/game/${game.id}`}>
-        <div>
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div>{game.character?.name}</div>
-              <Badge>{game.genre}</Badge>
-            </CardTitle>
-            <CardDescription>{game.character?.type}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col gap-3">
-              <p className="text-sm">{game.character?.plot}</p>
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <div>{game.character?.name}</div>
+            <Badge>{game.genre}</Badge>
+          </CardTitle>
+          <CardDescription>{game.character?.type}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col gap-3">
+            <p className="text-sm">{game.character?.plot}</p>
 
-              <Separator />
+            <Separator />
 
-              <p>Items:</p>
-              {game.character &&
-                JSON.parse(game.character.items).map((item: string) => (
-                  <p key={item} className="text-xs">
-                    - {item}
-                  </p>
-                ))}
-            </div>
-          </CardContent>
-        </div>
+            <p>Items:</p>
+            {game.character &&
+              JSON.parse(game.character.items).map((item: string) => (
+                <p key={item} className="text-xs">
+                  - {item}
+                </p>
+              ))}
+          </div>
+        </CardContent>
       </Link>
 
       <CardFooter className="flex items-center justify-between gap-3">
         <Link href={`/game/${game.id}`}>
           <Button>Continue</Button>
         </Link>
+
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button variant={"destructive"}>

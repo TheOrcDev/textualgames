@@ -12,7 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
 import { Game } from "@/db/schema";
 import { getLevel } from "@/server/ai";
@@ -135,7 +134,7 @@ export default function GameLevel({ game }: Props) {
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder="What do you do?"
-            className="min-h-[100px] resize-none border-0 bg-transparent text-white placeholder:text-gray-500 focus-visible:ring-0"
+            className="min-h-[100px] resize-none border-0 bg-transparent focus-visible:ring-0"
           />
         </div>
 
