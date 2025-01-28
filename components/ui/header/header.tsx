@@ -8,14 +8,8 @@ import { ModeToggle } from "../mode-toggle";
 export default function THeader() {
   return (
     <header className="flex items-center justify-between p-5 px-10">
-      <Link href={"/"} className="hidden sm:block">
-        <Image
-          width={70}
-          height={70}
-          src="/img/logo/textual-games-logo.png"
-          alt="Textual Games Logo"
-          className="bg-white"
-        />
+      <Link href={"/"} className="hidden text-sm sm:block">
+        Textual Games
       </Link>
       <div className="flex gap-3">
         <ModeToggle />
