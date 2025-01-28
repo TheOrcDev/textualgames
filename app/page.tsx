@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { GlowEffect } from "@/components/ui/glow-effect";
 
 export default function PlayPage() {
   return (
@@ -10,7 +11,17 @@ export default function PlayPage() {
         Textual Games
       </h1>
       <Link href={"/create-character"}>
-        <Button>Play Your Story</Button>
+        <div className="relative">
+          <GlowEffect
+            colors={["#FF5733", "#33FF57", "#3357FF", "#F1C40F"]}
+            mode="colorShift"
+            duration={3}
+            scale={0.9}
+          />
+          <Button className="relative inline-flex items-center gap-1 rounded-md bg-zinc-950 px-2.5 py-1.5 text-sm text-zinc-50 outline outline-1 outline-[#fff2f21f]">
+            Play Your Story
+          </Button>
+        </div>
       </Link>
     </div>
   );
