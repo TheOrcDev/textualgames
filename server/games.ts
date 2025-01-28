@@ -41,6 +41,12 @@ export const getGames = async (): Promise<Game[]> => {
   try {
     const user = await currentUser();
 
+    const userEmail = user?.emailAddresses[0].emailAddress;
+
+    if (!userEmail) {
+      throw new Error("User email not found");
+    }
+
     const userGames = await db.query.games.findMany({
       with: {
         levels: {
@@ -49,7 +55,7 @@ export const getGames = async (): Promise<Game[]> => {
         },
         character: true,
       },
-      where: eq(games.email, user?.emailAddresses[0].emailAddress!),
+      where: eq(games.email, userEmail),
     });
 
     return userGames;

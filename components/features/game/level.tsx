@@ -106,7 +106,7 @@ export default function GameLevel({ game }: Props) {
         {game.levels[0].image && (
           <Image
             src={game.levels[0].image}
-            alt={game.character.name}
+            alt={game.character?.name ?? game.genre}
             width={1000}
             height={1000}
             className="rounded-lg"
