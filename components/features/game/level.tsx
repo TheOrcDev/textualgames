@@ -97,7 +97,7 @@ export default function GameLevel({ game }: Props) {
     return <NotEnoughTokens />;
   }
 
-  if (!isLoading) {
+  if (isLoading) {
     return <LoadingSentences />;
   }
 
