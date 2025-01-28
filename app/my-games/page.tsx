@@ -11,7 +11,7 @@ export default async function MyGamesPage() {
 
   return (
     <>
-      <h2 className="text-2xl">My Games</h2>
+      <h2>Continue Your Stories</h2>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {games?.map((game) => {

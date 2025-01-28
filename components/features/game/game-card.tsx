@@ -2,6 +2,7 @@
 
 import { Trash } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { useToast } from "@/components/hooks/use-toast";
 import {
@@ -35,6 +36,7 @@ interface Props {
 
 export default function GameCard({ game }: Props) {
   const { toast } = useToast();
+  const router = useRouter();
 
   const handleDelete = async (gameId: string) => {
     try {
@@ -44,6 +46,8 @@ export default function GameCard({ game }: Props) {
         title: `Goodbye ${characterName}`,
         description: "Successfully deleted.",
       });
+
+      router.refresh();
     } catch (error) {
       toast({
         title: "Couldn't delete",
