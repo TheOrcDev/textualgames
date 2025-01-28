@@ -15,22 +15,7 @@ export default async function MyGamesPage() {
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {games?.map((game) => {
-          const validCharacter = game.character ?? {
-            id: "",
-            name: "",
-            gender: "male",
-            plot: "",
-            type: "",
-            items: "",
-            gameId: "",
-            createdAt: new Date(),
-          }; // Provide a default character
-          return (
-            <GameCard
-              game={{ ...game, character: validCharacter }}
-              key={game.id}
-            />
-          );
+          return <GameCard game={game} key={game.id} />;
         })}
 
         <Link href={"/create-character"} className="flex">

@@ -37,7 +37,7 @@ export const getGame = async (gameId: string): Promise<Game | null> => {
   }
 };
 
-export const getGames = async () => {
+export const getGames = async (): Promise<Game[]> => {
   try {
     const user = await currentUser();
 
@@ -51,10 +51,6 @@ export const getGames = async () => {
       },
       where: eq(games.email, user?.emailAddresses[0].emailAddress!),
     });
-
-    if (!userGames) {
-      return [];
-    }
 
     return userGames;
   } catch (error) {

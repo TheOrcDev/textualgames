@@ -35,7 +35,7 @@ export const games = pgTable("games", {
 
 export type Game = typeof games.$inferInsert & {
   levels: (typeof levels.$inferSelect)[];
-  character: typeof characters.$inferSelect;
+  character: (typeof characters.$inferSelect) | null;
 };
 
 export type Level = typeof levels.$inferSelect;
