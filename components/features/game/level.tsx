@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Game } from "@/db/schema";
 import { getLevel } from "@/server/ai";
 
+import LoadingSentences from "../loading-sentences/loading-sentences";
 import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
 
 interface Props {
@@ -94,6 +95,10 @@ export default function GameLevel({ game }: Props) {
 
   if (hasNoTokens) {
     return <NotEnoughTokens />;
+  }
+
+  if (!isLoading) {
+    return <LoadingSentences />;
   }
 
   return (

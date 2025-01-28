@@ -3,6 +3,8 @@
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
+
 const sentences = [
   "Loading...",
   "Your story is never the same.",
@@ -73,16 +75,17 @@ export default function LoadingSentences() {
 
   return (
     <div className="absolute top-1/2 flex w-full flex-col items-center justify-center gap-2">
-      <p
+      <TextShimmerWave
+        duration={1}
+        spread={1}
+        zDistance={1}
+        scaleDistance={1.1}
+        rotateYDistance={20}
         key={sentence}
-        className="
-        flex items-center 
-        justify-center text-center text-sm
-        "
+        className="flex items-center justify-center text-center text-sm"
       >
         {sentence}
-      </p>
-      <Loader2 className="size-10 animate-spin" />
+      </TextShimmerWave>
     </div>
   );
 }
