@@ -14,9 +14,11 @@ export default async function MyGamesPage() {
       <h2>Continue Your Stories</h2>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {games?.map((game) => {
-          return <GameCard game={game} key={game.id} />;
-        })}
+        {games
+          ?.filter((game) => game.character)
+          .map((game) => {
+            return <GameCard game={game} key={game.id} />;
+          })}
 
         <Link href={"/create-character"} className="flex">
           <Card className="flex cursor-pointer flex-col items-center justify-center from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-gradient-to-br">

@@ -58,7 +58,7 @@ export const getGames = async (): Promise<Game[]> => {
       where: eq(games.email, userEmail),
     });
 
-    return userGames;
+    return userGames as Game[];
   } catch (error) {
     console.log(error);
     throw error;
