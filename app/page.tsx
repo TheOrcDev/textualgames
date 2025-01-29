@@ -33,7 +33,11 @@ export default function Homepage() {
 
       <div className="flex flex-col items-center justify-center gap-2 text-xl text-neutral-200 md:text-4xl">
         <h2 className="text-center font-mono font-bold">
-          Create your own unique story
+          Create your own{" "}
+          <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-primary bg-clip-text text-transparent">
+            unique story
+          </span>
+          .
         </h2>
 
         <ChangingSentences />
