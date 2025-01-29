@@ -56,7 +56,7 @@ export default function Homepage() {
               src={image}
               key={image}
               alt="Dean blunt - Black Metal 2"
-              className="rounded-md"
+              className="w-96 rounded-md md:w-full"
               width={500}
               height={500}
             />
