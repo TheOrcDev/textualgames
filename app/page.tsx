@@ -5,16 +5,17 @@ import ImageSlider from "@/components/features/image-slider";
 import { Button } from "@/components/ui/button";
 import { GlowEffect } from "@/components/ui/glow-effect";
 import { Spotlight } from "@/components/ui/spotlight";
-import { TextEffect } from "@/components/ui/text-effect";
 
 export default function Homepage() {
   return (
     <main className="flex w-full flex-col gap-16 overflow-hidden rounded-md bg-black/[0.96] p-10 antialiased bg-grid-white/[0.02] md:items-center md:justify-center md:p-24">
       <Spotlight height={1000} />
+
       <div className="flex flex-col items-center justify-center gap-2">
         <h1 className="z-20 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-8 text-center text-3xl font-bold text-transparent md:text-4xl xl:text-6xl">
           Textual Games
         </h1>
+
         <Link href={"/create-character"}>
           <div className="relative w-max">
             <GlowEffect
@@ -34,6 +35,7 @@ export default function Homepage() {
         <h2 className="text-center font-mono font-bold">
           Create your own unique story
         </h2>
+
         <ChangingSentences />
       </div>
 
@@ -41,6 +43,7 @@ export default function Homepage() {
         <h3 className="text-center font-mono text-xl font-bold text-muted-foreground">
           Screenshots from the game
         </h3>
+
         <ImageSlider />
       </div>
     </main>
