@@ -8,7 +8,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 
 export default function Homepage() {
   return (
-    <main className="flex w-full flex-col gap-16 overflow-hidden rounded-md bg-black/[0.96] p-10 antialiased bg-grid-white/[0.02] md:items-center md:justify-center md:p-24">
+    <main className="flex w-full flex-col gap-16 overflow-hidden bg-black/[0.96] p-10 antialiased bg-grid-white/[0.02] md:items-center md:justify-center md:p-24">
       <Spotlight height={1000} />
 
       <div className="flex flex-col items-center justify-center gap-2">
