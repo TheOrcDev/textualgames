@@ -39,7 +39,7 @@ export default function Homepage() {
 
       <div className="flex max-w-3xl flex-col items-center justify-center gap-5">
         <h3 className="text-center font-mono text-xl font-bold text-muted-foreground">
-          some of our players
+          Screenshots from the game
         </h3>
         <ImageSlider />
       </div>
