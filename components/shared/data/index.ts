@@ -713,7 +713,6 @@ export const femaleNames = [
 ];
 
 export const sentences = [
-  "Loading...",
   "Your story is never the same.",
   "Your story is always unique.",
   "Play your story.",
