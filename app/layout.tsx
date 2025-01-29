@@ -31,7 +31,7 @@ export default async function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <html lang="en" suppressHydrationWarning className="scroll-smooth ">
         <GoogleAnalytics />
         <body className={cn(pressStart2P.className)}>
           <ThemeProvider
