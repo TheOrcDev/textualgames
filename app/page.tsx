@@ -32,7 +32,7 @@ export default function Homepage() {
 
       <div className="flex flex-col items-center justify-center gap-2 text-xl text-neutral-200 md:text-4xl">
         <h2 className="text-center font-mono font-bold">
-          Create Your Own Unique Story
+          Create your own unique story
         </h2>
         <ChangingSentences />
       </div>
