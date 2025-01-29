@@ -17,8 +17,7 @@ const images = [
 
 export default function Homepage() {
   return (
-    <div className="flex w-full flex-col gap-16 overflow-hidden rounded-md bg-black/[0.96] p-24 antialiased bg-grid-white/[0.02] md:items-center md:justify-center">
-      <Spotlight height={1000} />
+    <main className="flex w-full flex-col gap-16 overflow-hidden rounded-md bg-black/[0.96] p-10 antialiased bg-grid-white/[0.02] md:items-center md:justify-center md:p-24">
       <div className="flex flex-col items-center justify-center gap-2">
         <h1 className="z-20 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-8 text-center text-3xl font-bold text-transparent md:text-4xl xl:text-6xl">
           Textual Games
@@ -38,11 +37,11 @@ export default function Homepage() {
         </Link>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-2">
-        <h2 className="text-center font-mono text-4xl font-bold">
+      <div className="flex flex-col items-center justify-center gap-2 text-xl md:text-4xl">
+        <h2 className="text-center font-mono font-bold">
           Create Your Own Unique Story
         </h2>
-        <h2 className="text-center font-mono text-4xl font-bold">
+        <h2 className="text-center font-mono font-bold">
           Shape the fate of your character.
         </h2>
       </div>
@@ -64,6 +63,6 @@ export default function Homepage() {
           ))}
         </InfiniteSlider>
       </div>
-    </div>
+    </main>
   );
 }
