@@ -1,9 +1,11 @@
 import Link from "next/link";
 
+import ChangingSentences from "@/components/features/changing-sentences";
 import ImageSlider from "@/components/features/image-slider";
 import { Button } from "@/components/ui/button";
 import { GlowEffect } from "@/components/ui/glow-effect";
 import { Spotlight } from "@/components/ui/spotlight";
+import { TextEffect } from "@/components/ui/text-effect";
 
 export default function Homepage() {
   return (
@@ -32,9 +34,7 @@ export default function Homepage() {
         <h2 className="text-center font-mono font-bold">
           Create Your Own Unique Story
         </h2>
-        <h2 className="text-center font-mono font-bold">
-          Shape the fate of your character.
-        </h2>
+        <ChangingSentences />
       </div>
 
       <div className="flex max-w-3xl flex-col items-center justify-center gap-5">
