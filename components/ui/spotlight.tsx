@@ -37,7 +37,7 @@ export const Spotlight = ({
       transition={{
         duration: 1.5,
       }}
-      className="pointer-events-none absolute inset-0 size-full"
+      className="pointer-events-none absolute inset-0 hidden size-full lg:block"
     >
       <motion.div
         animate={{
