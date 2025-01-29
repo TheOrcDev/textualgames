@@ -1,19 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import ImageSlider from "@/components/features/image-slider";
 import { Button } from "@/components/ui/button";
 import { GlowEffect } from "@/components/ui/glow-effect";
-import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { Spotlight } from "@/components/ui/spotlight";
-
-const images = [
-  "/img/screenshots/demon-leading-an-army.webp",
-  "/img/screenshots/orc-leading-an-army.webp",
-  "/img/screenshots/zombie-trying-to-escape-from-magical-realm.webp",
-  "/img/screenshots/resistance-leader-dystopian.webp",
-  "/img/screenshots/alien-post-apocalyptic.webp",
-  "/img/screenshots/space-explorer-in-space.webp",
-];
 
 export default function Homepage() {
   return (
@@ -51,18 +41,7 @@ export default function Homepage() {
         <h3 className="text-center font-mono text-xl font-bold text-muted-foreground">
           some of our players
         </h3>
-        <InfiniteSlider duration={75} gap={24}>
-          {images.map((image) => (
-            <Image
-              src={image}
-              key={image}
-              alt="Dean blunt - Black Metal 2"
-              className="aspect-video w-96 rounded-md md:w-full"
-              width={500}
-              height={500}
-            />
-          ))}
-        </InfiniteSlider>
+        <ImageSlider />
       </div>
     </main>
   );
