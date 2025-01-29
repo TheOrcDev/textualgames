@@ -67,7 +67,7 @@ import { createCharacterFormSchema } from "@/lib/form-schemas";
 import { cn } from "@/lib/utils";
 import { createCharacter, getLevel } from "@/server/ai";
 
-import LoadingSentences from "../loading-sentences/loading-sentences";
+import LoadingSentences from "../loading-sentences";
 import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
 
 const genres = [
@@ -301,7 +301,9 @@ export default function CharacterCreator() {
                               <FormControl>
                                 <SelectTrigger className="text-xs">
                                   <SelectValue
-                                    placeholder={`${form.getValues("genre")} Character Type`}
+                                    placeholder={`${form.getValues(
+                                      "genre"
+                                    )} Character Type`}
                                   />
                                 </SelectTrigger>
                               </FormControl>
