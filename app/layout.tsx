@@ -7,8 +7,8 @@ import { Press_Start_2P } from "next/font/google";
 
 import { GoogleAnalytics } from "@/components/features";
 import { ThemeProvider } from "@/components/providers";
-import { ScreenSize } from "@/components/screen-size";
 import Footer from "@/components/ui/footer/footer";
+import { ScreenSize } from "@/components/ui/screen-size";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 
