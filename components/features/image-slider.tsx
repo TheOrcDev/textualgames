@@ -27,6 +27,10 @@ const images = [
     src: "/img/screenshots/space-explorer-in-space.webp",
     alt: "Space explorer in space",
   },
+  {
+    src: "/img/screenshots/orc-with-potion-of-strength.webp",
+    alt: "Orc with potion of strength",
+  },
 ];
 
 export default function ImageSlider() {
