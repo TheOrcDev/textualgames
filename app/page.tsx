@@ -9,7 +9,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 
 export default function Homepage() {
   return (
-    <main className="flex w-full flex-col gap-16 overflow-hidden p-10 antialiased bg-grid-black/[0.03] dark:bg-grid-white/[0.03] md:items-center md:justify-center md:p-24">
+    <main className="flex w-full flex-col gap-16 overflow-hidden p-10 pt-20 antialiased bg-grid-black/[0.03] dark:bg-grid-white/[0.03] md:items-center md:justify-center md:p-24">
       <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-3">
         <Link href={"/"} className="hidden text-sm sm:block">
           Textual Games
