@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { BuyTokens } from "@/components/features";
-import Header from "@/components/ui/header/header";
+import Header from "@/components/ui/header";
 
 export const metadata: Metadata = {
   title: "Buy Tokens: Fuel Your Adventure on Textual Games",
