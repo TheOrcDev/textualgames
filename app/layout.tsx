@@ -34,7 +34,7 @@ export default async function RootLayout({
         <body
           className={cn(
             pressStart2P.className,
-            "antialiased dark overflow-x-hidden scroll-smooth"
+            "antialiased overflow-x-hidden scroll-smooth"
           )}
         >
           <ThemeProvider
