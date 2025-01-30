@@ -8,7 +8,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 
 export default function Homepage() {
   return (
-    <main className="flex w-full flex-col gap-16 overflow-hidden bg-black/[0.96] p-10 antialiased bg-grid-white/[0.02] md:items-center md:justify-center md:p-24">
+    <main className="flex w-full flex-col gap-16 overflow-hidden p-10 antialiased bg-grid-black/[0.03] dark:bg-black/[0.96] dark:bg-grid-white/[0.02] md:items-center md:justify-center md:p-24">
       <Spotlight height={1000} />
 
       <div className="flex flex-col items-center justify-center gap-2">
@@ -31,7 +31,7 @@ export default function Homepage() {
         </Link>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-2 text-xl text-neutral-200 md:text-4xl">
+      <div className="flex flex-col items-center justify-center gap-2 text-xl md:text-4xl">
         <h2 className="text-center font-mono font-bold">
           Create your own{" "}
           <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-primary bg-clip-text text-transparent">

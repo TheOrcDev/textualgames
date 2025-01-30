@@ -7,6 +7,7 @@ import { Press_Start_2P } from "next/font/google";
 
 import { ThemeProvider } from "@/components/providers";
 import Footer from "@/components/ui/footer";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import { ScreenSize } from "@/components/ui/screen-size";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
@@ -43,6 +44,9 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <div className="absolute inset-x-0 top-0 flex justify-end px-5 py-3">
+              <ModeToggle />
+            </div>
             {children}
             <Footer />
             <Toaster />
