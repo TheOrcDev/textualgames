@@ -16,9 +16,9 @@ const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
-  title: "Textual Games - Create your own story with AI",
+  title: "Textual Games - Create your own unique story",
   description:
-    "Explore your creativity with Textual Games. Design, write, and play your own AI-generated stories. Start creating your interactive adventure today!",
+    "Textual Games is a platform for creating unique stories, and playing them in a text-based adventure game. Start creating your own story today!",
   openGraph: {
     images: "/img/og-image.png",
   },
