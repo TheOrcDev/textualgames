@@ -31,13 +31,14 @@ export default async function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html
-        lang="en"
-        suppressHydrationWarning
-        className="overflow-x-hidden scroll-smooth"
-      >
+      <html lang="en" suppressHydrationWarning>
         <GoogleAnalytics />
-        <body className={cn(pressStart2P.className)}>
+        <body
+          className={cn(
+            pressStart2P.className,
+            "antialiased dark overflow-x-hidden scroll-smooth"
+          )}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
