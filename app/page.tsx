@@ -4,11 +4,15 @@ import ChangingSentences from "@/components/features/changing-sentences";
 import ImageSlider from "@/components/features/image-slider";
 import { Button } from "@/components/ui/button";
 import { GlowEffect } from "@/components/ui/glow-effect";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Spotlight } from "@/components/ui/spotlight";
 
 export default function Homepage() {
   return (
     <main className="flex w-full flex-col gap-16 overflow-hidden p-10 antialiased bg-grid-black/[0.03] dark:bg-grid-white/[0.03] md:items-center md:justify-center md:p-24">
+      <div className="absolute inset-x-0 top-0 flex justify-end px-5 py-3">
+        <ModeToggle />
+      </div>
       <Spotlight height={1000} />
 
       <div className="flex flex-col items-center justify-center gap-2">
