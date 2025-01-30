@@ -10,15 +10,30 @@ import { Spotlight } from "@/components/ui/spotlight";
 export default function Homepage() {
   return (
     <main className="flex w-full flex-col gap-16 overflow-hidden p-10 antialiased bg-grid-black/[0.03] dark:bg-grid-white/[0.03] md:items-center md:justify-center md:p-24">
-      <div className="absolute inset-x-0 top-0 flex justify-end px-5 py-3">
+      <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-3">
+        <Link href={"/"} className="hidden text-sm sm:block">
+          Textual Games
+        </Link>
         <ModeToggle />
       </div>
       <Spotlight height={1000} />
 
-      <div className="flex flex-col items-center justify-center gap-2">
-        <h1 className="z-20 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-8 text-center text-3xl font-bold text-transparent md:text-4xl xl:text-6xl">
+      <div className="flex flex-col items-center justify-center gap-10">
+        {/* <h1 className="z-20 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-8 text-center text-3xl font-bold text-transparent md:text-4xl xl:text-6xl">
           Textual Games
-        </h1>
+        </h1> */}
+
+        <div className="flex flex-col items-center justify-center gap-2 text-xl md:text-4xl">
+          <h2 className="text-center font-mono font-bold md:text-5xl">
+            Create your own{" "}
+            <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-primary bg-clip-text text-transparent">
+              unique story
+            </span>
+            .
+          </h2>
+
+          <ChangingSentences />
+        </div>
 
         <Link href={"/create-character"}>
           <div className="relative w-max">
@@ -33,18 +48,6 @@ export default function Homepage() {
             </Button>
           </div>
         </Link>
-      </div>
-
-      <div className="flex flex-col items-center justify-center gap-2 text-xl md:text-4xl">
-        <h2 className="text-center font-mono font-bold">
-          Create your own{" "}
-          <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-primary bg-clip-text text-transparent">
-            unique story
-          </span>
-          .
-        </h2>
-
-        <ChangingSentences />
       </div>
 
       <div className="flex max-w-3xl flex-col items-center justify-center gap-5">
