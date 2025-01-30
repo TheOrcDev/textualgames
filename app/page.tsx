@@ -11,11 +11,12 @@ export default function Homepage() {
   return (
     <main className="flex w-full flex-col gap-16 overflow-hidden p-10 pt-20 antialiased bg-grid-black/[0.03] dark:bg-grid-white/[0.03] md:items-center md:justify-center md:p-24">
       <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-3">
-        <Link href={"/"} className="hidden text-sm sm:block">
-          Textual Games
+        <Link href={"/"} className="text-xs sm:text-sm">
+          <h1 className="font-bold">Textual Games</h1>
         </Link>
         <ModeToggle />
       </div>
+
       <Spotlight height={1000} />
 
       <div className="flex flex-col items-center justify-center gap-10">
@@ -44,7 +45,7 @@ export default function Homepage() {
               scale={0.9}
             />
             <Button className="relative bg-zinc-950 font-mono text-xl font-semibold">
-              Try For Free
+              Play For Free
             </Button>
           </div>
         </Link>
