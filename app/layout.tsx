@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 
-import { GoogleAnalytics } from "@/components/features";
 import { ThemeProvider } from "@/components/providers";
 import Footer from "@/components/ui/footer/footer";
 import { ScreenSize } from "@/components/ui/screen-size";
@@ -32,7 +31,6 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <GoogleAnalytics />
         <body
           className={cn(
             pressStart2P.className,
