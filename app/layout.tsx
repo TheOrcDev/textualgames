@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 
 import { ThemeProvider } from "@/components/providers";
-import Footer from "@/components/ui/footer/footer";
+import Footer from "@/components/ui/footer";
 import { ScreenSize } from "@/components/ui/screen-size";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
