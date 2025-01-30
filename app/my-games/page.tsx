@@ -1,9 +1,7 @@
-import { Plus } from "lucide-react";
 import Link from "next/link";
 
 import GameCard from "@/components/features/game/game-card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getGames } from "@/server/games";
 
 export default async function MyGamesPage() {
