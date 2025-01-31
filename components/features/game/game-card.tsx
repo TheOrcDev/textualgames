@@ -73,12 +73,11 @@ export default function GameCard({ game }: Props) {
             <Separator />
 
             <p>Items:</p>
-            {game.character &&
-              JSON.parse(game.character.items).map((item: string) => (
-                <p key={item} className="text-xs">
-                  - {item}
-                </p>
-              ))}
+            {JSON.parse(game.character?.items).map((item: string) => (
+              <p key={item} className="text-xs">
+                - {item}
+              </p>
+            ))}
           </div>
         </CardContent>
       </Link>
