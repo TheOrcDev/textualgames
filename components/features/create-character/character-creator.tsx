@@ -227,7 +227,6 @@ export default function CharacterCreator() {
                   <TooltipTrigger asChild>
                     <Button
                       variant="ghost"
-                      size="icon"
                       className="text-gray-400 hover:text-white"
                       onClick={handleRandomCharacter}
                       disabled={isLoading}
