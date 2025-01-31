@@ -15,8 +15,8 @@ import { Badge } from "../ui/badge";
 
 export default function BentoGrid() {
   return (
-    <div className="grid gap-4 md:min-h-[500px] md:grid-cols-4">
-      <Card className="group relative col-span-2 flex w-full flex-col bg-zinc-50 p-6 dark:bg-zinc-950 md:col-span-1 md:row-span-3">
+    <div className="grid gap-4 lg:min-h-[500px] lg:grid-cols-4">
+      <Card className="group relative col-span-2 flex w-full flex-col bg-zinc-50 p-6 dark:bg-zinc-950 lg:col-span-1 lg:row-span-3">
         <div className="absolute inset-0 rounded-md bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col justify-between gap-5">
           <Badge className="w-max p-2.5">
@@ -32,7 +32,7 @@ export default function BentoGrid() {
         </div>
       </Card>
 
-      <Card className="group relative col-span-2 overflow-hidden bg-zinc-50 p-6 dark:bg-zinc-950 md:col-span-2 md:row-span-1">
+      <Card className="group relative col-span-2 overflow-hidden bg-zinc-50 p-6 dark:bg-zinc-950 lg:col-span-2 lg:row-span-1">
         <div className="absolute inset-0 rounded-md bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col justify-between gap-5">
           <Badge className="w-max p-2.5">
@@ -50,7 +50,7 @@ export default function BentoGrid() {
         </div>
       </Card>
 
-      <Card className="group relative col-span-2 overflow-hidden bg-zinc-50 p-6 dark:bg-zinc-950 md:col-span-1 md:row-span-1">
+      <Card className="group relative col-span-2 overflow-hidden bg-zinc-50 p-6 dark:bg-zinc-950 lg:col-span-1 lg:row-span-1">
         <div className="absolute inset-0 rounded-md bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col justify-between gap-5">
           <Badge className="w-max p-2.5">
@@ -68,7 +68,7 @@ export default function BentoGrid() {
         </div>
       </Card>
 
-      <Card className="group relative col-span-2 overflow-hidden bg-zinc-50 p-6 dark:bg-zinc-950 md:col-span-3 md:row-span-2">
+      <Card className="group relative col-span-2 overflow-hidden bg-zinc-50 p-6 dark:bg-zinc-950 lg:col-span-3 lg:row-span-2">
         <div className="absolute inset-0 rounded-md bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col justify-between gap-5">
           <Badge className="w-max p-2.5">
