@@ -20,10 +20,6 @@ export default function Homepage() {
       <Spotlight height={1000} />
 
       <div className="flex flex-col items-center justify-center gap-10">
-        {/* <h1 className="z-20 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-8 text-center text-3xl font-bold text-transparent md:text-4xl xl:text-6xl">
-          Textual Games
-        </h1> */}
-
         <div className="flex flex-col items-center justify-center gap-2 text-xl md:text-4xl">
           <h2 className="text-center font-mono font-bold md:text-5xl">
             Create your own{" "}
