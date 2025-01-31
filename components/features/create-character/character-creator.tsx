@@ -1,7 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Radiation, Rocket, ScrollText, Sword } from "lucide-react";
+import {
+  Check,
+  ChevronsUpDown,
+  Radiation,
+  Rocket,
+  ScrollText,
+  Sword,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as React from "react";
@@ -23,6 +30,14 @@ import { Genre } from "@/components/shared/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -41,15 +56,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Tooltip,
   TooltipContent,
@@ -58,7 +71,7 @@ import {
 } from "@/components/ui/tooltip";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import { cn } from "@/lib/utils";
-import { createCharacter, getLevel } from "@/server/ai";
+import { createCharacter } from "@/server/ai";
 
 import LoadingSentences from "../loading-sentences";
 import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
@@ -188,13 +201,6 @@ export default function CharacterCreator() {
     form.getValues("items") &&
     form.getValues("plot");
 
-  const percentage = () => {
-    if (step === 1) return 0;
-    if (allFieldsFilled && step === 2) return 66;
-    if (step === 2) return 33;
-    return 0;
-  };
-
   return (
     <Form {...form}>
       <form
@@ -282,34 +288,69 @@ export default function CharacterCreator() {
                         control={form.control}
                         name="type"
                         render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Type</FormLabel>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              value={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger className="text-xs">
-                                  <SelectValue
-                                    placeholder={`${form.getValues(
-                                      "genre"
-                                    )} Character Type`}
-                                  />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {availableData.characters.map((type) => (
-                                  <SelectItem
-                                    key={type}
-                                    value={type}
-                                    className="text-xs"
+                          <FormItem className="flex flex-col">
+                            <FormLabel>Character Type</FormLabel>
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <FormControl>
+                                  <Button
+                                    variant="outline"
+                                    role="combobox"
+                                    className={cn(
+                                      "w-full justify-between",
+                                      !field.value && "text-muted-foreground"
+                                    )}
                                   >
-                                    {type}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
+                                    {field.value
+                                      ? availableData.characters.find(
+                                          (character) =>
+                                            character === field.value
+                                        )
+                                      : `${form.getValues(
+                                          "genre"
+                                        )} Character Type`}
+                                    <ChevronsUpDown className="opacity-50" />
+                                  </Button>
+                                </FormControl>
+                              </PopoverTrigger>
+                              <PopoverContent className="w-full p-0">
+                                <Command>
+                                  <CommandInput
+                                    placeholder="Search character..."
+                                    className="h-9 font-mono"
+                                  />
+                                  <CommandList>
+                                    <CommandEmpty>
+                                      No character found.
+                                    </CommandEmpty>
+                                    <CommandGroup>
+                                      {availableData.characters.map(
+                                        (character) => (
+                                          <CommandItem
+                                            value={character}
+                                            key={character}
+                                            className="font-mono"
+                                            onSelect={() => {
+                                              form.setValue("type", character);
+                                            }}
+                                          >
+                                            {character}
+                                            <Check
+                                              className={cn(
+                                                "ml-auto",
+                                                character === field.value
+                                                  ? "opacity-100"
+                                                  : "opacity-0"
+                                              )}
+                                            />
+                                          </CommandItem>
+                                        )
+                                      )}
+                                    </CommandGroup>
+                                  </CommandList>
+                                </Command>
+                              </PopoverContent>
+                            </Popover>
                             <FormDescription className="text-xs">
                               Each genre has different characters.
                             </FormDescription>
@@ -380,30 +421,62 @@ export default function CharacterCreator() {
                         control={form.control}
                         name="items"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="flex flex-col">
                             <FormLabel>Item</FormLabel>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              value={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger className="text-xs">
-                                  <SelectValue placeholder="Select your item" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {availableData.items.map((item) => (
-                                  <SelectItem
-                                    key={item}
-                                    value={item}
-                                    className="text-xs"
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <FormControl>
+                                  <Button
+                                    variant="outline"
+                                    role="combobox"
+                                    className={cn(
+                                      "w-full justify-between",
+                                      !field.value && "text-muted-foreground"
+                                    )}
                                   >
-                                    {item}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
+                                    {field.value
+                                      ? availableData.items.find(
+                                          (item) => item === field.value
+                                        )
+                                      : `${form.getValues("genre")} Item`}
+                                    <ChevronsUpDown className="opacity-50" />
+                                  </Button>
+                                </FormControl>
+                              </PopoverTrigger>
+                              <PopoverContent className="w-full p-0">
+                                <Command>
+                                  <CommandInput
+                                    placeholder="Search item..."
+                                    className="h-9 font-mono"
+                                  />
+                                  <CommandList>
+                                    <CommandEmpty>No item found.</CommandEmpty>
+                                    <CommandGroup>
+                                      {availableData.items.map((item) => (
+                                        <CommandItem
+                                          value={item}
+                                          key={item}
+                                          className="font-mono"
+                                          onSelect={() => {
+                                            form.setValue("items", item);
+                                          }}
+                                        >
+                                          {item}
+                                          <Check
+                                            className={cn(
+                                              "ml-auto",
+                                              item === field.value
+                                                ? "opacity-100"
+                                                : "opacity-0"
+                                            )}
+                                          />
+                                        </CommandItem>
+                                      ))}
+                                    </CommandGroup>
+                                  </CommandList>
+                                </Command>
+                              </PopoverContent>
+                            </Popover>
                             <FormDescription className="text-xs">
                               Each genre has different items.
                             </FormDescription>
