@@ -209,14 +209,14 @@ export default function CharacterCreator() {
         className="mx-auto w-full max-w-4xl"
       >
         <header className="flex flex-col items-center gap-5 text-center">
-          <h1 className="text-4xl font-bold tracking-wider">
+          <h1 className="text-2xl font-bold tracking-wider">
             Create Your Story
           </h1>
           <Progress className="max-w-sm" value={percentage()} />
           <p className="text-gray-400">Step {step} of 3</p>
         </header>
 
-        <div className="grid gap-6">
+        <div className="grid gap-6 font-mono">
           {/* Genre Selection */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
