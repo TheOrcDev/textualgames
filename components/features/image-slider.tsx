@@ -20,6 +20,10 @@ const images = [
     alt: "Resistance leader dystopian",
   },
   {
+    src: "/img/screenshots/wizard-in-the-underworld.webp",
+    alt: "Wizard in the underworld",
+  },
+  {
     src: "/img/screenshots/alien-post-apocalyptic.webp",
     alt: "Alien post apocalyptic",
   },
