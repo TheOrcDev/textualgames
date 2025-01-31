@@ -97,7 +97,7 @@ export async function getPaymentIntent(
     const { error } = await resend.emails.send({
       from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
       to: [user?.emailAddresses[0].emailAddress!],
-      subject: "Your Story begins here",
+      subject: "Your Story Begins Here",
       react: await BoughtTokens({ tokens: amountOfTokens }),
     });
 
