@@ -24,7 +24,7 @@ export default async function MyGamesPage() {
 
           <h2>Continue Your Stories</h2>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
             {games
               ?.filter((game) => game.character)
               .map((game) => {
