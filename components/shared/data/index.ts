@@ -224,7 +224,7 @@ export const fantasyPlots = [
   "leading army against invading force",
   "trying to be king in world of magic",
   "trying to find love in world of magic",
-  "trying to find way to be humagain",
+  "trying to find way to be human again",
   "on quest to retrieve stolen artifact",
   "living in world where magic is outlawed",
   "trying to save dying magical realm",

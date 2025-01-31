@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Check,
   ChevronsUpDown,
+  Dice4Icon as Dice,
   Radiation,
   Rocket,
   ScrollText,
@@ -75,7 +76,7 @@ import { createCharacter } from "@/server/ai";
 
 import LoadingSentences from "../loading-sentences";
 import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
-
+import { getRandomCharacter } from "./index";
 const genres = [
   {
     id: Genre.FANTASY,
@@ -177,13 +178,14 @@ export default function CharacterCreator() {
     }, 500);
   };
 
-  const handleRandomCharacter = () => {
-    setIsLoading(true);
-    // Simulate generating random character
-    setTimeout(() => {
-      setIsLoading(false);
-      // Add your random character logic here
-    }, 1000);
+  const handleRandomCharacter = async () => {
+    const randomCharacter = await getRandomCharacter();
+    handleGenreSelect(randomCharacter.genre);
+    form.setValue("name", randomCharacter.name);
+    form.setValue("gender", randomCharacter.gender as "male" | "female");
+    form.setValue("type", randomCharacter.type);
+    form.setValue("items", randomCharacter.item);
+    form.setValue("plot", randomCharacter.plot);
   };
 
   if (hasNoTokens) {
@@ -220,7 +222,7 @@ export default function CharacterCreator() {
               <h2 className="text-xs text-muted-foreground">
                 Choose Your Genre
               </h2>
-              {/* <TooltipProvider>
+              <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -229,6 +231,7 @@ export default function CharacterCreator() {
                       className="text-gray-400 hover:text-white"
                       onClick={handleRandomCharacter}
                       disabled={isLoading}
+                      type="button"
                     >
                       Random
                       <Dice className="size-5" />
@@ -239,7 +242,7 @@ export default function CharacterCreator() {
                     <p>Generate a random character</p>
                   </TooltipContent>
                 </Tooltip>
-              </TooltipProvider> */}
+              </TooltipProvider>
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
