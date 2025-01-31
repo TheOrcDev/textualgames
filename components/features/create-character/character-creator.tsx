@@ -184,7 +184,7 @@ export default function CharacterCreator() {
     return <NotEnoughTokens />;
   }
 
-  if (isLoading) {
+  if (!isLoading) {
     return <LoadingSentences />;
   }
 

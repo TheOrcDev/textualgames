@@ -21,18 +21,15 @@ export default function LoadingSentences() {
   }, []);
 
   return (
-    <div className="absolute top-1/2 flex w-full flex-col items-center justify-center gap-2">
-      <TextShimmerWave
-        duration={1}
-        spread={1}
-        zDistance={1}
-        scaleDistance={1.1}
-        rotateYDistance={20}
-        key={sentence}
-        className="flex items-center justify-center text-center text-sm"
-      >
-        {sentence}
-      </TextShimmerWave>
-    </div>
+    <TextShimmerWave
+      duration={1}
+      zDistance={1}
+      scaleDistance={1.1}
+      rotateYDistance={20}
+      key={sentence}
+      className="absolute top-1/2 text-wrap px-5 text-center text-xs md:text-sm"
+    >
+      {sentence}
+    </TextShimmerWave>
   );
 }
