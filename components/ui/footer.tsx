@@ -2,10 +2,14 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="fixed bottom-5 flex w-full items-center justify-between px-5">
-      <h2 className="border-l-2 border-black bg-gray-200 px-2 text-[10px] dark:bg-gray-800 md:text-sm">
-        Textual Games © {year}
-      </h2>
+    <footer className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+        <h3 className="flex justify-center sm:justify-start">Textual Games</h3>
+
+        <p className="text-center font-mono text-sm lg:text-right">
+          Copyright &copy; {year}. All rights reserved.
+        </p>
+      </div>
     </footer>
   );
 }
