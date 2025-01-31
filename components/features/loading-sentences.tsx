@@ -27,7 +27,7 @@ export default function LoadingSentences() {
       scaleDistance={1.1}
       rotateYDistance={20}
       key={sentence}
-      className="absolute top-1/2 text-wrap px-5 text-center text-xs md:text-sm"
+      className="absolute top-1/2 w-full justify-center text-wrap px-5 text-center text-xs md:flex md:text-sm"
     >
       {sentence}
     </TextShimmerWave>
