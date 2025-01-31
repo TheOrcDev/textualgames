@@ -1,13 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Dice5Icon as Dice,
-  Radiation,
-  Rocket,
-  ScrollText,
-  Sword,
-} from "lucide-react";
+import { Radiation, Rocket, ScrollText, Sword } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as React from "react";
@@ -47,7 +41,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -212,8 +205,6 @@ export default function CharacterCreator() {
           <h1 className="text-2xl font-bold tracking-wider">
             Create Your Story
           </h1>
-          <Progress className="max-w-sm" value={percentage()} />
-          <p className="text-gray-400">Step {step} of 3</p>
         </header>
 
         <div className="grid gap-6 font-mono">
