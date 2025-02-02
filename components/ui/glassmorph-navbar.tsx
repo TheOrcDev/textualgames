@@ -1,6 +1,6 @@
 "use client";
 
-import { useClerk } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 import { Coins, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,13 +15,15 @@ interface Props {
 
 export default function GlassmorphNavbar({ tokens }: Props) {
   const { signOut } = useClerk();
-  const pathname = usePathname();
+  const { isSignedIn } = useUser();
 
+  const pathname = usePathname();
   const pathnameWithoutParams = pathname.split("/").slice(0, 2).join("/");
 
   const [isOpen, setIsOpen] = useState(false);
 
   if (
+    !isSignedIn &&
     pathname !== "/my-games" &&
     pathname !== "/profile" &&
     pathname !== "/buy-tokens" &&
