@@ -7,6 +7,8 @@ import { GlowEffect } from "@/components/ui/glow-effect";
 
 export const metadata: Metadata = {
   title: "404 | Textual Games",
+  description:
+    "The page you are looking for does not exist. Please check the URL and try again.",
 };
 
 export default function NotFound() {

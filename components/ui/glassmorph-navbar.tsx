@@ -17,9 +17,18 @@ export default function GlassmorphNavbar({ tokens }: Props) {
   const { signOut } = useClerk();
   const pathname = usePathname();
 
+  const pathnameWithoutParams = pathname.split("/").slice(0, 2).join("/");
+
   const [isOpen, setIsOpen] = useState(false);
 
-  if (pathname === "/" || pathname === "/sign-in" || pathname === "/sign-up")
+  if (
+    pathname !== "/my-games" &&
+    pathname !== "/profile" &&
+    pathname !== "/buy-tokens" &&
+    pathname !== "/order-complete" &&
+    pathname !== "/create-character" &&
+    pathnameWithoutParams !== "/game"
+  )
     return null;
 
   return (
