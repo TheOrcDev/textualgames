@@ -23,13 +23,14 @@ export default function GlassmorphNavbar({ tokens }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (
-    !isSignedIn &&
-    pathname !== "/my-games" &&
-    pathname !== "/profile" &&
-    pathname !== "/buy-tokens" &&
-    pathname !== "/order-complete" &&
-    pathname !== "/create-character" &&
-    pathnameWithoutParams !== "/game"
+    (!isSignedIn &&
+      pathname !== "/my-games" &&
+      pathname !== "/profile" &&
+      pathname !== "/buy-tokens" &&
+      pathname !== "/order-complete" &&
+      pathname !== "/create-character" &&
+      pathnameWithoutParams !== "/game") ||
+    pathname === "/"
   )
     return null;
 
