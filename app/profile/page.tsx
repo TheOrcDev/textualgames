@@ -1,18 +1,18 @@
 "use client";
 
-import { SignUp } from "@clerk/nextjs";
+import { UserProfile } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { useTheme } from "next-themes";
 
-export default function Page() {
+export default function AccountPage() {
   const { resolvedTheme } = useTheme();
-
   return (
-    <main className="flex h-screen items-center justify-center pt-20 md:p-24">
-      <SignUp
+    <main className="flex flex-col items-center justify-center gap-5 p-5 py-10 pt-20 font-mono md:p-24">
+      <UserProfile
         appearance={{
           baseTheme: resolvedTheme === "dark" ? dark : undefined,
         }}
+        routing={"hash"}
       />
     </main>
   );

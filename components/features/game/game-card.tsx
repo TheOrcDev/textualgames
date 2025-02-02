@@ -64,11 +64,18 @@ export default function GameCard({ game }: Props) {
             <div>{game.character?.name}</div>
             <Badge>{game.genre}</Badge>
           </CardTitle>
-          <CardDescription>{game.character?.type}</CardDescription>
+          <CardDescription>
+            {game.character?.type.charAt(0).toUpperCase() +
+              game.character?.type.slice(1)}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-3">
-            <p className="text-sm">{game.character?.plot}</p>
+            <p className="text-sm">
+              {game.character?.plot.charAt(0).toUpperCase() +
+                game.character?.plot.slice(1)}
+              .
+            </p>
 
             <Separator />
 

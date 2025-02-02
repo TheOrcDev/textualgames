@@ -1,21 +1,14 @@
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import Image from "next/image";
 import Link from "next/link";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getTokens } from "@/server/tokens";
 
 import ClerkButton from "../clerk-button/clerk-button";
 
-export default async function UserInfo() {
-  const tokens = await getTokens();
-
+export default function UserInfo() {
   return (
     <div className="flex items-center gap-2">
-      <Link href={"/my-games"}>
-        <Button variant={"outline"}>My Games</Button>
-      </Link>
+      <Link href={"/my-games"}>My Games</Link>
 
       <SignedOut>
         <Button variant={"outline"} asChild>
@@ -24,18 +17,6 @@ export default async function UserInfo() {
       </SignedOut>
 
       <SignedIn>
-        <Link href={"/buy-tokens"}>
-          <Badge className={`flex gap-1 ${tokens === 0 && "bg-destructive"}`}>
-            {tokens}
-            <Image
-              src={"/img/tg-coin.png"}
-              width={32}
-              height={32}
-              alt="Textual Games Token"
-            />
-          </Badge>
-        </Link>
-
         <ClerkButton />
       </SignedIn>
     </div>

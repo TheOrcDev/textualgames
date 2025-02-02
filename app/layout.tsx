@@ -6,9 +6,11 @@ import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 
 import { ThemeProvider } from "@/components/providers";
+import GlassmorphNavbar from "@/components/ui/glassmorph-navbar";
 import { ScreenSize } from "@/components/ui/screen-size";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
+import { getTokens } from "@/server/tokens";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
@@ -27,6 +29,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const tokens = await getTokens();
+
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
@@ -42,6 +46,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <GlassmorphNavbar tokens={tokens} />
             {children}
             <Toaster />
             <Analytics />
