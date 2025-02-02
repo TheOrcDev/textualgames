@@ -10,14 +10,14 @@ export default async function MyGamesPage() {
   return (
     <>
       {!games?.length ? (
-        <div className="flex flex-col items-center justify-center gap-3">
+        <div className="flex flex-col items-center justify-center gap-3 font-mono">
           <h2 className="text-2xl">No started games yet!</h2>
           <Link href={"/create-character"}>
             <Button>Create Your Character</Button>
           </Link>
         </div>
       ) : (
-        <>
+        <div className="flex flex-col items-center justify-center gap-3 font-mono">
           <Link href={"/create-character"}>
             <Button>Create New Character</Button>
           </Link>
@@ -31,7 +31,7 @@ export default async function MyGamesPage() {
                 return <GameCard game={game} key={game.id} />;
               })}
           </div>
-        </>
+        </div>
       )}
     </>
   );
