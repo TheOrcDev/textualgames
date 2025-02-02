@@ -44,7 +44,7 @@ export default function BuyTokens() {
     <>
       {!showPayment && (
         <>
-          <div className="grid w-full gap-5 md:grid-cols-2 lg:px-20 xl:grid-cols-3">
+          <div className="grid w-full gap-5 font-mono md:grid-cols-2 lg:px-20 xl:grid-cols-3">
             <Card
               className="cursor-pointer from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-primary/10 hover:bg-gradient-to-br"
               onClick={() => buyTokens(Tokens.TEN)}
