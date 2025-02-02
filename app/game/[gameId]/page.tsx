@@ -6,7 +6,7 @@ import { getGame } from "@/server/games";
 export const metadata: Metadata = {
   title: "Play Your Game: Interactive Story on Textual Games",
   description:
-    "Immerse yourself in your own AI-generated story. Play, make choices, and experience your interactive adventure with Textual Games.",
+    "Immerse yourself in your own story. Play, make choices, and experience your interactive adventure with Textual Games.",
 };
 
 interface Props {

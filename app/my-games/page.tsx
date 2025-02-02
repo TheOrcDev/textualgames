@@ -8,7 +8,7 @@ import { getGames } from "@/server/games";
 export const metadata: Metadata = {
   title: "My Games: Explore Your Creations on Textual Games",
   description:
-    "View, edit, and continue your AI-generated stories. Explore all your past creations and keep the adventure going with Textual Games.",
+    "View, edit, and continue your stories. Explore all your past creations and keep the adventure going with Textual Games.",
 };
 
 export default async function MyGamesPage() {

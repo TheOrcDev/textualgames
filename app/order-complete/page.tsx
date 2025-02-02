@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 
 import { PaymentSuccess } from "@/components/features";
-import Header from "@/components/ui/header";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function BuyTokensPage() {

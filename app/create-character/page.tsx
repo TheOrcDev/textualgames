@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import CharacterCreator from "@/components/features/create-character/character-creator";
 
 export const metadata: Metadata = {
-  title: "My Games: Explore Your Creations on Textual Games",
+  title: "Create Character: Make Your Own Story on Textual Games",
   description:
-    "View, edit, and continue your AI-generated stories. Explore all your past creations and keep the adventure going with Textual Games.",
+    "Create your own story on Textual Games. Make your own choices and see where your story takes you.",
 };
 
 export default function CreateCharacterPage() {

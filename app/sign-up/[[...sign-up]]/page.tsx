@@ -2,7 +2,14 @@
 
 import { SignUp } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Metadata } from "next";
 import { useTheme } from "next-themes";
+
+export const metadata: Metadata = {
+  title: "Sign Up: Create Your Account on Textual Games",
+  description:
+    "Create your account on Textual Games. Start creating your own stories and adventures.",
+};
 
 export default function Page() {
   const { resolvedTheme } = useTheme();
