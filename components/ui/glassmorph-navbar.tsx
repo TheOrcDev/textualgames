@@ -23,7 +23,7 @@ export default function GlassmorphNavbar({ tokens }: Props) {
     return null;
 
   return (
-    <nav className="fixed left-1/2 top-4 z-50 w-11/12 max-w-5xl -translate-x-1/2 rounded-full border border-gray-200 bg-white/20 shadow-lg saturate-150 backdrop-blur-lg dark:border-gray-900 dark:bg-black/20">
+    <nav className="fixed left-1/2 top-4 z-50 w-11/12 max-w-5xl -translate-x-1/2 rounded-full border border-gray-200 bg-white/20 pb-40 shadow-lg saturate-150 backdrop-blur-lg dark:border-gray-900 dark:bg-black/20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
