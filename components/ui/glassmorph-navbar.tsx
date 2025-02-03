@@ -35,12 +35,16 @@ export default function GlassmorphNavbar({ tokens }: Props) {
     return null;
 
   return (
-    <nav className="fixed left-1/2 top-4 z-50 w-11/12 max-w-5xl -translate-x-1/2 rounded-full border border-gray-200 bg-white/20 shadow-lg saturate-150 backdrop-blur-lg dark:border-gray-900 dark:bg-black/20">
+    <nav
+      className={`fixed left-1/2 top-4 z-50 w-11/12 max-w-5xl -translate-x-1/2 border border-gray-200 bg-white/20 shadow-lg saturate-150 backdrop-blur-lg dark:border-gray-900 dark:bg-black/20 ${
+        isOpen ? "rounded-sm" : "rounded-full"
+      }`}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <div className="shrink-0">
-              <Link href={"/"} className="hidden text-sm sm:block">
+              <Link href={"/"} className="text-sm">
                 <span className="text-md font-semibold text-gray-800 dark:text-gray-200">
                   Textual Games
                 </span>
@@ -77,6 +81,7 @@ export default function GlassmorphNavbar({ tokens }: Props) {
           <div className="md:hidden">
             <Button
               onClick={() => setIsOpen(!isOpen)}
+              variant={"ghost"}
               className="inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white dark:bg-black/20 dark:text-gray-200"
             >
               <span className="sr-only">Open main menu</span>
@@ -95,10 +100,16 @@ export default function GlassmorphNavbar({ tokens }: Props) {
           <div className="flex items-center justify-between gap-3 px-5 py-3 font-mono">
             <div className="flex flex-col">
               <Link href={"/my-games"}>
-                <Button variant={"ghost"}>My Games</Button>
+                <Button variant={"ghost"}>
+                  <LayoutGrid />
+                  My Games
+                </Button>
               </Link>
               <Link href={"/profile"}>
-                <Button variant={"ghost"}>Profile</Button>
+                <Button variant={"ghost"}>
+                  <User />
+                  Profile
+                </Button>
               </Link>
               <Link href={"/buy-tokens"}>
                 <Button variant={"ghost"}>
