@@ -210,7 +210,7 @@ export default function CharacterCreator() {
         className="mx-auto w-full max-w-4xl"
       >
         <header className="flex flex-col items-center gap-5 text-center">
-          <h1 className="text-2xl font-bold tracking-wider">
+          <h1 className="text-md font-bold tracking-wider md:text-2xl">
             Create Your Story
           </h1>
         </header>
