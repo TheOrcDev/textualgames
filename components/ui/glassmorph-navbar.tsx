@@ -2,12 +2,16 @@
 
 import { useClerk, useUser } from "@clerk/nextjs";
 import { Coins, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
+import { Press_Start_2P } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { Button } from "./button";
 import { ModeToggle } from "./mode-toggle";
+const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 interface Props {
   tokens: number;
@@ -47,7 +51,10 @@ export default function GlassmorphNavbar({ tokens }: Props) {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <div className="shrink-0">
-                <Link href={"/"} className="text-sm">
+                <Link
+                  href={"/"}
+                  className={cn(pressStart2P.className, "text-sm")}
+                >
                   <span className="text-md font-semibold text-gray-800 dark:text-gray-200">
                     Textual Games
                   </span>

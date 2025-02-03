@@ -3,16 +3,12 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
-import { Press_Start_2P } from "next/font/google";
 
 import { ThemeProvider } from "@/components/providers";
 import GlassmorphNavbar from "@/components/ui/glassmorph-navbar";
 import { ScreenSize } from "@/components/ui/screen-size";
 import { Toaster } from "@/components/ui/toaster";
-import { cn } from "@/lib/utils";
 import { getTokens } from "@/server/tokens";
-
-const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
@@ -34,12 +30,7 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body
-          className={cn(
-            pressStart2P.className,
-            "antialiased overflow-x-hidden scroll-smooth"
-          )}
-        >
+        <body className="overflow-x-hidden scroll-smooth font-mono antialiased">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

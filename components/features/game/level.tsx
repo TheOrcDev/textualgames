@@ -119,7 +119,6 @@ export default function GameLevel({ game }: Props) {
           />
         )}
 
-        {/* Story Display */}
         <div className="rounded-lg border border-red-900/50 bg-background p-6 shadow-lg">
           <div className="space-y-4 whitespace-pre-wrap">
             {isLoading ? (
@@ -134,7 +133,6 @@ export default function GameLevel({ game }: Props) {
           </div>
         </div>
 
-        {/* Input Area */}
         <div className="rounded-lg border border-red-900/50 bg-transparent p-1">
           <Textarea
             value={userInput}
@@ -145,7 +143,6 @@ export default function GameLevel({ game }: Props) {
           />
         </div>
 
-        {/* Action Buttons */}
         <div className="flex justify-center gap-4">
           <Button
             onClick={handleInputSubmit}

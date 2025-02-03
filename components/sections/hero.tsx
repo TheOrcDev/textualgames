@@ -1,3 +1,4 @@
+import { Press_Start_2P } from "next/font/google";
 import Link from "next/link";
 
 import ChangingSentences from "@/components/features/changing-sentences";
@@ -6,13 +7,17 @@ import { Button } from "@/components/ui/button";
 import { GlowEffect } from "@/components/ui/glow-effect";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Spotlight } from "@/components/ui/spotlight";
+import { cn } from "@/lib/utils";
+const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 export default function Hero() {
   return (
     <section className="flex w-full flex-col gap-16 overflow-hidden p-10 pt-20 antialiased bg-grid-black/[0.03] dark:bg-grid-white/[0.03] sm:h-svh md:items-center md:justify-center md:p-24">
       <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-3">
         <Link href={"/"} className="text-xs sm:text-sm">
-          <h1 className="font-bold">Textual Games</h1>
+          <h1 className={cn(pressStart2P.className, "font-bold")}>
+            Textual Games
+          </h1>
         </Link>
         <ModeToggle />
       </div>
