@@ -15,7 +15,7 @@ export default async function MyGamesPage() {
   const games = await getGames();
 
   return (
-    <main className="flex flex-col items-center justify-center gap-5 p-5 py-10 pt-20 md:p-24">
+    <main>
       {!games?.length ? (
         <div className="flex flex-col items-center justify-center gap-3 font-mono">
           <h2 className="text-2xl">No started games yet!</h2>

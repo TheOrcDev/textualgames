@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function BuyTokensPage() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-10 p-12 pt-20 md:p-24">
+      <div>
         <BuyTokens />
       </div>
     </>
