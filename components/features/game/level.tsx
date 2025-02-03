@@ -63,6 +63,12 @@ export default function GameLevel({ game }: Props) {
     }
   };
 
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if ((e.ctrlKey && e.key === "Enter") || (e.metaKey && e.key === "Enter")) {
+      handleInputSubmit();
+    }
+  };
+
   const handleInputSubmit = async () => {
     if (!userInput.trim()) return;
 
@@ -133,6 +139,7 @@ export default function GameLevel({ game }: Props) {
           <Textarea
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
+            onKeyDown={handleInputKeyDown}
             placeholder="What do you do?"
             className="min-h-[100px] resize-none border-0 bg-transparent focus-visible:ring-0"
           />
