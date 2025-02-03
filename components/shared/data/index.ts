@@ -45,7 +45,7 @@ export const characters = [
   "painter",
   "journalist",
   "wrestler",
-  "guardiangel",
+  "guardian angel",
   "fairy",
   "ventriloquist",
   "master thief",
