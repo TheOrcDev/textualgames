@@ -22,7 +22,7 @@ export default function GlassmorphNavbar({ tokens }: Props) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  if (
+  const isHidden =
     (!isSignedIn &&
       pathname !== "/my-games" &&
       pathname !== "/profile" &&
@@ -30,9 +30,11 @@ export default function GlassmorphNavbar({ tokens }: Props) {
       pathname !== "/order-complete" &&
       pathname !== "/create-character" &&
       pathnameWithoutParams !== "/game") ||
-    pathname === "/"
-  )
+    pathname === "/";
+
+  if (isHidden) {
     return null;
+  }
 
   return (
     <nav
