@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function CreateCharacterPage() {
   return (
-    <main className="flex flex-col items-center justify-center gap-5 p-5 py-10 pt-20 md:p-24">
+    <main>
       <CharacterCreator />
     </main>
   );
