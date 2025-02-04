@@ -69,15 +69,18 @@ export default class StoryCreator {
 
   async getImagePrompt(game: Game) {
     return `
-    Give me a scenery image for the visual novel game.
-  
-    The main storyline is ${game.character.plot}.
-  
-    My character is a ${game.character.type} with a ${game.character.gender} gender, and is carrying these items: ${game.character.items}
-  
-    The story genre is: "${game.genre}", and keep the image in that mood.
-  
-    Image should be in photorealistic art, and it shouldn't have any text.
+    Create a highly detailed, photorealistic scenery image for a visual novel game. 
+    The setting should align with the game's storyline and mood.
+
+    - Storyline: ${game.character.plot}
+
+    - Character: A ${game.character.gender} ${game.character.type} carrying ${game.character.items}.
+
+    - Genre & Mood: "${game.genre}" (ensure the atmosphere matches this genre).
+
+    - Style: Photorealistic, immersive, and visually striking.
+
+    - Requirements: No text, symbols, UI elements, or overlays—just a pure, high-quality scenic artwork.
   `;
   }
 }
