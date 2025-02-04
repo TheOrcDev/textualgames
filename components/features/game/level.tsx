@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,8 @@ interface Props {
 }
 
 export default function GameLevel({ game }: Props) {
+  const router = useRouter();
+
   const storylineParts = game.levels[0].storyline
     .split(".")
     .filter((part: string) => part.trim());
@@ -56,6 +59,7 @@ export default function GameLevel({ game }: Props) {
 
       setGameText(storylineParts);
       setChoices(newChoices);
+      router.refresh();
     } catch (e) {
       console.log(e);
     } finally {
