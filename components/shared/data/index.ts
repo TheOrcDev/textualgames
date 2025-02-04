@@ -79,7 +79,7 @@ export const fantasyCharacters = [
   "knight's squire",
   "street magician",
   "gladiator",
-  "guardiangel",
+  "guardian angel",
   "fairy",
   "jester",
   "giant",
