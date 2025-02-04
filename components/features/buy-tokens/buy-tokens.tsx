@@ -1,7 +1,7 @@
 "use client";
 
 import { Elements } from "@stripe/react-stripe-js";
-import Image from "next/image";
+import { Coins } from "lucide-react";
 import { useTheme } from "next-themes";
 import React, { useState } from "react";
 
@@ -57,12 +57,7 @@ export default function BuyTokens() {
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-1 text-xl">
                     10
-                    <Image
-                      src={"/img/tg-coin.png"}
-                      width={32}
-                      height={32}
-                      alt="Textual Games Token"
-                    />
+                    <Coins className="size-4" />
                   </div>
                   <p>
                     Looking to try out Textual Games or just need a quick boost?
@@ -98,12 +93,7 @@ export default function BuyTokens() {
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-1 text-xl">
                     50
-                    <Image
-                      src={"/img/tg-coin.png"}
-                      width={32}
-                      height={32}
-                      alt="Textual Games Token"
-                    />
+                    <Coins className="size-4" />
                   </div>
                   <p>
                     Get more bang for your buck with our Efficient package! For
@@ -135,12 +125,7 @@ export default function BuyTokens() {
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-1 text-xl">
                     100
-                    <Image
-                      src={"/img/tg-coin.png"}
-                      width={32}
-                      height={32}
-                      alt="Textual Games Token"
-                    />
+                    <Coins className="size-4" />
                   </div>
                   <p>
                     Ready to go all in? The Best Deal offers incredible value
