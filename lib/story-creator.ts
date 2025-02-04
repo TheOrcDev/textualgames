@@ -52,15 +52,16 @@ export default class StoryCreator {
 
   async getNextLevel(game: Game): Promise<StoryPrompt> {
     const thePrompt = `
-      Continue the story based on my choice.
+      Continue the story naturally based on my choice while maintaining coherence with previous events.
 
-      My choice was: "${game.choice}"
-      
-      Feel free to incorporate items from inventory if they can logically be used for the game.
-      Currently, character has: ${game.character.items}.
+      - Player's Choice: "${game.choice}" (This should directly influence the next events).
 
-      Ensure the story remains in the ${game.genre}.
-      
+      - Inventory: The character currently has ${game.character.items}. Use these items only if there is a logical and meaningful way to do so.
+
+      - Genre & Tone: The story must stay within the "${game.genre}" genre, preserving its themes and atmosphere.
+
+      - Flow & Immersion: The continuation should feel organic, engaging, and in line with prior developments.
+            
       ${this.jsonFormat}
     `;
 
