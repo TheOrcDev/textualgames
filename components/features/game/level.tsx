@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -26,6 +27,17 @@ interface Props {
 
 export default function GameLevel({ game }: Props) {
   const router = useRouter();
+
+  if (!game.levels[0]) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-5">
+        <p>No levels found, please create a new game.</p>
+        <Link href={"/create-character"}>
+          <Button>Create New Game</Button>
+        </Link>
+      </div>
+    );
+  }
 
   const storylineParts = game.levels[0].storyline
     .split(".")
