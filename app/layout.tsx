@@ -11,10 +11,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { getTokens } from "@/server/tokens";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
   title: "Textual Games - Play your own unique story",
   description:
     "Textual Games is a platform for creating unique stories, and playing them in a text-based adventure game. Start creating your own story today!",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
   openGraph: {
     images: "/img/og-image.png",
   },
