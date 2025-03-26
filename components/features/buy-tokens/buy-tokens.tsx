@@ -41,7 +41,7 @@ export default function BuyTokens() {
   };
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center px-5 md:px-24">
       {!showPayment && (
         <>
           <div className="grid w-full gap-5 font-mono md:grid-cols-2 lg:px-20 xl:grid-cols-3">
@@ -158,6 +158,6 @@ export default function BuyTokens() {
           <PaymentForm back={() => setShowPayment(false)} />
         </Elements>
       )}
-    </>
+    </div>
   );
 }
