@@ -38,7 +38,9 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <GlassmorphNavbar tokens={tokens} />
-            {children}
+            <div className="flex flex-col items-center justify-center px-5 md:px-24">
+              {children}
+            </div>
             <Toaster />
             <Analytics />
             {process.env.APP_ENV === "development" && <ScreenSize />}
