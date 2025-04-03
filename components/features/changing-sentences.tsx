@@ -20,7 +20,7 @@ export default function ChangingSentences() {
     <TextEffect
       per="word"
       as="h2"
-      preset="blur"
+      preset="blur-sm"
       className="text-center font-mono font-bold"
     >
       {sentence}

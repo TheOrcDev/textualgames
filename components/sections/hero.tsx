@@ -12,7 +12,14 @@ const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 export default function Hero() {
   return (
-    <section className="flex w-full flex-col gap-16 overflow-hidden p-10 pt-20 antialiased bg-grid-black/[0.03] dark:bg-grid-white/[0.03] sm:h-svh md:items-center md:justify-center md:p-24">
+    <section className="flex w-full flex-col gap-16 overflow-hidden p-10 pt-20 antialiased sm:h-svh md:items-center md:justify-center md:p-24">
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0 [background-size:40px_40px] select-none -z-10",
+          "[background-image:linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] dark:[background-image:linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)]"
+        )}
+      />
+
       <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-3">
         <Link href={"/"} className="text-xs sm:text-sm">
           <h1 className={cn(pressStart2P.className, "font-bold")}>
@@ -28,7 +35,7 @@ export default function Hero() {
         <div className="flex flex-col items-center justify-center gap-2 text-xl md:text-4xl">
           <h2 className="text-center font-mono font-bold md:text-5xl">
             Create your own{" "}
-            <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-primary bg-clip-text text-transparent">
+            <span className="bg-linear-to-r to-primary from-purple-400 via-pink-500 bg-clip-text text-transparent">
               unique story
             </span>
             .
@@ -53,7 +60,7 @@ export default function Hero() {
       </div>
 
       <div className="flex max-w-3xl flex-col items-center justify-center gap-5">
-        <h3 className="text-center font-mono text-xl font-bold text-muted-foreground">
+        <h3 className="text-muted-foreground text-center font-mono text-xl font-bold">
           Screenshots from the game
         </h3>
 

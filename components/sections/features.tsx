@@ -13,7 +13,7 @@ export default function Features() {
       </Badge>
       <h2 className="text-2xl font-bold md:text-4xl">
         Key Features of{" "}
-        <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-primary bg-clip-text text-transparent">
+        <span className="bg-linear-to-r from-purple-400 via-pink-500 to-primary bg-clip-text text-transparent">
           Textual Games
         </span>
       </h2>

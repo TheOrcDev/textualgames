@@ -92,7 +92,7 @@ export default function GlassmorphNavbar({ tokens }: Props) {
               <Button
                 onClick={() => setIsOpen(!isOpen)}
                 variant={"ghost"}
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white dark:bg-black/20 dark:text-gray-200"
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-white/20 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white dark:bg-black/20 dark:text-gray-200"
               >
                 <span className="sr-only">Open main menu</span>
                 {isOpen ? (

@@ -12,7 +12,13 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 
-export type PresetType = "blur" | "fade-in-blur" | "scale" | "fade" | "slide";
+export type PresetType =
+  | "blur"
+  | "blur-sm"
+  | "fade-in-blur"
+  | "scale"
+  | "fade"
+  | "slide";
 
 export type PerType = "word" | "char" | "line";
 
@@ -75,6 +81,14 @@ const presetVariants: Record<
       hidden: { opacity: 0, filter: "blur(12px)" },
       visible: { opacity: 1, filter: "blur(0px)" },
       exit: { opacity: 0, filter: "blur(12px)" },
+    },
+  },
+  "blur-sm": {
+    container: defaultContainerVariants,
+    item: {
+      hidden: { opacity: 0, filter: "blur(4px)" },
+      visible: { opacity: 1, filter: "blur(0px)" },
+      exit: { opacity: 0, filter: "blur(4px)" },
     },
   },
   "fade-in-blur": {
@@ -203,6 +217,11 @@ const createVariantsWithTransition = (
       },
     },
   };
+};
+
+const baseVariants = {
+  container: defaultContainerVariants,
+  item: defaultItemVariants,
 };
 
 export function TextEffect({

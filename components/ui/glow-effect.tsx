@@ -113,14 +113,14 @@ export function GlowEffect({
     },
   };
 
-  const getBlurClass = (blur: GlowEffectProps["blur"]) => {
+  const getBlurClass = (blur: GlowEffectProps["blur-sm"]) => {
     if (typeof blur === "number") {
       return `blur-[${blur}px]`;
     }
 
     const presets = {
       softest: "blur-xs",
-      soft: "blur-sm",
+      soft: "blur-xs",
       medium: "blur-md",
       strong: "blur-lg",
       stronger: "blur-xl",
