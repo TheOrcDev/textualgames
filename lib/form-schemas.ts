@@ -1,9 +1,8 @@
 import { z } from "zod";
 
-import { Genre } from "@/components/shared/types";
 
 export const createCharacterFormSchema = z.object({
-  genre: z.nativeEnum(Genre),
+  genre: z.enum(["Fantasy", "Sci-Fi", "Dystopian"] as const),
   name: z
     .string()
     .min(2, {
@@ -12,7 +11,7 @@ export const createCharacterFormSchema = z.object({
     .max(64, {
       message: "Name cannot exceed 64 characters.",
     }),
-  gender: z.enum(["male", "female"]).default("male"),
+  gender: z.enum(["male", "female"] as const),
   plot: z
     .string({
       message: "You have to choose a story.",
