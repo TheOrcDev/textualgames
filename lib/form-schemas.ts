@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-
 export const createCharacterFormSchema = z.object({
   genre: z.enum(["Fantasy", "Sci-Fi", "Dystopian"] as const),
   name: z
