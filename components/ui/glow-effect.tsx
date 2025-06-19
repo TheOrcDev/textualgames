@@ -39,7 +39,7 @@ export function GlowEffect({
   scale = 1,
   duration = 5,
 }: GlowEffectProps) {
-  const BASE_TRANSITION = {
+  const BASE_TRANSITION: Transition = {
     repeat: Infinity,
     duration: duration,
     ease: "linear",
@@ -141,7 +141,7 @@ export function GlowEffect({
           backfaceVisibility: "hidden",
         } as React.CSSProperties
       }
-      animate={animations[mode]}
+      animate={animations[mode as keyof typeof animations]}
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full",
         "scale-[var(--scale)] transform-gpu",
