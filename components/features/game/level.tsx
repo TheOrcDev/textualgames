@@ -46,7 +46,7 @@ export default function GameLevel({ game }: Props) {
     return (
       <div className="flex flex-col items-center justify-center gap-5">
         <p>No levels found, please create a new game.</p>
-        <Link href={"/create-character"}>
+        <Link href={"/play/create-character"}>
           <Button>Create New Game</Button>
         </Link>
       </div>

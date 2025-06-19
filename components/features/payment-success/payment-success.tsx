@@ -1,11 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+
 import { getPaymentIntent } from "@/server/tokens";
+
+import { Button } from "@/components/ui/button";
 
 export default function PaymentSuccess() {
   const searchParams = useSearchParams();
@@ -34,7 +36,7 @@ export default function PaymentSuccess() {
       {paymentIntentData && (
         <div className="flex flex-col items-center justify-center gap-5">
           <h2>You have successfully bought {paymentIntentData} tokens!</h2>
-          <Link href={"/create-character"}>
+          <Link href={"/play/create-character"}>
             <Button>Go and play your story!</Button>
           </Link>
         </div>
