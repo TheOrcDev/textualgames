@@ -15,7 +15,7 @@ export default function LoginPage() {
             <Image
               width={50}
               height={50}
-              src={"/img/logo.png"}
+              src={"/textual-games-logo.png"}
               alt="Textual Games Logo"
               priority
             />

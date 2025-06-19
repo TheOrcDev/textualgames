@@ -12,7 +12,7 @@ export default async function PlayLayout({
   return (
     <>
       <GlassmorphNavbar tokens={tokens} />
-      {children}
+      <div className="px-5">{children}</div>
     </>
   );
 }

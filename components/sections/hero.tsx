@@ -1,4 +1,5 @@
 import { Press_Start_2P } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
@@ -24,8 +25,17 @@ export default function Hero() {
       />
 
       <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-3">
-        <Link href={"/"} className="text-xs sm:text-sm">
-          <h1 className={cn(pressStart2P.className, "font-bold")}>
+        <Link href={"/"} className="text-xs sm:text-sm flex items-center gap-2">
+          <Image
+            width={50}
+            height={50}
+            src={"/textual-games-logo.png"}
+            alt="Textual Games Logo"
+            priority
+          />
+          <h1
+            className={cn(pressStart2P.className, "font-bold hidden sm:block")}
+          >
             Textual Games
           </h1>
         </Link>

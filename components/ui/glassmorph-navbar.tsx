@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { Press_Start_2P } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Coins, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
@@ -34,9 +35,19 @@ export default function GlassmorphNavbar({ tokens }: Props) {
               <div className="shrink-0">
                 <Link
                   href={"/"}
-                  className={cn(pressStart2P.className, "text-sm")}
+                  className={cn(
+                    pressStart2P.className,
+                    "text-sm flex items-center gap-2"
+                  )}
                 >
-                  <span className="text-md font-semibold text-gray-800 dark:text-gray-200">
+                  <Image
+                    width={50}
+                    height={50}
+                    src={"/textual-games-logo.png"}
+                    alt="Textual Games Logo"
+                    priority
+                  />
+                  <span className="text-xs lg:text-md font-semibold text-gray-800 dark:text-gray-200 hidden sm:block">
                     Textual Games
                   </span>
                 </Link>

@@ -22,7 +22,7 @@ const ForgotPasswordEmail = ({ resetLink, username }: ForgotPasswordProps) => {
   return (
     <Html>
       <Head />
-      <Preview>Reset your Meal Planner password</Preview>
+      <Preview>Reset your Textual Games password</Preview>
       <Tailwind>
         <Body className="bg-gray-100 font-sans py-[40px]">
           <Container className="bg-white border border-solid border-gray-200 rounded-[8px] p-[48px] max-w-[600px]">
@@ -35,8 +35,8 @@ const ForgotPasswordEmail = ({ resetLink, username }: ForgotPasswordProps) => {
             </Text>
 
             <Text className="text-[16px] leading-[24px] text-gray-600 mb-[24px]">
-              We received a request to reset your password for your Meal Planner
-              account. Click the button below to create a new password:
+              We received a request to reset your password for your Textual
+              Games account. Click the button below to create a new password:
             </Text>
 
             <Section className="text-center mb-[32px]">
@@ -55,7 +55,7 @@ const ForgotPasswordEmail = ({ resetLink, username }: ForgotPasswordProps) => {
             </Text>
 
             <Text className="text-[16px] leading-[24px] text-gray-600 mb-[32px]">
-              Need help? Contact our support team at support@mealplanner.com
+              Need help? Contact our support team at support@textualgames.com
             </Text>
 
             <Text className="text-[14px] leading-[20px] text-gray-500 mb-[32px]">
@@ -65,7 +65,8 @@ const ForgotPasswordEmail = ({ resetLink, username }: ForgotPasswordProps) => {
 
             <Section className="border-t border-solid border-gray-200 pt-[24px]">
               <Text className="text-[14px] text-gray-500 m-0">
-                © {new Date().getFullYear()} Meal Planner. All rights reserved.
+                © {new Date().getFullYear()} Textual Games. All rights
+                reserved.
               </Text>
               <Text className="text-[14px] text-gray-500 m-0">
                 <a
