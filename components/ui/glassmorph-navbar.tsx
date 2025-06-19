@@ -5,9 +5,11 @@ import { useState } from "react";
 import { Press_Start_2P } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Coins, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
 
+import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
 import { Button } from "./button";
@@ -21,6 +23,13 @@ interface Props {
 
 export default function GlassmorphNavbar({ tokens }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    router.push("/");
+  };
 
   return (
     <div className="p-14">
@@ -61,19 +70,22 @@ export default function GlassmorphNavbar({ tokens }: Props) {
                     My Games
                   </Button>
                 </Link>
+
                 <Link href={"/play/profile"}>
                   <Button variant={"ghost"}>
                     <User />
                     Profile
                   </Button>
                 </Link>
+
                 <Link href={"/play/buy-tokens"}>
                   <Button variant={"ghost"}>
                     <Coins />
                     {tokens}
                   </Button>
                 </Link>
-                <Button variant={"ghost"}>
+
+                <Button variant={"ghost"} onClick={handleSignOut}>
                   <LogOut />
                   Log out
                 </Button>
