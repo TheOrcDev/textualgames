@@ -1,16 +1,17 @@
 "use client";
 
-import { useClerk, useUser } from "@clerk/nextjs";
-import { Coins, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
+import { useState } from "react";
+
 import { Press_Start_2P } from "next/font/google";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+
+import { Coins, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 import { Button } from "./button";
 import { ModeToggle } from "./mode-toggle";
+
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 interface Props {
@@ -18,27 +19,7 @@ interface Props {
 }
 
 export default function GlassmorphNavbar({ tokens }: Props) {
-  const { signOut } = useClerk();
-  const { isSignedIn } = useUser();
-
-  const pathname = usePathname();
-  const pathnameWithoutParams = pathname.split("/").slice(0, 2).join("/");
-
   const [isOpen, setIsOpen] = useState(false);
-
-  const isHidden =
-    (!isSignedIn &&
-      pathname !== "/my-games" &&
-      pathname !== "/profile" &&
-      pathname !== "/buy-tokens" &&
-      pathname !== "/order-complete" &&
-      pathname !== "/create-character" &&
-      pathnameWithoutParams !== "/game") ||
-    pathname === "/";
-
-  if (isHidden) {
-    return null;
-  }
 
   return (
     <div className="p-14">
@@ -63,25 +44,25 @@ export default function GlassmorphNavbar({ tokens }: Props) {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-center gap-1 font-mono">
-                <Link href={"/my-games"}>
+                <Link href={"/play/my-games"}>
                   <Button variant={"ghost"}>
                     <LayoutGrid />
                     My Games
                   </Button>
                 </Link>
-                <Link href={"/profile"}>
+                <Link href={"/play/profile"}>
                   <Button variant={"ghost"}>
                     <User />
                     Profile
                   </Button>
                 </Link>
-                <Link href={"/buy-tokens"}>
+                <Link href={"/play/buy-tokens"}>
                   <Button variant={"ghost"}>
                     <Coins />
                     {tokens}
                   </Button>
                 </Link>
-                <Button variant={"ghost"} onClick={() => signOut()}>
+                <Button variant={"ghost"}>
                   <LogOut />
                   Log out
                 </Button>
@@ -109,19 +90,19 @@ export default function GlassmorphNavbar({ tokens }: Props) {
           <div className="md:hidden">
             <div className="flex items-center justify-between gap-3 px-5 py-3 font-mono">
               <div className="flex flex-col">
-                <Link href={"/my-games"}>
+                <Link href={"/play/my-games"}>
                   <Button variant={"ghost"}>
                     <LayoutGrid />
                     My Games
                   </Button>
                 </Link>
-                <Link href={"/profile"}>
+                <Link href={"/play/profile"}>
                   <Button variant={"ghost"}>
                     <User />
                     Profile
                   </Button>
                 </Link>
-                <Link href={"/buy-tokens"}>
+                <Link href={"/play/buy-tokens"}>
                   <Button variant={"ghost"}>
                     <Coins />
                     {tokens} Tokens

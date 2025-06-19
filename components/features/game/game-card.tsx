@@ -1,10 +1,12 @@
 "use client";
 
-import { Trash } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { useToast } from "@/components/hooks/use-toast";
+import { Game } from "@/db/schema";
+import { deleteGame } from "@/server/games";
+import { Trash } from "lucide-react";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,8 +29,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Game } from "@/db/schema";
-import { deleteGame } from "@/server/games";
+
+import { useToast } from "@/components/hooks/use-toast";
 
 interface Props {
   game: Game;
@@ -49,6 +51,7 @@ export default function GameCard({ game }: Props) {
 
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast({
         title: "Couldn't delete",
         description: "Something went wrong. Please try again.",

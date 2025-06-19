@@ -1,14 +1,15 @@
 "use client";
 
+import React from "react";
+
 import {
   AnimatePresence,
-  motion,
   TargetAndTransition,
   Transition,
   Variant,
   Variants,
+  motion,
 } from "motion/react";
-import React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -193,7 +194,7 @@ const createVariantsWithTransition = (
 ): Variants => {
   if (!transition) return baseVariants;
 
-  const { exit: _, ...mainTransition } = transition;
+  const { ...mainTransition } = transition;
 
   return {
     ...baseVariants,
@@ -217,11 +218,6 @@ const createVariantsWithTransition = (
       },
     },
   };
-};
-
-const baseVariants = {
-  container: defaultContainerVariants,
-  item: defaultItemVariants,
 };
 
 export function TextEffect({

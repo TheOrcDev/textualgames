@@ -1,13 +1,16 @@
 import { Press_Start_2P } from "next/font/google";
 import Link from "next/link";
 
-import ChangingSentences from "@/components/features/changing-sentences";
-import ImageSlider from "@/components/features/image-slider";
+import { cn } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import { GlowEffect } from "@/components/ui/glow-effect";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Spotlight } from "@/components/ui/spotlight";
-import { cn } from "@/lib/utils";
+
+import ChangingSentences from "@/components/features/changing-sentences";
+import ImageSlider from "@/components/features/image-slider";
+
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 export default function Hero() {
@@ -44,7 +47,7 @@ export default function Hero() {
           <ChangingSentences />
         </div>
 
-        <Link href={"/create-character"}>
+        <Link href={"/play/create-character"}>
           <div className="relative w-max">
             <GlowEffect
               colors={["#FF5733", "#33FF57", "#3357FF", "#F1C40F"]}

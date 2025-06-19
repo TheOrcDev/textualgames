@@ -1,6 +1,5 @@
 "use server";
 
-import { currentUser } from "@clerk/nextjs/server";
 import { PostgresChatMessageHistory } from "@langchain/community/stores/message/postgres";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import {
@@ -18,6 +17,8 @@ import { characters, Game, games, levels, tokenSpends } from "@/db/schema";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import { getTotalTokens } from "@/lib/queries";
 import StoryCreator from "@/lib/story-creator";
+
+import { getUserSession } from "./users";
 
 if (!process.env.OPENAI_API_KEY) {
   throw "No OpenAI API Key";
@@ -93,11 +94,11 @@ const creator = new StoryCreator();
 export async function createCharacter(
   formData: z.infer<typeof createCharacterFormSchema>
 ) {
-  const user = await currentUser();
+  const { user } = await getUserSession();
 
   try {
     const totalUserTokens = await getTotalTokens(
-      user?.emailAddresses[0].emailAddress!
+      user.email
     );
 
     if (totalUserTokens <= 0) {
@@ -107,7 +108,7 @@ export async function createCharacter(
     const [newGame] = await db
       .insert(games)
       .values({
-        email: user?.emailAddresses[0].emailAddress!,
+        email: user.email,
         genre: formData.genre,
         choice: "",
       })
@@ -149,7 +150,7 @@ export async function createCharacter(
 
     await db.insert(tokenSpends).values({
       amount: 1,
-      email: user?.emailAddresses[0].emailAddress!,
+      email: user.email,
       action: "level",
     });
 
@@ -191,11 +192,11 @@ export async function createCharacter(
 }
 
 export async function getLevel(game: Game) {
-  const user = await currentUser();
+  const { user } = await getUserSession();
 
   try {
     const totalUserTokens = await getTotalTokens(
-      user?.emailAddresses[0].emailAddress!
+      user.email
     );
 
     if (totalUserTokens <= 0) {
@@ -217,7 +218,7 @@ export async function getLevel(game: Game) {
       const [newGame] = await db
         .insert(games)
         .values({
-          email: user?.emailAddresses[0].emailAddress!,
+          email: user.email,
           genre: game.genre,
           choice: "",
         })
@@ -243,7 +244,7 @@ export async function getLevel(game: Game) {
 
     await db.insert(tokenSpends).values({
       amount: 1,
-      email: user?.emailAddresses[0].emailAddress!,
+      email: user.email,
       action: "level",
     });
 
