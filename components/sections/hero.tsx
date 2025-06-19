@@ -6,11 +6,12 @@ import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { GlowEffect } from "@/components/ui/glow-effect";
-import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Spotlight } from "@/components/ui/spotlight";
 
 import ChangingSentences from "@/components/features/changing-sentences";
 import ImageSlider from "@/components/features/image-slider";
+
+import { ModeSwitcher } from "../mode-switcher";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
@@ -39,7 +40,7 @@ export default function Hero() {
             Textual Games
           </h1>
         </Link>
-        <ModeToggle />
+        <ModeSwitcher />
       </div>
 
       <Spotlight height={1000} />

@@ -12,8 +12,8 @@ import { Coins, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
+import { ModeSwitcher } from "../mode-switcher";
 import { Button } from "./button";
-import { ModeToggle } from "./mode-toggle";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
@@ -89,7 +89,7 @@ export default function GlassmorphNavbar({ tokens }: Props) {
                   <LogOut />
                   Log out
                 </Button>
-                <ModeToggle />
+                <ModeSwitcher />
               </div>
             </div>
             <div className="md:hidden">
@@ -133,7 +133,7 @@ export default function GlassmorphNavbar({ tokens }: Props) {
                 </Link>
               </div>
 
-              <ModeToggle />
+              <ModeSwitcher />
             </div>
           </div>
         )}
