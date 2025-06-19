@@ -31,5 +31,6 @@ export const auth = betterAuth({
         provider: "pg",
         schema: schema
     }),
+    trustedOrigins: [process.env.NEXT_PUBLIC_APP_URL as string],
     plugins: [nextCookies()],
 });
