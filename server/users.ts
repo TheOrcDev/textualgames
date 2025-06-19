@@ -117,7 +117,7 @@ export const updateProfile = async (data: z.infer<typeof userSchema>) => {
             values: {
                 text: "Successfully updated profile.",
             },
-            redirect: "/dashboard/meal-planner",
+            redirect: "/play/create-character",
         }
     } catch (e) {
         const error = e as Error;

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "sonner";
 
 import { ScreenSize } from "@/components/ui/screen-size";
-import { Toaster } from "@/components/ui/toaster";
 
 import { ThemeProvider } from "@/components/providers";
 
@@ -24,8 +24,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const tokens = await getTokens();
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="overflow-x-hidden scroll-smooth font-mono antialiased">
