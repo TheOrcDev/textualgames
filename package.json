@@ -13,8 +13,6 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.3.22",
-    "@clerk/nextjs": "^6.22.0",
-    "@clerk/themes": "^2.2.50",
     "@hookform/resolvers": "^5.1.1",
     "@langchain/community": "^0.3.46",
     "@langchain/core": "^0.3.59",
@@ -34,6 +32,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toast": "^1.2.14",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@react-email/components": "^0.1.0",
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^7.3.1",
     "@tailwindcss/postcss": "^4.1.10",
@@ -42,6 +41,7 @@
     "@types/react-dom": "^19.1.6",
     "@vercel/analytics": "^1.5.0",
     "ai": "^4.3.16",
+    "better-auth": "^1.2.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.1.1",
@@ -64,6 +64,7 @@
     "react-hook-form": "^7.58.0",
     "react-use-measure": "^2.1.7",
     "resend": "4.6.0",
+    "sonner": "^2.0.5",
     "stripe": "^18.2.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.10",
@@ -77,11 +78,15 @@
     }
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@next/eslint-plugin-next": "^15.3.3",
     "@typescript-eslint/parser": "^8.34.1",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1",
+    "prettier": "^3.5.3",
     "cz-customizable": "^7.4.0",
     "drizzle-kit": "^0.31.1",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7"
   },
   "type": "module"

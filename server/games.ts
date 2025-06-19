@@ -1,11 +1,12 @@
 "use server";
 
-import { currentUser } from "@clerk/nextjs/server";
 import { desc, eq } from "drizzle-orm";
 
 import { isValidUUID } from "@/db";
 import db from "@/db/drizzle";
 import { characters, Game, games, levels } from "@/db/schema";
+
+import { getUserSession } from "./users";
 
 export const getGame = async (gameId: string): Promise<Game | null> => {
   const isValidGameId = isValidUUID(gameId);
@@ -39,9 +40,9 @@ export const getGame = async (gameId: string): Promise<Game | null> => {
 
 export const getGames = async (): Promise<Game[]> => {
   try {
-    const user = await currentUser();
+    const { user } = await getUserSession();
 
-    const userEmail = user?.emailAddresses[0].emailAddress;
+    const userEmail = user.email;
 
     if (!userEmail) {
       throw new Error("User email not found");

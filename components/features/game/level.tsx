@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+
+import { Game } from "@/db/schema";
+import { getLevel } from "@/server/ai";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,8 +19,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { Game } from "@/db/schema";
-import { getLevel } from "@/server/ai";
 
 import LoadingSentences from "../loading-sentences";
 import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
@@ -28,6 +30,18 @@ interface Props {
 export default function GameLevel({ game }: Props) {
   const router = useRouter();
 
+  const defaultChoices = JSON.parse(game.levels[0].choices);
+  const storylineParts = game.levels[0].storyline
+    .split(".")
+    .filter((part: string) => part.trim());
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasNoTokens, setHasNoTokens] = useState(false);
+  const [userInput, setUserInput] = useState("");
+  const [showChoices, setShowChoices] = useState(false);
+  const [gameText, setGameText] = useState(storylineParts);
+  const [choices, setChoices] = useState(defaultChoices);
+
   if (!game.levels[0]) {
     return (
       <div className="flex flex-col items-center justify-center gap-5">
@@ -38,19 +52,6 @@ export default function GameLevel({ game }: Props) {
       </div>
     );
   }
-
-  const storylineParts = game.levels[0].storyline
-    .split(".")
-    .filter((part: string) => part.trim());
-
-  const defaultChoices = JSON.parse(game.levels[0].choices);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasNoTokens, setHasNoTokens] = useState(false);
-  const [userInput, setUserInput] = useState("");
-  const [showChoices, setShowChoices] = useState(false);
-  const [gameText, setGameText] = useState(storylineParts);
-  const [choices, setChoices] = useState(defaultChoices);
 
   const goToNextLevel = async (choice: string) => {
     game.choice = choice;

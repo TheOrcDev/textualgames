@@ -1,5 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import * as React from "react";
+
+import { useRouter } from "next/navigation";
+
+import { createCharacter } from "@/server/ai";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Check,
@@ -10,24 +16,12 @@ import {
   ScrollText,
   Sword,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import {
-  dystopianCharacters,
-  dystopianItems,
-  dystopianPlots,
-  fantasyCharacters,
-  fantasyItems,
-  fantasyPlots,
-  sciFiCharacters,
-  sciFiItems,
-  sciFiPlots,
-} from "@/components/shared/data";
-import { Genre } from "@/components/shared/types";
+import { createCharacterFormSchema } from "@/lib/form-schemas";
+import { cn } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -70,13 +64,24 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { createCharacterFormSchema } from "@/lib/form-schemas";
-import { cn } from "@/lib/utils";
-import { createCharacter } from "@/server/ai";
+
+import {
+  dystopianCharacters,
+  dystopianItems,
+  dystopianPlots,
+  fantasyCharacters,
+  fantasyItems,
+  fantasyPlots,
+  sciFiCharacters,
+  sciFiItems,
+  sciFiPlots,
+} from "@/components/shared/data";
+import { Genre } from "@/components/shared/types";
 
 import LoadingSentences from "../loading-sentences";
 import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
 import { getRandomCharacter } from "./index";
+
 const genres = [
   {
     id: Genre.FANTASY,
@@ -137,7 +142,7 @@ export default function CharacterCreator() {
         return;
       }
 
-      router.push(`/game/${data.gameId}`);
+      router.push(`/play/game/${data.gameId}`);
     } catch (e) {
       console.log(e);
     } finally {
@@ -520,7 +525,7 @@ export default function CharacterCreator() {
                             </DialogTitle>
                             <DialogDescription>
                               Select a story path that will define your
-                              character's journey
+                              character&apos;s journey
                             </DialogDescription>
                           </DialogHeader>
                           <ScrollArea className="h-[400px] w-full rounded-md border p-4">

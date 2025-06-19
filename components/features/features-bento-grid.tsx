@@ -1,13 +1,4 @@
-import {
-  Globe,
-  Heart,
-  Infinity,
-  Shuffle,
-  Target,
-  Users,
-  VenetianMask,
-  Zap,
-} from "lucide-react";
+import { Infinity, Globe, Shuffle, VenetianMask } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 
@@ -44,7 +35,8 @@ export default function BentoGrid() {
             </h3>
             <p className="text-muted-foreground">
               Your choices shape the world around you. Explore limitless
-              adventures, forge alliances, or create chaos - it's all up to you.
+              adventures, forge alliances, or create chaos - it&apos;s all up to
+              you.
             </p>
           </div>
         </div>

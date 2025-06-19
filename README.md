@@ -53,13 +53,11 @@ your `Stripe` publishable and secret key for payments
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="YOUR_STRIPE_PUBLISHABLE_KEY"
 STRIPE_SECRET_KEY="YOUR_STRIPE_SECRET_KEY"
 ```
-and your `Clerk` keys for authentication
+and your `Better Auth` keys for authentication
 
 ```bash
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="YOUR_CLERK_PUBLISHABLE_KEY"
-CLERK_SECRET_KEY="YOUR_CLERK_SECRET_KEY"
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
 ```
 
 After that everything is ready, just run the app, and play the game!

@@ -1,6 +1,5 @@
 "use server";
 
-import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { Resend } from "resend";
 import Stripe from "stripe";
@@ -10,6 +9,8 @@ import { Tokens } from "@/components/shared/types";
 import db from "@/db/drizzle";
 import { purchases, tokenSpends } from "@/db/schema";
 import { getTotalTokens } from "@/lib/queries";
+
+import { getUserSession } from "./users";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   typescript: true,
@@ -33,11 +34,11 @@ const getTokenByPrice = (price: number) => {
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function getTokens() {
-  const user = await currentUser();
+  const { user } = await getUserSession();
 
   try {
     const totalUserTokens = await getTotalTokens(
-      user?.emailAddresses[0].emailAddress!
+      user.email
     );
 
     return totalUserTokens;
@@ -66,7 +67,7 @@ export async function getPaymentIntent(
   paymentIntentSecret: string
 ) {
   try {
-    const user = await currentUser();
+    const { user } = await getUserSession();
 
     const paymentIntent =
       await stripe.paymentIntents.retrieve(paymentIntentString);
@@ -88,7 +89,7 @@ export async function getPaymentIntent(
     const amountOfTokens = getTokenByPrice(paymentIntent.amount / 100);
 
     await db.insert(purchases).values({
-      email: user?.emailAddresses[0].emailAddress!,
+      email: user.email,
       paymentIntent: paymentIntentString,
       paymentIntentSecret,
       amount: +amountOfTokens,
@@ -96,7 +97,7 @@ export async function getPaymentIntent(
 
     const { error } = await resend.emails.send({
       from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
-      to: [user?.emailAddresses[0].emailAddress!],
+      to: [user.email],
       subject: "Your Story Begins Here",
       react: await BoughtTokens({ tokens: amountOfTokens }),
     });

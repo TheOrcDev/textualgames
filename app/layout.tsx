@@ -1,14 +1,13 @@
-import "./globals.css";
-
-import { ClerkProvider } from "@clerk/nextjs";
-import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 
-import { ThemeProvider } from "@/components/providers";
-import GlassmorphNavbar from "@/components/ui/glassmorph-navbar";
+import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "sonner";
+
 import { ScreenSize } from "@/components/ui/screen-size";
-import { Toaster } from "@/components/ui/toaster";
-import { getTokens } from "@/server/tokens";
+
+import { ThemeProvider } from "@/components/providers";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Textual Games - Play your own unique story",
@@ -25,26 +24,21 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const tokens = await getTokens();
-
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className="overflow-x-hidden scroll-smooth font-mono antialiased">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <GlassmorphNavbar tokens={tokens} />
-            {children}
-            <Toaster />
-            <Analytics />
-            {process.env.APP_ENV === "development" && <ScreenSize />}
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className="overflow-x-hidden scroll-smooth font-mono antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+          <Analytics />
+          {process.env.APP_ENV === "development" && <ScreenSize />}
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
