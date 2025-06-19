@@ -56,15 +56,15 @@ export function TextShimmerWave({
               "inline-block whitespace-pre [transform-style:preserve-3d]"
             )}
             initial={{
-              translateZ: 0,
+              z: 0,
               scale: 1,
               rotateY: 0,
               color: "var(--base-color)",
             }}
             animate={{
-              translateZ: [0, zDistance, 0],
-              translateX: [0, xDistance, 0],
-              translateY: [0, yDistance, 0],
+              z: [0, zDistance, 0],
+              x: [0, xDistance, 0],
+              y: [0, yDistance, 0],
               scale: [1, scaleDistance, 1],
               rotateY: [0, rotateYDistance, 0],
               color: [
