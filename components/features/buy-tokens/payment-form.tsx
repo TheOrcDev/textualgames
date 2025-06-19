@@ -27,7 +27,7 @@ export default function PaymentForm({ back }: Props) {
     await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${process.env.NEXT_PUBLIC_APP_URL}/order-complete`,
+        return_url: `${process.env.NEXT_PUBLIC_APP_URL}/play/order-complete`,
       },
     });
   }
