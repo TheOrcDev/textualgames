@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import GameLevel from "@/components/features/game/level";
-import { Button } from "@/components/ui/button";
 import { getGame } from "@/server/games";
+
+import { Button } from "@/components/ui/button";
+
+import GameLevel from "@/components/features/game/level";
 
 export const metadata: Metadata = {
   title: "Play Your Game: Interactive Story on Textual Games",

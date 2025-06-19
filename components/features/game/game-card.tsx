@@ -61,7 +61,7 @@ export default function GameCard({ game }: Props) {
 
   return (
     <Card className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-linear-to-br">
-      <Link href={`/game/${game.id}`}>
+      <Link href={`/play/game/${game.id}`}>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <div>{game.character?.name}</div>
@@ -99,7 +99,7 @@ export default function GameCard({ game }: Props) {
       </Link>
 
       <CardFooter className="flex items-center justify-between gap-3">
-        <Link href={`/game/${game.id}`}>
+        <Link href={`/play/game/${game.id}`}>
           <Button>Continue</Button>
         </Link>
 
