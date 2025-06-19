@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,7 +24,9 @@ export default function LoginPage() {
           </div>
           Textual Games
         </Link>
-        <ResetPasswordForm />
+        <Suspense>
+          <ResetPasswordForm />
+        </Suspense>
       </div>
     </div>
   );

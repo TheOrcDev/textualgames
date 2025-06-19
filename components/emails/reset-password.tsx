@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Body,
   Button,
@@ -9,8 +10,8 @@ import {
   Link,
   Preview,
   Section,
-  Text,
   Tailwind,
+  Text,
 } from "@react-email/components";
 
 interface ForgotPasswordEmailProps {

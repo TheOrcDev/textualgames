@@ -2,13 +2,13 @@ import { getTokens } from "@/server/tokens";
 
 import GlassmorphNavbar from "@/components/ui/glassmorph-navbar";
 
-const tokens = await getTokens();
-
-export default function PlayLayout({
+export default async function PlayLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const tokens = await getTokens();
+
   return (
     <>
       <GlassmorphNavbar tokens={tokens} />
