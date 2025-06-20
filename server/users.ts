@@ -9,7 +9,11 @@ import db from "@/db/drizzle";
 import { user } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
+import WelcomeEmail from "@/components/emails/welcome";
+import { Resend } from "resend";
 import { userSchema } from "./schemas";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const getUserById = async (id: string) => {
     const [currentUser] = await db.select().from(user).where(eq(user.id, id));
@@ -78,6 +82,13 @@ export const signUp = async (email: string, password: string, username: string) 
                 name: username
             }
         })
+
+        await resend.emails.send({
+            from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
+            to: [email],
+            subject: "Welcome to Textual Games",
+            react: WelcomeEmail({ name: username }),
+        });
 
         return {
             success: true,
