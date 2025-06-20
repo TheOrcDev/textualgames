@@ -70,18 +70,17 @@ export default class StoryCreator {
 
   async getImagePrompt(game: Game) {
     return `
-    Create a highly detailed, photorealistic scenery image for a visual novel game. 
-    The setting should align with the game's storyline and mood.
+    Generate a highly detailed, photorealistic scenery image for a visual novel game, designed to immerse players in the game's atmosphere. The scene must align with the storyline and mood, featuring a consistent, slightly dark aesthetic with muted tones, subtle shadows, and realistic textures to enhance the immersive and grounded feel.
 
-    - Storyline: ${game.character.plot}
-
-    - Character: A ${game.character.gender} ${game.character.type} carrying ${game.character.items}.
-
-    - Genre & Mood: "${game.genre}" (ensure the atmosphere matches this genre).
-
-    - Style: Photorealistic, immersive, and visually striking.
-
-    - Requirements: No text, symbols, UI elements, or overlays—just a pure, high-quality scenic artwork.
+    Storyline: Reflect the narrative of ${game.character.plot}, ensuring the environment complements the plot’s themes and emotional tone.
+    
+    Character: Depict a ${game.character.gender} ${game.character.type} carrying ${game.character.items}, integrated naturally into the scene. The character’s appearance and posture should harmonize with the setting and mood.
+    
+    Genre & Mood: "${game.genre}"—craft the atmosphere to evoke the specific emotions and tone of this genre, emphasizing a slightly dark, moody ambiance with realistic lighting and depth.
+    
+    Style: Photorealistic with a slightly dark aesthetic (e.g., muted color palettes, soft contrasts, and natural textures like weathered surfaces or dim lighting). Ensure the scene feels immersive, atmospheric, and visually striking, capturing fine details like environmental wear, light reflections, or subtle imperfections.
+    
+    Requirements: Exclude any text, symbols, UI elements, or overlays. Deliver a pure, high-quality scenic artwork that feels like a snapshot from a real, lived-in world, optimized for visual novel storytelling.
   `;
   }
 }
