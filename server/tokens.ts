@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { Resend } from "resend";
 import Stripe from "stripe";
 
-import { BoughtTokens } from "@/components/emails/bought-tokens";
+import BoughtTokens from "@/components/emails/bought-tokens";
 import { Tokens } from "@/components/shared/types";
 import db from "@/db/drizzle";
 import { purchases, tokenSpends } from "@/db/schema";
@@ -99,7 +99,7 @@ export async function getPaymentIntent(
       from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
       to: [user.email],
       subject: "Your Story Begins Here",
-      react: await BoughtTokens({ tokens: amountOfTokens }),
+      react: BoughtTokens({ tokens: +amountOfTokens }),
     });
 
     if (error) {
