@@ -188,7 +188,7 @@ export default function GameLevel({ game }: Props) {
                     key={choice}
                     onClick={() => handleChoiceSelect(choice)}
                     variant="outline"
-                    className="justify-start text-wrap p-10 text-left font-mono"
+                    className="justify-start p-10 text-left font-mono whitespace-pre-wrap"
                   >
                     {choice}
                   </Button>
