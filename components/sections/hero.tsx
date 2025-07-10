@@ -67,7 +67,7 @@ export default function Hero() {
               scale={0.9}
             />
             <Button className="relative bg-zinc-950 font-mono text-xl font-semibold">
-              Play For Free
+              Try Now For Free
             </Button>
           </div>
         </Link>
