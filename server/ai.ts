@@ -115,11 +115,7 @@ export async function createCharacter(
       .returning({ id: games.id });
 
     await db.insert(characters).values({
-      name: formData.name,
-      plot: formData.plot,
-      type: formData.type,
-      items: formData.items,
-      gender: formData.gender,
+      ...formData,
       gameId: newGame.id,
     });
 
