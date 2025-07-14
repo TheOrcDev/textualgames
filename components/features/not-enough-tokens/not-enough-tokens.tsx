@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 export default function NotEnoughTokens() {
   return (
     <div className="flex flex-col items-center justify-center gap-5">
@@ -23,9 +24,9 @@ export default function NotEnoughTokens() {
             Ready to unlock more? Get tokens now and continue playing your
             story.
           </p>
-          <Link href={"/buy-tokens"}>
-            <Button>Buy Now!</Button>
-          </Link>
+          <Button asChild>
+            <Link href={"/buy-tokens"}>Buy Now!</Link>
+          </Button>
         </CardContent>
       </Card>
     </div>

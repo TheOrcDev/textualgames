@@ -99,9 +99,9 @@ export default function GameCard({ game }: Props) {
       </Link>
 
       <CardFooter className="flex items-center justify-between gap-3">
-        <Link href={`/play/game/${game.id}`}>
-          <Button>Continue</Button>
-        </Link>
+        <Button asChild>
+          <Link href={`/play/game/${game.id}`}>Continue</Link>
+        </Button>
 
         <AlertDialog>
           <AlertDialogTrigger asChild>

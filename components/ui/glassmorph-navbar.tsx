@@ -64,26 +64,26 @@ export default function GlassmorphNavbar({ tokens }: Props) {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-center gap-1 font-mono">
-                <Link href={"/play/my-games"}>
-                  <Button variant={"ghost"}>
+                <Button variant={"ghost"} asChild>
+                  <Link href={"/play/my-games"}>
                     <LayoutGrid />
                     My Games
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
 
-                <Link href={"/play/profile"}>
-                  <Button variant={"ghost"}>
+                <Button variant={"ghost"} asChild>
+                  <Link href={"/play/profile"}>
                     <User />
                     Profile
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
 
-                <Link href={"/play/buy-tokens"}>
-                  <Button variant={"ghost"}>
+                <Button variant={"ghost"} asChild>
+                  <Link href={"/play/buy-tokens"}>
                     <Coins />
                     {tokens}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
 
                 <Button variant={"ghost"} onClick={handleSignOut}>
                   <LogOut />
@@ -113,24 +113,24 @@ export default function GlassmorphNavbar({ tokens }: Props) {
           <div className="md:hidden">
             <div className="flex items-center justify-between gap-3 px-5 py-3 font-mono">
               <div className="flex flex-col">
-                <Link href={"/play/my-games"}>
-                  <Button variant={"ghost"}>
+                <Button variant={"ghost"} asChild>
+                  <Link href={"/play/my-games"}>
                     <LayoutGrid />
                     My Games
-                  </Button>
-                </Link>
-                <Link href={"/play/profile"}>
-                  <Button variant={"ghost"}>
+                  </Link>
+                </Button>
+                <Button variant={"ghost"} asChild>
+                  <Link href={"/play/profile"}>
                     <User />
                     Profile
-                  </Button>
-                </Link>
-                <Link href={"/play/buy-tokens"}>
-                  <Button variant={"ghost"}>
+                  </Link>
+                </Button>
+                <Button variant={"ghost"} asChild>
+                  <Link href={"/play/buy-tokens"}>
                     <Coins />
                     {tokens} Tokens
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
 
               <ModeSwitcher />
