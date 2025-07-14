@@ -58,19 +58,20 @@ export default function Hero() {
           <ChangingSentences />
         </div>
 
-        <Link href={"/play/create-character"}>
-          <div className="relative w-max">
-            <GlowEffect
-              colors={["#FF5733", "#33FF57", "#3357FF", "#F1C40F"]}
-              mode="colorShift"
-              duration={3}
-              scale={0.9}
-            />
-            <Button className="relative bg-zinc-950 font-mono text-xl font-semibold">
-              Try Now For Free
-            </Button>
-          </div>
-        </Link>
+        <div className="relative w-max">
+          <GlowEffect
+            colors={["#FF5733", "#33FF57", "#3357FF", "#F1C40F"]}
+            mode="colorShift"
+            duration={3}
+            scale={0.9}
+          />
+          <Button
+            className="relative bg-zinc-950 font-mono text-xl font-semibold"
+            asChild
+          >
+            <Link href={"/play/create-character"}>Try Now For Free</Link>
+          </Button>
+        </div>
       </div>
 
       <div className="flex max-w-3xl flex-col items-center justify-center gap-5">
