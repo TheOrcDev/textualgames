@@ -25,19 +25,22 @@ export default function NotFound() {
       <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">Uh-oh!</h1>
 
       <p className="text-gray-500">You are lost.</p>
-      <Link href={"/"}>
-        <div className="relative">
+      <div className="flex justify-center">
+        <div className="relative w-max">
           <GlowEffect
             colors={["#FF5733", "#33FF57", "#3357FF", "#F1C40F"]}
             mode="colorShift"
             duration={3}
             scale={0.9}
           />
-          <Button className="relative inline-flex items-center gap-1 rounded-md bg-zinc-950 px-2.5 py-1.5 text-sm text-zinc-50 outline outline-1 outline-[#fff2f21f]">
-            Return to Home Page
+          <Button
+            className="relative inline-flex items-center gap-1 rounded-md bg-zinc-950 px-2.5 py-1.5 text-sm text-zinc-50 outline outline-[#fff2f21f]"
+            asChild
+          >
+            <Link href={"/"}>Return to Home Page</Link>
           </Button>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }
