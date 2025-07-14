@@ -5,7 +5,7 @@ import { Toaster } from "sonner";
 
 import { ScreenSize } from "@/components/ui/screen-size";
 
-import { ThemeProvider } from "@/components/providers";
+import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
 
