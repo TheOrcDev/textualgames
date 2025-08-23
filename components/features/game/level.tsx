@@ -21,7 +21,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 import LoadingSentences from "../loading-sentences";
-import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
 
 interface Props {
   game: Game;
@@ -36,7 +35,6 @@ export default function GameLevel({ game }: Props) {
     .filter((part: string) => part.trim());
 
   const [isLoading, setIsLoading] = useState(false);
-  const [hasNoTokens, setHasNoTokens] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [showChoices, setShowChoices] = useState(false);
   const [gameText, setGameText] = useState(storylineParts);
@@ -58,11 +56,6 @@ export default function GameLevel({ game }: Props) {
 
     try {
       const data = await getLevel(game);
-
-      if (data === "Not enough tokens") {
-        setHasNoTokens(true);
-        return;
-      }
 
       const storylineParts = data.level.storyline
         .split(".")
@@ -114,10 +107,6 @@ export default function GameLevel({ game }: Props) {
       setIsLoading(false);
     }
   };
-
-  if (hasNoTokens) {
-    return <NotEnoughTokens />;
-  }
 
   if (isLoading) {
     return <LoadingSentences />;

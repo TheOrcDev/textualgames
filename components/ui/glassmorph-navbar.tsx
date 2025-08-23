@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Coins, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
+import { LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
 
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
@@ -17,11 +17,7 @@ import { Button } from "./button";
 
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
-interface Props {
-  tokens: number;
-}
-
-export default function GlassmorphNavbar({ tokens }: Props) {
+export default function GlassmorphNavbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
@@ -78,13 +74,6 @@ export default function GlassmorphNavbar({ tokens }: Props) {
                   </Link>
                 </Button>
 
-                <Button variant={"ghost"} asChild>
-                  <Link href={"/play/buy-tokens"}>
-                    <Coins />
-                    {tokens}
-                  </Link>
-                </Button>
-
                 <Button variant={"ghost"} onClick={handleSignOut}>
                   <LogOut />
                   Log out
@@ -123,12 +112,6 @@ export default function GlassmorphNavbar({ tokens }: Props) {
                   <Link href={"/play/profile"}>
                     <User />
                     Profile
-                  </Link>
-                </Button>
-                <Button variant={"ghost"} asChild>
-                  <Link href={"/play/buy-tokens"}>
-                    <Coins />
-                    {tokens} Tokens
                   </Link>
                 </Button>
               </div>

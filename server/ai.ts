@@ -13,9 +13,8 @@ import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 import db from "@/db/drizzle";
-import { characters, Game, games, levels, tokenSpends } from "@/db/schema";
+import { characters, Game, games, levels } from "@/db/schema";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
-import { getTotalTokens } from "@/lib/queries";
 import StoryCreator from "@/lib/story-creator";
 
 import { getUserSession } from "./users";
@@ -97,14 +96,6 @@ export async function createCharacter(
   const { user } = await getUserSession();
 
   try {
-    const totalUserTokens = await getTotalTokens(
-      user.email
-    );
-
-    if (totalUserTokens <= 0) {
-      return "Not enough tokens";
-    }
-
     const [newGame] = await db
       .insert(games)
       .values({
@@ -143,12 +134,6 @@ export async function createCharacter(
     };
 
     const image = await getImage({ ...game, character: validCharacter });
-
-    await db.insert(tokenSpends).values({
-      amount: 1,
-      email: user.email,
-      action: "level",
-    });
 
     const level = (
       await creator.getGptStoryPrompt({ ...game, character: validCharacter })
@@ -191,14 +176,6 @@ export async function getLevel(game: Game) {
   const { user } = await getUserSession();
 
   try {
-    const totalUserTokens = await getTotalTokens(
-      user.email
-    );
-
-    if (totalUserTokens <= 0) {
-      return "Not enough tokens";
-    }
-
     // TODO: check if character plot, type, and items are from the data lists
 
     let level = "";
@@ -237,12 +214,6 @@ export async function getLevel(game: Game) {
       image = "";
       levelNumber = +game.levels[0].level + 1;
     }
-
-    await db.insert(tokenSpends).values({
-      amount: 1,
-      email: user.email,
-      action: "level",
-    });
 
     const response = await chainWithHistory.invoke(
       {

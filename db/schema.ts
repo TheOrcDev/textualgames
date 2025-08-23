@@ -18,14 +18,6 @@ export const purchases = pgTable("purchases", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export const tokenSpends = pgTable("token_spends", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  email: text("email").notNull(),
-  action: text("action").notNull(),
-  amount: integer("amount").notNull(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-});
-
 export const games = pgTable("games", {
   id: uuid("id").primaryKey().defaultRandom(),
   genre: text("genre").notNull(),

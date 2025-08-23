@@ -79,7 +79,6 @@ import {
 import { Genre } from "@/components/shared/types";
 
 import LoadingSentences from "../loading-sentences";
-import NotEnoughTokens from "../not-enough-tokens/not-enough-tokens";
 import { getRandomCharacter } from "./index";
 
 const genres = [
@@ -110,7 +109,6 @@ export default function CharacterCreator() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isGenreChangeLoading, setIsGenreChangeLoading] =
     useState<boolean>(false);
-  const [hasNoTokens, setHasNoTokens] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [availableData, setAvailableData] = useState({
     characters: fantasyCharacters,
@@ -136,11 +134,6 @@ export default function CharacterCreator() {
 
     try {
       const data = await createCharacter(values);
-
-      if (data === "Not enough tokens") {
-        setHasNoTokens(true);
-        return;
-      }
 
       router.push(`/play/game/${data.gameId}`);
     } catch (e) {
@@ -192,10 +185,6 @@ export default function CharacterCreator() {
     form.setValue("items", randomCharacter.item);
     form.setValue("plot", randomCharacter.plot);
   };
-
-  if (hasNoTokens) {
-    return <NotEnoughTokens />;
-  }
 
   if (isLoading) {
     return <LoadingSentences />;
