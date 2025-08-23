@@ -122,54 +122,58 @@ export async function createCharacter(
       throw new Error("Game not found");
     }
 
-    const validCharacter = game.character ?? {
-      id: "",
-      name: "",
-      gender: "male",
-      plot: "",
-      type: "",
-      items: "",
-      gameId: "",
-      createdAt: new Date(),
-    };
-
-    const image = await getImage({ ...game, character: validCharacter });
-
-    const level = (
-      await creator.getGptStoryPrompt({ ...game, character: validCharacter })
-    ).basePrompt;
-    const levelNumber = 1;
-
-    const response = await chainWithHistory.invoke(
-      {
-        input: level,
-      },
-      { configurable: { sessionId: game.id } }
-    );
-
-    const aiJSON = await JSON.parse(response);
-
-    if (aiJSON.items) {
-      await db
-        .update(characters)
-        .set({
-          items: JSON.stringify(aiJSON.items),
-        })
-        .where(eq(characters.gameId, game.id));
-    }
-
-    await db.insert(levels).values({
-      storyline: aiJSON.storyline,
-      choices: JSON.stringify(aiJSON.choices),
-      image,
-      level: String(levelNumber),
-      gameId: game.id,
-    });
-
-    return { gameId: game.id, level: aiJSON };
+    return { gameId: game.id };
   } catch (e) {
     throw e;
   }
+}
+
+export async function createFirstLevel(game: Game) {
+  const validCharacter = game.character ?? {
+    id: "",
+    name: "",
+    gender: "male",
+    plot: "",
+    type: "",
+    items: "",
+    gameId: "",
+    createdAt: new Date(),
+  };
+
+  const image = await getImage({ ...game, character: validCharacter });
+
+  const level = (
+    await creator.getGptStoryPrompt({ ...game, character: validCharacter })
+  ).basePrompt;
+  const levelNumber = 1;
+
+  const response = await chainWithHistory.invoke(
+    {
+      input: level,
+    },
+    { configurable: { sessionId: game.id } }
+  );
+
+  const aiJSON = await JSON.parse(response);
+
+  if (aiJSON.items) {
+    await db
+      .update(characters)
+      .set({
+        items: JSON.stringify(aiJSON.items),
+      })
+      .where(eq(characters.gameId, game.id));
+  }
+
+  await db.insert(levels).values({
+    storyline: aiJSON.storyline,
+    choices: JSON.stringify(aiJSON.choices),
+    image,
+    level: String(levelNumber),
+    gameId: game.id,
+  });
+
+  return { gameId: game.id, level: aiJSON };
 }
 
 export async function getLevel(game: Game) {

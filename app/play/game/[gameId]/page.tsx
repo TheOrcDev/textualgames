@@ -1,43 +1,23 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-
 import { getGame } from "@/server/games";
 
-import { Button } from "@/components/ui/button";
+import AIChat from "@/components/ai-chat";
 
-import GameLevel from "@/components/features/game/level";
+type Params = Promise<{
+  gameId: string;
+}>;
 
-export const metadata: Metadata = {
-  title: "Play Your Game: Interactive Story on Textual Games",
-  description:
-    "Immerse yourself in your own story. Play, make choices, and experience your interactive adventure with Textual Games.",
-};
-
-interface Props {
-  params: Promise<{
-    gameId: string;
-  }>;
-}
-
-export default async function GamePage({ params }: Props) {
+export default async function GameLevel({ params }: { params: Params }) {
   const { gameId } = await params;
 
   const game = await getGame(gameId);
 
-  if (!game?.character) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-5 p-5 py-10 pt-20 md:p-24">
-        No character found
-        <Button asChild>
-          <Link href={"/play/create-character"}>Create New Character</Link>
-        </Button>
-      </div>
-    );
-  }
+  console.log(game);
 
   return (
-    <main>
-      <GameLevel game={game} />
-    </main>
+    <div className="p-6 font-mono">
+      <div className="mx-auto max-w-4xl space-y-6">
+        <AIChat />
+      </div>
+    </div>
   );
 }

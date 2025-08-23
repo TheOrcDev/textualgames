@@ -134,7 +134,6 @@ export default function CharacterCreator() {
 
     try {
       const data = await createCharacter(values);
-
       router.push(`/play/game/${data.gameId}`);
     } catch (e) {
       console.log(e);

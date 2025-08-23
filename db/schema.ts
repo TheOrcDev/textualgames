@@ -26,7 +26,7 @@ export const games = pgTable("games", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export type Game = typeof games.$inferInsert & {
+export type Game = typeof games.$inferSelect & {
   levels: (typeof levels.$inferSelect)[];
   character: typeof characters.$inferSelect;
 };
