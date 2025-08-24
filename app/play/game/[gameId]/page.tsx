@@ -19,6 +19,13 @@ export default async function GameLevel({ params }: { params: Params }) {
     return notFound();
   }
 
+  // TODO: Check if there are no levels, and if so, create a new game
+  // Save to chat just the character stats, and send to AI actual prompt
+
+  if (game.levels.length === 0) {
+    // Create a new game
+  }
+
   const messages = await loadChat(game.chatId);
 
   return (
