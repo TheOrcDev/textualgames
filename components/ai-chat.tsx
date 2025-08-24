@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 
+import Image from "next/image";
+
+import { Game, Level } from "@/db/schema";
 import { UIMessage, useChat } from "@ai-sdk/react";
 
 import {
@@ -34,14 +37,16 @@ import {
 import ChoicesSelect from "./choices-select";
 
 interface AIChatProps {
-  chatId: string;
+  game: Game;
   initialMessages?: UIMessage[];
+  level: Level;
 }
 
-const AIChat = ({ chatId, initialMessages }: AIChatProps) => {
+const AIChat = ({ game, initialMessages, level }: AIChatProps) => {
   const [input, setInput] = useState("");
+
   const { messages, sendMessage, status } = useChat({
-    id: chatId,
+    id: game.chatId,
     messages: initialMessages ?? [],
   });
 
@@ -52,7 +57,7 @@ const AIChat = ({ chatId, initialMessages }: AIChatProps) => {
         { text: input },
         {
           body: {
-            id: chatId,
+            game,
           },
         }
       );
@@ -138,7 +143,7 @@ const AIChat = ({ chatId, initialMessages }: AIChatProps) => {
           />
           <PromptInputToolbar>
             <PromptInputTools>
-              <ChoicesSelect />
+              <ChoicesSelect level={level} />
             </PromptInputTools>
             <PromptInputSubmit disabled={!input} status={status} />
           </PromptInputToolbar>

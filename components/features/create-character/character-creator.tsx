@@ -137,8 +137,6 @@ export default function CharacterCreator() {
       router.push(`/play/game/${data.gameId}`);
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsLoading(false);
     }
   }
 

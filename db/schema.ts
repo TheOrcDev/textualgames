@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   boolean,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
   text,
@@ -47,11 +48,15 @@ export const characters = pgTable("characters", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export type Choice = {
+  text: string;
+};
+
 export const levels = pgTable("levels", {
   id: uuid("id").primaryKey().defaultRandom(),
   level: text("level").notNull(),
   image: text("image").notNull(),
-  choices: text("choices").notNull(),
+  choices: jsonb("choices").$type<Choice[]>().notNull(),
   storyline: text("storyline").notNull(),
   gameId: uuid("game_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),

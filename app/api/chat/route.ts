@@ -1,21 +1,27 @@
+import { Game } from '@/db/schema';
 import { loadChat, saveChat } from '@/lib/chat-store';
+import StoryCreator from '@/lib/story-creator';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 const model = 'openai/gpt-4o';
 
+const creator = new StoryCreator();
+
 export async function POST(req: Request) {
     const {
         messages,
-        id
-    }: { messages: UIMessage[]; id: string } =
+        game,
+    }: { messages: UIMessage[]; game: Game } =
         await req.json();
 
     const lastMessage = messages[messages.length - 1];
 
     // Load previous messages from database
-    const previousMessages = await loadChat(id);
+    const previousMessages = await loadChat(game.chatId);
+
+    const prompt = await creator.getNextStep(game);
 
     // Append new message to previousMessages messages
     const allMessages = [...previousMessages, ...messages];
@@ -23,13 +29,12 @@ export async function POST(req: Request) {
     const result = streamText({
         model,
         messages: convertToModelMessages(allMessages),
-        system:
-            'You are a storyteller and you are helping a user to create a story.',
+        system: prompt.basePrompt,
     });
 
     return result.toUIMessageStreamResponse({
         onFinish: ({ messages }) => {
-            saveChat({ chatId: id, messages: [...previousMessages, lastMessage, ...messages] });
+            saveChat({ chatId: game.chatId, messages: [...previousMessages, lastMessage, ...messages] });
         },
     });
 }
