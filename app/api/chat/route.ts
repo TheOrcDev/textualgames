@@ -12,12 +12,13 @@ export async function POST(req: Request) {
     }: { messages: UIMessage[]; id: string } =
         await req.json();
 
+    const lastMessage = messages[messages.length - 1];
+
     // Load previous messages from database
     const previousMessages = await loadChat(id);
 
     // Append new message to previousMessages messages
     const allMessages = [...previousMessages, ...messages];
-
 
     const result = streamText({
         model,
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
 
     return result.toUIMessageStreamResponse({
         onFinish: ({ messages }) => {
-            saveChat({ chatId: id, messages });
+            saveChat({ chatId: id, messages: [...previousMessages, lastMessage, ...messages] });
         },
     });
 }

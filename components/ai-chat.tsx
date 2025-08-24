@@ -66,8 +66,8 @@ const AIChat = ({ chatId, initialMessages }: AIChatProps) => {
       <div className="flex flex-col h-full">
         <Conversation className="h-full">
           <ConversationContent>
-            {messages.map((message) => (
-              <div key={message.id}>
+            {messages.map((message, index) => (
+              <div key={`${message.role}-${index}`}>
                 {message.role === "assistant" && (
                   <Sources>
                     {message.parts.map((part, i) => {
@@ -82,9 +82,11 @@ const AIChat = ({ chatId, initialMessages }: AIChatProps) => {
                                   ).length
                                 }
                               />
-                              <SourcesContent key={`${message.id}-${i}`}>
+                              <SourcesContent
+                                key={`${message.role}-${index}-${i}`}
+                              >
                                 <Source
-                                  key={`${message.id}-${i}`}
+                                  key={`${message.role}-${index}-${i}`}
                                   href={part.url}
                                   title={part.url}
                                 />
@@ -95,20 +97,20 @@ const AIChat = ({ chatId, initialMessages }: AIChatProps) => {
                     })}
                   </Sources>
                 )}
-                <Message from={message.role} key={message.id}>
+                <Message from={message.role} key={`${message.role}-${index}`}>
                   <MessageContent>
                     {message.parts.map((part, i) => {
                       switch (part.type) {
                         case "text":
                           return (
-                            <Response key={`${message.id}-${i}`}>
+                            <Response key={`${message.role}-${index}-${i}`}>
                               {part.text}
                             </Response>
                           );
                         case "reasoning":
                           return (
                             <Reasoning
-                              key={`${message.id}-${i}`}
+                              key={`${message.role}-${index}-${i}`}
                               className="w-full"
                               isStreaming={status === "streaming"}
                             >
