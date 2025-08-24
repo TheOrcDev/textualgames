@@ -23,6 +23,7 @@ export const games = pgTable("games", {
   genre: text("genre").notNull(),
   choice: text("choice").notNull(),
   email: text("email").notNull(),
+  chatId: text("chat_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 

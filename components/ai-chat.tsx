@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import { useChat } from "@ai-sdk/react";
-import { GlobeIcon } from "lucide-react";
 
 import {
   Conversation,
@@ -14,12 +13,6 @@ import { Loader } from "@/components/ai-elements/loader";
 import { Message, MessageContent } from "@/components/ai-elements/message";
 import {
   PromptInput,
-  PromptInputButton,
-  PromptInputModelSelect,
-  PromptInputModelSelectContent,
-  PromptInputModelSelectItem,
-  PromptInputModelSelectTrigger,
-  PromptInputModelSelectValue,
   PromptInputSubmit,
   PromptInputTextarea,
   PromptInputToolbar,
@@ -39,22 +32,9 @@ import {
 } from "@/components/ai-elements/source";
 
 import ChoicesSelect from "./choices-select";
-import { Button } from "./ui/button";
 
-const models = [
-  {
-    name: "GPT 4o",
-    value: "openai/gpt-4o",
-  },
-  {
-    name: "Deepseek R1",
-    value: "deepseek/deepseek-r1",
-  },
-];
-
-const AIChat = () => {
+const AIChat = ({ chatId }: { chatId: string }) => {
   const [input, setInput] = useState("");
-  const [model, setModel] = useState<string>(models[0].value);
   const { messages, sendMessage, status } = useChat();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -64,7 +44,7 @@ const AIChat = () => {
         { text: input },
         {
           body: {
-            model: model,
+            id: chatId,
           },
         }
       );

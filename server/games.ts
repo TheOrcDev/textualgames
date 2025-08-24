@@ -9,12 +9,6 @@ import { characters, Game, games, levels } from "@/db/schema";
 import { getUserSession } from "./users";
 
 export const getGame = async (gameId: string): Promise<Game | null> => {
-  const isValidGameId = isValidUUID(gameId);
-
-  if (!isValidGameId) {
-    return null;
-  }
-
   try {
     const game = await db.query.games.findFirst({
       with: {

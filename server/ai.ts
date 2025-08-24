@@ -17,6 +17,7 @@ import { characters, Game, games, levels } from "@/db/schema";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import StoryCreator from "@/lib/story-creator";
 
+import { createChat } from "@/lib/chat-store";
 import { getUserSession } from "./users";
 
 if (!process.env.OPENAI_API_KEY) {
@@ -96,12 +97,15 @@ export async function createCharacter(
   const { user } = await getUserSession();
 
   try {
+    const chatId = await createChat();
+
     const [newGame] = await db
       .insert(games)
       .values({
         email: user.email,
         genre: formData.genre,
         choice: "",
+        chatId,
       })
       .returning({ id: games.id });
 
@@ -117,6 +121,7 @@ export async function createCharacter(
         levels: true,
       },
     });
+
 
     if (!game) {
       throw new Error("Game not found");

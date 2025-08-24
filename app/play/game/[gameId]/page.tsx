@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { getGame } from "@/server/games";
 
 import AIChat from "@/components/ai-chat";
@@ -11,13 +13,13 @@ export default async function GameLevel({ params }: { params: Params }) {
 
   const game = await getGame(gameId);
 
-  console.log(game);
+  if (!game) {
+    return notFound();
+  }
 
   return (
-    <div className="p-6 font-mono">
-      <div className="mx-auto max-w-4xl space-y-6">
-        <AIChat />
-      </div>
+    <div className="mx-auto max-w-4xl space-y-6 p-6 font-mono">
+      <AIChat chatId={game.chatId} />
     </div>
   );
 }
