@@ -4,6 +4,9 @@ import db from "@/db/drizzle";
 import { characters, Game, games, levels } from "@/db/schema";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import StoryCreator from "@/lib/story-creator";
+import { openai } from "@ai-sdk/openai";
+import { put } from '@vercel/blob';
+import { experimental_generateImage as generateImage } from 'ai';
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
@@ -68,18 +71,22 @@ export async function createFirstLevel(game: Game) {
     createdAt: new Date(),
   };
 
-  // const { images } = await generateImage({
-  //   model: openai.image('dall-e-3'),
-  //   prompt: 'A futuristic cityscape at sunset',
-  //   n: 3,
-  //   size: '1792x1024',
-  // });
+  const imagePrompt = await creator.getImagePrompt(game);
 
-  // const blob = await put(`${game.id}-${Date.now()}.png`, images[0].base64, {
-  //   access: 'public',
-  // });
+  const { images } = await generateImage({
+    model: openai.image('dall-e-3'),
+    prompt: imagePrompt,
+    n: 3,
+    size: '1792x1024',
+  });
 
-  // console.log(blob);
+  // Convert base64 to Buffer for proper blob creation
+  const base64Data = images[0].base64;
+  const buffer = Buffer.from(base64Data, 'base64');
+
+  const blob = await put(`${game.id}-${Date.now()}.png`, buffer, {
+    access: 'public',
+  });
 
   const level = (
     await creator.getFirstLevelPrompt({ ...game, character: validCharacter })
@@ -100,8 +107,7 @@ export async function createFirstLevel(game: Game) {
   await db.insert(levels).values({
     storyline: object.storyline,
     choices: object.choices,
-    // image: blob.url,
-    image: "",
+    image: blob.url,
     level: String(1),
     gameId: game.id,
   });
