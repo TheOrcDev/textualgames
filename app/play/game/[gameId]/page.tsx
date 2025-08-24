@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 
 import { getGame } from "@/server/games";
 
+import { loadChat } from "@/lib/chat-store";
+
 import AIChat from "@/components/ai-chat";
 
 type Params = Promise<{
@@ -17,9 +19,11 @@ export default async function GameLevel({ params }: { params: Params }) {
     return notFound();
   }
 
+  const messages = await loadChat(game.chatId);
+
   return (
     <div className="mx-auto max-w-4xl space-y-6 p-6 font-mono">
-      <AIChat chatId={game.chatId} />
+      <AIChat chatId={game.chatId} initialMessages={messages} />
     </div>
   );
 }

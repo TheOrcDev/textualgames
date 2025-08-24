@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { useChat } from "@ai-sdk/react";
+import { UIMessage, useChat } from "@ai-sdk/react";
 
 import {
   Conversation,
@@ -33,9 +33,17 @@ import {
 
 import ChoicesSelect from "./choices-select";
 
-const AIChat = ({ chatId }: { chatId: string }) => {
+interface AIChatProps {
+  chatId: string;
+  initialMessages?: UIMessage[];
+}
+
+const AIChat = ({ chatId, initialMessages }: AIChatProps) => {
   const [input, setInput] = useState("");
-  const { messages, sendMessage, status } = useChat();
+  const { messages, sendMessage, status } = useChat({
+    id: chatId,
+    messages: initialMessages ?? [],
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
