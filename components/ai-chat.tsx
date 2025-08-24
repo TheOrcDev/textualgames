@@ -56,6 +56,7 @@ const AIChat = ({ chatId, initialMessages }: AIChatProps) => {
           },
         }
       );
+
       setInput("");
     }
   };

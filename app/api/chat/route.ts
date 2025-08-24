@@ -12,7 +12,6 @@ export async function POST(req: Request) {
     }: { messages: UIMessage[]; id: string } =
         await req.json();
 
-
     // Load previous messages from database
     const previousMessages = await loadChat(id);
 

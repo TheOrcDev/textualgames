@@ -18,9 +18,36 @@ function getChatFile(id: string): string {
 export async function loadChat(id: string): Promise<UIMessage[]> {
     const chatFile = getChatFile(id);
     if (!existsSync(chatFile)) return [];
+    // check if the file is empty
+    const fileContent = await readFile(chatFile, 'utf8');
+    if (fileContent.trim() === '') return [];
     return JSON.parse(await readFile(chatFile, 'utf8'));
 }
 
 export async function saveChat(chat: { chatId: string; messages: UIMessage[] }) {
-    await writeFile(getChatFile(chat.chatId), JSON.stringify(chat.messages));
+    // Load existing messages first
+    const existingMessages = await loadChat(chat.chatId);
+
+    // Find the last existing message ID to determine where to start adding new ones
+    const lastExistingId = existingMessages.length > 0
+        ? existingMessages[existingMessages.length - 1].id
+        : null;
+
+    // Find new messages (those that come after the last existing message)
+    let newMessages: UIMessage[] = [];
+    if (lastExistingId) {
+        const lastExistingIndex = chat.messages.findIndex(msg => msg.id === lastExistingId);
+        if (lastExistingIndex !== -1 && lastExistingIndex < chat.messages.length - 1) {
+            newMessages = chat.messages.slice(lastExistingIndex + 1);
+        }
+    } else {
+        // If no existing messages, all messages are new
+        newMessages = chat.messages;
+    }
+
+    // Combine existing and new messages
+    const allMessages = [...existingMessages, ...newMessages];
+
+    // Save the combined messages
+    await writeFile(getChatFile(chat.chatId), JSON.stringify(allMessages));
 }
