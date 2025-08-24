@@ -16,7 +16,9 @@ function getChatFile(id: string): string {
 }
 
 export async function loadChat(id: string): Promise<UIMessage[]> {
-    return JSON.parse(await readFile(getChatFile(id), 'utf8'));
+    const chatFile = getChatFile(id);
+    if (!existsSync(chatFile)) return [];
+    return JSON.parse(await readFile(chatFile, 'utf8'));
 }
 
 export async function saveChat(chat: { chatId: string; messages: UIMessage[] }) {
