@@ -74,10 +74,6 @@ export default class StoryCreator {
       - Keep the narration immersive and continuous, not segmented into levels or chapters.  
       - Maintain coherence with everything that has already happened.  
       - Include sensory details (what I see, hear, smell, feel) and interactions with the environment.  
-  
-      Gameplay:  
-      - End this turn by presenting **two meaningful choices** for what the player can do next.  
-      - Choices should feel like natural actions or decisions within the world, not like chapter breaks.  
     `;
 
     return { basePrompt: thePrompt, character: game.character.name };

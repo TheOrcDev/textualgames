@@ -143,7 +143,12 @@ const AIChat = ({ game, initialMessages, level }: AIChatProps) => {
           />
           <PromptInputToolbar>
             <PromptInputTools>
-              <ChoicesSelect level={level} />
+              <ChoicesSelect
+                choices={level.choices}
+                onChoiceSelected={(choice) => {
+                  setInput(choice.text);
+                }}
+              />
             </PromptInputTools>
             <PromptInputSubmit disabled={!input} status={status} />
           </PromptInputToolbar>

@@ -1,4 +1,4 @@
-import { Level } from "@/db/schema";
+import { Choice, Level } from "@/db/schema";
 
 import {
   Select,
@@ -9,19 +9,33 @@ import {
 } from "@/components/ui/select";
 
 interface ChoicesSelectProps {
-  level?: Level;
+  choices: Choice[];
+  onChoiceSelected: (choice: Choice) => void;
 }
 
-export default function ChoicesSelect({ level }: ChoicesSelectProps) {
+export default function ChoicesSelect({
+  choices,
+  onChoiceSelected,
+}: ChoicesSelectProps) {
   return (
-    <Select>
+    <Select
+      onValueChange={(value) => {
+        const selectedChoice = choices.find((choice) => choice.text === value);
+
+        if (selectedChoice) {
+          onChoiceSelected(selectedChoice);
+        }
+      }}
+    >
       <SelectTrigger>
         <SelectValue placeholder="Choices" />
       </SelectTrigger>
       <SelectContent>
-        {level?.choices.map((choice) => (
+        {choices.map((choice) => (
           <SelectItem key={choice.text} value={choice.text}>
-            {choice.text}
+            {choice.text.length > 25
+              ? `${choice.text.substring(0, 30)}...`
+              : choice.text}
           </SelectItem>
         ))}
       </SelectContent>
