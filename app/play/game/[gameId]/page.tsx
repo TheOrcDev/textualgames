@@ -4,11 +4,8 @@ import { notFound } from "next/navigation";
 import { getGame } from "@/server/games";
 
 import { loadChat } from "@/lib/chat-store";
-import StoryCreator from "@/lib/story-creator";
 
 import AIChat from "@/components/ai-chat";
-
-const creator = new StoryCreator();
 
 type Params = Promise<{
   gameId: string;

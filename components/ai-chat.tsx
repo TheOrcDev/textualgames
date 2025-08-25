@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import Image from "next/image";
-
 import { Game, Level } from "@/db/schema";
 import { UIMessage, useChat } from "@ai-sdk/react";
 
