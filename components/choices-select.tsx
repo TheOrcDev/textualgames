@@ -27,7 +27,7 @@ export default function ChoicesSelect({
         }
       }}
     >
-      <SelectTrigger>
+      <SelectTrigger className="rounded-bl-none">
         <SelectValue placeholder="Choices" />
       </SelectTrigger>
       <SelectContent>

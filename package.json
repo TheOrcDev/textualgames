@@ -53,6 +53,7 @@
     "eslint": "^9.34.0",
     "eslint-config-next": "^15.5.0",
     "framer-motion": "^12.23.12",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.541.0",
     "mini-svg-data-uri": "^1.4.4",
     "motion": "^12.23.12",
