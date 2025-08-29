@@ -28,7 +28,7 @@ export function ModeSwitcher() {
         xmlns="http://www.w3.org/2000/svg"
         stroke="currentColor"
         strokeWidth="0.25"
-        className="size-10 hidden [html.dark_&]:block"
+        className="size-8 hidden [html.dark_&]:block"
         aria-label="sun-dim"
       >
         <rect x="120" y="88" width="14" height="14" rx="1"></rect>
@@ -68,7 +68,7 @@ export function ModeSwitcher() {
         xmlns="http://www.w3.org/2000/svg"
         stroke="currentColor"
         strokeWidth="0.25"
-        className="hidden [html.light_&]:block size-10"
+        className="hidden [html.light_&]:block size-8"
         aria-label="moon"
       >
         <rect x="104" y="56" width="14" height="14" rx="1"></rect>
