@@ -22,8 +22,12 @@ import { z } from "zod";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import { cn } from "@/lib/utils";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/8bit/card";
 import {
   Command,
   CommandEmpty,
@@ -31,7 +35,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/components/ui/8bit/command";
 import {
   Dialog,
   DialogContent,
@@ -39,7 +43,22 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/8bit/dialog";
+import { Input } from "@/components/ui/8bit/input";
+import { Label } from "@/components/ui/8bit/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/8bit/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/8bit/radio-group";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/8bit/tooltip";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -49,21 +68,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 import {
   dystopianCharacters,
@@ -206,36 +211,37 @@ export default function CharacterCreator() {
           </h1>
         </header>
 
-        <div className="grid gap-6 font-mono">
+        <div className="grid gap-6">
           {/* Genre Selection */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xs text-muted-foreground">
                 Choose Your Genre
               </h2>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      className="text-gray-400 hover:text-white"
-                      onClick={handleRandomCharacter}
-                      disabled={isLoading}
-                      type="button"
-                    >
-                      Random
-                      <Dice className="size-5" />
-                      <span className="sr-only">Random Character</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Generate a random character</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <div>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        onClick={handleRandomCharacter}
+                        disabled={isLoading}
+                        type="button"
+                      >
+                        Random
+                        <Dice className="size-5" />
+                        <span className="sr-only">Random Character</span>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Generate a random character</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="flex flex-col md:flex-row flex-wrap gap-2">
               {genres.map((genre) => (
                 <TooltipProvider key={genre.id}>
                   <Tooltip>
@@ -244,7 +250,7 @@ export default function CharacterCreator() {
                         variant="outline"
                         type="button"
                         className={cn(
-                          "h-auto py-4 px-6 font-mono text-lg justify-start gap-4 transition-all",
+                          "h-auto py-4 px-6 text-lg justify-start gap-4 transition-all",
                           form.getValues("genre") === genre.id &&
                             "border-primary text-primary border-2"
                         )}
@@ -271,7 +277,7 @@ export default function CharacterCreator() {
                 Create Your Character
               </h2>
               <div className="grid gap-6 md:grid-cols-2">
-                <Card className="border-background bg-gray-300 dark:bg-gray-900">
+                <Card>
                   <CardHeader>
                     <CardTitle className="text-sm">Character Details</CardTitle>
                   </CardHeader>
@@ -310,7 +316,7 @@ export default function CharacterCreator() {
                                 <Command>
                                   <CommandInput
                                     placeholder="Search character..."
-                                    className="h-9 font-mono"
+                                    className="h-9"
                                   />
                                   <CommandList>
                                     <CommandEmpty>
@@ -322,7 +328,6 @@ export default function CharacterCreator() {
                                           <CommandItem
                                             value={character}
                                             key={character}
-                                            className="font-mono"
                                             onSelect={() => {
                                               form.setValue("type", character);
                                             }}
@@ -404,7 +409,7 @@ export default function CharacterCreator() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-background bg-gray-300 dark:bg-gray-900">
+                <Card>
                   <CardHeader>
                     <CardTitle className="text-sm">Story & Inventory</CardTitle>
                   </CardHeader>
@@ -440,7 +445,7 @@ export default function CharacterCreator() {
                                 <Command>
                                   <CommandInput
                                     placeholder="Search item..."
-                                    className="h-9 font-mono"
+                                    className="h-9"
                                   />
                                   <CommandList>
                                     <CommandEmpty>No item found.</CommandEmpty>
@@ -449,7 +454,6 @@ export default function CharacterCreator() {
                                         <CommandItem
                                           value={item}
                                           key={item}
-                                          className="font-mono"
                                           onSelect={() => {
                                             form.setValue("items", item);
                                           }}
@@ -488,7 +492,7 @@ export default function CharacterCreator() {
                         <DialogTrigger asChild>
                           <Button
                             variant="outline"
-                            className="h-32 w-full border-gray-700 bg-background font-mono hover:bg-gray-300 dark:hover:bg-gray-900"
+                            className="h-32 w-full bg-background"
                           >
                             {form.getValues("plot") ? (
                               <div className="space-y-2 text-left">
@@ -497,16 +501,16 @@ export default function CharacterCreator() {
                                 </h4>
                               </div>
                             ) : (
-                              <div className="flex flex-col items-center gap-2 text-gray-400">
+                              <div className="flex flex-col items-center gap-2">
                                 <ScrollText className="size-6" />
                                 <span>Select Your Story</span>
                               </div>
                             )}
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="max-w-2xl bg-gray-300 dark:bg-gray-900">
+                        <DialogContent className="max-w-2xl">
                           <DialogHeader>
-                            <DialogTitle className="font-mono text-xl">
+                            <DialogTitle className="text-xl">
                               Choose Your Story
                             </DialogTitle>
                             <DialogDescription>
@@ -514,14 +518,14 @@ export default function CharacterCreator() {
                               character&apos;s journey
                             </DialogDescription>
                           </DialogHeader>
-                          <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+                          <ScrollArea className="h-[400px] w-full border p-4">
                             <div className="flex flex-col gap-2">
                               {availableData.stories.map(
                                 (story: string, index: number) => (
                                   <Card
                                     key={index}
                                     className={cn(
-                                      "cursor-pointer transition-colors bg-background hover:bg-gray-100 dark:hover:bg-gray-900",
+                                      "cursor-pointer transition-color border-x-4 hover:bg-primary",
                                       form.getValues("plot") === story &&
                                         "border-primary"
                                     )}
@@ -531,7 +535,7 @@ export default function CharacterCreator() {
                                     }}
                                   >
                                     <CardHeader>
-                                      <CardTitle className="font-mono text-sm">
+                                      <CardTitle className="text-sm">
                                         {index + 1}. {story}
                                       </CardTitle>
                                     </CardHeader>
@@ -561,16 +565,11 @@ export default function CharacterCreator() {
                   form.reset();
                   setStep(1);
                 }}
-                className="font-mono"
               >
                 Clear
               </Button>
               <div className="relative flex justify-center">
-                <Button
-                  className="font-mono"
-                  disabled={isLoading}
-                  type="submit"
-                >
+                <Button disabled={isLoading} type="submit">
                   Play Your Story
                 </Button>
 
