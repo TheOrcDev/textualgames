@@ -247,6 +247,7 @@ export default function CharacterCreator() {
                         variant="outline"
                         type="button"
                         className={cn(
+                          "border-none",
                           form.getValues("genre") === genre.id && "bg-primary"
                         )}
                         onClick={() => handleGenreSelect(genre.id)}
@@ -567,7 +568,7 @@ export default function CharacterCreator() {
                 </Button>
 
                 {allFieldsFilled && (
-                  <div className="absolute top-0 w-max -translate-y-full animate-pulse">
+                  <div className="absolute -top-1 w-max -translate-y-full animate-pulse">
                     ready to play
                   </div>
                 )}
