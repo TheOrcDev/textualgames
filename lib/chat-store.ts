@@ -19,6 +19,7 @@ export async function loadChat(id: string): Promise<UIMessage[]> {
 }
 
 export async function saveChat(chat: { chatId: string; gameId: string; messages: UIMessage[] }) {
+    console.log(chat);
     await db.insert(chats).values({
         chatId: chat.chatId,
         gameId: chat.gameId,
@@ -37,11 +38,18 @@ export async function deleteChat(id: string): Promise<void> {
     await db.delete(chats).where(eq(chats.chatId, id));
 }
 
-// New function to get all chats for a game
 export async function getGameChats(gameId: string): Promise<{ chatId: string; messages: UIMessage[] }[]> {
     const result = await db.select().from(chats).where(eq(chats.gameId, gameId));
     return result.map(chat => ({
         chatId: chat.chatId,
         messages: chat.messages
     }));
+}
+
+export async function getChatByGameId(gameId: string): Promise<UIMessage[]> {
+    const result = await db.select().from(chats).where(eq(chats.gameId, gameId));
+    if (result.length > 0) {
+        return result.flatMap(chat => chat.messages || []);
+    }
+    return [];
 }

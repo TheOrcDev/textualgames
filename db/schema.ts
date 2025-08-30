@@ -1,3 +1,4 @@
+import { UIMessage } from "ai";
 import { relations } from "drizzle-orm";
 import {
   boolean,
@@ -9,7 +10,6 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { z } from 'zod';
 
 export const purchases = pgTable("purchases", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -31,6 +31,7 @@ export const games = pgTable("games", {
 export type Game = typeof games.$inferSelect & {
   levels: (typeof levels.$inferSelect)[];
   character: typeof characters.$inferSelect;
+  chat?: typeof chats.$inferSelect;
 };
 
 export type Level = typeof levels.$inferSelect;
@@ -65,7 +66,7 @@ export const levels = pgTable("levels", {
 export const gamesRelations = relations(games, ({ many, one }) => ({
   levels: many(levels),
   character: one(characters),
-  chat: one(chats),
+  chats: many(chats),
 }));
 
 export const levelsRelations = relations(levels, ({ one }) => ({
@@ -128,17 +129,11 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date())
 });
 
-export const gameResponseSchema = z.object({
-  storyline: z.string(),
-  choices: z.array(z.object({ text: z.string() })),
-  items: z.array(z.string()),
-});
-
 export const chats = pgTable("chats", {
   id: uuid("id").primaryKey().defaultRandom(),
   chatId: text("chat_id").notNull().unique(),
   gameId: uuid("game_id").notNull().references(() => games.id, { onDelete: 'cascade' }),
-  messages: jsonb("messages").$type<z.infer<typeof gameResponseSchema>>().notNull(),
+  messages: jsonb("messages").$type<UIMessage[]>().notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

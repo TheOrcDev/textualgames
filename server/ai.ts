@@ -1,14 +1,14 @@
 "use server";
 
 import db from "@/db/drizzle";
-import { characters, Game, gameResponseSchema, games, levels } from "@/db/schema";
+import { characters, Game, games, levels } from "@/db/schema";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import StoryCreator from "@/lib/story-creator";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 import { createChat, saveChat } from "@/lib/chat-store";
-import { generateObject, zodSchema } from "ai";
+import { generateId, generateObject, zodSchema } from "ai";
 import { getUserSession } from "./users";
 
 const creator = new StoryCreator();
@@ -89,6 +89,12 @@ export async function createFirstLevel(game: Game) {
     await creator.getFirstLevelPrompt({ ...game, character: validCharacter })
   ).basePrompt;
 
+  const gameResponseSchema = z.object({
+    storyline: z.string(),
+    choices: z.array(z.object({ text: z.string() })),
+    items: z.array(z.string()),
+  });
+
   const { object } = await generateObject({
     model: "openai/gpt-4o",
     schema: zodSchema(gameResponseSchema),
@@ -108,7 +114,14 @@ export async function createFirstLevel(game: Game) {
   saveChat({
     chatId,
     gameId: game.id,
-    messages: object,
+    messages: [{
+      id: generateId(),
+      role: "assistant",
+      parts: [{
+        type: "text",
+        text: object.storyline,
+      }],
+    }],
   });
 
   return { gameId: game.id, level: object };
