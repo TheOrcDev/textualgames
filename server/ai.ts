@@ -1,7 +1,7 @@
 "use server";
 
 import db from "@/db/drizzle";
-import { characters, Game, games, levels } from "@/db/schema";
+import { characters, Game, gameResponseSchema, games, levels } from "@/db/schema";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import StoryCreator from "@/lib/story-creator";
 import { eq } from "drizzle-orm";
@@ -19,7 +19,6 @@ export async function createCharacter(
   const { user } = await getUserSession();
 
   try {
-    const chatId = await createChat();
 
     const [newGame] = await db
       .insert(games)
@@ -27,7 +26,6 @@ export async function createCharacter(
         email: user.email,
         genre: formData.genre,
         choice: "",
-        chatId,
       })
       .returning({ id: games.id });
 
@@ -91,12 +89,6 @@ export async function createFirstLevel(game: Game) {
     await creator.getFirstLevelPrompt({ ...game, character: validCharacter })
   ).basePrompt;
 
-  const gameResponseSchema = z.object({
-    storyline: z.string(),
-    choices: z.array(z.object({ text: z.string() })),
-    items: z.array(z.string()),
-  });
-
   const { object } = await generateObject({
     model: "openai/gpt-4o",
     schema: zodSchema(gameResponseSchema),
@@ -111,15 +103,12 @@ export async function createFirstLevel(game: Game) {
     gameId: game.id,
   });
 
+  const chatId = await createChat(game.id);
+
   saveChat({
-    chatId: game.chatId, messages: [{
-      role: "assistant",
-      id: game.chatId,
-      parts: [{
-        type: "text",
-        text: object.storyline,
-      }],
-    }]
+    chatId,
+    gameId: game.id,
+    messages: object,
   });
 
   return { gameId: game.id, level: object };
