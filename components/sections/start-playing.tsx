@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/8bit/button";
 
 export default function StartPlaying() {
   return (
-    <div className="retro flex flex-col items-center justify-center gap-4 font-mono">
+    <div className="retro flex flex-col items-center justify-center gap-4 ">
       <h3 className="text-center text-xl font-bold md:text-2xl">
         Are you ready to explore Textual Games?
       </h3>

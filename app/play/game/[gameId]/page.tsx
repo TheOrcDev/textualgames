@@ -22,7 +22,7 @@ export default async function GameLevel({ params }: { params: Params }) {
   const messages = await loadChat(game.chatId);
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 p-6 font-mono">
+    <div className="mx-auto max-w-4xl space-y-6 p-6 ">
       <AIChat game={game} initialMessages={messages} level={game.levels[0]} />
     </div>
   );

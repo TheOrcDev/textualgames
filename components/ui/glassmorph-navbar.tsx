@@ -30,7 +30,7 @@ export default function GlassmorphNavbar() {
   return (
     <div className="p-14">
       <nav
-        className={`fixed left-1/2 top-4 z-50 w-11/12 max-w-5xl -translate-x-1/2 bg-primary shadow-lg saturate-150 backdrop-blur-lg border-2`}
+        className={`retro fixed left-1/2 top-4 z-50 w-11/12 max-w-5xl -translate-x-1/2 bg-primary shadow-lg saturate-150 backdrop-blur-lg border-2`}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -57,7 +57,7 @@ export default function GlassmorphNavbar() {
               </div>
             </div>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-center gap-1 font-mono">
+              <div className="ml-10 flex items-center gap-1">
                 <Button variant={"ghost"} asChild>
                   <Link href={"/play/my-games"}>
                     <LayoutGrid />
@@ -98,7 +98,7 @@ export default function GlassmorphNavbar() {
 
         {isOpen && (
           <div className="md:hidden">
-            <div className="flex items-center justify-between gap-3 px-5 py-3 font-mono">
+            <div className="flex items-center justify-between gap-3 px-5 py-3">
               <div className="flex flex-col">
                 <Button variant={"ghost"} asChild>
                   <Link href={"/play/my-games"}>

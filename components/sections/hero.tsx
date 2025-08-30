@@ -5,8 +5,6 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/8bit/button";
-import { GlowEffect } from "@/components/ui/glow-effect";
-import { Spotlight } from "@/components/ui/spotlight";
 
 import ChangingSentences from "@/components/features/changing-sentences";
 import ImageSlider from "@/components/features/image-slider";
@@ -73,7 +71,7 @@ export default function Hero() {
 
         <div className="relative flex flex-col items-center justify-center gap-10">
           <div className="flex flex-col items-center justify-center gap-2 text-xl md:text-4xl">
-            <h2 className="text-center font-mono font-bold md:text-2xl retro">
+            <h2 className="text-center  font-bold md:text-2xl retro">
               Create your own unique story.
             </h2>
 
@@ -86,7 +84,7 @@ export default function Hero() {
         </div>
 
         <div className="flex max-w-3xl flex-col items-center justify-center gap-5">
-          <h3 className="retro text-muted-foreground text-center font-mono text-xl font-bold">
+          <h3 className="retro text-muted-foreground text-center  text-xl font-bold">
             Screenshots from the game
           </h3>
 

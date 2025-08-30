@@ -5,7 +5,7 @@ import { Badge } from "../ui/badge";
 
 export default function Features() {
   return (
-    <section className="retro flex w-full flex-col gap-7 overflow-hidden p-10 pt-20 font-mono antialiased md:p-24">
+    <section className="retro flex w-full flex-col gap-7 overflow-hidden p-10 pt-20  antialiased md:p-24">
       <Badge className="w-max px-2 py-1">
         <h3 className="flex items-center gap-2 text-xl font-bold">
           <svg

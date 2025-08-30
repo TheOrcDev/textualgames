@@ -26,7 +26,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="overflow-x-hidden scroll-smooth font-mono antialiased">
+      <body className="overflow-x-hidden scroll-smooth retro antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

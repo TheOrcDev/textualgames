@@ -10,7 +10,7 @@ export default function Footer() {
           Textual Games
         </h3>
 
-        <p className="text-center font-mono text-sm lg:text-right">
+        <p className="text-center  text-sm lg:text-right">
           Copyright &copy; {year}. All rights reserved.
         </p>
       </div>

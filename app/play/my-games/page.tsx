@@ -19,14 +19,14 @@ export default async function MyGamesPage() {
   return (
     <main className="flex flex-col items-center justify-center px-5 md:px-24">
       {!games?.length ? (
-        <div className="flex flex-col items-center justify-center gap-3 font-mono">
+        <div className="flex flex-col items-center justify-center gap-3 ">
           <h2 className="text-2xl">No started games yet!</h2>
           <Link href={"/play/create-character"}>
             <Button>Create Your Character</Button>
           </Link>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-3 font-mono">
+        <div className="flex flex-col items-center justify-center gap-3 ">
           <Link href={"/play/create-character"}>
             <Button>Create New Character</Button>
           </Link>
