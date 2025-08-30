@@ -12,61 +12,73 @@ export default class StoryCreator {
     this.jsonFormat = `
     Please return the story in the following JSON format 
     { "storyline": string, "choices": string[], "items": string[] }. 
-    There should be two potential choices for this level in choices array. 
+   
     Avoid new lines in the story, and anything that can break the json format.
     `;
   }
 
   // TODO: Add companions
   // TODO: Add enemies
-
-  async getGptStoryPrompt(game: Game): Promise<StoryPrompt> {
+  async getFirstLevelPrompt(game: Game): Promise<StoryPrompt> {
     const inventory = `
-      Feel free to incorporate items from inventory if they can logically be used for the game.
-      Currently, character has: ${game.character.items}.
-      If you want to add or remove items from the inventory, you can do that by finding, losing, trading, or acquiring them in the game.
-      Be creative in integrating these items into the narrative.
+      The player may use or interact with items in their inventory if it makes sense in the world.
+      Current inventory: ${game.character.items}.
+      Items can be gained, lost, traded, or discovered naturally as part of the story.
     `;
 
     const gameCharacterStory = `${game.character.type} ${game.character.plot}`;
 
     const thePrompt = `
-      You are a dungeon master running a text-based game with a player.
-      Begin the ${game.genre} genre text-based game.
-      The story revolves around my character, ${gameCharacterStory}.
-      My character's name is ${game.character.name}, with a ${game.character.gender} gender. Start by providing a detailed description of my character.
-      The game should be from first person, as my character sees the world.
+      You are the dungeon master of an interactive, text-based MUD-style adventure. 
+      The player experiences the world through their character's eyes in the ${game.genre} genre.
       
-      Inventory:
+      Character:
+      - Name: ${game.character.name}
+      - Gender: ${game.character.gender}
+      - Role: ${gameCharacterStory}
+      
+      Start the game by:
+      - Giving a vivid first-person description of how my character looks and feels at this moment.  
+      - Describing the immediate environment and atmosphere around me in rich detail.  
+      - Providing a short backstory about events leading to this starting point.  
+      - Ensuring everything matches the tone of a ${game.genre} adventure.  
+  
       ${inventory}
-      
-      Set the scene by describing my surroundings, creating an immersive atmosphere for the game.
-      Make a little backstory for my character, a short summary of the events leading up to the start of the game.
-      Ensure that the story aligns with the ${game.genre} genre.
-      
-      ${this.jsonFormat}
+  
+      Gameplay:
+      - Keep the narration immersive, continuous, and written in first-person (as if I am living it).  
+      - The world should feel alive: describe locations, NPCs, sounds, smells, and atmosphere.  
+      - Present **two distinct choices** for what my character can do next (like a classic text adventure).  
+      - Choices should be actions or decisions, not chapter breaks.  
+      - The game should feel ongoing, not segmented into levels or chapters.  
     `;
 
     return { basePrompt: thePrompt, character: gameCharacterStory };
   }
 
-  async getNextLevel(game: Game): Promise<StoryPrompt> {
+  async getNextStep(game: Game): Promise<StoryPrompt> {
     const thePrompt = `
-      Continue the story naturally based on my choice while maintaining coherence with previous events.
-
-      - Player's Choice: "${game.choice}" (This should directly influence the next events).
-
-      - Inventory: The character currently has ${game.character.items}. Use these items only if there is a logical and meaningful way to do so.
-
-      - Genre & Tone: The story must stay within the "${game.genre}" genre, preserving its themes and atmosphere.
-
-      - Flow & Immersion: The continuation should feel organic, engaging, and in line with prior developments.
-            
-      ${this.jsonFormat}
+      Continue the text-based MUD-style adventure seamlessly, reacting to the player's last action.
+  
+      Player's last choice: "${game.choice}"  
+      → This choice should directly shape what happens next.
+  
+      Inventory: ${game.character.items}  
+      - Use items only if they make sense in the story.  
+      - New items can be gained, lost, or discovered naturally.  
+  
+      Genre & Tone: Keep the story firmly within the "${game.genre}" genre, with consistent atmosphere and themes.  
+  
+      Flow & Immersion:
+      - Write in first-person, as the player experiences the world directly.  
+      - Keep the narration immersive and continuous, not segmented into levels or chapters.  
+      - Maintain coherence with everything that has already happened.  
+      - Include sensory details (what I see, hear, smell, feel) and interactions with the environment.  
     `;
 
     return { basePrompt: thePrompt, character: game.character.name };
   }
+
 
   async getImagePrompt(game: Game) {
     return `

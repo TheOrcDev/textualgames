@@ -8,6 +8,14 @@ import { deleteGame } from "@/server/games";
 import { Trash } from "lucide-react";
 
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/8bit/card";
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -20,14 +28,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 import { useToast } from "@/components/hooks/use-toast";
@@ -60,7 +60,7 @@ export default function GameCard({ game }: Props) {
   };
 
   return (
-    <Card className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent transition duration-300 ease-in-out hover:-translate-y-2 hover:bg-linear-to-br">
+    <Card className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent hover:bg-linear-to-br h-full">
       <Link href={`/play/game/${game.id}`}>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">

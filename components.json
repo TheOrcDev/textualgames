@@ -16,5 +16,8 @@
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
+  },
+  "registries": {
+    "@8bitcn": "https://8bitcn.com/r/{name}.json"
   }
 }
