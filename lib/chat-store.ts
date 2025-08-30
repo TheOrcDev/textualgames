@@ -9,8 +9,15 @@ export async function createChat(): Promise<string> {
     return id;
 }
 
+function getChatDir() {
+    if (process.env.APP_ENV === 'production') {
+        return '/tmp/.chats';
+    }
+    return path.join(process.cwd(), '.chats');
+}
+
 function getChatFile(id: string): string {
-    const chatDir = path.join(process.cwd(), '.chats');
+    const chatDir = getChatDir();
     if (!existsSync(chatDir)) mkdirSync(chatDir, { recursive: true });
     return path.join(chatDir, `${id}.json`);
 }
