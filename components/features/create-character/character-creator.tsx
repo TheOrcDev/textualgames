@@ -22,6 +22,7 @@ import { z } from "zod";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
 import { cn } from "@/lib/utils";
 
+import { Button } from "@/components/ui/8bit/button";
 import {
   Card,
   CardContent,
@@ -58,7 +59,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/8bit/tooltip";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -171,11 +171,8 @@ export default function CharacterCreator() {
     setAvailableData(genreData[genre]);
     form.setValue("genre", genre);
 
-    // Simulate loading of genre-specific content
-    setTimeout(() => {
-      setIsGenreChangeLoading(false);
-      setStep(2);
-    }, 500);
+    setIsGenreChangeLoading(false);
+    setStep(2);
   };
 
   const handleRandomCharacter = async () => {
@@ -203,7 +200,7 @@ export default function CharacterCreator() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mx-auto w-full max-w-4xl"
+        className="mx-auto w-full max-w-4xl retro"
       >
         <header className="flex flex-col items-center gap-5 text-center">
           <h1 className="text-md font-bold tracking-wider md:text-2xl">
@@ -250,9 +247,7 @@ export default function CharacterCreator() {
                         variant="outline"
                         type="button"
                         className={cn(
-                          "h-auto py-4 px-6 text-lg justify-start gap-4 transition-all",
-                          form.getValues("genre") === genre.id &&
-                            "border-primary text-primary border-2"
+                          form.getValues("genre") === genre.id && "bg-primary"
                         )}
                         onClick={() => handleGenreSelect(genre.id)}
                         disabled={isLoading}
@@ -277,7 +272,7 @@ export default function CharacterCreator() {
                 Create Your Character
               </h2>
               <div className="grid gap-6 md:grid-cols-2">
-                <Card>
+                <Card className="h-full">
                   <CardHeader>
                     <CardTitle className="text-sm">Character Details</CardTitle>
                   </CardHeader>
@@ -305,9 +300,7 @@ export default function CharacterCreator() {
                                           (character) =>
                                             character === field.value
                                         )
-                                      : `${form.getValues(
-                                          "genre"
-                                        )} Character Type`}
+                                      : `${form.getValues("genre")} Character`}
                                     <ChevronsUpDown className="opacity-50" />
                                   </Button>
                                 </FormControl>
@@ -518,7 +511,7 @@ export default function CharacterCreator() {
                               character&apos;s journey
                             </DialogDescription>
                           </DialogHeader>
-                          <ScrollArea className="h-[400px] w-full border p-4">
+                          <ScrollArea className="h-[400px] w-full border border-dashed p-4">
                             <div className="flex flex-col gap-2">
                               {availableData.stories.map(
                                 (story: string, index: number) => (
