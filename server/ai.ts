@@ -7,8 +7,8 @@ import StoryCreator from "@/lib/story-creator";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { createChat, saveChat } from "@/lib/chat-store";
-import { generateObject, zodSchema } from "ai";
+import { createChat, updateChat } from "@/lib/chat-store";
+import { generateId, generateObject, zodSchema } from "ai";
 import { getUserSession } from "./users";
 
 const creator = new StoryCreator();
@@ -19,7 +19,6 @@ export async function createCharacter(
   const { user } = await getUserSession();
 
   try {
-    const chatId = await createChat();
 
     const [newGame] = await db
       .insert(games)
@@ -27,7 +26,6 @@ export async function createCharacter(
         email: user.email,
         genre: formData.genre,
         choice: "",
-        chatId,
       })
       .returning({ id: games.id });
 
@@ -111,15 +109,19 @@ export async function createFirstLevel(game: Game) {
     gameId: game.id,
   });
 
-  saveChat({
-    chatId: game.chatId, messages: [{
+  const chatId = await createChat(game.id);
+
+  updateChat({
+    chatId,
+    gameId: game.id,
+    messages: [{
+      id: generateId(),
       role: "assistant",
-      id: game.chatId,
       parts: [{
         type: "text",
         text: object.storyline,
       }],
-    }]
+    }],
   });
 
   return { gameId: game.id, level: object };

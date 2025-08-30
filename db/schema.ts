@@ -1,3 +1,4 @@
+import { UIMessage } from "ai";
 import { relations } from "drizzle-orm";
 import {
   boolean,
@@ -24,13 +25,13 @@ export const games = pgTable("games", {
   genre: text("genre").notNull(),
   choice: text("choice").notNull(),
   email: text("email").notNull(),
-  chatId: text("chat_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
 export type Game = typeof games.$inferSelect & {
   levels: (typeof levels.$inferSelect)[];
   character: typeof characters.$inferSelect;
+  chat?: typeof chats.$inferSelect;
 };
 
 export type Level = typeof levels.$inferSelect;
@@ -65,6 +66,7 @@ export const levels = pgTable("levels", {
 export const gamesRelations = relations(games, ({ many, one }) => ({
   levels: many(levels),
   character: one(characters),
+  chats: many(chats),
 }));
 
 export const levelsRelations = relations(levels, ({ one }) => ({
@@ -127,4 +129,20 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date())
 });
 
-export const schema = { user, session, account, verification };
+export const chats = pgTable("chats", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  chatId: text("chat_id").notNull().unique(),
+  gameId: uuid("game_id").notNull().references(() => games.id, { onDelete: 'cascade' }),
+  messages: jsonb("messages").$type<UIMessage[]>().notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const chatsRelations = relations(chats, ({ one }) => ({
+  game: one(games, {
+    fields: [chats.gameId],
+    references: [games.id],
+  }),
+}));
+
+export const schema = { user, session, account, verification, chats };

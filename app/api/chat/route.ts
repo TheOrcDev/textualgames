@@ -1,5 +1,5 @@
 import { Game } from '@/db/schema';
-import { loadChat, saveChat } from '@/lib/chat-store';
+import { getChatByGameId, updateChat } from '@/lib/chat-store';
 import StoryCreator from '@/lib/story-creator';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     const lastMessage = messages[messages.length - 1];
 
     // Load previous messages from database
-    const previousMessages = await loadChat(game.chatId);
+    const previousMessages = await getChatByGameId(game.id);
 
     const prompt = await creator.getNextStep(game);
 
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
 
     return result.toUIMessageStreamResponse({
         onFinish: ({ messages }) => {
-            saveChat({ chatId: game.chatId, messages: [...previousMessages, lastMessage, ...messages] });
+            updateChat({ chatId: game.id, gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
         },
     });
 }

@@ -54,7 +54,7 @@ const AIChat = ({ game, initialMessages, level }: AIChatProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages, sendMessage, status } = useChat({
-    id: game.chatId,
+    id: game.id,
     messages: initialMessages ?? [],
   });
 

@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "eslint .",
     "postinstall": "husky install",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:run-migration": "tsx db/migrate.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.19",
