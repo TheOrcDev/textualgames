@@ -7,7 +7,7 @@ import StoryCreator from "@/lib/story-creator";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { createChat, saveChat } from "@/lib/chat-store";
+import { createChat, updateChat } from "@/lib/chat-store";
 import { generateId, generateObject, zodSchema } from "ai";
 import { getUserSession } from "./users";
 
@@ -111,7 +111,7 @@ export async function createFirstLevel(game: Game) {
 
   const chatId = await createChat(game.id);
 
-  saveChat({
+  updateChat({
     chatId,
     gameId: game.id,
     messages: [{

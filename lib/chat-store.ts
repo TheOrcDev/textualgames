@@ -19,19 +19,27 @@ export async function loadChat(id: string): Promise<UIMessage[]> {
 }
 
 export async function saveChat(chat: { chatId: string; gameId: string; messages: UIMessage[] }) {
-    console.log(chat);
-    await db.insert(chats).values({
-        chatId: chat.chatId,
-        gameId: chat.gameId,
-        messages: chat.messages,
-        updatedAt: new Date()
-    }).onConflictDoUpdate({
-        target: chats.chatId,
-        set: {
+    try {
+        await db.insert(chats).values({
+            chatId: chat.chatId,
+            gameId: chat.gameId,
             messages: chat.messages,
             updatedAt: new Date()
-        }
-    });
+        })
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function updateChat(chat: { chatId: string; gameId: string; messages: UIMessage[] }) {
+    try {
+        await db.update(chats).set({
+            messages: chat.messages,
+            updatedAt: new Date()
+        }).where(eq(chats.gameId, chat.gameId));
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export async function deleteChat(id: string): Promise<void> {

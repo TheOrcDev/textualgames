@@ -1,5 +1,5 @@
 import { Game } from '@/db/schema';
-import { getChatByGameId, saveChat } from '@/lib/chat-store';
+import { getChatByGameId, updateChat } from '@/lib/chat-store';
 import StoryCreator from '@/lib/story-creator';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
 
     return result.toUIMessageStreamResponse({
         onFinish: ({ messages }) => {
-            saveChat({ chatId: game.id, gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
+            updateChat({ chatId: game.id, gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
         },
     });
 }
