@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   boolean,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
   text,
@@ -18,23 +19,16 @@ export const purchases = pgTable("purchases", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export const tokenSpends = pgTable("token_spends", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  email: text("email").notNull(),
-  action: text("action").notNull(),
-  amount: integer("amount").notNull(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-});
-
 export const games = pgTable("games", {
   id: uuid("id").primaryKey().defaultRandom(),
   genre: text("genre").notNull(),
   choice: text("choice").notNull(),
   email: text("email").notNull(),
+  chatId: text("chat_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export type Game = typeof games.$inferInsert & {
+export type Game = typeof games.$inferSelect & {
   levels: (typeof levels.$inferSelect)[];
   character: typeof characters.$inferSelect;
 };
@@ -54,11 +48,15 @@ export const characters = pgTable("characters", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export type Choice = {
+  text: string;
+};
+
 export const levels = pgTable("levels", {
   id: uuid("id").primaryKey().defaultRandom(),
   level: text("level").notNull(),
   image: text("image").notNull(),
-  choices: text("choices").notNull(),
+  choices: jsonb("choices").$type<Choice[]>().notNull(),
   storyline: text("storyline").notNull(),
   gameId: uuid("game_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),

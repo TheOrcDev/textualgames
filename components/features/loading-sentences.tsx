@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import { sentences } from "@/components/shared/data";
 import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
+
+import { sentences } from "@/components/shared/data";
 
 const getRandomSentence = () => {
   return sentences[Math.floor(Math.random() * sentences.length)];

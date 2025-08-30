@@ -27,13 +27,6 @@ export type Character = {
   createdAt: string;
 };
 
-export const Tokens = {
-  TEN: "10",
-  FIFTY: "50",
-  HUNDRED: "100",
-} as const;
-export type Tokens = (typeof Tokens)[keyof typeof Tokens];
-
 export const Genre = {
   FANTASY: "Fantasy",
   SCIFI: "Sci-Fi",

@@ -47,13 +47,7 @@ your `Postgres DB` URL
 DATABASE_URL="YOUR_DATABASE_URL"
 ```
 
-your `Stripe` publishable and secret key for payments
-
-```bash
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="YOUR_STRIPE_PUBLISHABLE_KEY"
-STRIPE_SECRET_KEY="YOUR_STRIPE_SECRET_KEY"
-```
-and your `Better Auth` keys for authentication
+Your `Better Auth` keys for authentication
 
 ```bash
 BETTER_AUTH_SECRET=

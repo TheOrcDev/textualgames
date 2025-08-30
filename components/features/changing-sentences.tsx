@@ -1,29 +1,16 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
 import { sentences } from "../shared/data";
-import { TextEffect } from "../ui/text-effect";
+import TextType from "../text-type";
 
 export default function ChangingSentences() {
-  const [sentence, setSentence] = useState<string>("");
-
-  useEffect(() => {
-    setSentence(sentences[Math.floor(Math.random() * sentences.length)]);
-    const interval = setInterval(() => {
-      setSentence(sentences[Math.floor(Math.random() * sentences.length)]);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <TextEffect
-      per="word"
-      as="h2"
-      preset="blur-sm"
-      className="text-center font-mono font-bold"
-    >
-      {sentence}
-    </TextEffect>
+    <TextType
+      text={sentences}
+      typingSpeed={100}
+      pauseDuration={1500}
+      showCursor={false}
+      cursorCharacter="|"
+      textColors={["text-foreground"]}
+      className="retro text-xl h-10"
+    />
   );
 }

@@ -4,15 +4,15 @@ import { InfiniteSlider } from "../ui/infinite-slider";
 
 const images = [
   {
-    src: "/img/screenshots/orc-leading-an-army.webp",
+    src: "/img/screenshots/8bit-orc-leading-an-army.png",
     alt: "Orc leading an army",
   },
   {
-    src: "/img/screenshots/zombie-trying-to-escape-from-magical-realm.webp",
+    src: "/img/screenshots/8bit-zombie-trying-to-escape-from-magical-realm.png",
     alt: "Zombie trying to escape from magical realm",
   },
   {
-    src: "/img/screenshots/demon-leading-an-army.webp",
+    src: "/img/screenshots/8bit-demon-leading-an-army.png",
     alt: "Demon leading an army",
   },
   {
