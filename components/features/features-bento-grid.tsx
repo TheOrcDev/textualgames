@@ -1,8 +1,4 @@
-import { Infinity, Globe, Shuffle, VenetianMask } from "lucide-react";
-
 import { Card } from "@/components/ui/8bit/card";
-
-import { Badge } from "../ui/badge";
 
 export default function BentoGrid() {
   return (

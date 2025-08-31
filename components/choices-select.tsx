@@ -1,4 +1,4 @@
-import { Choice, Level } from "@/db/schema";
+import { Choice } from "@/db/schema";
 
 import {
   Select,

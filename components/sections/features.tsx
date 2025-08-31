@@ -1,5 +1,3 @@
-import { Key } from "lucide-react";
-
 import FeaturesBentoGrid from "../features/features-bento-grid";
 import { Badge } from "../ui/badge";
 

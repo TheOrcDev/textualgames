@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { getGame } from "@/server/games";
 
-import { getChatByGameId, loadChat } from "@/lib/chat-store";
+import { getChatByGameId } from "@/lib/chat-store";
 
 import AIChat from "@/components/ai-chat";
 
