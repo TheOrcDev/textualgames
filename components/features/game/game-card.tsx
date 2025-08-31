@@ -8,15 +8,6 @@ import { deleteGame } from "@/server/games";
 import { Trash } from "lucide-react";
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/8bit/card";
-import { toast } from "@/components/ui/8bit/toast";
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -26,7 +17,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "@/components/ui/8bit/alert-dialog";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/8bit/card";
+import { toast } from "@/components/ui/8bit/toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
