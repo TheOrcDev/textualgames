@@ -33,8 +33,8 @@ export async function POST(req: Request) {
     });
 
     return result.toUIMessageStreamResponse({
-        onFinish: ({ messages }) => {
-            updateChat({ gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
+        onFinish: async ({ messages }) => {
+            await updateChat({ gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
         },
     });
 }
