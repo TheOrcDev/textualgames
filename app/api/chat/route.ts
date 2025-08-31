@@ -34,7 +34,7 @@ export async function POST(req: Request) {
 
     return result.toUIMessageStreamResponse({
         onFinish: ({ messages }) => {
-            updateChat({ chatId: game.id, gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
+            updateChat({ gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
         },
     });
 }

@@ -3,12 +3,12 @@ import { eq } from 'drizzle-orm';
 import db from '../db/drizzle';
 import { chats } from '../db/schema';
 
-export async function createChat(gameId: string): Promise<string> {
+export async function createChat(gameId: string, messages: UIMessage[]): Promise<string> {
     const id = generateId(); // generate a unique chat ID
     await db.insert(chats).values({
         chatId: id,
         gameId: gameId,
-        messages: []
+        messages
     });
     return id;
 }
@@ -31,7 +31,7 @@ export async function saveChat(chat: { chatId: string; gameId: string; messages:
     }
 }
 
-export async function updateChat(chat: { chatId: string; gameId: string; messages: UIMessage[] }) {
+export async function updateChat(chat: { gameId: string; messages: UIMessage[] }) {
     try {
         await db.update(chats).set({
             messages: chat.messages,
