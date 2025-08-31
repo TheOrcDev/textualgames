@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="retro mx-auto max-w-(--breakpoint-xl) px-4 py-8 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
         <div className="flex flex-col sm:flex-row items-center gap-2">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Button size="icon" variant="outline">
               <Link
                 href="https://x.com/theorcdev"
