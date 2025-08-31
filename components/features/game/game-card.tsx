@@ -15,6 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/8bit/card";
+import { toast } from "@/components/ui/8bit/toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,32 +31,23 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import { useToast } from "@/components/hooks/use-toast";
-
 interface Props {
   game: Game;
 }
 
 export default function GameCard({ game }: Props) {
-  const { toast } = useToast();
   const router = useRouter();
 
   const handleDelete = async (gameId: string) => {
     try {
       const characterName = await deleteGame(gameId);
 
-      toast({
-        title: `Goodbye ${characterName}`,
-        description: "Successfully deleted.",
-      });
+      toast(`Goodbye ${characterName}. Successfully deleted.`);
 
       router.refresh();
     } catch (error) {
       console.error(error);
-      toast({
-        title: "Couldn't delete",
-        description: "Something went wrong. Please try again.",
-      });
+      toast("Couldn't delete. Something went wrong. Please try again.");
     }
   };
 

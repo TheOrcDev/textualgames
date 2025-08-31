@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 import { Analytics } from "@vercel/analytics/react";
-import { Toaster } from "sonner";
 
 import { ScreenSize } from "@/components/ui/screen-size";
+import { Toaster } from "@/components/ui/sonner";
 
 import { ThemeProvider } from "@/components/theme-provider";
 
