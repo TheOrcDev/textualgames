@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     const allMessages = [...previousMessages, ...messages];
 
     const result = streamText({
-        model,
+        model: model!,
         messages: convertToModelMessages(allMessages),
         system: prompt.basePrompt,
     });
