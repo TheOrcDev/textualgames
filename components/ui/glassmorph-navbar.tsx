@@ -30,7 +30,7 @@ export default function GlassmorphNavbar() {
   return (
     <div className="p-14">
       <nav
-        className={`retro fixed left-1/2 top-4 z-50 w-11/12 max-w-5xl -translate-x-1/2 bg-primary shadow-lg saturate-150 backdrop-blur-lg border-2`}
+        className={`retro fixed left-1/2 top-4 z-50 w-11/12 max-w-5xl -translate-x-1/2 border-2 bg-secondary`}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -83,7 +83,7 @@ export default function GlassmorphNavbar() {
               <Button
                 onClick={() => setIsOpen(!isOpen)}
                 variant={"ghost"}
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-primary focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary dark:text-gray-200"
+                className="inline-flex items-center justify-center rounded-md p-2 hover:bg-primary focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary dark:text-gray-200"
               >
                 <span className="sr-only">Open main menu</span>
                 {isOpen ? (

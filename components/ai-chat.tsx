@@ -34,7 +34,6 @@ import {
   SourcesTrigger,
 } from "@/components/ai-elements/source";
 
-import ChoicesSelect from "./choices-select";
 import { ScrollArea } from "./ui/scroll-area";
 
 interface AIChatProps {
@@ -153,7 +152,7 @@ const AIChat = ({ game, initialMessages, level }: AIChatProps) => {
               value={input}
               className="rounded-none"
             />
-            <PromptInputToolbar>
+            {/* <PromptInputToolbar>
               <PromptInputTools className="rounded-none">
                 <ChoicesSelect
                   choices={level.choices}
@@ -163,7 +162,7 @@ const AIChat = ({ game, initialMessages, level }: AIChatProps) => {
                 />
               </PromptInputTools>
               <PromptInputSubmit disabled={!input} status={status} />
-            </PromptInputToolbar>
+            </PromptInputToolbar> */}
           </PromptInput>
         </ScrollArea>
       </CardContent>
