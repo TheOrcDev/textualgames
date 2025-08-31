@@ -50,7 +50,7 @@ export default function GlassmorphNavbar() {
                     alt="Textual Games Logo"
                     priority
                   />
-                  <span className="text-xs lg:text-md font-semibold text-gray-800 dark:text-gray-200 hidden sm:block">
+                  <span className="text-xs lg:text-md hidden sm:block">
                     Textual Games
                   </span>
                 </Link>
