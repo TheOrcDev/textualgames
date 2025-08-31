@@ -96,7 +96,7 @@ export async function createFirstLevel(game: Game) {
   });
 
   const { object } = await generateObject({
-    model: "openai/gpt-4o",
+    model: process.env.AI_MODEL!,
     schema: zodSchema(gameResponseSchema),
     prompt: level,
   });
