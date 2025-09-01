@@ -115,7 +115,6 @@ export async function resetMonthlyUsage(): Promise<void> {
 
         await db.update(userUsage)
             .set({
-                tokensUsed: 0,
                 levelsCompleted: 0,
                 lastResetDate: startOfMonth,
                 updatedAt: new Date(),
