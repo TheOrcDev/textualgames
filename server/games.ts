@@ -2,7 +2,6 @@
 
 import { desc, eq } from "drizzle-orm";
 
-import { isValidUUID } from "@/db";
 import db from "@/db/drizzle";
 import { characters, Game, games, levels } from "@/db/schema";
 
@@ -61,12 +60,6 @@ export const getGames = async (): Promise<Game[]> => {
 };
 
 export const deleteGame = async (gameId: string) => {
-  const isValidGameId = isValidUUID(gameId);
-
-  if (!isValidGameId) {
-    return false;
-  }
-
   try {
     await db.delete(levels).where(eq(levels.gameId, gameId));
 
