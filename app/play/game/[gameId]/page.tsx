@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { getGame } from "@/server/games";
-import { checkSubscription, isSubscriptionValid } from "@/server/subscriptions";
+import { isSubscriptionValid } from "@/server/subscriptions";
 import { getUserSession } from "@/server/users";
 
 import { getChatByGameId } from "@/lib/chat-store";
