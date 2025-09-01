@@ -37,6 +37,7 @@ export type Game = typeof games.$inferSelect & {
 };
 
 export type Level = typeof levels.$inferSelect;
+export type InsertLevel = typeof levels.$inferInsert;
 
 export const genderEnum = pgEnum("gender", ["male", "female"]);
 

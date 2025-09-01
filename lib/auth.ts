@@ -48,7 +48,7 @@ export const auth = betterAuth({
         createCustomerOnSignUp: true,
         use: [
             checkout({
-                products: [{ productId: "03b8e511-b0f6-42a4-8dac-6cd879609e5c", slug: "pro" }],
+                products: [{ productId: "533c4351-04d5-4739-a465-e1883307e5df", slug: "pro" }],
                 successUrl: "/play/payment",
                 authenticatedUsersOnly: true,
             }),

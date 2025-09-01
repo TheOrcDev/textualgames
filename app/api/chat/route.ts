@@ -2,7 +2,7 @@ import { Game } from '@/db/schema';
 import { auth } from '@/lib/auth';
 import { getChatByGameId, updateChat } from '@/lib/chat-store';
 import StoryCreator from '@/lib/story-creator';
-import { updateUserUsage } from '@/lib/usage-tracking';
+import { saveLevel } from '@/server/level';
 import { isSubscriptionValid } from '@/server/subscriptions';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 import { headers } from 'next/headers';
@@ -60,29 +60,16 @@ export async function POST(req: Request) {
             system: prompt.basePrompt,
         });
 
+        await saveLevel(game.id, {
+            level: String(game.levels.length + 1),
+            storyline: await result.text,
+            choices: [],
+            image: "",
+            gameId: game.id,
+        });
+
         return result.toUIMessageStreamResponse({
             onFinish: async ({ messages }) => {
-                // Note: We can't get exact token usage from onFinish
-                // Using more realistic token estimation based on content analysis
-                const estimatedTokens = messages.reduce((total, msg) => {
-                    const content = typeof msg === 'string' ? msg : JSON.stringify(msg);
-
-                    // More realistic token estimation:
-                    // - Words: ~1.3 tokens per word
-                    // - Punctuation and special chars: ~1 token each
-                    // - Base overhead for message structure
-                    const words = content.split(/\s+/).length;
-                    const specialChars = (content.match(/[^\w\s]/g) || []).length;
-                    const baseTokens = 10; // Base overhead for message structure
-
-                    return total + Math.round(words * 1.3 + specialChars + baseTokens);
-                }, 0);
-
-                // Update user usage with estimated token consumption
-                await updateUserUsage(userId, {
-                    totalTokens: estimatedTokens,
-                });
-
                 await updateChat({ gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
             },
         });
