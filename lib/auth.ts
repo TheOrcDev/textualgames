@@ -49,7 +49,7 @@ export const auth = betterAuth({
         use: [
             checkout({
                 products: [{ productId: "03b8e511-b0f6-42a4-8dac-6cd879609e5c", slug: "pro" }],
-                successUrl: "/play/payment/success",
+                successUrl: "/play/payment",
                 authenticatedUsersOnly: true,
             }),
             portal(),

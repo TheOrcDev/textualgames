@@ -117,8 +117,7 @@ export type InsertSubscription = typeof subscriptions.$inferInsert;
 export const userUsage = pgTable("user_usage", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: text("user_id").notNull().references(() => user.id),
-  tokensUsed: integer("tokens_used").notNull().default(0),
-  costInCents: integer("cost_in_cents").notNull().default(0),
+  levelsCompleted: integer("levels_completed").notNull().default(0),
   lastResetDate: timestamp("last_reset_date").notNull().defaultNow(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
@@ -127,7 +126,8 @@ export const userUsage = pgTable("user_usage", {
 export const usageLimits = pgTable("usage_limits", {
   id: uuid("id").primaryKey().defaultRandom(),
   tier: subscriptionEnum("subscription").notNull().default(Subscription.FREE),
-  maxCostInCents: integer("max_cost_in_cents").notNull(),
+  maxLevels: integer("max_levels").notNull(),
+  maxTokens: integer("max_tokens").notNull(),
   features: jsonb("features").$type<string[]>(), // ["chat", "unlimited_games", etc.]
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),

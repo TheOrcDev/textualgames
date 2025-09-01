@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 
+import { Badge } from "@/components/ui/8bit/badge";
 import { Button } from "@/components/ui/8bit/button";
 import {
   Card,
@@ -23,6 +24,8 @@ export const PricingCard = ({ allowUpgrade }: PricingCardProps) => {
     });
   };
 
+  console.log(allowUpgrade);
+
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -34,9 +37,11 @@ export const PricingCard = ({ allowUpgrade }: PricingCardProps) => {
         <p>Create unlimited games, and play how much you want.</p>
       </CardContent>
       <CardFooter className="flex justify-center">
-        <Button disabled={allowUpgrade} onClick={handleUpgrade} asChild>
-          Upgrade
-        </Button>
+        {allowUpgrade ? (
+          <Button onClick={handleUpgrade}>Upgrade</Button>
+        ) : (
+          <Badge>active</Badge>
+        )}
       </CardFooter>
     </Card>
   );

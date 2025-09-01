@@ -79,7 +79,9 @@ export default function Hero() {
           </div>
 
           <Button asChild>
-            <Link href={"/play/create-character"}>Try Now For Free</Link>
+            <Link className="p-5" href={"/play/create-character"}>
+              Try Now For Free
+            </Link>
           </Button>
         </div>
 

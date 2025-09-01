@@ -12,7 +12,8 @@
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:migrate": "drizzle-kit migrate",
-    "db:run-migration": "tsx db/migrate.ts"
+    "db:run-migration": "tsx db/migrate.ts",
+    "db:setup-usage-limits": "tsx scripts/setup-usage-limits.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.23",

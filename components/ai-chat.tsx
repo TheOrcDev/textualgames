@@ -2,8 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { Game, Level } from "@/db/schema";
+import Link from "next/link";
+
+import { Game, Level, Subscription } from "@/db/schema";
 import { UIMessage, useChat } from "@ai-sdk/react";
+
+import { UsageCheckResult } from "@/lib/usage-tracking";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/8bit/card";
 
@@ -34,15 +38,18 @@ import {
   SourcesTrigger,
 } from "@/components/ai-elements/source";
 
+import { Button } from "./ui/8bit/button";
 import { ScrollArea } from "./ui/scroll-area";
 
 interface AIChatProps {
   game: Game;
   initialMessages?: UIMessage[];
   level: Level;
+  tier?: Subscription;
+  usage?: UsageCheckResult;
 }
 
-const AIChat = ({ game, initialMessages, level }: AIChatProps) => {
+const AIChat = ({ game, initialMessages, level, tier, usage }: AIChatProps) => {
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -146,11 +153,25 @@ const AIChat = ({ game, initialMessages, level }: AIChatProps) => {
             <ConversationScrollButton />
           </Conversation>
 
+          {!usage?.canProceed && tier === Subscription.FREE && (
+            <div className="flex justify-center">
+              <Button asChild>
+                <Link href="/play/pricing">Upgrade</Link>
+              </Button>
+            </div>
+          )}
+
           <PromptInput onSubmit={handleSubmit} className="mt-4 rounded-none">
             <PromptInputTextarea
               onChange={(e) => setInput(e.target.value)}
               value={input}
               className="rounded-none"
+              placeholder={
+                !usage?.canProceed && tier === Subscription.FREE
+                  ? "You've reached your usage limit. Upgrade to continue using the service."
+                  : "What do you do?"
+              }
+              disabled={!usage?.canProceed && tier === Subscription.FREE}
             />
             {/* <PromptInputToolbar>
               <PromptInputTools className="rounded-none">

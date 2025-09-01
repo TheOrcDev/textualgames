@@ -38,22 +38,12 @@ export const getPolarSubscription = async () => {
     }
 }
 
-export const checkSubscription = async () => {
+export const checkSubscription = async (): Promise<Subscription> => {
     const session = await getUserSession();
 
     try {
-        if (session.user.subscriptions?.tier === Subscription.PRO) {
-            return {
-                success: false,
-                message: "You already have a pro subscription.",
-            }
-        }
-
-        return {
-            success: true,
-            message: "You don't have a pro subscription.",
-        }
+        return session.user.subscriptions?.tier as Subscription ?? Subscription.FREE;
     } catch (e) {
-        console.log(e);
+        return Subscription.FREE;
     }
 };

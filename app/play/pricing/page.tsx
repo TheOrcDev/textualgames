@@ -1,3 +1,4 @@
+import { Subscription } from "@/db/schema";
 import { checkSubscription } from "@/server/subscriptions";
 
 import { PricingCard } from "./_components/pricing-card";
@@ -9,7 +10,7 @@ export default async function PricingPage() {
     <main className="flex flex-col gap-10 items-center justify-center">
       <h1>Pricing</h1>
 
-      <PricingCard allowUpgrade={subscription?.success === false} />
+      <PricingCard allowUpgrade={subscription === Subscription.FREE} />
     </main>
   );
 }
