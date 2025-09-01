@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 
-import { getUserProfile } from "@/server/users";
+import { getUserTheme } from "@/server/users";
 import { Analytics } from "@vercel/analytics/react";
+
+import { Theme } from "@/lib/themes";
 
 import { ScreenSize } from "@/components/ui/screen-size";
 import { Toaster } from "@/components/ui/sonner";
@@ -26,7 +28,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getUserProfile();
+  const theme = await getUserTheme();
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -37,7 +39,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ActiveThemeProvider initialTheme={user.userConfigurations?.theme}>
+          <ActiveThemeProvider initialTheme={theme ?? Theme.Default}>
             {children}
             <Toaster />
             <Analytics />

@@ -104,6 +104,29 @@ export const signUp = async (email: string, password: string, username: string) 
     }
 }
 
+export const getUserTheme = async () => {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
+    if (!session?.user?.id) {
+        return null;
+    }
+
+    const userProfile = await db.query.user.findFirst({
+        where: eq(user.id, session?.user?.id),
+        with: {
+            userConfigurations: true,
+        },
+    });
+
+    if (!userProfile) {
+        return null;
+    }
+
+    return userProfile.userConfigurations?.theme;
+}
+
 export const getUserProfile = async () => {
     const session = await auth.api.getSession({
         headers: await headers(),
