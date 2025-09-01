@@ -6,8 +6,6 @@ import { eq } from "drizzle-orm";
 import { getUserSession } from "./users";
 
 export const updateSubscription = async (userId: string, subscription: Subscription) => {
-    const session = await getUserSession();
-
     try {
         await db.update(subscriptions).set({ tier: subscription }).where(eq(subscriptions.userId, userId));
     } catch (e) {
