@@ -66,6 +66,10 @@ export default function GlassmorphNavbar() {
                   <Link href={"/play/profile"}>Profile</Link>
                 </Button>
 
+                {/* <Button variant={"ghost"} asChild>
+                  <Link href={"/play/pricing"}>Pricing</Link>
+                </Button> */}
+
                 <Button variant={"ghost"} onClick={handleSignOut}>
                   Log out
                 </Button>
@@ -96,6 +100,11 @@ export default function GlassmorphNavbar() {
                 <Button variant={"ghost"} asChild>
                   <Link href={"/play/my-games"}>My Games</Link>
                 </Button>
+
+                {/* <Button variant={"ghost"} asChild>
+                  <Link href={"/play/pricing"}>Pricing</Link>
+                </Button> */}
+
                 <Button variant={"ghost"} asChild>
                   <Link href={"/play/profile"}>Profile</Link>
                 </Button>

@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import db from "@/db/drizzle";
-import { user } from "@/db/schema";
+import { Subscription, subscriptions, user } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 import WelcomeEmail from "@/components/emails/welcome";
@@ -38,6 +38,9 @@ export const getUserSession = async () => {
 
     const currentUser = await db.query.user.findFirst({
         where: eq(user.id, session?.user?.id),
+        with: {
+            subscriptions: true,
+        },
     });
 
     if (!currentUser) {
@@ -88,6 +91,15 @@ export const signUp = async (email: string, password: string, username: string) 
             to: [email],
             subject: "Welcome to Textual Games",
             react: WelcomeEmail({ name: username }),
+        });
+
+        const user = await getUserByEmail(email);
+
+        await db.insert(subscriptions).values({
+            userId: user.id,
+            polarProductId: "",
+            slug: "",
+            subscription: Subscription.FREE,
         });
 
         return {
