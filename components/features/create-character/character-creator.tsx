@@ -848,7 +848,7 @@ export default function CharacterCreator() {
                             )}
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="max-w-2xl">
+                        <DialogContent className="sm:max-w-2xl">
                           <DialogHeader>
                             <DialogTitle className="text-xl">
                               Choose Your Story
