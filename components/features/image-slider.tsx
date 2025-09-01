@@ -16,7 +16,7 @@ const images = [
     alt: "Demon leading an army",
   },
   {
-    src: "/img/screenshots/resistance-leader-dystopian.webp",
+    src: "/img/screenshots/8bit-resistance-leader-dystopian.png",
     alt: "Resistance leader dystopian",
   },
   {
@@ -49,7 +49,7 @@ export default function ImageSlider() {
           src={image.src}
           key={image.src}
           alt={image.alt}
-          className="aspect-video w-96 rounded-md md:w-full"
+          className="aspect-video w-96 rounded-md md:w-full border-2"
           width={500}
           height={500}
         />
