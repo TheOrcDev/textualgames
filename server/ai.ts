@@ -34,6 +34,7 @@ export async function createCharacter(
     const [newGame] = await db
       .insert(games)
       .values({
+        userId: user.id,
         email: user.email,
         genre: formData.genre,
         choice: "",

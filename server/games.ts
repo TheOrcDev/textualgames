@@ -1,6 +1,6 @@
 "use server";
 
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, inArray } from "drizzle-orm";
 
 import db from "@/db/drizzle";
 import { characters, Game, games, levels } from "@/db/schema";
@@ -79,4 +79,19 @@ export const deleteGame = async (gameId: string) => {
     console.error("Failed to delete game:", error);
     throw error;
   }
+};
+
+export const getTotalGamesAndtotalLevels = async (userId: string) => {
+  const totalGames = await db.query.games.findMany({
+    where: eq(games.userId, userId),
+  });
+
+  const totalLevels = await db.query.levels.findMany({
+    where: inArray(levels.gameId, totalGames.map((game) => game.id)),
+  });
+
+  return {
+    totalGames: totalGames.length,
+    totalLevels: totalLevels.length,
+  };
 };

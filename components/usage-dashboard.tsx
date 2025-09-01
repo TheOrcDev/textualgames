@@ -33,9 +33,17 @@ interface UsageData {
 interface UsageDashboardProps {
   tier: Subscription;
   usageData: UsageData;
+  totalGamesAndLevels: {
+    totalGames: number;
+    totalLevels: number;
+  };
 }
 
-export function UsageDashboard({ tier, usageData }: UsageDashboardProps) {
+export function UsageDashboard({
+  tier,
+  usageData,
+  totalGamesAndLevels,
+}: UsageDashboardProps) {
   if (!usageData) {
     return (
       <Card className="w-full max-w-md">
@@ -56,73 +64,97 @@ export function UsageDashboard({ tier, usageData }: UsageDashboardProps) {
         <CardTitle>Usage</CardTitle>
         <CardDescription>Your monthly usage and limits</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Levels completed:</span>
-            <span className="font-mono">{usageData.currentLevels}</span>
+      {tier === Subscription.FREE && (
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Levels completed:</span>
+              <span className="font-mono">{usageData.currentLevels}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span>Level limit:</span>
+              <span className="font-mono">{usageData.maxLevels}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span>Levels remaining:</span>
+              <span className="font-mono">{usageData.remainingLevels}</span>
+            </div>
           </div>
-          <div className="flex justify-between text-sm">
-            <span>Level limit:</span>
-            <span className="font-mono">{usageData.maxLevels}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span>Levels remaining:</span>
-            <span className="font-mono">{usageData.remainingLevels}</span>
-          </div>
-        </div>
 
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Levels usage:</span>
-            <span className="font-mono">
-              {levelUsagePercentage.toFixed(1)}%
-            </span>
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Levels usage:</span>
+              <span className="font-mono">
+                {levelUsagePercentage.toFixed(1)}%
+              </span>
+            </div>
+            <Progress
+              value={levelUsagePercentage}
+              className={`h-2 ${usageData.remainingLevels <= 0 ? "bg-red-200" : usageData.remainingLevels <= 10 ? "bg-orange-200" : "bg-green-200"}`}
+            />
           </div>
-          <Progress
-            value={levelUsagePercentage}
-            className={`h-2 ${usageData.remainingLevels <= 0 ? "bg-red-200" : usageData.remainingLevels <= 10 ? "bg-orange-200" : "bg-green-200"}`}
-          />
-        </div>
 
-        {usageData.message && (
-          <div className="p-3 bg-orange-100 border border-orange-300 rounded-md">
-            <p className="text-sm text-orange-800">{usageData.message}</p>
+          {usageData.message && (
+            <div className="p-3 bg-orange-100 border border-orange-300 rounded-md">
+              <p className="text-sm text-orange-800">{usageData.message}</p>
+            </div>
+          )}
+
+          {usageData.remainingLevels < 6 && (
+            <div className="flex flex-col gap-5">
+              <Alert>
+                <AlertTitle>Heads up!</AlertTitle>
+                <AlertDescription>
+                  You&apos;re approaching your usage limit. Consider upgrading
+                  to continue using the service.
+                </AlertDescription>
+              </Alert>
+
+              <Link href="/play/pricing">
+                <Button>Upgrade</Button>
+              </Link>
+            </div>
+          )}
+
+          {usageData.remainingLevels <= 0 && (
+            <div className="flex flex-col gap-5">
+              <Alert>
+                <AlertTitle>Heads up!</AlertTitle>
+                <AlertDescription>
+                  You&apos;ve reached your monthly usage limit. Upgrade to
+                  continue using the service.
+                </AlertDescription>
+              </Alert>
+
+              <Link href="/play/pricing">
+                <Button>Upgrade</Button>
+              </Link>
+            </div>
+          )}
+        </CardContent>
+      )}
+
+      {tier === Subscription.PRO && (
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Total levels:</span>
+              <span className="font-mono">
+                {totalGamesAndLevels.totalLevels}
+              </span>
+            </div>
           </div>
-        )}
 
-        {usageData.remainingLevels < 6 && (
-          <div className="flex flex-col gap-5">
-            <Alert>
-              <AlertTitle>Heads up!</AlertTitle>
-              <AlertDescription>
-                You&apos;re approaching your usage limit. Consider upgrading to
-                continue using the service.
-              </AlertDescription>
-            </Alert>
-
-            <Link href="/play/pricing">
-              <Button>Upgrade</Button>
-            </Link>
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Total games:</span>
+              <span className="font-mono">
+                {totalGamesAndLevels.totalGames}
+              </span>
+            </div>
           </div>
-        )}
-
-        {usageData.remainingLevels <= 0 && (
-          <div className="flex flex-col gap-5">
-            <Alert>
-              <AlertTitle>Heads up!</AlertTitle>
-              <AlertDescription>
-                You&apos;ve reached your monthly usage limit. Upgrade to
-                continue using the service.
-              </AlertDescription>
-            </Alert>
-
-            <Link href="/play/pricing">
-              <Button>Upgrade</Button>
-            </Link>
-          </div>
-        )}
-      </CardContent>
+        </CardContent>
+      )}
     </Card>
   );
 }

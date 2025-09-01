@@ -23,6 +23,7 @@ export const purchases = pgTable("purchases", {
 
 export const games = pgTable("games", {
   id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => user.id, { onDelete: 'cascade' }),
   genre: text("genre").notNull(),
   choice: text("choice").notNull(),
   email: text("email").notNull(),
@@ -68,6 +69,10 @@ export const gamesRelations = relations(games, ({ many, one }) => ({
   levels: many(levels),
   character: one(characters),
   chats: many(chats),
+  user: one(user, {
+    fields: [games.userId],
+    references: [user.id],
+  }),
 }));
 
 export const levelsRelations = relations(levels, ({ one }) => ({
@@ -151,6 +156,7 @@ export const userRelations = relations(user, ({ many, one }) => ({
   verification: many(verification),
   userConfigurations: one(userConfigurations),
   subscriptions: one(subscriptions),
+  games: many(games),
 }));
 
 export const session = pgTable("session", {

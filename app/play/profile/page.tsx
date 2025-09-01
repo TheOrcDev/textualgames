@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { Subscription } from "@/db/schema";
+import { getTotalGamesAndtotalLevels } from "@/server/games";
 import { isSubscriptionValid } from "@/server/subscriptions";
 import { getUserProfile } from "@/server/users";
 
@@ -14,6 +15,7 @@ export default async function AccountPage() {
 
   const tier = (user.subscriptions?.tier as Subscription) ?? Subscription.FREE;
   const usageData = await checkUsageLimit(user.id);
+  const totalGamesAndLevels = await getTotalGamesAndtotalLevels(user.id);
 
   if (!user) {
     return notFound();
@@ -22,7 +24,11 @@ export default async function AccountPage() {
   return (
     <main className="flex flex-col items-center justify-center gap-6">
       <UserConfig user={user} />
-      <UsageDashboard userId={user.id} tier={tier} usageData={usageData} />
+      <UsageDashboard
+        tier={tier}
+        usageData={usageData}
+        totalGamesAndLevels={totalGamesAndLevels}
+      />
     </main>
   );
 }
