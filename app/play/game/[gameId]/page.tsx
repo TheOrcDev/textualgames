@@ -5,7 +5,6 @@ import { isSubscriptionValid } from "@/server/subscriptions";
 import { getUserSession } from "@/server/users";
 
 import { getChatByGameId } from "@/lib/chat-store";
-import { checkUsageLimit } from "@/lib/usage-tracking";
 
 import AIChat from "@/components/ai-chat";
 

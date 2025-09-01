@@ -43,10 +43,15 @@ interface AIChatProps {
   game: Game;
   initialMessages?: UIMessage[];
   level: Level;
-  isValid?: boolean;
+  isSubscriptionValid?: boolean;
 }
 
-const AIChat = ({ game, initialMessages, level, isValid }: AIChatProps) => {
+const AIChat = ({
+  game,
+  initialMessages,
+  level,
+  isSubscriptionValid,
+}: AIChatProps) => {
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -150,7 +155,7 @@ const AIChat = ({ game, initialMessages, level, isValid }: AIChatProps) => {
             <ConversationScrollButton />
           </Conversation>
 
-          {!isValid && (
+          {!isSubscriptionValid && (
             <div className="flex justify-center">
               <Button asChild>
                 <Link href="/play/pricing">Upgrade</Link>
@@ -164,11 +169,11 @@ const AIChat = ({ game, initialMessages, level, isValid }: AIChatProps) => {
               value={input}
               className="rounded-none"
               placeholder={
-                !isValid
+                !isSubscriptionValid
                   ? "You've reached your usage limit. Upgrade to continue using the service."
                   : "What do you do?"
               }
-              disabled={!isValid}
+              disabled={!isSubscriptionValid}
             />
             {/* <PromptInputToolbar>
               <PromptInputTools className="rounded-none">
