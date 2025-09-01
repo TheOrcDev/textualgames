@@ -113,7 +113,16 @@ export const getUserProfile = async () => {
         throw new Error("User not found");
     }
 
-    const [userProfile] = await db.select().from(user).where(eq(user.id, session?.user?.id));
+    const userProfile = await db.query.user.findFirst({
+        where: eq(user.id, session?.user?.id),
+        with: {
+            userConfigurations: true,
+        },
+    });
+
+    if (!userProfile) {
+        throw new Error("User not found");
+    }
 
     return userProfile;
 }

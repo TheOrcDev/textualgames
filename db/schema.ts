@@ -1,3 +1,4 @@
+import { Theme } from "@/lib/themes";
 import { UIMessage } from "ai";
 import { relations } from "drizzle-orm";
 import {
@@ -93,6 +94,18 @@ export const user = pgTable("user", {
   updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date()).notNull()
 });
 
+export type User = typeof user.$inferSelect & {
+  userConfigurations: typeof userConfigurations.$inferSelect | null;
+};
+export type InsertUser = typeof user.$inferInsert;
+
+export const userRelations = relations(user, ({ many, one }) => ({
+  sessions: many(session),
+  accounts: many(account),
+  verification: many(verification),
+  userConfigurations: one(userConfigurations),
+}));
+
 export const session = pgTable("session", {
   id: text('id').primaryKey(),
   expiresAt: timestamp('expires_at').notNull(),
@@ -137,6 +150,24 @@ export const chats = pgTable("chats", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+export const userConfigurations = pgTable("user_configurations", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull().references(() => user.id, { onDelete: 'cascade' }),
+  theme: text("theme").notNull().$type<Theme>(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const userConfigurationsRelations = relations(userConfigurations, ({ one }) => ({
+  user: one(user, {
+    fields: [userConfigurations.userId],
+    references: [user.id],
+  }),
+}));
+
+export type UserConfiguration = typeof userConfigurations.$inferSelect;
+export type InsertUserConfiguration = typeof userConfigurations.$inferInsert;
 
 export const chatsRelations = relations(chats, ({ one }) => ({
   game: one(games, {

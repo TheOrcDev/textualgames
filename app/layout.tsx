@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
+import { getUserProfile } from "@/server/users";
 import { Analytics } from "@vercel/analytics/react";
 
 import { ScreenSize } from "@/components/ui/screen-size";
 import { Toaster } from "@/components/ui/sonner";
 
+import { ActiveThemeProvider } from "@/components/active-theme";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
@@ -24,6 +26,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const user = await getUserProfile();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="overflow-x-hidden scroll-smooth retro antialiased">
@@ -33,10 +37,12 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster />
-          <Analytics />
-          {process.env.APP_ENV === "development" && <ScreenSize />}
+          <ActiveThemeProvider initialTheme={user.userConfigurations?.theme}>
+            {children}
+            <Toaster />
+            <Analytics />
+            {process.env.APP_ENV === "development" && <ScreenSize />}
+          </ActiveThemeProvider>
         </ThemeProvider>
       </body>
     </html>
