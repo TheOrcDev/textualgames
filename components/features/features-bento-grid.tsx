@@ -6,7 +6,7 @@ export default function BentoGrid() {
       <Card className="group relative col-span-2 flex w-full flex-col p-6 h-full lg:col-span-1 lg:row-span-3">
         <div className="absolute inset-0d bg-linear-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col justify-between gap-5">
-          <div className="bg-primary p-2.5 w-max">
+          <div className="bg-primary/40 p-2.5 w-max">
             <svg
               width="50"
               height="50"
@@ -81,7 +81,7 @@ export default function BentoGrid() {
       <Card className="group relative col-span-2 p-6 h-full lg:col-span-2 lg:row-span-1">
         <div className="absolute inset-0d bg-linear-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col justify-between gap-5">
-          <div className="bg-primary p-2.5 w-max">
+          <div className="bg-primary/40 p-2.5 w-max">
             <svg
               width="50"
               height="50"
@@ -168,7 +168,7 @@ export default function BentoGrid() {
       <Card className="group relative col-span-2 p-6 h-full lg:col-span-1 lg:row-span-1">
         <div className="absolute inset-0d bg-linear-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col justify-between gap-5">
-          <div className="bg-primary p-2.5 w-max">
+          <div className="bg-primary/40 p-2.5 w-max">
             <svg
               width="50"
               height="50"
@@ -242,7 +242,7 @@ export default function BentoGrid() {
       <Card className="group relative col-span-2 p-6 h-full lg:col-span-3 lg:row-span-2">
         <div className="absolute inset-0d bg-linear-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col justify-between gap-5">
-          <div className="bg-primary p-2.5 w-max">
+          <div className="bg-primary/40 p-2.5 w-max">
             <svg
               width="50"
               height="50"
