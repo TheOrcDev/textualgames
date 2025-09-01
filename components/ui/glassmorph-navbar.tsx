@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
@@ -57,23 +57,16 @@ export default function GlassmorphNavbar() {
               </div>
             </div>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-center gap-1">
+              <div className="flex items-center gap-1">
                 <Button variant={"ghost"} asChild>
-                  <Link href={"/play/my-games"}>
-                    <LayoutGrid />
-                    My Games
-                  </Link>
+                  <Link href={"/play/my-games"}>My Games</Link>
                 </Button>
 
                 <Button variant={"ghost"} asChild>
-                  <Link href={"/play/profile"}>
-                    <User />
-                    Profile
-                  </Link>
+                  <Link href={"/play/profile"}>Profile</Link>
                 </Button>
 
                 <Button variant={"ghost"} onClick={handleSignOut}>
-                  <LogOut />
                   Log out
                 </Button>
                 <ModeSwitcher />
@@ -83,7 +76,7 @@ export default function GlassmorphNavbar() {
               <Button
                 onClick={() => setIsOpen(!isOpen)}
                 variant={"ghost"}
-                className="inline-flex items-center justify-center rounded-md p-2 hover:bg-primary focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary dark:text-gray-200"
+                className="inline-flex items-center justify-center rounded-md p-2 hover:bg-primary focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary"
               >
                 <span className="sr-only">Open main menu</span>
                 {isOpen ? (
@@ -101,16 +94,10 @@ export default function GlassmorphNavbar() {
             <div className="flex items-center justify-between gap-3 px-5 py-3">
               <div className="flex flex-col">
                 <Button variant={"ghost"} asChild>
-                  <Link href={"/play/my-games"}>
-                    <LayoutGrid />
-                    My Games
-                  </Link>
+                  <Link href={"/play/my-games"}>My Games</Link>
                 </Button>
                 <Button variant={"ghost"} asChild>
-                  <Link href={"/play/profile"}>
-                    <User />
-                    Profile
-                  </Link>
+                  <Link href={"/play/profile"}>Profile</Link>
                 </Button>
               </div>
 
