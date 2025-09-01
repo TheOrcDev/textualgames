@@ -74,7 +74,7 @@ export default function GameCard({ game }: Props) {
 
             <Separator />
 
-            <p>Items:</p>
+            {/* <p>Items:</p>
             {(() => {
               try {
                 return JSON.parse(game.character?.items).map((item: string) => (
@@ -85,7 +85,7 @@ export default function GameCard({ game }: Props) {
               } catch {
                 return <p className="text-xs">No items.</p>; // Fallback message
               }
-            })()}
+            })()} */}
           </div>
         </CardContent>
       </Link>
