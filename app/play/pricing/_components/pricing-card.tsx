@@ -1,5 +1,7 @@
 "use client";
 
+import { Subscription } from "@/db/schema";
+
 import { authClient } from "@/lib/auth-client";
 
 import { Badge } from "@/components/ui/8bit/badge";
@@ -14,10 +16,10 @@ import {
 } from "@/components/ui/8bit/card";
 
 interface PricingCardProps {
-  allowUpgrade: boolean;
+  tier: Subscription;
 }
 
-export const PricingCard = ({ allowUpgrade }: PricingCardProps) => {
+export const PricingCard = ({ tier }: PricingCardProps) => {
   const handleUpgrade = async () => {
     await authClient.checkout({
       slug: "pro",
@@ -35,7 +37,7 @@ export const PricingCard = ({ allowUpgrade }: PricingCardProps) => {
         <p>Create unlimited games, and play how much you want.</p>
       </CardContent>
       <CardFooter className="flex justify-center">
-        {!allowUpgrade ? (
+        {tier === Subscription.FREE ? (
           <Button onClick={handleUpgrade}>Upgrade</Button>
         ) : (
           <Badge>active</Badge>

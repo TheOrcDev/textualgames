@@ -1,16 +1,18 @@
 import { Subscription } from "@/db/schema";
-import { isSubscriptionValid } from "@/server/subscriptions";
+import { getUserSession } from "@/server/users";
 
 import { PricingCard } from "./_components/pricing-card";
 
 export default async function PricingPage() {
-  const subscription = await isSubscriptionValid();
+  const session = await getUserSession();
+  const tier =
+    (session.user.subscriptions?.tier as Subscription) ?? Subscription.FREE;
 
   return (
     <main className="flex flex-col gap-10 items-center justify-center">
       <h1>Pricing</h1>
 
-      <PricingCard allowUpgrade={subscription} />
+      <PricingCard tier={tier} />
     </main>
   );
 }
