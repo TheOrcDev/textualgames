@@ -152,6 +152,7 @@ export const getUserProfile = async () => {
         where: eq(user.id, session?.user?.id),
         with: {
             userConfigurations: true,
+            subscriptions: true,
         },
     });
 

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 
+import { Subscription } from "@/db/schema";
+
 import {
   Alert,
   AlertDescription,
@@ -21,9 +23,6 @@ import { Progress } from "@/components/ui/8bit/progress";
 import { Button } from "./ui/8bit/button";
 
 interface UsageData {
-  currentTokens: number;
-  maxTokens: number;
-  remainingTokens: number;
   currentLevels: number;
   maxLevels: number;
   remainingLevels: number;
@@ -31,39 +30,12 @@ interface UsageData {
   message?: string;
 }
 
-export function UsageDashboard({ userId }: { userId: string }) {
-  const [usageData, setUsageData] = useState<UsageData | null>(null);
-  const [loading, setLoading] = useState(true);
+interface UsageDashboardProps {
+  tier: Subscription;
+  usageData: UsageData;
+}
 
-  useEffect(() => {
-    const fetchUsage = async () => {
-      try {
-        const response = await fetch(`/api/usage?userId=${userId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setUsageData(data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch usage:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsage();
-  }, [userId]);
-
-  if (loading) {
-    return (
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Usage</CardTitle>
-          <CardDescription>Loading your usage information...</CardDescription>
-        </CardHeader>
-      </Card>
-    );
-  }
-
+export function UsageDashboard({ tier, usageData }: UsageDashboardProps) {
   if (!usageData) {
     return (
       <Card className="w-full max-w-md">
