@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Subscription } from "@/db/schema";
-import { checkSubscription } from "@/server/subscriptions";
+import { isSubscriptionValid } from "@/server/subscriptions";
 import { getUserSession } from "@/server/users";
 
 import { checkUsageLimit } from "@/lib/usage-tracking";
@@ -18,14 +18,9 @@ export const metadata: Metadata = {
 };
 
 export default async function CreateCharacterPage() {
-  const session = await getUserSession();
+  const subscription = await isSubscriptionValid();
 
-  const [tier, usage] = await Promise.all([
-    checkSubscription(),
-    checkUsageLimit(session.user.id),
-  ]);
-
-  if (!usage?.canProceed && tier === Subscription.FREE) {
+  if (!subscription) {
     return (
       <div className="flex flex-col items-center justify-center gap-5 max-w-md mx-auto">
         <h2 className="md:text-xl text-center">

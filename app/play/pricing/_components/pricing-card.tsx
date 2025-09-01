@@ -24,8 +24,6 @@ export const PricingCard = ({ allowUpgrade }: PricingCardProps) => {
     });
   };
 
-  console.log(allowUpgrade);
-
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -37,7 +35,7 @@ export const PricingCard = ({ allowUpgrade }: PricingCardProps) => {
         <p>Create unlimited games, and play how much you want.</p>
       </CardContent>
       <CardFooter className="flex justify-center">
-        {allowUpgrade ? (
+        {!allowUpgrade ? (
           <Button onClick={handleUpgrade}>Upgrade</Button>
         ) : (
           <Badge>active</Badge>

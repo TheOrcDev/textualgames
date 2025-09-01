@@ -7,8 +7,6 @@ import Link from "next/link";
 import { Game, Level, Subscription } from "@/db/schema";
 import { UIMessage, useChat } from "@ai-sdk/react";
 
-import { UsageCheckResult } from "@/lib/usage-tracking";
-
 import { Card, CardContent, CardHeader } from "@/components/ui/8bit/card";
 
 import {
@@ -45,11 +43,10 @@ interface AIChatProps {
   game: Game;
   initialMessages?: UIMessage[];
   level: Level;
-  tier?: Subscription;
-  usage?: UsageCheckResult;
+  isValid?: boolean;
 }
 
-const AIChat = ({ game, initialMessages, level, tier, usage }: AIChatProps) => {
+const AIChat = ({ game, initialMessages, level, isValid }: AIChatProps) => {
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -153,7 +150,7 @@ const AIChat = ({ game, initialMessages, level, tier, usage }: AIChatProps) => {
             <ConversationScrollButton />
           </Conversation>
 
-          {!usage?.canProceed && tier === Subscription.FREE && (
+          {!isValid && (
             <div className="flex justify-center">
               <Button asChild>
                 <Link href="/play/pricing">Upgrade</Link>
@@ -167,11 +164,11 @@ const AIChat = ({ game, initialMessages, level, tier, usage }: AIChatProps) => {
               value={input}
               className="rounded-none"
               placeholder={
-                !usage?.canProceed && tier === Subscription.FREE
+                !isValid
                   ? "You've reached your usage limit. Upgrade to continue using the service."
                   : "What do you do?"
               }
-              disabled={!usage?.canProceed && tier === Subscription.FREE}
+              disabled={!isValid}
             />
             {/* <PromptInputToolbar>
               <PromptInputTools className="rounded-none">

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { getGame } from "@/server/games";
-import { checkSubscription } from "@/server/subscriptions";
+import { checkSubscription, isSubscriptionValid } from "@/server/subscriptions";
 import { getUserSession } from "@/server/users";
 
 import { getChatByGameId } from "@/lib/chat-store";
@@ -23,10 +23,9 @@ export default async function GameLevel({ params }: { params: Params }) {
     return notFound();
   }
 
-  const [messages, tier, usage] = await Promise.all([
+  const [messages, isValid] = await Promise.all([
     getChatByGameId(game.id),
-    checkSubscription(),
-    checkUsageLimit(session.user.id),
+    isSubscriptionValid(),
   ]);
 
   return (
@@ -35,8 +34,7 @@ export default async function GameLevel({ params }: { params: Params }) {
         game={game}
         initialMessages={messages}
         level={game.levels[0]}
-        tier={tier}
-        usage={usage}
+        isSubscriptionValid={isValid}
       />
     </div>
   );

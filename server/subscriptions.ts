@@ -2,6 +2,7 @@
 
 import db from "@/db/drizzle";
 import { Subscription, subscriptions } from "@/db/schema";
+import { checkUsageLimit } from "@/lib/usage-tracking";
 import { eq } from "drizzle-orm";
 import { getUserSession } from "./users";
 
@@ -38,12 +39,19 @@ export const getPolarSubscription = async () => {
     }
 }
 
-export const checkSubscription = async (): Promise<Subscription> => {
+export const isSubscriptionValid = async (): Promise<boolean> => {
     const session = await getUserSession();
 
     try {
-        return session.user.subscriptions?.tier as Subscription ?? Subscription.FREE;
+        const usage = await checkUsageLimit(session.user.id);
+        const tier = session.user.subscriptions?.tier as Subscription ?? Subscription.FREE;
+
+        if (tier !== Subscription.FREE) {
+            return true
+        }
+
+        return usage?.canProceed
     } catch (e) {
-        return Subscription.FREE;
+        return false;
     }
 };

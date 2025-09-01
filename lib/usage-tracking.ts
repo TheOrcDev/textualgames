@@ -46,7 +46,7 @@ export async function checkUsageLimit(userId: string): Promise<UsageCheckResult>
 
         const remainingLevels = maxLevels - currentLevels;
 
-        // User can proceed if they have both tokens and levels remaining
+        // User can proceed if they have levels remaining
         const canProceed = remainingLevels > 0;
 
         return {

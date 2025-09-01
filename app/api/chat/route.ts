@@ -2,7 +2,8 @@ import { Game } from '@/db/schema';
 import { auth } from '@/lib/auth';
 import { getChatByGameId, updateChat } from '@/lib/chat-store';
 import StoryCreator from '@/lib/story-creator';
-import { checkUsageLimit, updateUserUsage } from '@/lib/usage-tracking';
+import { updateUserUsage } from '@/lib/usage-tracking';
+import { isSubscriptionValid } from '@/server/subscriptions';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 import { headers } from 'next/headers';
 
@@ -26,14 +27,11 @@ export async function POST(req: Request) {
         const userId = session.user.id;
 
         // Check usage limit before processing
-        const usageCheck = await checkUsageLimit(userId);
-        if (!usageCheck.canProceed) {
+        const subscription = await isSubscriptionValid();
+        if (!subscription) {
             return new Response(JSON.stringify({
                 error: 'Usage limit exceeded',
-                message: usageCheck.message,
-                currentLevels: usageCheck.currentLevels,
-                maxLevels: usageCheck.maxLevels,
-                remainingLevels: usageCheck.remainingLevels,
+                message: 'Usage limit exceeded',
             }), {
                 status: 429,
                 headers: { 'Content-Type': 'application/json' }

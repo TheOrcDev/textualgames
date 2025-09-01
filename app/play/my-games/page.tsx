@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Subscription } from "@/db/schema";
 import { getGames } from "@/server/games";
+import { isSubscriptionValid } from "@/server/subscriptions";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/8bit/button";
 
 import GameCard from "@/components/features/game/game-card";
 
@@ -16,6 +18,8 @@ export const metadata: Metadata = {
 export default async function MyGamesPage() {
   const games = await getGames();
 
+  const isValidSubscription = await isSubscriptionValid();
+
   return (
     <main className="flex flex-col items-center justify-center px-5 md:px-24">
       {!games?.length ? (
@@ -26,10 +30,20 @@ export default async function MyGamesPage() {
           </Link>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-3 ">
-          <Link href={"/play/create-character"}>
-            <Button>Create New Character</Button>
-          </Link>
+        <div className="flex flex-col items-center justify-center gap-5">
+          {!isValidSubscription && (
+            <h2 className="text-center text-xs">
+              You&apos;ve reached your games limit. Upgrade to create more.
+            </h2>
+          )}
+
+          {isValidSubscription ? (
+            <Link href={"/play/create-character"}>
+              <Button>New Game</Button>
+            </Link>
+          ) : (
+            <Button disabled>New Game</Button>
+          )}
 
           <h2>Continue Your Stories</h2>
 
