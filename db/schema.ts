@@ -123,16 +123,6 @@ export const userUsage = pgTable("user_usage", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
-export const usageLimits = pgTable("usage_limits", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  tier: subscriptionEnum("subscription").notNull().default(Subscription.FREE),
-  maxLevels: integer("max_levels").notNull(),
-  maxTokens: integer("max_tokens").notNull(),
-  features: jsonb("features").$type<string[]>(), // ["chat", "unlimited_games", etc.]
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
-});
-
 export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
   user: one(user, {
     fields: [subscriptions.userId],
