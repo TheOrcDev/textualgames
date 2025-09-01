@@ -119,7 +119,7 @@ export function UsageDashboard({ userId }: { userId: string }) {
           </div>
         )}
 
-        {usageData.remainingLevels > 0 && (
+        {usageData.remainingLevels < 6 && (
           <div className="flex flex-col gap-5">
             <Alert>
               <AlertTitle>Heads up!</AlertTitle>
