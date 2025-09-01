@@ -18,6 +18,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/8bit/alert-dialog";
+import { Badge } from "@/components/ui/8bit/badge";
+import { Button } from "@/components/ui/8bit/button";
 import {
   Card,
   CardContent,
@@ -26,10 +28,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/8bit/card";
+import { Separator } from "@/components/ui/8bit/separator";
 import { toast } from "@/components/ui/8bit/toast";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 
 interface Props {
   game: Game;
