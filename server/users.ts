@@ -99,7 +99,7 @@ export const signUp = async (email: string, password: string, username: string) 
             userId: user.id,
             polarProductId: "",
             slug: "",
-            subscription: Subscription.FREE,
+            tier: Subscription.FREE,
         });
 
         return {
