@@ -24,7 +24,7 @@ const images = [
     alt: "Wizard in the underworld",
   },
   {
-    src: "/img/screenshots/alien-post-apocalyptic.webp",
+    src: "/img/screenshots/8bit-alien-post-apocalyptic.png",
     alt: "Alien post apocalyptic",
   },
   {
