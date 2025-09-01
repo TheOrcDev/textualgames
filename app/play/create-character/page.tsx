@@ -1,4 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+
+import { Subscription } from "@/db/schema";
+import { checkSubscription } from "@/server/subscriptions";
+import { getUserSession } from "@/server/users";
+
+import { checkUsageLimit } from "@/lib/usage-tracking";
+
+import { Button } from "@/components/ui/8bit/button";
 
 import CharacterCreator from "@/components/features/create-character/character-creator";
 
@@ -8,7 +17,27 @@ export const metadata: Metadata = {
     "Create your own story on Textual Games. Make your own choices and see where your story takes you.",
 };
 
-export default function CreateCharacterPage() {
+export default async function CreateCharacterPage() {
+  const session = await getUserSession();
+
+  const [tier, usage] = await Promise.all([
+    checkSubscription(),
+    checkUsageLimit(session.user.id),
+  ]);
+
+  if (!usage?.canProceed && tier === Subscription.FREE) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-5 max-w-md mx-auto">
+        <h2 className="md:text-xl text-center">
+          You&apos;ve reached your games limit. Upgrade to create more.
+        </h2>
+        <Link href={"/play/pricing"}>
+          <Button>Upgrade</Button>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <main>
       <CharacterCreator />
