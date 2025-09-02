@@ -28,7 +28,7 @@ export const UserConfig = ({ user }: UserConfigProps) => {
   };
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-lg">
       <CardHeader>
         <CardTitle>Theme</CardTitle>
         <CardDescription>Select your preferred theme</CardDescription>

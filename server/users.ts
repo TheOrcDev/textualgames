@@ -167,6 +167,16 @@ export const updateProfile = async (data: z.infer<typeof userSchema>) => {
     const session = await getUserSession();
 
     try {
+        const checkIfUsernameExists = await db.query.user.findFirst({
+            where: eq(user.name, data.name),
+        });
+
+        if (checkIfUsernameExists) {
+            return {
+                errors: { message: ["Username already exists"] },
+            }
+        }
+
         await db.update(user).set(data).where(eq(user.id, session?.user?.id));
 
         return {

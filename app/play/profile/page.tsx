@@ -7,6 +7,7 @@ import { getUserProfile } from "@/server/users";
 
 import { checkUsageLimit } from "@/lib/usage-tracking";
 
+import { ProfileEditCard } from "@/components/profile-edit-card";
 import { UsageDashboard } from "@/components/usage-dashboard";
 import { UserConfig } from "@/components/user-config";
 
@@ -23,12 +24,17 @@ export default async function AccountPage() {
 
   return (
     <main className="flex flex-col items-center justify-center gap-6">
-      <UserConfig user={user} />
-      <UsageDashboard
-        tier={tier}
-        usageData={usageData}
-        totalGamesAndLevels={totalGamesAndLevels}
-      />
+      <div className="flex flex-col md:flex-row gap-4">
+        <ProfileEditCard user={user} />
+        <div className="flex flex-col gap-2">
+          <UserConfig user={user} />
+          <UsageDashboard
+            tier={tier}
+            usageData={usageData}
+            totalGamesAndLevels={totalGamesAndLevels}
+          />
+        </div>
+      </div>
     </main>
   );
 }

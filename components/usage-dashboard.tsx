@@ -46,7 +46,7 @@ export function UsageDashboard({
 }: UsageDashboardProps) {
   if (!usageData) {
     return (
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-xl">
         <CardHeader>
           <CardTitle>Usage</CardTitle>
           <CardDescription>Unable to load usage information</CardDescription>
@@ -59,7 +59,7 @@ export function UsageDashboard({
     (usageData.currentLevels / usageData.maxLevels) * 100;
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-lg h-full">
       <CardHeader>
         <CardTitle>Usage</CardTitle>
         <CardDescription>Your monthly usage and limits</CardDescription>
