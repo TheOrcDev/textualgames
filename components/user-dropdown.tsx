@@ -30,11 +30,7 @@ import {
 import { useThemeConfig } from "./active-theme";
 import { navItems } from "./header";
 
-interface UserDropdownProps {
-  onThemeChange: (theme: Theme) => void;
-}
-
-export function UserDropdown({ onThemeChange }: UserDropdownProps) {
+export function UserDropdown() {
   const router = useRouter();
 
   const handleSignOut = async () => {
