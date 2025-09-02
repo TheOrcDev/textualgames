@@ -8,7 +8,6 @@ import {
   useState,
 } from "react";
 
-import { authClient } from "@/lib/auth-client";
 import { Theme } from "@/lib/themes";
 
 const COOKIE_NAME = "active_theme";
@@ -36,8 +35,6 @@ export function ActiveThemeProvider({
   children: ReactNode;
   initialTheme?: Theme;
 }) {
-  const { data: session } = authClient.useSession();
-
   const [activeTheme, setActiveTheme] = useState<Theme>(
     () => initialTheme || DEFAULT_THEME
   );

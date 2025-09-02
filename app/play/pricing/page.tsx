@@ -10,8 +10,6 @@ export default async function PricingPage() {
 
   return (
     <main className="flex flex-col gap-10 items-center justify-center">
-      <h1>Pricing</h1>
-
       <PricingCard tier={tier} />
     </main>
   );

@@ -201,11 +201,11 @@ export default function CharacterCreator() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto w-full max-w-4xl retro"
       >
-        <header className="flex flex-col items-center gap-5 text-center">
+        <div className="flex flex-col items-center gap-5 text-center">
           <h1 className="text-md font-bold tracking-wider md:text-2xl">
             Create Your Story
           </h1>
-        </header>
+        </div>
 
         <div className="grid gap-6">
           {/* Genre Selection */}
