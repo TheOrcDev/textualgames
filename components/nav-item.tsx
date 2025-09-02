@@ -20,7 +20,7 @@ export function NavItem({ href, label }: NavItemProps) {
   return (
     <Button
       className={cn("text-xs", isActive && "bg-primary/30")}
-      variant={"ghost"}
+      variant={"link"}
       key={href}
       asChild
     >
