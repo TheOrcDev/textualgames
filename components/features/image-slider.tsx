@@ -28,15 +28,15 @@ const images = [
     alt: "Alien post apocalyptic",
   },
   {
-    src: "/img/screenshots/space-explorer-in-space.webp",
+    src: "/img/screenshots/8bit-space-explorer-in-space.png",
     alt: "Space explorer in space",
   },
   {
-    src: "/img/screenshots/orc-with-potion-of-strength.webp",
+    src: "/img/screenshots/8bit-orc-with-potion-of-strength.png",
     alt: "Orc with potion of strength",
   },
   {
-    src: "/img/screenshots/djin-finding-lost-soul.webp",
+    src: "/img/screenshots/8bit-djin-finding-lost-soul.png",
     alt: "Djin finding lost soul",
   },
 ];
