@@ -84,7 +84,7 @@ const AIChat = ({
   return (
     <Card>
       <CardHeader className="hidden"></CardHeader>
-      <CardContent className="max-w-4xl mx-auto p-6 relative max-h-[700px] overflow-x-hidden overflow-y-auto">
+      <CardContent className="max-w-4xl mx-auto relative max-h-[700px] overflow-x-hidden overflow-y-auto md:p-6">
         <ScrollArea>
           <Conversation>
             <ConversationContent>
@@ -125,7 +125,10 @@ const AIChat = ({
                         switch (part.type) {
                           case "text":
                             return (
-                              <Response key={`${message.role}-${index}-${i}`}>
+                              <Response
+                                key={`${message.role}-${index}-${i}`}
+                                className="text-[9px] md:text-sm"
+                              >
                                 {part.text}
                               </Response>
                             );
@@ -167,7 +170,7 @@ const AIChat = ({
             <PromptInputTextarea
               onChange={(e) => setInput(e.target.value)}
               value={input}
-              className="rounded-none"
+              className="rounded-none text-[9px] md:text-sm"
               placeholder={
                 !isSubscriptionValid
                   ? "You've reached your usage limit. Upgrade to continue using the service."
@@ -175,17 +178,17 @@ const AIChat = ({
               }
               disabled={!isSubscriptionValid}
             />
-            {/* <PromptInputToolbar>
-              <PromptInputTools className="rounded-none">
+            <PromptInputToolbar>
+              {/* <PromptInputTools className="rounded-none">
                 <ChoicesSelect
                   choices={level.choices}
                   onChoiceSelected={(choice) => {
                     setInput(choice.text);
                   }}
                 />
-              </PromptInputTools>
+              </PromptInputTools> */}
               <PromptInputSubmit disabled={!input} status={status} />
-            </PromptInputToolbar> */}
+            </PromptInputToolbar>
           </PromptInput>
         </ScrollArea>
       </CardContent>

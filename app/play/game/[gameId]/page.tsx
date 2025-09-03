@@ -28,7 +28,7 @@ export default async function GameLevel({ params }: { params: Params }) {
   ]);
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 p-6 ">
+    <div className="mx-auto max-w-4xl space-y-6 md:p-6 pb-10">
       <AIChat
         game={game}
         initialMessages={messages}

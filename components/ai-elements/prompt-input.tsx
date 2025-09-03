@@ -147,10 +147,96 @@ export const PromptInputSubmit = ({
   children,
   ...props
 }: PromptInputSubmitProps) => {
-  let Icon = <SendIcon className="size-4" />;
+  let Icon = (
+    <svg
+      width="50"
+      height="50"
+      viewBox="0 0 256 256"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      stroke="currentColor"
+      strokeWidth="0.25"
+      className="size-10"
+      aria-label="send"
+    >
+      <rect x="144" y="136" width="14" height="14" rx="1"></rect>
+      <rect x="128" y="152" width="14" height="14" rx="1"></rect>
+      <rect x="112" y="72" width="14" height="14" rx="1"></rect>
+      <rect x="112" y="168" width="14" height="14" rx="1"></rect>
+      <rect x="96" y="168" width="14" height="14" rx="1"></rect>
+      <rect x="96" y="72" width="14" height="14" rx="1"></rect>
+      <rect x="96" y="72" width="14" height="14" rx="1"></rect>
+      <rect x="80" y="152" width="14" height="14" rx="1"></rect>
+      <rect x="160" y="120" width="14" height="14" rx="1"></rect>
+      <rect x="144" y="104" width="14" height="14" rx="1"></rect>
+      <rect x="128" y="88" width="14" height="14" rx="1"></rect>
+      <rect x="80" y="136" width="14" height="14" rx="1"></rect>
+      <rect x="80" y="104" width="14" height="14" rx="1"></rect>
+      <rect x="80" y="120" width="14" height="14" rx="1"></rect>
+      <rect x="80" y="88" width="14" height="14" rx="1"></rect>
+    </svg>
+  );
 
   if (status === "submitted") {
-    Icon = <Loader2Icon className="size-4 animate-spin" />;
+    Icon = (
+      <svg
+        width="50"
+        height="50"
+        viewBox="0 0 256 256"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        stroke="currentColor"
+        strokeWidth="0.25"
+        className="animate-spin size-10"
+        aria-label="loading"
+      >
+        <rect x="96" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="48" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="144" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="176" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="160" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="128" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="112" width="14" height="14" rx="1"></rect>
+        <rect x="64" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="144" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="160" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="192" width="14" height="14" rx="1"></rect>
+        <rect x="48" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="176" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="144" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="48" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="96" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="96" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="112" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="80" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="64" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="64" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="80" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="128" width="14" height="14" rx="1"></rect>
+        <rect x="120" y="120" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="48" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="176" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="192" width="14" height="14" rx="1"></rect>
+        <rect x="176" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="160" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="64" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="192" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="208" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="192" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="80" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="112" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="160" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="128" y="32" width="14" height="14" rx="1"></rect>
+        <rect x="144" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="32" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="80" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="96" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="112" y="208" width="14" height="14" rx="1"></rect>
+        <rect x="128" y="208" width="14" height="14" rx="1"></rect>
+      </svg>
+    );
   } else if (status === "streaming") {
     Icon = <SquareIcon className="size-4" />;
   } else if (status === "error") {
