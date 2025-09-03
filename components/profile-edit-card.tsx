@@ -91,7 +91,7 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
   }
 
   return (
-    <Card className="w-full max-w-xl">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Edit Profile</CardTitle>
         <CardDescription>

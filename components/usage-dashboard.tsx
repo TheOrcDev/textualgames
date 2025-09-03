@@ -44,7 +44,7 @@ export function UsageDashboard({
 }: UsageDashboardProps) {
   if (!usageData) {
     return (
-      <Card className="w-full max-w-xl">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Usage</CardTitle>
           <CardDescription>Unable to load usage information</CardDescription>

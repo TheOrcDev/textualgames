@@ -22,10 +22,12 @@ export default async function AccountPage() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center gap-6">
-      <div className="flex flex-col md:flex-row gap-4">
-        <ProfileEditCard user={user} />
-        <div className="flex flex-col gap-2">
+    <main className="flex flex-col items-center justify-center gap-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+        <div className="col-span-2">
+          <ProfileEditCard user={user} />
+        </div>
+        <div className="flex flex-col gap-2 w-full col-span-1">
           <UserConfig user={user} />
           <UsageDashboard
             tier={tier}
