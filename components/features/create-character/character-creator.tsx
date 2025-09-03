@@ -52,6 +52,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/8bit/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/8bit/radio-group";
+import { ScrollArea } from "@/components/ui/8bit/scroll-area";
 import {
   Tooltip,
   TooltipContent,
@@ -67,7 +68,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 import {
   dystopianCharacters,

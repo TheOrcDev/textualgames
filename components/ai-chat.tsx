@@ -37,7 +37,7 @@ import {
 } from "@/components/ai-elements/source";
 
 import { Button } from "./ui/8bit/button";
-import { ScrollArea } from "./ui/scroll-area";
+import { ScrollArea } from "./ui/8bit/scroll-area";
 
 interface AIChatProps {
   game: Game;
@@ -85,7 +85,7 @@ const AIChat = ({
   return (
     <Card>
       <CardHeader className="hidden"></CardHeader>
-      <CardContent className="max-w-4xl mx-auto relative max-h-[700px] overflow-x-hidden overflow-y-auto md:p-6">
+      <CardContent className="max-w-4xl mx-auto relative max-h-[600px] md:max-h-[700px] overflow-x-hidden overflow-y-auto md:p-6">
         <ScrollArea>
           <Conversation>
             <ConversationContent>
