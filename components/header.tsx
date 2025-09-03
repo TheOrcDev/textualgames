@@ -14,10 +14,6 @@ export const navItems = [
     label: "Profile",
     href: "/play/profile",
   },
-  {
-    label: "Pricing",
-    href: "/play/pricing",
-  },
 ];
 
 export default function Header() {

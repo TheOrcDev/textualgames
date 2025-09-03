@@ -56,7 +56,7 @@ function Badge({
   );
 
   return (
-    <div className={cn("relative inline-flex", spacingClasses)}>
+    <div className={cn("relative inline-flex", className, spacingClasses)}>
       <ShadcnBadge
         {...props}
         className={cn(

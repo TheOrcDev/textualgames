@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import { Subscription } from "@/db/schema";
 import { saveConfiguration } from "@/server/configurations";
 
 import { authClient } from "@/lib/auth-client";
@@ -39,6 +40,7 @@ export function UserDropdown() {
   };
 
   const user = authClient.useSession();
+
   const { activeTheme, setActiveTheme } = useThemeConfig();
 
   const handleThemeChange = async (theme: Theme) => {
@@ -52,18 +54,27 @@ export function UserDropdown() {
     });
   };
 
+  const handleBilling = async () => {
+    await authClient.customer.portal();
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar>
-          <AvatarImage
-            src={user.data?.user?.image || ""}
-            alt={user.data?.user?.name || "User"}
-          />
-          <AvatarFallback>
-            {user.data?.user?.name?.[0] || "User"}
-          </AvatarFallback>
-        </Avatar>
+        <div className="relative">
+          <Avatar>
+            <AvatarImage
+              src={user.data?.user?.image || ""}
+              alt={user.data?.user?.name || "User"}
+            />
+            <AvatarFallback>
+              {user.data?.user?.name?.[0] || "User"}
+            </AvatarFallback>
+          </Avatar>
+          <div className="absolute -bottom-5 right-0 left-0 flex justify-center items-center bg-primary text-primary-foreground text-[8px] px-1 py-1">
+            pro
+          </div>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="text-xs w-56 rounded-none">
         <DropdownMenuGroup>
@@ -72,6 +83,10 @@ export function UserDropdown() {
               <DropdownMenuItem>{item.label}</DropdownMenuItem>
             </Link>
           ))}
+          <Link href={"/play/pricing"}>
+            <DropdownMenuItem>Pricing</DropdownMenuItem>
+          </Link>
+          <DropdownMenuItem onClick={handleBilling}>Billing</DropdownMenuItem>
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
