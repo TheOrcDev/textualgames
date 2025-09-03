@@ -1,6 +1,6 @@
 "use server";
 
-import { eq } from "drizzle-orm";
+import { and, eq, ne } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -168,7 +168,7 @@ export const updateProfile = async (data: z.infer<typeof userSchema>) => {
 
     try {
         const checkIfUsernameExists = await db.query.user.findFirst({
-            where: eq(user.name, data.name),
+            where: and(eq(user.name, data.name), ne(user.id, session?.user?.id)),
         });
 
         if (checkIfUsernameExists) {

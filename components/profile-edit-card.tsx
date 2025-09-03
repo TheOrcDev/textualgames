@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import Image from "next/image";
 
@@ -8,6 +8,7 @@ import { User } from "@/db/schema";
 import { userSchema } from "@/server/schemas";
 import { updateProfile } from "@/server/users";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { PutBlobResult } from "@vercel/blob";
 import { Loader2, Upload, User as UserIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -41,6 +42,8 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
   const [imagePreview, setImagePreview] = useState<string | null>(
     user.image || null
   );
+  const [blob, setBlob] = useState<PutBlobResult | null>(null);
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof userSchema>>({
     resolver: zodResolver(userSchema),
@@ -73,8 +76,27 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
     try {
       setLoading(true);
 
-      const { errors, values: updateProfileValues } =
-        await updateProfile(values);
+      if (!inputFileRef.current?.files) {
+        throw new Error("No file selected");
+      }
+
+      const file = inputFileRef.current.files[0];
+
+      const fileName = `${user.id}-${Date.now()}.jpg`;
+
+      const response = await fetch(`/api/avatar/upload?filename=${fileName}`, {
+        method: "POST",
+        body: file,
+      });
+
+      const newBlob = (await response.json()) as PutBlobResult;
+
+      setBlob(newBlob);
+
+      const { errors, values: updateProfileValues } = await updateProfile({
+        ...values,
+        image: newBlob.url,
+      });
 
       if (errors) {
         toast(errors.message.join(", "));
@@ -159,6 +181,7 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
                       type="file"
                       accept="image/*"
                       onChange={handleImageChange}
+                      ref={inputFileRef}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
                     <Upload className="size-4" />
