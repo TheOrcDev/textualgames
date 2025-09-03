@@ -5,8 +5,7 @@ import { saveLevel } from '@/server/level';
 import { isSubscriptionValidForUser } from '@/server/subscriptions';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
+export const maxDuration = 60;
 const model = process.env.AI_MODEL;
 
 const creator = new StoryCreator();
