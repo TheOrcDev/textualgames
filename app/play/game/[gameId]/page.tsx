@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 
 import { getGame } from "@/server/games";
 import { isSubscriptionValid } from "@/server/subscriptions";
-import { getUserSession } from "@/server/users";
 
 import { getChatByGameId } from "@/lib/chat-store";
 
@@ -14,8 +13,6 @@ type Params = Promise<{
 
 export default async function GameLevel({ params }: { params: Params }) {
   const { gameId } = await params;
-  const session = await getUserSession();
-
   const game = await getGame(gameId);
 
   if (!game) {

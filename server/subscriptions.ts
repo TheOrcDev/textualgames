@@ -51,7 +51,7 @@ export const isSubscriptionValid = async (): Promise<boolean> => {
         }
 
         return usage?.canProceed
-    } catch (e) {
+    } catch {
         return false;
     }
 };
@@ -74,7 +74,7 @@ export const getSubscriptionForUser = async (userId: string): Promise<Subscripti
         });
 
         return subscription?.tier as Subscription ?? Subscription.FREE;
-    } catch (e) {
+    } catch {
         return Subscription.FREE;
     }
 }
