@@ -8,7 +8,7 @@ import type {
 import { Children } from "react";
 
 import type { ChatStatus } from "ai";
-import { Loader2Icon, SendIcon, SquareIcon, XIcon } from "lucide-react";
+import { SquareIcon, XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 

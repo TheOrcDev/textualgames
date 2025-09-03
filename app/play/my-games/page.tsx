@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { Subscription } from "@/db/schema";
 import { getGames } from "@/server/games";
 import { isSubscriptionValid } from "@/server/subscriptions";
 

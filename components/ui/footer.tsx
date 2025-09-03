@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { HomeIcon } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 
 import { Button } from "./8bit/button";

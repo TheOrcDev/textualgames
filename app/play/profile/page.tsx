@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 
 import { Subscription } from "@/db/schema";
 import { getTotalGamesAndtotalLevels } from "@/server/games";
-import { isSubscriptionValid } from "@/server/subscriptions";
 import { getUserProfile } from "@/server/users";
 
 import { checkUsageLimit } from "@/lib/usage-tracking";

@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { Subscription } from "@/db/schema";
 import { isSubscriptionValid } from "@/server/subscriptions";
-import { getUserSession } from "@/server/users";
-
-import { checkUsageLimit } from "@/lib/usage-tracking";
 
 import { Button } from "@/components/ui/8bit/button";
 

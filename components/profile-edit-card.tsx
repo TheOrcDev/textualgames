@@ -107,11 +107,11 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
                     <img
                       src={imagePreview}
                       alt="Profile preview"
-                      className="w-16 h-16 rounded-full object-cover border-2 border-foreground"
+                      className="size-16 rounded-full object-cover border-2 border-foreground"
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center border-2 border-foreground">
-                      <UserIcon className="w-8 h-8 text-muted-foreground" />
+                    <div className="size-16 rounded-full bg-muted flex items-center justify-center border-2 border-foreground">
+                      <UserIcon className="size-8 text-muted-foreground" />
                     </div>
                   )}
                 </div>
