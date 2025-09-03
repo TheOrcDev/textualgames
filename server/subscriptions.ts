@@ -55,3 +55,26 @@ export const isSubscriptionValid = async (): Promise<boolean> => {
         return false;
     }
 };
+
+export const isSubscriptionValidForUser = async (userId: string): Promise<boolean> => {
+    const usage = await checkUsageLimit(userId);
+    const tier = await getSubscriptionForUser(userId);
+
+    if (tier !== Subscription.FREE) {
+        return true
+    }
+
+    return usage?.canProceed
+}
+
+export const getSubscriptionForUser = async (userId: string): Promise<Subscription> => {
+    try {
+        const subscription = await db.query.subscriptions.findFirst({
+            where: eq(subscriptions.userId, userId),
+        });
+
+        return subscription?.tier as Subscription ?? Subscription.FREE;
+    } catch (e) {
+        return Subscription.FREE;
+    }
+}

@@ -1,11 +1,9 @@
 import { Game } from '@/db/schema';
-import { auth } from '@/lib/auth';
 import { getChatByGameId, updateChat } from '@/lib/chat-store';
 import StoryCreator from '@/lib/story-creator';
 import { saveLevel } from '@/server/level';
-import { isSubscriptionValid } from '@/server/subscriptions';
+import { isSubscriptionValidForUser } from '@/server/subscriptions';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
-import { headers } from 'next/headers';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -15,19 +13,18 @@ const creator = new StoryCreator();
 
 export async function POST(req: Request) {
     try {
-        // Get current user session
-        const session = await auth.api.getSession({
-            headers: await headers(),
-        });
 
-        if (!session?.user?.id) {
-            return new Response('Unauthorized', { status: 401 });
-        }
 
-        const userId = session.user.id;
+        const {
+            messages,
+            game,
+            userId,
+        }: { messages: UIMessage[]; game: Game; userId: string } =
+            await req.json();
 
         // Check usage limit before processing
-        const subscription = await isSubscriptionValid();
+        const subscription = await isSubscriptionValidForUser(userId);
+
         if (!subscription) {
             return new Response(JSON.stringify({
                 error: 'Usage limit exceeded',
@@ -37,12 +34,6 @@ export async function POST(req: Request) {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-
-        const {
-            messages,
-            game,
-        }: { messages: UIMessage[]; game: Game } =
-            await req.json();
 
         const lastMessage = messages[messages.length - 1];
 

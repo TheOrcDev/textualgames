@@ -73,6 +73,7 @@ const AIChat = ({
         {
           body: {
             game,
+            userId: game.userId,
           },
         }
       );
