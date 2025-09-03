@@ -187,7 +187,7 @@ export const PromptInputSubmit = ({
         xmlns="http://www.w3.org/2000/svg"
         stroke="currentColor"
         strokeWidth="0.25"
-        className="animate-spin size-10"
+        className="animate-spin size-6"
         aria-label="loading"
       >
         <rect x="96" y="32" width="14" height="14" rx="1"></rect>

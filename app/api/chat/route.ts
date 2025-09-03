@@ -13,8 +13,6 @@ const creator = new StoryCreator();
 
 export async function POST(req: Request) {
     try {
-
-
         const {
             messages,
             game,
@@ -51,16 +49,18 @@ export async function POST(req: Request) {
             system: prompt.basePrompt,
         });
 
-        await saveLevel(game.id, {
-            level: String(game.levels.length + 1),
-            storyline: await result.text,
-            choices: [],
-            image: "",
-            gameId: game.id,
-        });
-
         return result.toUIMessageStreamResponse({
             onFinish: async ({ messages }) => {
+                // Save level after streaming is complete
+                await saveLevel(game.id, {
+                    level: String(game.levels.length + 1),
+                    storyline: await result.text,
+                    choices: [],
+                    image: "",
+                    gameId: game.id,
+                });
+
+                // Update chat with all messages
                 await updateChat({ gameId: game.id, messages: [...previousMessages, lastMessage, ...messages] });
             },
         });
