@@ -2,8 +2,6 @@
 
 import { useRef, useState } from "react";
 
-import Image from "next/image";
-
 import { User } from "@/db/schema";
 import { userSchema } from "@/server/schemas";
 import { updateProfile } from "@/server/users";
@@ -13,6 +11,11 @@ import { Loader2, Upload, User as UserIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/8bit/avatar";
 import { Button } from "@/components/ui/8bit/button";
 import {
   Card,
@@ -127,19 +130,13 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  {imagePreview ? (
-                    <Image
-                      src={imagePreview}
-                      alt="Profile preview"
-                      className="size-16 rounded-full object-cover border-2 border-foreground"
-                      width={64}
-                      height={64}
+                  <Avatar className="size-18">
+                    <AvatarImage
+                      src={imagePreview || ""}
+                      alt={user.name?.[0] || "User"}
                     />
-                  ) : (
-                    <div className="size-16 rounded-full bg-muted flex items-center justify-center border-2 border-foreground">
-                      <UserIcon className="size-8 text-muted-foreground" />
-                    </div>
-                  )}
+                    <AvatarFallback>{user.name?.[0] || "User"}</AvatarFallback>
+                  </Avatar>
                 </div>
                 <div className="flex-1">
                   <FormField
