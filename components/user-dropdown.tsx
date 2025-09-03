@@ -1,7 +1,5 @@
 "use client";
 
-import { Suspense } from "react";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -31,7 +29,6 @@ import {
 
 import { useThemeConfig } from "./active-theme";
 import { navItems } from "./header";
-import { Skeleton } from "./ui/skeleton";
 
 export function UserDropdown() {
   const router = useRouter();

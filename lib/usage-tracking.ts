@@ -10,10 +10,6 @@ export interface UsageCheckResult {
     message?: string;
 }
 
-export interface TokenUsage {
-    totalTokens: number;
-}
-
 export async function checkUsageLimit(userId: string): Promise<UsageCheckResult> {
     try {
         // Get user's subscription tier
@@ -70,7 +66,7 @@ export async function checkUsageLimit(userId: string): Promise<UsageCheckResult>
     }
 }
 
-export async function updateUserUsage(userId: string, usage: TokenUsage): Promise<void> {
+export async function updateUserUsage(userId: string): Promise<void> {
     try {
         // Get or create usage record for current month
         const startOfMonth = new Date();

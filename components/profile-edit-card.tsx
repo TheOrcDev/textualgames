@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import Image from "next/image";
+
 import { User } from "@/db/schema";
 import { userSchema } from "@/server/schemas";
 import { updateProfile } from "@/server/users";
@@ -104,10 +106,12 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   {imagePreview ? (
-                    <img
+                    <Image
                       src={imagePreview}
                       alt="Profile preview"
                       className="size-16 rounded-full object-cover border-2 border-foreground"
+                      width={64}
+                      height={64}
                     />
                   ) : (
                     <div className="size-16 rounded-full bg-muted flex items-center justify-center border-2 border-foreground">
