@@ -33,7 +33,7 @@ export default function Header() {
           />
         </Link>
 
-        <div className="flex items-center">
+        <div className="items-center hidden md:flex">
           {navItems.map((item) => (
             <NavItem key={item.href} href={item.href} label={item.label} />
           ))}
