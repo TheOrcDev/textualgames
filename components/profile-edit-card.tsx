@@ -7,7 +7,7 @@ import { userSchema } from "@/server/schemas";
 import { updateProfile } from "@/server/users";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { PutBlobResult } from "@vercel/blob";
-import { Loader2, Upload, User as UserIcon } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
