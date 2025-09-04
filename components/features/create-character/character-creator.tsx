@@ -114,6 +114,9 @@ export default function CharacterCreator() {
   const [isGenreChangeLoading, setIsGenreChangeLoading] =
     useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [isCharacterPopoverOpen, setIsCharacterPopoverOpen] =
+    useState<boolean>(false);
+  const [isItemsPopoverOpen, setIsItemsPopoverOpen] = useState<boolean>(false);
   const [availableData, setAvailableData] = useState({
     characters: fantasyCharacters,
     stories: fantasyPlots,
@@ -632,7 +635,10 @@ export default function CharacterCreator() {
                         render={({ field }) => (
                           <FormItem className="flex flex-col">
                             <FormLabel>Character Type</FormLabel>
-                            <Popover>
+                            <Popover
+                              open={isCharacterPopoverOpen}
+                              onOpenChange={setIsCharacterPopoverOpen}
+                            >
                               <PopoverTrigger asChild>
                                 <FormControl>
                                   <Button
@@ -669,8 +675,10 @@ export default function CharacterCreator() {
                                           <CommandItem
                                             value={character}
                                             key={character}
+                                            className="text-xs"
                                             onSelect={() => {
                                               form.setValue("type", character);
+                                              setIsCharacterPopoverOpen(false);
                                             }}
                                           >
                                             {character}
@@ -762,7 +770,10 @@ export default function CharacterCreator() {
                         render={({ field }) => (
                           <FormItem className="flex flex-col">
                             <FormLabel>Item</FormLabel>
-                            <Popover>
+                            <Popover
+                              open={isItemsPopoverOpen}
+                              onOpenChange={setIsItemsPopoverOpen}
+                            >
                               <PopoverTrigger asChild>
                                 <FormControl>
                                   <Button
@@ -795,8 +806,10 @@ export default function CharacterCreator() {
                                         <CommandItem
                                           value={item}
                                           key={item}
+                                          className="text-xs"
                                           onSelect={() => {
                                             form.setValue("items", item);
+                                            setIsItemsPopoverOpen(false);
                                           }}
                                         >
                                           {item}
@@ -876,7 +889,7 @@ export default function CharacterCreator() {
                                     }}
                                   >
                                     <CardHeader>
-                                      <CardTitle className="text-sm">
+                                      <CardTitle className="text-xs">
                                         {index + 1}. {story}
                                       </CardTitle>
                                     </CardHeader>
