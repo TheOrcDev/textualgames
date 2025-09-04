@@ -18,8 +18,8 @@ export const navItems = [
   },
 ];
 
-export default function Header() {
-  const subscription = isSubscriptionValid();
+export default async function Header() {
+  const subscription = await isSubscriptionValid();
 
   return (
     <header className="px-10 border-b mb-5 bg-primary/20">
