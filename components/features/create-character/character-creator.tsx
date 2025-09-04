@@ -594,7 +594,8 @@ export default function CharacterCreator() {
                         type="button"
                         className={cn(
                           "border-none",
-                          form.getValues("genre") === genre.id && "bg-primary"
+                          form.getValues("genre") === genre.id &&
+                            "bg-primary dark:bg-primary/40"
                         )}
                         onClick={() => handleGenreSelect(genre.id)}
                         disabled={isLoading}
