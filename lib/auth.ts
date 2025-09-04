@@ -60,7 +60,8 @@ export const auth = betterAuth({
                     if (payload.data.paid) {
                         await updateSubscription(
                             payload.data.customer.externalId as string,
-                            Subscription.PRO
+                            Subscription.PRO,
+                            true
                         );
                     }
                 },
@@ -68,7 +69,8 @@ export const auth = betterAuth({
                     if (payload.data.canceledAt) {
                         await updateSubscription(
                             payload.data.customer.externalId as string,
-                            Subscription.FREE
+                            Subscription.FREE,
+                            false
                         );
                     }
                 }
