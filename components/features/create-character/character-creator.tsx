@@ -669,7 +669,7 @@ export default function CharacterCreator() {
                                     <CommandEmpty>
                                       No character found.
                                     </CommandEmpty>
-                                    <CommandGroup>
+                                    <CommandGroup className="max-w-[300px] sm:max-w-none">
                                       {availableData.characters.map(
                                         (character) => (
                                           <CommandItem
@@ -801,7 +801,7 @@ export default function CharacterCreator() {
                                   />
                                   <CommandList>
                                     <CommandEmpty>No item found.</CommandEmpty>
-                                    <CommandGroup>
+                                    <CommandGroup className="max-w-[300px] sm:max-w-none">
                                       {availableData.items.map((item) => (
                                         <CommandItem
                                           value={item}

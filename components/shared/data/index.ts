@@ -215,7 +215,7 @@ export const dystopianCharacters = [
   "lost astronaut",
   "toxic environment ranger",
   "brainwashed cult member",
-  "datbroker",
+  "database broker",
   "graffiti artist spreading forbidden messages",
 ];
 
