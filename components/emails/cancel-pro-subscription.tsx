@@ -17,10 +17,11 @@ import {
 
 interface TextualGamesCancelEmailProps {
   userName: string;
+  nextBillingDate?: string;
 }
 
 const TextualGamesCancelEmail = (props: TextualGamesCancelEmailProps) => {
-  const { userName } = props;
+  const { userName, nextBillingDate = new Date().toISOString() } = props;
 
   return (
     <Html lang="en" dir="ltr">
@@ -62,7 +63,16 @@ const TextualGamesCancelEmail = (props: TextualGamesCancelEmailProps) => {
                 <Text className="text-[16px] text-gray-700 mb-[12px] leading-[24px]">
                   📅{" "}
                   <span className="font-semibold">
-                    Access until October 3, 2025
+                    Access until{" "}
+                    {(() => {
+                      const date = new Date(nextBillingDate);
+                      date.setMonth(date.getMonth() + 1);
+                      return date.toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      });
+                    })()}
                   </span>{" "}
                   - You can continue using Pro features until your current
                   billing period ends
@@ -117,7 +127,7 @@ const TextualGamesCancelEmail = (props: TextualGamesCancelEmailProps) => {
                 Thank you for being part of the Textual Games community. If you
                 need any help or have questions, reach out to us at{" "}
                 <Link
-                  href="mailto:support@textualgames.com"
+                  href="mailto:theorcdev@gmail.com"
                   className="text-blue-600 underline"
                 >
                   support@textualgames.com
@@ -131,9 +141,6 @@ const TextualGamesCancelEmail = (props: TextualGamesCancelEmailProps) => {
             <Section className="text-center">
               <Text className="text-[12px] text-gray-500 mb-[8px]">
                 Textual Games Inc.
-              </Text>
-              <Text className="text-[12px] text-gray-500 mb-[8px] m-0">
-                123 Gaming Street, Digital City, DC 12345
               </Text>
               <Text className="text-[12px] text-gray-500 mb-[8px]">
                 <Link

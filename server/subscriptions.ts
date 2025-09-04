@@ -21,7 +21,7 @@ export const updateSubscription = async (userId: string, subscription: Subscript
             from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
             to: [user.email],
             subject: isPro ? "Pro Subscription Activated - Textual Games" : "Pro Subscription Cancelled - Textual Games",
-            react: isPro ? TextualGamesProEmail({ userName: user.name }) : TextualGamesCancelEmail({ userName: user.name }),
+            react: isPro ? TextualGamesProEmail({ userName: user.name }) : TextualGamesCancelEmail({ userName: user.name, nextBillingDate: user.subscriptions?.createdAt.toISOString() }),
         });
     } catch (e) {
         console.log(e);

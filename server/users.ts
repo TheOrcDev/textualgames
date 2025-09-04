@@ -16,7 +16,16 @@ import { userSchema } from "./schemas";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const getUserById = async (id: string) => {
-    const [currentUser] = await db.select().from(user).where(eq(user.id, id));
+    const currentUser = await db.query.user.findFirst({
+        where: eq(user.id, id),
+        with: {
+            subscriptions: true,
+        },
+    });
+
+    if (!currentUser) {
+        redirect("/login");
+    }
 
     return currentUser;
 }

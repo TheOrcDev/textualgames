@@ -91,7 +91,15 @@ const TextualGamesProEmail = (props: TextualGamesProEmailProps) => {
                 </Text>
                 <Text className="text-[14px] text-gray-700">
                   Next billing date:{" "}
-                  <span className="font-semibold">October 3, 2025</span>
+                  <span className="font-semibold">
+                    {new Date(
+                      Date.now() + 30 * 24 * 60 * 60 * 1000
+                    ).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
                 </Text>
               </Section>
 
@@ -114,7 +122,7 @@ const TextualGamesProEmail = (props: TextualGamesProEmailProps) => {
                 If you have any questions or need assistance, our support team
                 is here to help at{" "}
                 <Link
-                  href="mailto:support@textualgames.com"
+                  href="mailto:theorcdev@gmail.com"
                   className="text-blue-600 underline"
                 >
                   support@textualgames.com
@@ -129,9 +137,7 @@ const TextualGamesProEmail = (props: TextualGamesProEmailProps) => {
               <Text className="text-[12px] text-gray-500 mb-[8px]">
                 Textual Games Inc.
               </Text>
-              <Text className="text-[12px] text-gray-500 mb-[8px] m-0">
-                123 Gaming Street, Digital City, DC 12345
-              </Text>
+
               <Text className="text-[12px] text-gray-500 mb-[8px]">
                 <Link
                   href="https://textualgames.com/unsubscribe"
