@@ -87,7 +87,9 @@ export function UserDropdown({ subscription }: { subscription: boolean }) {
           <Link href={"/play/pricing"}>
             <DropdownMenuItem>Pricing</DropdownMenuItem>
           </Link>
-          <DropdownMenuItem onClick={handleBilling}>Billing</DropdownMenuItem>
+          {subscription && (
+            <DropdownMenuItem onClick={handleBilling}>Billing</DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
