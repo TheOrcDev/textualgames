@@ -1,14 +1,27 @@
 "use server";
 
+import TextualGamesProEmail from "@/components/emails/pro-subscription";
 import db from "@/db/drizzle";
 import { Subscription, subscriptions } from "@/db/schema";
 import { checkUsageLimit } from "@/lib/usage-tracking";
 import { eq } from "drizzle-orm";
-import { getUserSession } from "./users";
+import { Resend } from "resend";
+import { getUserById, getUserSession } from "./users";
 
 export const updateSubscription = async (userId: string, subscription: Subscription) => {
     try {
         await db.update(subscriptions).set({ tier: subscription }).where(eq(subscriptions.userId, userId));
+
+        const user = await getUserById(userId);
+
+        const resend = new Resend(process.env.RESEND_API_KEY);
+
+        await resend.emails.send({
+            from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
+            to: [user.email],
+            subject: "Pro Subscription Activated - Textual Games",
+            react: TextualGamesProEmail({ userName: user.name }),
+        });
     } catch (e) {
         console.log(e);
     }
