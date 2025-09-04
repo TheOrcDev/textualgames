@@ -47,7 +47,7 @@ function Button({ children, asChild, ...props }: BitButtonProps) {
     <ShadcnButton
       {...props}
       className={cn(
-        "rounded-none border-none active:translate-y-1 transition-transform relative inline-flex items-center justify-center gap-1.5",
+        "rounded-none active:translate-y-1 transition-transform relative inline-flex items-center justify-center gap-1.5",
         font !== "normal" && "retro",
         className
       )}

@@ -63,6 +63,14 @@ export const auth = betterAuth({
                             Subscription.PRO
                         );
                     }
+                },
+                onSubscriptionCanceled: async (payload) => {
+                    if (payload.data.canceledAt) {
+                        await updateSubscription(
+                            payload.data.customer.externalId as string,
+                            Subscription.FREE
+                        );
+                    }
                 }
             })
         ],

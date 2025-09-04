@@ -1,5 +1,6 @@
 "use server";
 
+import TextualGamesCancelEmail from "@/components/emails/cancel-pro-subscription";
 import TextualGamesProEmail from "@/components/emails/pro-subscription";
 import db from "@/db/drizzle";
 import { Subscription, subscriptions } from "@/db/schema";
@@ -8,7 +9,7 @@ import { eq } from "drizzle-orm";
 import { Resend } from "resend";
 import { getUserById, getUserSession } from "./users";
 
-export const updateSubscription = async (userId: string, subscription: Subscription) => {
+export const updateSubscription = async (userId: string, subscription: Subscription, isPro: boolean) => {
     try {
         await db.update(subscriptions).set({ tier: subscription }).where(eq(subscriptions.userId, userId));
 
@@ -19,8 +20,8 @@ export const updateSubscription = async (userId: string, subscription: Subscript
         await resend.emails.send({
             from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
             to: [user.email],
-            subject: "Pro Subscription Activated - Textual Games",
-            react: TextualGamesProEmail({ userName: user.name }),
+            subject: isPro ? "Pro Subscription Activated - Textual Games" : "Pro Subscription Cancelled - Textual Games",
+            react: isPro ? TextualGamesProEmail({ userName: user.name }) : TextualGamesCancelEmail({ userName: user.name }),
         });
     } catch (e) {
         console.log(e);

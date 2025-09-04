@@ -31,7 +31,7 @@ import {
 import { useThemeConfig } from "./active-theme";
 import { navItems } from "./header";
 
-export function UserDropdown() {
+export function UserDropdown({ subscription }: { subscription: boolean }) {
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -71,9 +71,11 @@ export function UserDropdown() {
               {user.data?.user?.name?.[0] || "User"}
             </AvatarFallback>
           </Avatar>
-          <div className="absolute -bottom-5 right-0 left-0 flex justify-center items-center bg-primary text-primary-foreground text-[8px] px-1 py-1">
-            pro
-          </div>
+          {subscription && (
+            <div className="absolute -bottom-5 right-0 left-0 flex justify-center items-center bg-primary text-primary-foreground text-[8px] px-1 py-1">
+              pro
+            </div>
+          )}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="text-xs w-56 rounded-none">
