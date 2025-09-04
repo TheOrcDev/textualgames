@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Subscription } from "@/db/schema";
 import { saveConfiguration } from "@/server/configurations";
 
 import { authClient } from "@/lib/auth-client";

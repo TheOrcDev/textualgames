@@ -70,6 +70,13 @@ export const isSubscriptionValid = async (): Promise<boolean> => {
     }
 };
 
+export const isProSubscriptionValid = async (): Promise<boolean> => {
+    const session = await getUserSession();
+    const tier = session.user.subscriptions?.tier as Subscription ?? Subscription.FREE;
+
+    return tier === Subscription.PRO;
+}
+
 export const isSubscriptionValidForUser = async (userId: string): Promise<boolean> => {
     const usage = await checkUsageLimit(userId);
     const tier = await getSubscriptionForUser(userId);

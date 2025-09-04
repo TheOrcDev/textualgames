@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { isSubscriptionValid } from "@/server/subscriptions";
+import { isProSubscriptionValid } from "@/server/subscriptions";
 
 import { ModeSwitcher } from "./mode-switcher";
 import { NavItem } from "./nav-item";
@@ -19,7 +19,7 @@ export const navItems = [
 ];
 
 export default async function Header() {
-  const subscription = await isSubscriptionValid();
+  const subscription = await isProSubscriptionValid();
 
   return (
     <header className="px-10 border-b mb-5 bg-primary/20">
