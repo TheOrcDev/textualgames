@@ -598,7 +598,7 @@ export default function CharacterCreator() {
                         className={cn(
                           "border-none",
                           form.getValues("genre") === genre.id &&
-                            "bg-primary dark:bg-primary/40"
+                            "bg-primary/40 dark:bg-primary/40"
                         )}
                         onClick={() => handleGenreSelect(genre.id)}
                         disabled={isLoading}
@@ -879,7 +879,7 @@ export default function CharacterCreator() {
                                   <Card
                                     key={index}
                                     className={cn(
-                                      "cursor-pointer transition-color border-x-4 hover:bg-primary",
+                                      "cursor-pointer transition-color border-x-4 hover:bg-primary/10",
                                       form.getValues("plot") === story &&
                                         "border-primary"
                                     )}
