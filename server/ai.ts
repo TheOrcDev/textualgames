@@ -8,7 +8,8 @@ import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 import { createChat } from "@/lib/chat-store";
-import { generateId, generateObject, zodSchema } from "ai";
+import { put } from "@vercel/blob";
+import { generateId, generateObject, generateText, zodSchema } from "ai";
 import { isSubscriptionValid } from "./subscriptions";
 import { getUserSession } from "./users";
 
@@ -78,24 +79,7 @@ export async function createFirstLevel(game: Game) {
     createdAt: new Date(),
   };
 
-
-  // TODO: Add this as a paid feature
-  // const imagePrompt = await creator.getImagePrompt(game);
-
-  // const { images } = await generateImage({
-  //   model: openai.image('dall-e-3'),
-  //   prompt: imagePrompt,
-  //   n: 3,
-  //   size: '1792x1024',
-  // });
-
-  // // Convert base64 to Buffer for proper blob creation
-  // const base64Data = images[0].base64;
-  // const buffer = Buffer.from(base64Data, 'base64');
-
-  // const blob = await put(`${game.id}-${Date.now()}.png`, buffer, {
-  //   access: 'public',
-  // });
+  const image = await generateImage(await creator.getImagePrompt(game)) ?? "";
 
   const level = (
     await creator.getFirstLevelPrompt({ ...game, character: validCharacter })
@@ -116,7 +100,7 @@ export async function createFirstLevel(game: Game) {
   await db.insert(levels).values({
     storyline: object.storyline,
     choices: object.choices,
-    image: "",
+    image,
     level: String(1),
     gameId: game.id,
   });
@@ -131,4 +115,28 @@ export async function createFirstLevel(game: Game) {
   }]);
 
   return { gameId: game.id, level: object };
+}
+
+export async function generateImage(prompt: string) {
+  const result = await generateText({
+    model: 'gemini-2.5-flash-image-preview',
+    prompt
+  });
+
+  // Save generated images
+  for (const file of result.files) {
+    if (file.mediaType.startsWith('image/')) {
+      const timestamp = Date.now();
+      const fileName = `generated-${timestamp}.png`;
+
+      const blob = await put(fileName, Buffer.from(file.uint8Array), {
+        access: 'public',
+        addRandomSuffix: true,
+      });
+
+      return blob.url;
+    }
+  }
+
+  return null;
 }

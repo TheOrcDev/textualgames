@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { Game, Level, Subscription } from "@/db/schema";
@@ -83,104 +84,113 @@ const AIChat = ({
   };
 
   return (
-    <Card>
-      <CardHeader className="hidden"></CardHeader>
-      <CardContent className="max-w-4xl mx-auto relative max-h-[600px] md:max-h-[700px] overflow-x-hidden overflow-y-auto md:p-6">
-        <ScrollArea>
-          <Conversation>
-            <ConversationContent>
-              {messages.map((message, index) => (
-                <div key={`${message.role}-${index}`}>
-                  {message.role === "assistant" && (
-                    <Sources>
-                      {message.parts.map((part, i) => {
-                        switch (part.type) {
-                          case "source-url":
-                            return (
-                              <>
-                                <SourcesTrigger
-                                  count={
-                                    message.parts.filter(
-                                      (part) => part.type === "source-url"
-                                    ).length
-                                  }
-                                />
-                                <SourcesContent
-                                  key={`${message.role}-${index}-${i}`}
-                                >
-                                  <Source
-                                    key={`${message.role}-${index}-${i}`}
-                                    href={part.url}
-                                    title={part.url}
+    <div className="flex flex-col items-center justify-center gap-5">
+      {level.image && (
+        <Image src={level.image} alt="Game Image" width={500} height={500} />
+      )}
+      <Card>
+        <CardHeader className="hidden"></CardHeader>
+        <CardContent className="max-w-4xl mx-auto relative max-h-[600px] md:max-h-[700px] overflow-x-hidden overflow-y-auto md:p-6">
+          <ScrollArea>
+            <Conversation>
+              <ConversationContent>
+                {messages.map((message, index) => (
+                  <div key={`${message.role}-${index}`}>
+                    {message.role === "assistant" && (
+                      <Sources>
+                        {message.parts.map((part, i) => {
+                          switch (part.type) {
+                            case "source-url":
+                              return (
+                                <>
+                                  <SourcesTrigger
+                                    count={
+                                      message.parts.filter(
+                                        (part) => part.type === "source-url"
+                                      ).length
+                                    }
                                   />
-                                </SourcesContent>
-                              </>
-                            );
-                        }
-                      })}
-                    </Sources>
-                  )}
-                  <Message from={message.role} key={`${message.role}-${index}`}>
-                    <MessageContent>
-                      {message.parts.map((part, i) => {
-                        switch (part.type) {
-                          case "text":
-                            return (
-                              <Response
-                                key={`${message.role}-${index}-${i}`}
-                                className="text-[9px] md:text-sm"
-                              >
-                                {part.text}
-                              </Response>
-                            );
-                          case "reasoning":
-                            return (
-                              <Reasoning
-                                key={`${message.role}-${index}-${i}`}
-                                className="w-full"
-                                isStreaming={status === "streaming"}
-                              >
-                                <ReasoningTrigger />
-                                <ReasoningContent>{part.text}</ReasoningContent>
-                              </Reasoning>
-                            );
-                          default:
-                            return null;
-                        }
-                      })}
-                    </MessageContent>
-                  </Message>
-                </div>
-              ))}
-              {status === "submitted" && <Loader />}
-              {/* Invisible div to scroll to */}
-              <div ref={messagesEndRef} />
-            </ConversationContent>
-            <ConversationScrollButton />
-          </Conversation>
+                                  <SourcesContent
+                                    key={`${message.role}-${index}-${i}`}
+                                  >
+                                    <Source
+                                      key={`${message.role}-${index}-${i}`}
+                                      href={part.url}
+                                      title={part.url}
+                                    />
+                                  </SourcesContent>
+                                </>
+                              );
+                          }
+                        })}
+                      </Sources>
+                    )}
+                    <Message
+                      from={message.role}
+                      key={`${message.role}-${index}`}
+                    >
+                      <MessageContent>
+                        {message.parts.map((part, i) => {
+                          switch (part.type) {
+                            case "text":
+                              return (
+                                <Response
+                                  key={`${message.role}-${index}-${i}`}
+                                  className="text-[9px] md:text-sm"
+                                >
+                                  {part.text}
+                                </Response>
+                              );
+                            case "reasoning":
+                              return (
+                                <Reasoning
+                                  key={`${message.role}-${index}-${i}`}
+                                  className="w-full"
+                                  isStreaming={status === "streaming"}
+                                >
+                                  <ReasoningTrigger />
+                                  <ReasoningContent>
+                                    {part.text}
+                                  </ReasoningContent>
+                                </Reasoning>
+                              );
+                            default:
+                              return null;
+                          }
+                        })}
+                      </MessageContent>
+                    </Message>
+                  </div>
+                ))}
+                {status === "submitted" && <Loader />}
+                {/* Invisible div to scroll to */}
+                <div ref={messagesEndRef} />
+              </ConversationContent>
+              <ConversationScrollButton />
+            </Conversation>
 
-          {!isSubscriptionValid && (
-            <div className="flex justify-center">
-              <Button asChild>
-                <Link href="/play/pricing">Upgrade</Link>
-              </Button>
-            </div>
-          )}
+            {!isSubscriptionValid && (
+              <div className="flex justify-center">
+                <Button asChild>
+                  <Link href="/play/pricing">Upgrade</Link>
+                </Button>
+              </div>
+            )}
 
-          <PromptInput onSubmit={handleSubmit} className="mt-4 rounded-none">
-            <PromptInputTextarea
-              onChange={(e) => setInput(e.target.value)}
-              value={input}
-              className="rounded-none text-[9px] md:text-sm"
-              placeholder={
-                !isSubscriptionValid
-                  ? "You've reached your usage limit. Upgrade to continue using the service."
-                  : "What do you do?"
-              }
-              disabled={!isSubscriptionValid}
-            />
-            <PromptInputToolbar>
-              {/* <PromptInputTools className="rounded-none">
+            <PromptInput onSubmit={handleSubmit} className="mt-4 rounded-none">
+              <PromptInputTextarea
+                onChange={(e) => setInput(e.target.value)}
+                value={input}
+                className="rounded-none text-[9px] md:text-sm"
+                placeholder={
+                  !isSubscriptionValid
+                    ? "You've reached your usage limit. Upgrade to continue using the service."
+                    : "What do you do?"
+                }
+                disabled={!isSubscriptionValid}
+              />
+              <PromptInputToolbar>
+                {/* <PromptInputTools className="rounded-none">
                 <ChoicesSelect
                   choices={level.choices}
                   onChoiceSelected={(choice) => {
@@ -188,12 +198,13 @@ const AIChat = ({
                   }}
                 />
               </PromptInputTools> */}
-              <PromptInputSubmit disabled={!input} status={status} />
-            </PromptInputToolbar>
-          </PromptInput>
-        </ScrollArea>
-      </CardContent>
-    </Card>
+                <PromptInputSubmit disabled={!input} status={status} />
+              </PromptInputToolbar>
+            </PromptInput>
+          </ScrollArea>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
