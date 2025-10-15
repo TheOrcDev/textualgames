@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.52",
-    "@ai-sdk/react": "^2.0.71",
+    "@ai-sdk/react": "^2.0.72",
     "@hookform/resolvers": "^5.2.2",
     "@neondatabase/serverless": "^1.0.2",
     "@polar-sh/better-auth": "^1.1.9",
@@ -47,7 +47,7 @@
     "@types/react-dom": "^19.2.2",
     "@vercel/analytics": "^1.5.0",
     "@vercel/blob": "^2.0.0",
-    "ai": "^5.0.71",
+    "ai": "^5.0.72",
     "better-auth": "1.3.27",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -93,7 +93,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
-    "shadcn": "^3.4.0"
+    "shadcn": "^3.4.2"
   },
   "type": "module"
 }
