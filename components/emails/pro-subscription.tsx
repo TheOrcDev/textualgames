@@ -19,8 +19,17 @@ interface TextualGamesProEmailProps {
   userName: string;
 }
 
+const date = Date.now() + 30 * 24 * 60 * 60 * 1000;
+
 const TextualGamesProEmail = (props: TextualGamesProEmailProps) => {
   const { userName } = props;
+
+  // Calculate next billing date outside of render
+  const nextBillingDate = new Date(date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
     <Html lang="en" dir="ltr">
@@ -91,15 +100,7 @@ const TextualGamesProEmail = (props: TextualGamesProEmailProps) => {
                 </Text>
                 <Text className="text-[14px] text-gray-700">
                   Next billing date:{" "}
-                  <span className="font-semibold">
-                    {new Date(
-                      Date.now() + 30 * 24 * 60 * 60 * 1000
-                    ).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </span>
+                  <span className="font-semibold">{nextBillingDate}</span>
                 </Text>
               </Section>
 

@@ -38,6 +38,7 @@ export function TextShimmerWave({
   );
 
   return (
+    // eslint-disable-next-line react-hooks/static-components
     <MotionComponent
       className={cn(
         "relative inline-block [perspective:500px]",

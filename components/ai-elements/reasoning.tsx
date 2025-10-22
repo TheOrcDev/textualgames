@@ -1,7 +1,14 @@
 "use client";
 
 import type { ComponentProps } from "react";
-import { createContext, memo, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  memo,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import { BrainIcon, ChevronDownIcon } from "lucide-react";
@@ -65,19 +72,19 @@ export const Reasoning = memo(
     });
 
     const [hasAutoClosedRef, setHasAutoClosedRef] = useState(false);
-    const [startTime, setStartTime] = useState<number | null>(null);
+    const startTimeRef = useRef<number | null>(null);
 
     // Track duration when streaming starts and ends
     useEffect(() => {
       if (isStreaming) {
-        if (startTime === null) {
-          setStartTime(Date.now());
+        if (startTimeRef.current === null) {
+          startTimeRef.current = Date.now();
         }
-      } else if (startTime !== null) {
-        setDuration(Math.round((Date.now() - startTime) / 1000));
-        setStartTime(null);
+      } else if (startTimeRef.current !== null) {
+        setDuration(Math.round((Date.now() - startTimeRef.current) / 1000));
+        startTimeRef.current = null;
       }
-    }, [isStreaming, startTime, setDuration]);
+    }, [isStreaming, setDuration]);
 
     // Auto-open when streaming starts, auto-close when streaming ends (once only)
     useEffect(() => {

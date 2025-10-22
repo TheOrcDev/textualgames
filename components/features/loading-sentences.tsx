@@ -11,10 +11,9 @@ const getRandomSentence = () => {
 };
 
 export default function LoadingSentences() {
-  const [sentence, setSentence] = useState<string>("");
+  const [sentence, setSentence] = useState<string>(getRandomSentence);
 
   useEffect(() => {
-    setSentence(getRandomSentence());
     const interval = setInterval(() => {
       setSentence(getRandomSentence());
     }, 5000);
