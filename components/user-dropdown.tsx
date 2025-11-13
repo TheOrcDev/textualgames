@@ -30,7 +30,7 @@ import {
 import { useThemeConfig } from "./active-theme";
 import { navItems } from "./header";
 
-export function UserDropdown({ subscription }: { subscription: boolean }) {
+export function UserDropdown() {
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -70,11 +70,11 @@ export function UserDropdown({ subscription }: { subscription: boolean }) {
               {user.data?.user?.name?.[0] || "User"}
             </AvatarFallback>
           </Avatar>
-          {subscription && (
+          {/* {subscription && (
             <div className="absolute -bottom-5 right-0 left-0 flex justify-center items-center bg-primary text-primary-foreground text-[8px] px-1 py-1">
               pro
             </div>
-          )}
+          )} */}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="text-xs w-56 rounded-none">
@@ -84,12 +84,12 @@ export function UserDropdown({ subscription }: { subscription: boolean }) {
               <DropdownMenuItem>{item.label}</DropdownMenuItem>
             </Link>
           ))}
-          <Link href={"/play/pricing"}>
+          {/* <Link href={"/play/pricing"}>
             <DropdownMenuItem>Pricing</DropdownMenuItem>
-          </Link>
-          {subscription && (
+          </Link> */}
+          {/* {subscription && (
             <DropdownMenuItem onClick={handleBilling}>Billing</DropdownMenuItem>
-          )}
+          )} */}
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />

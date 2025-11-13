@@ -10,7 +10,6 @@ import { z } from "zod";
 import { createChat } from "@/lib/chat-store";
 import { put } from "@vercel/blob";
 import { generateId, generateObject, generateText, zodSchema } from "ai";
-import { isSubscriptionValid } from "./subscriptions";
 import { getUserSession } from "./users";
 
 const creator = new StoryCreator();
@@ -19,16 +18,6 @@ export async function createCharacter(
   formData: z.infer<typeof createCharacterFormSchema>
 ) {
   const { user } = await getUserSession();
-
-  try {
-    const subscription = await isSubscriptionValid();
-
-    if (!subscription) {
-      throw new Error('Usage limit exceeded');
-    }
-  } catch (e) {
-    throw e;
-  }
 
   try {
 

@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { isProSubscriptionValid } from "@/server/subscriptions";
-
 import { ModeSwitcher } from "./mode-switcher";
 import { NavItem } from "./nav-item";
 import { UserDropdown } from "./user-dropdown";
@@ -19,8 +17,6 @@ export const navItems = [
 ];
 
 export default async function Header() {
-  const subscription = await isProSubscriptionValid();
-
   return (
     <header className="px-10 border-b mb-5 bg-primary/20">
       <div className="flex items-center justify-between max-w-4xl mx-auto">
@@ -42,7 +38,7 @@ export default async function Header() {
         <div className="flex items-center gap-3">
           <ModeSwitcher />
 
-          <UserDropdown subscription={subscription} />
+          <UserDropdown />
         </div>
       </div>
     </header>

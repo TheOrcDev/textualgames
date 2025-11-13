@@ -2,7 +2,6 @@ import { Game } from '@/db/schema';
 import { getChatByGameId, updateChat } from '@/lib/chat-store';
 import StoryCreator from '@/lib/story-creator';
 import { saveLevel } from '@/server/level';
-import { isSubscriptionValidForUser } from '@/server/subscriptions';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 export const maxDuration = 60;
@@ -18,19 +17,6 @@ export async function POST(req: Request) {
             userId,
         }: { messages: UIMessage[]; game: Game; userId: string } =
             await req.json();
-
-        // Check usage limit before processing
-        const subscription = await isSubscriptionValidForUser(userId);
-
-        if (!subscription) {
-            return new Response(JSON.stringify({
-                error: 'Usage limit exceeded',
-                message: 'Usage limit exceeded',
-            }), {
-                status: 429,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
 
         const lastMessage = messages[messages.length - 1];
 

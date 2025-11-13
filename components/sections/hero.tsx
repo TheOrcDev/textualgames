@@ -80,13 +80,13 @@ export default function Hero() {
 
           <Button asChild>
             <Link className="p-5" href={"/play/create-character"}>
-              Try Now For Free
+              Play Now For Free
             </Link>
           </Button>
         </div>
 
         <div className="flex max-w-3xl flex-col items-center justify-center gap-5">
-          <h3 className="retro text-muted-foreground text-center  text-xl font-bold">
+          <h3 className="retro text-muted-foreground text-center text-xl font-bold">
             Screenshots from the game
           </h3>
 

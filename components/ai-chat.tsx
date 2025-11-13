@@ -85,7 +85,7 @@ const AIChat = ({
 
   return (
     <div className="flex flex-col items-center justify-center gap-5">
-      {level.image && (
+      {level?.image && (
         <Image src={level.image} alt="Game Image" width={500} height={500} />
       )}
       <Card>
@@ -169,25 +169,12 @@ const AIChat = ({
               <ConversationScrollButton />
             </Conversation>
 
-            {!isSubscriptionValid && (
-              <div className="flex justify-center">
-                <Button asChild>
-                  <Link href="/play/pricing">Upgrade</Link>
-                </Button>
-              </div>
-            )}
-
             <PromptInput onSubmit={handleSubmit} className="mt-4 rounded-none">
               <PromptInputTextarea
                 onChange={(e) => setInput(e.target.value)}
                 value={input}
                 className="rounded-none text-[9px] md:text-sm"
-                placeholder={
-                  !isSubscriptionValid
-                    ? "You've reached your usage limit. Upgrade to continue using the service."
-                    : "What do you do?"
-                }
-                disabled={!isSubscriptionValid}
+                placeholder="What do you do?"
               />
               <PromptInputToolbar>
                 {/* <PromptInputTools className="rounded-none">

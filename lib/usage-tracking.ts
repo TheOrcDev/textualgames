@@ -11,59 +11,13 @@ export interface UsageCheckResult {
 }
 
 export async function checkUsageLimit(userId: string): Promise<UsageCheckResult> {
-    try {
-        // Get user's subscription tier
-        const userSubscription = await db.query.subscriptions.findFirst({
-            where: eq(subscriptions.userId, userId),
-        });
-
-        const tier = userSubscription?.tier || Subscription.FREE;
-
-        // Get usage limits for the tier
-        const limits = await db.query.usageLimits.findFirst({
-            where: eq(usageLimits.tier, tier),
-        });
-
-        const maxLevels = limits?.maxLevels || 12; // Default 12 levels for free tier
-
-        // Get current month's usage
-        const startOfMonth = new Date();
-        startOfMonth.setDate(1);
-        startOfMonth.setHours(0, 0, 0, 0);
-
-        const currentUsage = await db.query.userUsage.findFirst({
-            where: and(
-                eq(userUsage.userId, userId),
-                gte(userUsage.lastResetDate, startOfMonth)
-            ),
-        });
-
-        const currentLevels = currentUsage?.levelsCompleted || 0;
-
-        const remainingLevels = maxLevels - currentLevels;
-
-        // User can proceed if they have levels remaining
-        const canProceed = remainingLevels > 0;
-
-        return {
-            canProceed,
-            currentLevels,
-            maxLevels,
-            remainingLevels,
-            message: canProceed
-                ? undefined
-                : `Usage limit exceeded. You've completed ${currentLevels} levels.`,
-        };
-    } catch (error) {
-        console.error("Error checking usage limit:", error);
-        // Default to allowing access if there's an error
-        return {
-            canProceed: true,
-            currentLevels: 0,
-            maxLevels: 12,
-            remainingLevels: 12,
-        };
-    }
+    // Always allow access - game is now free
+    return {
+        canProceed: true,
+        currentLevels: 0,
+        maxLevels: Infinity,
+        remainingLevels: Infinity,
+    };
 }
 
 export async function updateUserUsage(userId: string): Promise<void> {

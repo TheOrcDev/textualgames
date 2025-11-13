@@ -54,20 +54,8 @@ export const getPolarSubscription = async () => {
 }
 
 export const isSubscriptionValid = async (): Promise<boolean> => {
-    const session = await getUserSession();
-
-    try {
-        const usage = await checkUsageLimit(session.user.id);
-        const tier = session.user.subscriptions?.tier as Subscription ?? Subscription.FREE;
-
-        if (tier !== Subscription.FREE) {
-            return true
-        }
-
-        return usage?.canProceed
-    } catch {
-        return false;
-    }
+    // Always return true - game is now free
+    return true;
 };
 
 export const isProSubscriptionValid = async (): Promise<boolean> => {
@@ -78,14 +66,8 @@ export const isProSubscriptionValid = async (): Promise<boolean> => {
 }
 
 export const isSubscriptionValidForUser = async (userId: string): Promise<boolean> => {
-    const usage = await checkUsageLimit(userId);
-    const tier = await getSubscriptionForUser(userId);
-
-    if (tier !== Subscription.FREE) {
-        return true
-    }
-
-    return usage?.canProceed
+    // Always return true - game is now free
+    return true;
 }
 
 export const getSubscriptionForUser = async (userId: string): Promise<Subscription> => {
