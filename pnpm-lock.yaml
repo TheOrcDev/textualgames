@@ -4799,8 +4799,8 @@ packages:
       sass:
         optional: true
 
-  node-abi@3.83.0:
-    resolution: {integrity: sha512-o2PH88PgFlfoSDjU5oq/b/p9m+DJaPfslRI5FzNqcK1ea1i2/8xo/FL850kdgw0EAQJ/cSyyi2W2fBjHBdg5rA==}
+  node-abi@3.85.0:
+    resolution: {integrity: sha512-zsFhmbkAzwhTft6nd3VxcG0cvJsT70rL+BIGHWVq5fi6MwGrHwzqKaxXE+Hl2GmnGItnDKPPkO5/LQqjVkIdFg==}
     engines: {node: '>=10'}
 
   node-domexception@1.0.0:
@@ -10994,7 +10994,7 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  node-abi@3.83.0:
+  node-abi@3.85.0:
     dependencies:
       semver: 7.7.3
     optional: true
@@ -11287,7 +11287,7 @@ snapshots:
       minimist: 1.2.8
       mkdirp-classic: 0.5.3
       napi-build-utils: 2.0.0
-      node-abi: 3.83.0
+      node-abi: 3.85.0
       pump: 3.0.3
       rc: 1.2.8
       simple-get: 4.0.1
