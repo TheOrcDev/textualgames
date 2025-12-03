@@ -3,7 +3,7 @@
 import db from "@/db/drizzle";
 import { characters, Game, games, levels } from "@/db/schema";
 import { createCharacterFormSchema } from "@/lib/form-schemas";
-import StoryCreator from "@/lib/story-creator";
+import GameCreator from "@/lib/game-creator";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
@@ -12,7 +12,7 @@ import { put } from "@vercel/blob";
 import { generateId, generateObject, generateText, zodSchema } from "ai";
 import { getUserSession } from "./users";
 
-const creator = new StoryCreator();
+const creator = new GameCreator();
 
 export async function createCharacter(
   formData: z.infer<typeof createCharacterFormSchema>

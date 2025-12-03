@@ -1,13 +1,13 @@
 import { Game } from '@/db/schema';
 import { getChatByGameId, updateChat } from '@/lib/chat-store';
-import StoryCreator from '@/lib/story-creator';
+import GameCreator from '@/lib/game-creator';
 import { saveLevel } from '@/server/level';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 export const maxDuration = 60;
 const model = process.env.AI_MODEL;
 
-const creator = new StoryCreator();
+const creator = new GameCreator();
 
 export async function POST(req: Request) {
     try {
