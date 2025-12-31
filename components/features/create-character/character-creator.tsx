@@ -711,7 +711,7 @@ export default function CharacterCreator() {
                             Plot Hook:
                           </dt>
                           <dd className="text-sm italic">
-                            "{form.getValues("plot")}"
+                            &quot;{form.getValues("plot")}&quot;
                           </dd>
                         </div>
                       </div>
