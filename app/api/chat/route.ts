@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
         const result = streamText({
             model: model!,
-            messages: convertToModelMessages(allMessages),
+            messages: await convertToModelMessages(allMessages),
             system: prompt.basePrompt,
         });
 
