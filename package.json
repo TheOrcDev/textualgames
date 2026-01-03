@@ -85,7 +85,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@next/eslint-plugin-next": "^16.1.1",
-    "@trivago/prettier-plugin-sort-imports": "^6.0.1",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@typescript-eslint/parser": "^8.51.0",
     "drizzle-kit": "^0.31.8",
