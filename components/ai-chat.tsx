@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 
 import { Game, Level, Subscription } from "@/db/schema";
 import { UIMessage, useChat } from "@ai-sdk/react";
+import { WorkflowChatTransport } from "@workflow/ai";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/8bit/card";
 
@@ -56,9 +57,37 @@ const AIChat = ({
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const runIdStorageKey = `workflow-run-id:${game.id}`;
+
+  const activeRunId = useMemo(() => {
+    if (typeof window === "undefined") return undefined;
+    return localStorage.getItem(runIdStorageKey) ?? undefined;
+  }, [runIdStorageKey]);
+
   const { messages, sendMessage, status } = useChat({
     id: game.id,
     messages: initialMessages ?? [],
+    resume: Boolean(activeRunId),
+    transport: new WorkflowChatTransport({
+      api: "/api/chat",
+      onChatSendMessage: (response) => {
+        const workflowRunId = response.headers.get("x-workflow-run-id");
+        if (workflowRunId) {
+          localStorage.setItem(runIdStorageKey, workflowRunId);
+        }
+      },
+      onChatEnd: () => {
+        localStorage.removeItem(runIdStorageKey);
+      },
+      prepareReconnectToStreamRequest: ({ api, ...rest }) => {
+        const runId = localStorage.getItem(runIdStorageKey);
+        if (!runId) throw new Error("No active workflow run ID found");
+        return {
+          ...rest,
+          api: `/api/chat/${encodeURIComponent(runId)}/stream`,
+        };
+      },
+    }),
   });
 
   // Auto-scroll to bottom when new messages arrive

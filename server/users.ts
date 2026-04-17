@@ -3,17 +3,15 @@
 import { and, eq, ne } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { start } from "workflow/api";
 import { z } from "zod";
 
 import db from "@/db/drizzle";
-import { Subscription, subscriptions, user } from "@/db/schema";
+import { user } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
-import WelcomeEmail from "@/components/emails/welcome";
-import { Resend } from "resend";
+import { handleUserSignup } from "@/workflows/user-signup";
 import { userSchema } from "./schemas";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const getUserById = async (id: string) => {
     const currentUser = await db.query.user.findFirst({
@@ -95,21 +93,9 @@ export const signUp = async (email: string, password: string, username: string) 
             }
         })
 
-        await resend.emails.send({
-            from: `${process.env.EMAIL_SENDER_NAME} <${process.env.EMAIL_SENDER_ADDRESS}>`,
-            to: [email],
-            subject: "Welcome to Textual Games",
-            react: WelcomeEmail({ name: username }),
-        });
+        const newUser = await getUserByEmail(email);
 
-        const user = await getUserByEmail(email);
-
-        await db.insert(subscriptions).values({
-            userId: user.id,
-            polarProductId: "",
-            slug: "",
-            tier: Subscription.FREE,
-        });
+        await start(handleUserSignup, [newUser.id, email, username]);
 
         return {
             success: true,
