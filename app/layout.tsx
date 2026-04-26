@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getUserTheme } from "@/server/users";
 import { Analytics } from "@vercel/analytics/react";
 
-import { Theme } from "@/lib/themes";
+import { DEFAULT_THEME, normalizeTheme } from "@/lib/themes";
 
 import { ScreenSize } from "@/components/ui/screen-size";
 import { Toaster } from "@/components/ui/sonner";
@@ -29,17 +29,21 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const theme = await getUserTheme();
+  const activeTheme = normalizeTheme(theme);
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="overflow-x-hidden scroll-smooth retro antialiased">
+    <html lang="en" data-theme={activeTheme} suppressHydrationWarning>
+      <body
+        className="overflow-x-hidden scroll-smooth antialiased"
+        data-theme={activeTheme}
+      >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
-          <ActiveThemeProvider initialTheme={theme ?? Theme.Default}>
+          <ActiveThemeProvider initialTheme={theme ?? DEFAULT_THEME}>
             {children}
             <Toaster />
             <Analytics />

@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 
 import { cn } from "@/lib/utils";
 
-import { ScrollArea, ScrollBar } from "@/components/ui/8bit/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 
 export type SuggestionsProps = ComponentProps<typeof ScrollArea>;
@@ -42,7 +42,7 @@ export const Suggestion = ({
 
   return (
     <Button
-      className={cn("cursor-pointer rounded-full px-4", className)}
+      className={cn("cursor-pointer px-4", className)}
       onClick={handleClick}
       size={size}
       type="button"

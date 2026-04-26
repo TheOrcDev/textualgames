@@ -14,15 +14,17 @@ import { z } from "zod";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
-import { Button } from "@/components/ui/8bit/button";
+import { GridScanOverlay } from "@/components/thegridcn/grid-scan-overlay";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/8bit/card";
-import { Input } from "@/components/ui/8bit/input";
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -82,12 +84,18 @@ export function ResetPasswordForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Reset Password</CardTitle>
+      <Card className="relative overflow-hidden border-primary/30 bg-card/85 shadow-[0_0_28px_color-mix(in_oklch,var(--glow)_18%,transparent)] backdrop-blur">
+        <GridScanOverlay gridSize={64} scanSpeed={14} />
+        <div className="relative">
+          <UplinkHeader leftText="AUTH UPLINK" rightText="RESET" />
+        </div>
+        <CardHeader className="relative text-center">
+          <CardTitle className="font-mono text-xl uppercase tracking-wider">
+            Reset Password
+          </CardTitle>
           <CardDescription>Enter your new password</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="relative">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <div className="grid gap-6">

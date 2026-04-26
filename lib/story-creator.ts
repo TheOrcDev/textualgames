@@ -79,7 +79,6 @@ export default class StoryCreator {
     return { basePrompt: thePrompt, character: game.character.name };
   }
 
-
   async getImagePrompt(game: Game) {
     return `
     Generate an 8-bit scenery image for a visual novel game, designed to immerse players in the game's atmosphere. The scene must align with the storyline and mood, featuring a consistent, slightly dark aesthetic with muted tones, subtle shadows, and realistic textures to enhance the immersive and grounded feel.

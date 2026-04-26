@@ -18,6 +18,6 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@8bitcn": "https://8bitcn.com/r/{name}.json"
+    "@thegridcn": "https://thegridcn.com/r/{name}.json"
   }
 }

@@ -1,98 +1,95 @@
-import { Press_Start_2P } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
-
-import { Button } from "@/components/ui/8bit/button";
+import { BrandLogo } from "@/components/brand-logo";
+import { CircuitBackground } from "@/components/thegridcn/circuit-background";
+import { DataCard } from "@/components/thegridcn/data-card";
+import { GridScanOverlay } from "@/components/thegridcn/grid-scan-overlay";
+import { StatusBar } from "@/components/thegridcn/status-bar";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
+import { Button } from "@/components/ui/button";
 
 import ChangingSentences from "@/components/features/changing-sentences";
 import ImageSlider from "@/components/features/image-slider";
 
 import { ModeSwitcher } from "../mode-switcher";
 
-const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"] });
-
 export default function Hero() {
   return (
-    <div className="min-h-screen w-full relative">
-      {/* Circuit Board Background */}
-      <div
-        className="absolute inset-0 z-0 dark:hidden"
-        style={{
-          background: "#f8fafc",
-          backgroundImage: `
-        linear-gradient(90deg, #e2e8f0 1px, transparent 1px),
-        linear-gradient(180deg, #e2e8f0 1px, transparent 1px),
-        linear-gradient(90deg, #cbd5e1 1px, transparent 1px),
-        linear-gradient(180deg, #cbd5e1 1px, transparent 1px)
-      `,
-          backgroundSize: "50px 50px, 50px 50px, 10px 10px, 10px 10px",
-        }}
-      />
-      <div
-        className="absolute inset-0 z-0 hidden dark:block"
-        style={{
-          background: "#171717",
-          backgroundImage: `
-            linear-gradient(90deg, #171717 1px, transparent 1px),
-            linear-gradient(180deg, #171717 1px, transparent 1px),
-            linear-gradient(90deg, #262626 1px, transparent 1px),
-            linear-gradient(180deg, #262626 1px, transparent 1px)
-          `,
-          backgroundSize: "50px 50px, 50px 50px, 10px 10px, 10px 10px",
-        }}
-      />
-
-      <section className="flex w-full flex-col gap-16 overflow-hidden p-10 pt-20 antialiased sm:h-svh md:items-center md:justify-center md:p-24 z-10">
-        <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-3">
-          <Link
-            href={"/"}
-            className="text-xs sm:text-sm flex items-center gap-2"
-          >
-            <Image
-              width={50}
-              height={50}
-              src={"/textual-games-logo.png"}
-              alt="Textual Games Logo"
-              priority
-            />
-            <h1
-              className={cn(
-                pressStart2P.className,
-                "font-bold hidden sm:block"
-              )}
-            >
-              Textual Games
-            </h1>
+    <CircuitBackground className="min-h-screen w-full" opacity={0.12}>
+      <GridScanOverlay className="opacity-80" />
+      <section className="relative flex min-h-screen w-full flex-col gap-12 overflow-hidden px-5 pb-14 pt-24 sm:min-h-svh md:px-10 lg:px-16">
+        <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between border-b border-primary/25 bg-background/80 px-5 py-3 backdrop-blur">
+          <Link href="/" className="flex items-center gap-3">
+            <BrandLogo size="lg" />
           </Link>
           <ModeSwitcher />
         </div>
 
-        <div className="relative flex flex-col items-center justify-center gap-10">
-          <div className="flex flex-col items-center justify-center gap-2 text-xl md:text-4xl">
-            <h2 className="text-center  font-bold md:text-2xl retro">
-              Create your own unique story.
-            </h2>
+        <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_420px]">
+          <div className="space-y-8">
+            <UplinkHeader
+              leftText="Story generator online"
+              rightText="Grid channel 01"
+            />
 
-            <ChangingSentences />
+            <div className="space-y-5">
+              <p className="font-mono text-xs uppercase tracking-[0.35em] text-primary">
+                Target acquired
+              </p>
+              <h1 className="max-w-4xl font-display text-4xl font-black uppercase leading-none tracking-wider text-foreground sm:text-6xl lg:text-7xl">
+                Play your own unique story
+              </h1>
+              <div className="min-h-12 max-w-2xl text-lg text-muted-foreground">
+                <ChangingSentences />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button asChild size="lg" className="font-mono uppercase">
+                <Link href="/play/create-character">Enter the Grid</Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="font-mono uppercase"
+              >
+                <Link href="/play/my-games">Resume stories</Link>
+              </Button>
+            </div>
+
+            <StatusBar
+              leftContent={<span>AI narrative engine: active</span>}
+              rightContent={<span>Choices generate new branches</span>}
+              variant="info"
+            />
           </div>
 
-          <Button asChild>
-            <Link className="p-5" href={"/play/create-character"}>
-              Play Now For Free
-            </Link>
-          </Button>
+          <DataCard
+            title="Player Session"
+            subtitle="Mission brief"
+            status="active"
+            fields={[
+              { label: "Mode", value: "Interactive fiction", highlight: true },
+              { label: "Worlds", value: "Fantasy / Sci-Fi / Dystopian" },
+              { label: "Loop", value: "Choose / adapt / survive" },
+            ]}
+            className="hidden lg:block"
+          />
         </div>
 
-        <div className="flex max-w-3xl flex-col items-center justify-center gap-5">
-          <h3 className="retro text-muted-foreground text-center text-xl font-bold">
-            Screenshots from the game
-          </h3>
-
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-5">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="font-display text-sm font-bold uppercase tracking-[0.28em] text-muted-foreground">
+              Game snapshots
+            </h2>
+            <span className="hidden font-mono text-xs uppercase text-primary sm:inline">
+              Visual feed
+            </span>
+          </div>
           <ImageSlider />
         </div>
       </section>
-    </div>
+    </CircuitBackground>
   );
 }

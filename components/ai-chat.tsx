@@ -3,13 +3,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import Image from "next/image";
-import Link from "next/link";
 
-import { Game, Level, Subscription } from "@/db/schema";
+import { Game, Level } from "@/db/schema";
 import { UIMessage, useChat } from "@ai-sdk/react";
 import { WorkflowChatTransport } from "@workflow/ai";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/8bit/card";
+import { GridScanOverlay } from "@/components/thegridcn/grid-scan-overlay";
+import { StatusBar } from "@/components/thegridcn/status-bar";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import {
   Conversation,
@@ -23,7 +25,6 @@ import {
   PromptInputSubmit,
   PromptInputTextarea,
   PromptInputToolbar,
-  PromptInputTools,
 } from "@/components/ai-elements/prompt-input";
 import {
   Reasoning,
@@ -38,8 +39,7 @@ import {
   SourcesTrigger,
 } from "@/components/ai-elements/source";
 
-import { Button } from "./ui/8bit/button";
-import { ScrollArea } from "./ui/8bit/scroll-area";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface AIChatProps {
   game: Game;
@@ -105,7 +105,7 @@ const AIChat = ({
             game,
             userId: game.userId,
           },
-        }
+        },
       );
 
       setInput("");
@@ -115,11 +115,33 @@ const AIChat = ({
   return (
     <div className="flex flex-col items-center justify-center gap-5">
       {level?.image && (
-        <Image src={level.image} alt="Game Image" width={500} height={500} />
+        <Image
+          src={level.image}
+          alt="Game Image"
+          width={500}
+          height={500}
+          className="rounded border border-primary/30 shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_18%,transparent)]"
+        />
       )}
-      <Card>
+      <Card className="relative w-full max-w-4xl overflow-hidden border-primary/30 bg-card/85 backdrop-blur">
+        <GridScanOverlay gridSize={86} scanSpeed={18} />
+        <div className="relative">
+          <UplinkHeader
+            leftText={game.character?.name || "ACTIVE STORY"}
+            rightText={status === "streaming" ? "STREAMING" : "READY"}
+          />
+          <StatusBar
+            leftContent={
+              <>
+                <span>{game.genre}</span>
+                <span>Level {level?.level || "current"}</span>
+              </>
+            }
+            rightContent={<span>{messages.length} messages</span>}
+          />
+        </div>
         <CardHeader className="hidden"></CardHeader>
-        <CardContent className="max-w-4xl mx-auto relative max-h-[600px] md:max-h-[700px] overflow-x-hidden overflow-y-auto md:p-6">
+        <CardContent className="relative mx-auto max-h-[600px] max-w-4xl overflow-x-hidden overflow-y-auto md:max-h-[700px] md:p-6">
           <ScrollArea>
             <Conversation>
               <ConversationContent>
@@ -135,7 +157,7 @@ const AIChat = ({
                                   <SourcesTrigger
                                     count={
                                       message.parts.filter(
-                                        (part) => part.type === "source-url"
+                                        (part) => part.type === "source-url",
                                       ).length
                                     }
                                   />
@@ -198,11 +220,14 @@ const AIChat = ({
               <ConversationScrollButton />
             </Conversation>
 
-            <PromptInput onSubmit={handleSubmit} className="mt-4 rounded-none">
+            <PromptInput
+              onSubmit={handleSubmit}
+              className="mt-4 rounded border-primary/30 bg-background/80"
+            >
               <PromptInputTextarea
                 onChange={(e) => setInput(e.target.value)}
                 value={input}
-                className="rounded-none text-[9px] md:text-sm"
+                className="font-mono text-[9px] md:text-sm"
                 placeholder="What do you do?"
               />
               <PromptInputToolbar>

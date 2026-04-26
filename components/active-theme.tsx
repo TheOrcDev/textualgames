@@ -8,10 +8,9 @@ import {
   useState,
 } from "react";
 
-import { Theme } from "@/lib/themes";
+import { DEFAULT_THEME, Theme, normalizeTheme } from "@/lib/themes";
 
 const COOKIE_NAME = "active_theme";
-const DEFAULT_THEME = Theme.Default;
 
 function setThemeCookie(theme: Theme) {
   if (typeof window === "undefined") return;
@@ -35,23 +34,22 @@ export function ActiveThemeProvider({
   children: ReactNode;
   initialTheme?: Theme;
 }) {
-  const [activeTheme, setActiveTheme] = useState<Theme>(
-    () => initialTheme || DEFAULT_THEME
+  const [activeTheme, setActiveTheme] = useState<Theme>(() =>
+    normalizeTheme(initialTheme),
   );
 
   useEffect(() => {
-    setThemeCookie(activeTheme);
+    const normalizedTheme = normalizeTheme(activeTheme);
 
-    const targets = [document.body, document.documentElement];
+    if (normalizedTheme !== activeTheme) {
+      setActiveTheme(normalizedTheme);
+      return;
+    }
 
-    targets.forEach((el) => {
-      Array.from(el.classList)
-        .filter((className) => className.startsWith("theme-"))
-        .forEach((className) => {
-          el.classList.remove(className);
-        });
-      el.classList.add(`theme-${activeTheme}`);
-    });
+    setThemeCookie(normalizedTheme);
+
+    document.documentElement.dataset.theme = normalizedTheme;
+    document.body.dataset.theme = normalizedTheme;
   }, [activeTheme]);
 
   return (
@@ -65,7 +63,7 @@ export function useThemeConfig() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error(
-      "useThemeConfig must be used within an ActiveThemeProvider"
+      "useThemeConfig must be used within an ActiveThemeProvider",
     );
   }
   return context;

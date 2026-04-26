@@ -15,15 +15,17 @@ import { z } from "zod";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
-import { Button } from "@/components/ui/8bit/button";
+import { GridScanOverlay } from "@/components/thegridcn/grid-scan-overlay";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/8bit/card";
-import { Input } from "@/components/ui/8bit/input";
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -43,6 +45,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,10 +57,33 @@ export function LoginForm({
   });
 
   const signInWithGoogle = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/play/create-character",
-    });
+    setIsGoogleLoading(true);
+
+    try {
+      const { data, error } = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/play/create-character",
+        errorCallbackURL: "/login",
+        disableRedirect: true,
+      });
+
+      if (error) {
+        toast.error(error.message || "Could not start Google login.");
+        return;
+      }
+
+      if (data?.url) {
+        window.location.href = data.url;
+        return;
+      }
+
+      toast.error("Could not start Google login.");
+    } catch (error) {
+      console.error(error);
+      toast.error("Could not start Google login.");
+    } finally {
+      setIsGoogleLoading(false);
+    }
   };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -77,12 +103,18 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>Login with your Google account</CardDescription>
+      <Card className="relative overflow-hidden border-primary/30 bg-card/85 shadow-[0_0_28px_color-mix(in_oklch,var(--glow)_18%,transparent)] backdrop-blur">
+        <GridScanOverlay gridSize={64} scanSpeed={14} />
+        <div className="relative">
+          <UplinkHeader leftText="AUTH UPLINK" rightText="LOGIN" />
+        </div>
+        <CardHeader className="relative text-center">
+          <CardTitle className="font-mono text-xl uppercase tracking-wider">
+            Welcome back
+          </CardTitle>
+          <CardDescription>Sign in to resume your stories</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="relative">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <div className="grid gap-6">
@@ -92,8 +124,13 @@ export function LoginForm({
                     className="w-full"
                     type="button"
                     onClick={signInWithGoogle}
+                    disabled={isGoogleLoading}
                   >
-                    Login with Google
+                    {isGoogleLoading ? (
+                      <Loader2 className="size-4 animate-spin" />
+                    ) : (
+                      "Login with Google"
+                    )}
                   </Button>
                 </div>
                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">

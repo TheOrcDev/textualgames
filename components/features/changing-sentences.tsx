@@ -10,7 +10,7 @@ export default function ChangingSentences() {
       showCursor={false}
       cursorCharacter="|"
       textColors={["text-foreground"]}
-      className="retro text-xs md:text-xl h-10 text-center"
+      className="h-10 text-center font-mono text-sm uppercase tracking-widest text-primary md:text-xl"
     />
   );
 }

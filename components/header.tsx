@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import { BrandLogo } from "./brand-logo";
 import { ModeSwitcher } from "./mode-switcher";
 import { NavItem } from "./nav-item";
 import { UserDropdown } from "./user-dropdown";
@@ -18,18 +18,16 @@ export const navItems = [
 
 export default async function Header() {
   return (
-    <header className="px-10 border-b mb-5 bg-primary/20">
-      <div className="flex items-center justify-between max-w-4xl mx-auto">
-        <Link href="/">
-          <Image
-            src="/textual-games-logo.png"
-            alt="Textual Games Logo"
-            width={50}
-            height={50}
-          />
+    <header className="sticky top-0 z-40 mb-5 border-b border-primary/25 bg-background/85 px-4 backdrop-blur md:px-10">
+      <div className="mx-auto flex max-w-5xl items-center justify-between py-3">
+        <Link
+          href="/"
+          className="flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-widest text-foreground"
+        >
+          <BrandLogo size="md" textClassName="hidden sm:inline" />
         </Link>
 
-        <div className="items-center hidden md:flex">
+        <div className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => (
             <NavItem key={item.href} href={item.href} label={item.label} />
           ))}

@@ -5,13 +5,15 @@ import { saveConfiguration } from "@/server/configurations";
 
 import { Theme } from "@/lib/themes";
 
+import { GridScanOverlay } from "@/components/thegridcn/grid-scan-overlay";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/8bit/card";
+} from "@/components/ui/card";
 
 import { SelectThemeDropdown } from "./select-theme-dropdown";
 
@@ -28,12 +30,18 @@ export const UserConfig = ({ user }: UserConfigProps) => {
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Theme</CardTitle>
+    <Card className="relative w-full overflow-hidden border-primary/25 bg-card/85">
+      <GridScanOverlay gridSize={72} scanSpeed={18} />
+      <div className="relative">
+        <UplinkHeader leftText="GRID THEME" rightText="IDENTITY" />
+      </div>
+      <CardHeader className="relative">
+        <CardTitle className="font-mono uppercase tracking-wider">
+          Theme
+        </CardTitle>
         <CardDescription>Select your preferred theme</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="relative">
         <SelectThemeDropdown user={user} onThemeChange={handleThemeChange} />
       </CardContent>
     </Card>

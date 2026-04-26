@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/8bit/card";
+import { StatCard } from "@/components/thegridcn/stat-card";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
 
 interface UsageData {
   currentLevels: number;
@@ -30,43 +25,18 @@ export function UsageDashboard({
 }: UsageDashboardProps) {
   if (!usageData) {
     return (
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle>Usage</CardTitle>
-          <CardDescription>Unable to load usage information</CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="w-full rounded border border-destructive/40 bg-card/80 p-4 font-mono text-sm uppercase tracking-wider text-destructive">
+        Unable to load usage information
+      </div>
     );
   }
 
   return (
-    <Card className="w-full max-w-lg h-full">
-      <CardHeader>
-        <CardTitle>Usage</CardTitle>
-        <CardDescription>Your game statistics</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Total levels:</span>
-            <span className="font-mono">{totalGamesAndLevels.totalLevels}</span>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Total games:</span>
-            <span className="font-mono">{totalGamesAndLevels.totalGames}</span>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Levels completed this month:</span>
-            <span className="font-mono">{usageData.currentLevels}</span>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="grid h-full w-full gap-3">
+      <UplinkHeader leftText="USAGE" rightText="ACCOUNT TELEMETRY" />
+      <StatCard title="Total levels" value={totalGamesAndLevels.totalLevels} />
+      <StatCard title="Total games" value={totalGamesAndLevels.totalGames} />
+      <StatCard title="Levels this month" value={usageData.currentLevels} />
+    </div>
   );
 }

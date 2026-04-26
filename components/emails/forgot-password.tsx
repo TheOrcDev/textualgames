@@ -65,8 +65,7 @@ const ForgotPasswordEmail = ({ resetLink, username }: ForgotPasswordProps) => {
 
             <Section className="border-t border-solid border-gray-200 pt-[24px]">
               <Text className="text-[14px] text-gray-500 m-0">
-                © {new Date().getFullYear()} Textual Games. All rights
-                reserved.
+                © {new Date().getFullYear()} Textual Games. All rights reserved.
               </Text>
               <Text className="text-[14px] text-gray-500 m-0">
                 <a

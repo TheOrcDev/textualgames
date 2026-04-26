@@ -1,31 +1,32 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/8bit/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/8bit/card";
+import { GridScanOverlay } from "@/components/thegridcn/grid-scan-overlay";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function TermsOfService() {
   return (
-    <main className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="flex justify-center items-center mb-5">
+    <main className="container mx-auto max-w-4xl px-4 py-8">
+      <div className="mb-5 flex items-center justify-center">
         <Button asChild>
           <Link href="/">Back to home</Link>
         </Button>
       </div>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center">
+      <Card className="relative overflow-hidden border-primary/25 bg-card/85">
+        <GridScanOverlay gridSize={84} scanSpeed={18} />
+        <div className="relative">
+          <UplinkHeader leftText="LEGAL ARCHIVE" rightText="TERMS" />
+        </div>
+        <CardHeader className="relative">
+          <CardTitle className="text-center font-mono text-3xl font-bold uppercase tracking-wider">
             Terms of Service
           </CardTitle>
           <p className="text-center text-muted-foreground">
             Last updated: {new Date().toLocaleDateString()}
           </p>
         </CardHeader>
-        <CardContent className="space-y-8">
+        <CardContent className="relative space-y-8">
           <section>
             <h2 className="text-2xl font-semibold mb-4">
               1. Acceptance of Terms

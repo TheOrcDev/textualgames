@@ -11,20 +11,18 @@ import { Loader2, Upload } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/8bit/avatar";
-import { Button } from "@/components/ui/8bit/button";
+import { GridScanOverlay } from "@/components/thegridcn/grid-scan-overlay";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/8bit/card";
-import { Input } from "@/components/ui/8bit/input";
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -34,7 +32,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { toast } from "./ui/8bit/toast";
+import { toast } from "./ui/toast";
 
 interface ProfileEditCardProps {
   user: User;
@@ -43,7 +41,7 @@ interface ProfileEditCardProps {
 export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
   const [loading, setLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(
-    user.image || null
+    user.image || null,
   );
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -79,26 +77,29 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
     try {
       setLoading(true);
 
-      if (!inputFileRef.current?.files) {
-        throw new Error("No file selected");
+      let imageUrl = values.image;
+      const file = inputFileRef.current?.files?.[0];
+
+      if (file) {
+        const fileName = `${user.id}-${Date.now()}.jpg`;
+
+        const response = await fetch(
+          `/api/avatar/upload?filename=${fileName}`,
+          {
+            method: "POST",
+            body: file,
+          },
+        );
+
+        const newBlob = (await response.json()) as PutBlobResult;
+
+        setBlob(newBlob);
+        imageUrl = newBlob.url;
       }
-
-      const file = inputFileRef.current.files[0];
-
-      const fileName = `${user.id}-${Date.now()}.jpg`;
-
-      const response = await fetch(`/api/avatar/upload?filename=${fileName}`, {
-        method: "POST",
-        body: file,
-      });
-
-      const newBlob = (await response.json()) as PutBlobResult;
-
-      setBlob(newBlob);
 
       const { errors, values: updateProfileValues } = await updateProfile({
         ...values,
-        image: newBlob.url,
+        image: imageUrl,
       });
 
       if (errors) {
@@ -116,21 +117,27 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
   }
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Edit Profile</CardTitle>
+    <Card className="relative w-full overflow-hidden border-primary/25 bg-card/85 backdrop-blur">
+      <GridScanOverlay gridSize={72} scanSpeed={15} />
+      <div className="relative">
+        <UplinkHeader leftText="IDENTITY" rightText="PROFILE EDIT" />
+      </div>
+      <CardHeader className="relative">
+        <CardTitle className="font-mono uppercase tracking-wider">
+          Edit Profile
+        </CardTitle>
         <CardDescription>
           Update your username and profile image
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="relative">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {/* Profile Image Section */}
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <Avatar className="size-18">
+                  <Avatar className="size-18 border border-primary/40 shadow-[0_0_18px_color-mix(in_oklch,var(--glow)_20%,transparent)]">
                     <AvatarImage
                       src={imagePreview || ""}
                       alt={user.name?.[0] || "User"}
@@ -168,19 +175,19 @@ export const ProfileEditCard = ({ user }: ProfileEditCardProps) => {
                   Or upload from device
                 </label>
                 <div className="relative">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    ref={inputFileRef}
+                    className="sr-only"
+                  />
                   <Button
                     type="button"
                     variant="outline"
                     className="w-full justify-center gap-2"
-                    asChild
+                    onClick={() => inputFileRef.current?.click()}
                   >
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      ref={inputFileRef}
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    />
                     <Upload className="size-4" />
                     Choose Image
                   </Button>

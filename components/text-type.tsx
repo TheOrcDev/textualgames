@@ -60,7 +60,7 @@ const TextType = forwardRef<
       reverseMode = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [displayedText, setDisplayedText] = useState("");
     const [currentCharIndex, setCurrentCharIndex] = useState(0);
@@ -81,12 +81,12 @@ const TextType = forwardRef<
           }
         }
       },
-      [ref]
+      [ref],
     );
 
     const textArray = useMemo(
       () => (Array.isArray(text) ? text : [text]),
-      [text]
+      [text],
     );
 
     const getRandomSpeed = useCallback(() => {
@@ -120,7 +120,7 @@ const TextType = forwardRef<
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       observer.observe(containerRef.current);
@@ -175,11 +175,11 @@ const TextType = forwardRef<
             timeout = setTimeout(
               () => {
                 setDisplayedText(
-                  (prev) => prev + processedText[currentCharIndex]
+                  (prev) => prev + processedText[currentCharIndex],
                 );
                 setCurrentCharIndex((prev) => prev + 1);
               },
-              variableSpeed ? getRandomSpeed() : typingSpeed
+              variableSpeed ? getRandomSpeed() : typingSpeed,
             );
           } else if (textArray.length > 1) {
             timeout = setTimeout(() => {
@@ -237,9 +237,9 @@ const TextType = forwardRef<
         >
           {cursorCharacter}
         </span>
-      )
+      ),
     );
-  }
+  },
 );
 
 TextType.displayName = "TextType";

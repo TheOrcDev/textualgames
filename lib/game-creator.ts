@@ -78,7 +78,6 @@ export default class GameCreator {
     return { basePrompt: thePrompt, character: game.character.name };
   }
 
-
   async getImagePrompt(game: Game) {
     return `
     # Image Generation Prompt

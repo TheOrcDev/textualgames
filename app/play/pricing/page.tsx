@@ -9,7 +9,7 @@ export default async function PricingPage() {
     (session.user.subscriptions?.tier as Subscription) ?? Subscription.FREE;
 
   return (
-    <main className="flex flex-col gap-10 items-center justify-center">
+    <main className="flex flex-col items-center justify-center gap-10 px-5 py-10">
       <PricingCard tier={tier} />
     </main>
   );

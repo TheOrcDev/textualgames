@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
-import { Button } from "./ui/8bit/button";
+import { Button } from "./ui/button";
 
 interface NavItemProps {
   href: string;
@@ -19,8 +19,11 @@ export function NavItem({ href, label }: NavItemProps) {
 
   return (
     <Button
-      className={cn("text-xs", isActive && "bg-primary/30")}
-      variant={"link"}
+      className={cn(
+        "font-mono text-xs uppercase tracking-widest",
+        isActive && "border-primary/40 bg-primary/10 text-primary",
+      )}
+      variant={isActive ? "outline" : "ghost"}
       key={href}
       asChild
     >

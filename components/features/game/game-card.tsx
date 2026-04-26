@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 
 import { Game } from "@/db/schema";
 import { deleteGame } from "@/server/games";
-import { Trash } from "lucide-react";
+import { Play, Trash } from "lucide-react";
 
+import { GridScanOverlay } from "@/components/thegridcn/grid-scan-overlay";
+import { UplinkHeader } from "@/components/thegridcn/uplink-header";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,9 +19,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/8bit/alert-dialog";
-import { Badge } from "@/components/ui/8bit/badge";
-import { Button } from "@/components/ui/8bit/button";
+} from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -27,9 +29,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/8bit/card";
-import { Separator } from "@/components/ui/8bit/separator";
-import { toast } from "@/components/ui/8bit/toast";
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/ui/toast";
 
 interface Props {
   game: Game;
@@ -52,10 +54,18 @@ export default function GameCard({ game }: Props) {
   };
 
   return (
-    <Card className="flex cursor-pointer flex-col justify-between from-primary/40 to-transparent hover:bg-linear-to-br h-full">
+    <Card className="relative flex h-full cursor-pointer flex-col justify-between overflow-hidden border-primary/25 bg-card/80 transition-all hover:border-primary/60 hover:bg-primary/5 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--glow)_22%,transparent)]">
+      <GridScanOverlay gridSize={72} scanSpeed={16} />
+      <div className="relative">
+        <UplinkHeader
+          leftText={game.genre || "STORY"}
+          rightText="SAVED GAME"
+          variant="primary"
+        />
+      </div>
       <Link href={`/play/game/${game.id}`}>
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between">
+        <CardHeader className="relative">
+          <CardTitle className="flex items-center justify-between gap-3 font-mono uppercase tracking-wider">
             <div>{game.character?.name}</div>
             <Badge>{game.genre}</Badge>
           </CardTitle>
@@ -64,7 +74,7 @@ export default function GameCard({ game }: Props) {
               game.character?.type.slice(1)}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="relative">
           <div className="flex flex-col gap-3">
             <p className="text-sm">
               {game.character?.plot.charAt(0).toUpperCase() +
@@ -90,9 +100,12 @@ export default function GameCard({ game }: Props) {
         </CardContent>
       </Link>
 
-      <CardFooter className="flex items-center justify-between gap-3">
+      <CardFooter className="relative flex items-center justify-between gap-3">
         <Button asChild>
-          <Link href={`/play/game/${game.id}`}>Continue</Link>
+          <Link href={`/play/game/${game.id}`}>
+            <Play className="size-4" />
+            Continue
+          </Link>
         </Button>
 
         <AlertDialog>

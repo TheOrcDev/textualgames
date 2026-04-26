@@ -8,7 +8,12 @@ import type {
 import { Children } from "react";
 
 import type { ChatStatus } from "ai";
-import { SquareIcon, XIcon } from "lucide-react";
+import {
+  LoaderCircleIcon,
+  SendHorizontalIcon,
+  SquareIcon,
+  XIcon,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -28,7 +33,7 @@ export const PromptInput = ({ className, ...props }: PromptInputProps) => (
   <form
     className={cn(
       "w-full divide-y overflow-hidden rounded-xl border bg-background shadow-sm",
-      className
+      className,
     )}
     {...props}
   />
@@ -69,7 +74,7 @@ export const PromptInputTextarea = ({
         "w-full resize-none rounded-none border-none p-3 shadow-none outline-none ring-0",
         "field-sizing-content max-h-[6lh] bg-transparent dark:bg-transparent",
         "focus-visible:ring-0",
-        className
+        className,
       )}
       name="message"
       onChange={(e) => {
@@ -120,7 +125,7 @@ export const PromptInputButton = ({
         "shrink-0 gap-1.5 rounded-lg",
         variant === "ghost" && "text-muted-foreground",
         newSize === "default" && "px-3",
-        className
+        className,
       )}
       size={newSize}
       type="button"
@@ -142,95 +147,11 @@ export const PromptInputSubmit = ({
   children,
   ...props
 }: PromptInputSubmitProps) => {
-  let Icon = (
-    <svg
-      width="50"
-      height="50"
-      viewBox="0 0 256 256"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      stroke="currentColor"
-      strokeWidth="0.25"
-      className="size-10"
-      aria-label="send"
-    >
-      <rect x="144" y="136" width="14" height="14" rx="1"></rect>
-      <rect x="128" y="152" width="14" height="14" rx="1"></rect>
-      <rect x="112" y="72" width="14" height="14" rx="1"></rect>
-      <rect x="112" y="168" width="14" height="14" rx="1"></rect>
-      <rect x="96" y="168" width="14" height="14" rx="1"></rect>
-      <rect x="96" y="72" width="14" height="14" rx="1"></rect>
-      <rect x="96" y="72" width="14" height="14" rx="1"></rect>
-      <rect x="80" y="152" width="14" height="14" rx="1"></rect>
-      <rect x="160" y="120" width="14" height="14" rx="1"></rect>
-      <rect x="144" y="104" width="14" height="14" rx="1"></rect>
-      <rect x="128" y="88" width="14" height="14" rx="1"></rect>
-      <rect x="80" y="136" width="14" height="14" rx="1"></rect>
-      <rect x="80" y="104" width="14" height="14" rx="1"></rect>
-      <rect x="80" y="120" width="14" height="14" rx="1"></rect>
-      <rect x="80" y="88" width="14" height="14" rx="1"></rect>
-    </svg>
-  );
+  let Icon = <SendHorizontalIcon className="size-4" aria-label="send" />;
 
   if (status === "submitted") {
     Icon = (
-      <svg
-        width="50"
-        height="50"
-        viewBox="0 0 256 256"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.25"
-        className="animate-spin size-6"
-        aria-label="loading"
-      >
-        <rect x="96" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="48" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="144" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="176" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="160" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="128" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="112" width="14" height="14" rx="1"></rect>
-        <rect x="64" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="144" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="160" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="192" width="14" height="14" rx="1"></rect>
-        <rect x="48" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="176" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="144" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="48" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="96" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="96" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="112" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="80" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="64" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="64" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="80" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="128" width="14" height="14" rx="1"></rect>
-        <rect x="120" y="120" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="48" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="176" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="192" width="14" height="14" rx="1"></rect>
-        <rect x="176" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="160" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="64" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="192" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="208" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="192" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="80" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="112" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="160" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="128" y="32" width="14" height="14" rx="1"></rect>
-        <rect x="144" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="32" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="80" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="96" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="112" y="208" width="14" height="14" rx="1"></rect>
-        <rect x="128" y="208" width="14" height="14" rx="1"></rect>
-      </svg>
+      <LoaderCircleIcon className="size-4 animate-spin" aria-label="loading" />
     );
   } else if (status === "streaming") {
     Icon = <SquareIcon className="size-4" />;
@@ -269,7 +190,7 @@ export const PromptInputModelSelectTrigger = ({
     className={cn(
       "border-none bg-transparent font-medium text-muted-foreground shadow-none transition-colors",
       'hover:bg-accent hover:text-foreground [&[aria-expanded="true"]]:bg-accent [&[aria-expanded="true"]]:text-foreground',
-      className
+      className,
     )}
     {...props}
   />
