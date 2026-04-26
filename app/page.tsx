@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,6 +40,52 @@ import { UplinkHeader } from "@/components/thegridcn/uplink-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/ui/footer";
+
+const landingTitle = "Textual Games | Your Story, Ready to Play";
+const landingDescription =
+  "Create your character, choose a world, and turn your own story into a playable adventure where every decision becomes the next scene.";
+
+export const metadata: Metadata = {
+  title: landingTitle,
+  description: landingDescription,
+  keywords: [
+    "play your story",
+    "playable story",
+    "create your own story",
+    "interactive fiction",
+    "story game",
+    "text-based RPG",
+    "choose your own adventure",
+    "fantasy story game",
+    "sci-fi story adventure",
+    "dystopian story adventure",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: landingTitle,
+    description: landingDescription,
+    url: "/",
+    siteName: "Textual Games",
+    type: "website",
+    images: [
+      {
+        url: "/img/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Textual Games playable story preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: landingTitle,
+    description: landingDescription,
+    images: ["/img/og-image.png"],
+    creator: "@theorcdev",
+  },
+};
 
 const navLinks = [
   { label: "Systems", href: "#systems" },
@@ -245,14 +292,14 @@ export default function Homepage() {
 
             <div className="space-y-5">
               <Badge className="border-primary/40 bg-primary/10 font-mono text-[10px] uppercase tracking-[0.24em] text-primary hover:bg-primary/15">
-                AI stories you can actually play
+                Your story, ready to play
               </Badge>
               <h1 className="max-w-4xl font-display text-4xl font-black uppercase leading-none tracking-wider text-foreground sm:text-6xl lg:text-7xl">
                 Textual Games
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-                Create a character, choose a world, and step into an adaptive
-                text adventure where every decision becomes the next scene.
+                Create a character, choose a world, and step into a playable
+                story where every decision becomes the next scene.
               </p>
             </div>
 
