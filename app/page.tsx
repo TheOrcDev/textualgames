@@ -58,9 +58,9 @@ const storyImages = [
     label: "Dystopian Cell",
   },
   {
-    src: "/img/screenshots/wizard-in-the-underworld.webp",
-    alt: "Wizard in the underworld story scene",
-    label: "Underworld Gate",
+    src: "/img/screenshots/orc-leading-an-army.webp",
+    alt: "Orc leading an army story scene",
+    label: "War March",
   },
 ];
 
@@ -127,16 +127,16 @@ const playerReports = [
     player: "Mara",
     genre: "Fantasy",
     character:
-      fantasyCharacters.find((character) => character === "wizard") ??
+      fantasyCharacters.find((character) => character === "orc") ??
       fantasyCharacters[0],
     objective:
-      fantasyPlots.find((plot) => plot.includes("underworld")) ??
+      fantasyPlots.find((plot) => plot === "leading army against invading force") ??
       fantasyPlots[0],
     item:
-      fantasyItems.find((item) => item === "staff of healing") ??
+      fantasyItems.find((item) => item === "potion of strength") ??
       fantasyItems[0],
-    note: "I started cautious, but the underworld scene forced a trade: save the guide now or keep the staff charged for later.",
-    status: "Choice pending",
+    note: "The army started breaking before sunrise, so I used the potion of strength to hold the bridge and force the invaders into a narrow fight.",
+    status: "Front line held",
   },
   {
     player: "Keon",
