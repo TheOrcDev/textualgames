@@ -58,7 +58,7 @@ export function BrandLogo({
         <span className="absolute inset-[7px] rotate-45 border border-primary/45 bg-primary/10" />
         <span className="absolute left-0 top-1/2 h-px w-full bg-primary/35" />
         <span className="absolute left-1/2 top-0 h-full w-px bg-primary/25" />
-        <span className="absolute -right-2 top-1 h-4 w-4 rotate-45 border border-cyan-300/40" />
+        <span className="absolute -right-2 top-1 h-4 w-4 rotate-45 border border-primary/40" />
         <span
           className={cn(
             "relative z-10 font-display font-black leading-none tracking-wider text-primary",

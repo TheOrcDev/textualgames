@@ -19,7 +19,7 @@ export function StatusBar({
   const variantStyles = {
     default: "bg-muted/50 border-border",
     alert: "bg-red-500/10 border-red-500/50",
-    info: "bg-cyan-500/10 border-cyan-500/50",
+    info: "bg-primary/10 border-primary/50",
   };
 
   return (
@@ -62,7 +62,7 @@ export function InfoPanel({
   const statusIndicator = {
     active: "bg-green-500",
     pending: "bg-amber-500 animate-pulse",
-    complete: "bg-cyan-500",
+    complete: "bg-primary",
   };
 
   return (
@@ -131,14 +131,14 @@ export function UplinkBar({
   return (
     <div
       className={cn(
-        "flex items-center justify-between border-y border-cyan-500/30 bg-cyan-500/5 px-4 py-2 font-mono text-xs",
+        "flex items-center justify-between border-y border-primary/30 bg-primary/5 px-4 py-2 font-mono text-xs",
         className,
       )}
       {...props}
     >
       <div className="flex items-center gap-2">
-        <span className="text-cyan-400">⚡</span>
-        <span className="uppercase tracking-widest text-cyan-500">
+        <span className="text-primary">|</span>
+        <span className="uppercase tracking-widest text-primary">
           UPLINK: {channel}
         </span>
       </div>
@@ -157,7 +157,7 @@ export function UplinkBar({
               key={i}
               className={cn(
                 "w-1 rounded-t",
-                i < signalBars[signal] ? "bg-cyan-500" : "bg-cyan-500/20",
+                i < signalBars[signal] ? "bg-primary" : "bg-primary/20",
               )}
               style={{ height: `${(i + 1) * 3 + 2}px` }}
             />

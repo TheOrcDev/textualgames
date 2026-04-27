@@ -24,7 +24,7 @@ export function FeatureCard({
       className={cn(
         "group relative overflow-hidden rounded border bg-card/80 p-5 backdrop-blur-sm transition-all duration-300",
         variant === "highlight"
-          ? "border-primary/50 shadow-[0_0_20px_rgba(var(--primary-rgb,0,180,255),0.08)]"
+          ? "border-primary/50 shadow-[0_0_20px_color-mix(in_oklch,var(--glow)_16%,transparent)]"
           : "border-primary/20 hover:border-primary/40",
         className,
       )}

@@ -39,7 +39,7 @@ export function PricingCard({
       className={cn(
         "group relative flex flex-col overflow-hidden rounded border bg-card/80 backdrop-blur-sm transition-all duration-300",
         highlighted
-          ? "border-primary/60 shadow-[0_0_30px_rgba(var(--primary-rgb,0,180,255),0.1)]"
+          ? "border-primary/60 shadow-[0_0_30px_color-mix(in_oklch,var(--glow)_18%,transparent)]"
           : "border-primary/20 hover:border-primary/40",
         className,
       )}
@@ -106,7 +106,7 @@ export function PricingCard({
           className={cn(
             "w-full rounded border py-2 font-mono text-[10px] uppercase tracking-widest transition-all duration-300",
             highlighted
-              ? "border-primary bg-primary/20 text-primary hover:bg-primary/30 shadow-[0_0_12px_rgba(var(--primary-rgb,0,180,255),0.15)]"
+              ? "border-primary bg-primary/20 text-primary hover:bg-primary/30 shadow-[0_0_12px_color-mix(in_oklch,var(--glow)_22%,transparent)]"
               : "border-primary/30 text-foreground/60 hover:border-primary/50 hover:text-primary",
           )}
         >
