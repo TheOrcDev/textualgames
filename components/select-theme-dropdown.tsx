@@ -52,11 +52,6 @@ export function SelectThemeDropdown({
               style={{ backgroundColor: theme.color }}
             />
             <span className="relative min-w-0 truncate">{theme.label}</span>
-            {selected && (
-              <span className="relative ml-auto hidden text-[9px] text-primary xl:inline">
-                ACTIVE
-              </span>
-            )}
           </button>
         );
       })}
