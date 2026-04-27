@@ -3,15 +3,7 @@
 import { User } from "@/db/schema";
 
 import { Theme, normalizeTheme } from "@/lib/themes";
-import { themes } from "@/lib/utils";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { cn, themes } from "@/lib/utils";
 
 import { useThemeConfig } from "./active-theme";
 
@@ -31,30 +23,43 @@ export function SelectThemeDropdown({
   };
 
   return (
-    <Select
-      value={normalizeTheme(activeTheme || user.userConfigurations?.theme)}
-      onValueChange={(val) => {
-        setActiveTheme(val as Theme);
-        handleThemeChange(val as Theme);
-      }}
-    >
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select theme" />
-      </SelectTrigger>
-      <SelectContent>
-        {themes.map((theme) => (
-          <SelectItem key={theme.name} value={theme.name}>
-            <div className="flex items-center gap-2">
-              <span
-                aria-hidden
-                className="inline-block h-3 w-3 rounded-sm border border-foreground"
-                style={{ backgroundColor: theme.color }}
-              />
-              <span>{theme.label}</span>
-            </div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <div className="grid grid-cols-2 gap-2">
+      {themes.map((theme) => {
+        const selected =
+          normalizeTheme(activeTheme || user.userConfigurations?.theme) ===
+          theme.name;
+
+        return (
+          <button
+            key={theme.name}
+            type="button"
+            onClick={() => {
+              setActiveTheme(theme.name);
+              handleThemeChange(theme.name);
+            }}
+            className={cn(
+              "group relative flex min-h-12 items-center gap-2 overflow-hidden rounded border bg-background/60 px-3 py-2 text-left font-mono text-[10px] uppercase tracking-widest transition-all",
+              selected
+                ? "border-primary/70 bg-primary/15 text-primary shadow-[0_0_16px_color-mix(in_oklch,var(--glow)_22%,transparent)]"
+                : "border-primary/20 text-foreground/70 hover:border-primary/45 hover:bg-primary/10 hover:text-primary",
+            )}
+            aria-pressed={selected}
+          >
+            <span className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.03)_2px,rgba(0,0,0,0.03)_4px)]" />
+            <span
+              aria-hidden
+              className="relative size-3 shrink-0 rounded-sm border border-foreground/40"
+              style={{ backgroundColor: theme.color }}
+            />
+            <span className="relative truncate">{theme.label}</span>
+            {selected && (
+              <span className="relative ml-auto text-[9px] text-primary">
+                ACTIVE
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
   );
 }

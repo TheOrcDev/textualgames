@@ -30,12 +30,12 @@ export const UserConfig = ({ user }: UserConfigProps) => {
   };
 
   return (
-    <Card className="relative w-full overflow-hidden border-primary/25 bg-card/85">
+    <Card className="relative w-full overflow-hidden border-primary/25 bg-card/85 pb-6">
       <GridScanOverlay gridSize={72} scanSpeed={18} />
       <div className="relative">
         <UplinkHeader leftText="GRID THEME" rightText="IDENTITY" />
       </div>
-      <CardHeader className="relative">
+      <CardHeader className="relative pb-0">
         <CardTitle className="font-mono uppercase tracking-wider">
           Theme
         </CardTitle>
