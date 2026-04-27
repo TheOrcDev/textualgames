@@ -3,8 +3,6 @@ import { notFound } from "next/navigation";
 import { getTotalGamesAndtotalLevels } from "@/server/games";
 import { getUserProfile } from "@/server/users";
 
-import { checkUsageLimit } from "@/lib/usage-tracking";
-
 import { UplinkHeader } from "@/components/thegridcn/uplink-header";
 import { ProfileEditCard } from "@/components/profile-edit-card";
 import { UsageDashboard } from "@/components/usage-dashboard";
@@ -13,7 +11,6 @@ import { UserConfig } from "@/components/user-config";
 export default async function AccountPage() {
   const user = await getUserProfile();
 
-  const usageData = await checkUsageLimit(user.id);
   const totalGamesAndLevels = await getTotalGamesAndtotalLevels(user.id);
 
   if (!user) {
@@ -29,10 +26,7 @@ export default async function AccountPage() {
         </div>
         <div className="col-span-1 flex w-full flex-col gap-3">
           <UserConfig user={user} />
-          <UsageDashboard
-            usageData={usageData}
-            totalGamesAndLevels={totalGamesAndLevels}
-          />
+          <UsageDashboard totalGamesAndLevels={totalGamesAndLevels} />
         </div>
       </div>
     </main>

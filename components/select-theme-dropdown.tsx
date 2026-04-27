@@ -23,7 +23,7 @@ export function SelectThemeDropdown({
   };
 
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
       {themes.map((theme) => {
         const selected =
           normalizeTheme(activeTheme || user.userConfigurations?.theme) ===
@@ -38,7 +38,7 @@ export function SelectThemeDropdown({
               handleThemeChange(theme.name);
             }}
             className={cn(
-              "group relative flex min-h-12 items-center gap-2 overflow-hidden rounded border bg-background/60 px-3 py-2 text-left font-mono text-[10px] uppercase tracking-widest transition-all",
+              "group relative flex min-h-10 items-center gap-2 overflow-hidden rounded border bg-background/60 px-2.5 py-2 text-left font-mono text-[10px] uppercase tracking-widest transition-all",
               selected
                 ? "border-primary/70 bg-primary/15 text-primary shadow-[0_0_16px_color-mix(in_oklch,var(--glow)_22%,transparent)]"
                 : "border-primary/20 text-foreground/70 hover:border-primary/45 hover:bg-primary/10 hover:text-primary",
@@ -51,9 +51,9 @@ export function SelectThemeDropdown({
               className="relative size-3 shrink-0 rounded-sm border border-foreground/40"
               style={{ backgroundColor: theme.color }}
             />
-            <span className="relative truncate">{theme.label}</span>
+            <span className="relative min-w-0 truncate">{theme.label}</span>
             {selected && (
-              <span className="relative ml-auto text-[9px] text-primary">
+              <span className="relative ml-auto hidden text-[9px] text-primary xl:inline">
                 ACTIVE
               </span>
             )}

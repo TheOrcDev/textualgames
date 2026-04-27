@@ -30,7 +30,7 @@ export const UserConfig = ({ user }: UserConfigProps) => {
   };
 
   return (
-    <Card className="relative w-full overflow-hidden border-primary/25 bg-card/85 pb-6">
+    <Card className="relative w-full overflow-visible border-primary/25 bg-card/85 pb-6">
       <GridScanOverlay gridSize={72} scanSpeed={18} />
       <div className="relative">
         <UplinkHeader leftText="GRID THEME" rightText="IDENTITY" />
